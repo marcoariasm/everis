@@ -3,3 +3,33 @@ npm install -g npx
 git clone https://PrimaAFPTeam@dev.azure.com/PrimaAFPTeam/PrimaAppWebTransactional/_git/prima-transactional-web-app
 
 
+NAWu4rTbyP5w5eQ
+
+
+zeplin
+https://app.zeplin.io/project/5f4e6891cb9ca51104e8df65/screen/5f5123ac3e03f37db830613b
+
+
+
+
+27-46
+    <BrowserRouter>
+      <Layout>
+        {number ? (
+          <Redirect from="/proceso95-5/" to="/not-access" />
+        ) : (
+          <Redirect to="/proceso95-5/login-pn" />
+          // <Redirect to="/proceso95-5/validation-prerequisites" />
+        )}
+        <Switch>
+          <Route exact path="/proceso95-5/validation-prerequisites" component={ValidationPrerequisites} />
+          <Route exact path="/proceso95-5/validation-ruc" component={ValidationRuc} />
+          <Route exact path="/proceso95-5/not-access" component={NotAccess} />
+          <Route exact path="/proceso95-5/homeAdvice" component={HomeAdvice} />
+          <Route exact path="/proceso95-5/dataValidation" component={DataValidation} />
+          <Route exact path="/proceso95-5/advisory" component={Advisory} />
+          <Route exact path="/proceso95-5/CompletionOfAdvisory" component={CompletionOfAdvisory} />
+          <Route exact path="/proceso95-5/catalog" component={Catalog} />
+          
+          {/* Tramites Digitales */}
+          <Route exact path="/proceso95-5/login-pn" component={LoginPNatural} />
