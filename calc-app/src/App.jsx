@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import words from 'lodash.words'
 import Functions from './components/Functions'
 import MathOperations from './components/MathOperations'
 import Numbers from './components/Numbers'
@@ -12,10 +13,10 @@ const App = () => {
     // const [state, setstate] = useState(initialState)
 
     // entendiendo la llamada a la función  useState
-    const arrayTextoFuncionModificaTexto = useState("")
     // arrayTextoFuncionModificaTexto = ["", funcion]
-    const texto = arrayTextoFuncionModificaTexto[0]
-    const funcionModificaTexto = arrayTextoFuncionModificaTexto[1]
+    const [stack, setStack] = useState("")
+
+    const items = words(stack, /[^-^+^*^/]+/g)
 
     // const clickHandlerFunction = (text) => {
     //     console.log("esto se ejecuta en al App", text);
@@ -23,10 +24,11 @@ const App = () => {
 
     // Lo que ejecuta la función
     // debugger
-    console.log("Renderización de App")
+    const value = items.length > 0 ? items[items.length-1]: 0;
+    console.log("Renderización de App", value)
     return (
       <main className='react-calculator'>
-        <Result value={ texto } />
+        <Result value={ items[items.length-1] } />
                 {/* // text="ay" */}
                 {/* // prop={true} */}
                 {/* ></Result> */}
@@ -44,14 +46,22 @@ const App = () => {
         </div> */}
         <Numbers onClickNumber={number => {
             console.log('Element ', number)
-            funcionModificaTexto(number)
+            setStack(`${stack}${number}`)
         }}/>
         <Functions 
-            onContentClear = {() => console.log("Content Clear")} 
-            onDelete = {() => console.log("Delete")} />
+            onContentClear = {() => {console.log("Content Clear")
+                                     setStack('')}} 
+            onDelete = {() => { if (stack.length>0) {
+                                console.log("Delete")
+                                const newStack = stack.substring(0, stack.length-1)
+                                setStack(newStack)
+                            }}} />
         <MathOperations 
-            onClickOperation={ operation => {console.log("Operation: ", operation)}}
-            onClickEqual={ equal => {console.log("Equal: ", equal);}} />
+            onClickOperation={ operation => {console.log("Operation: ", operation)
+                                            setStack(`${stack}${operation}`)}}
+            onClickEqual={ equal => {console.log("Equal: ", equal);
+                                     setStack(eval(stack).toString())
+                                    }} />
     </main>)
 }
 
