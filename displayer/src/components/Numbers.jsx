@@ -3,15 +3,15 @@ import React, { Fragment } from 'react'
 import Button from './Button'
 // import './../App.css'
 
-const Numbers = ({value, clickHandler}) => {
+const Numbers = ({onClickHandler}) => {
 
-    const clickHandler = (text) => {
+    // const clickHandler = (text) => {
 
-    }
+    // }
 
     return (
         <Fragment>
-            <Button text={value} onClickHandler={() => clickHandler(value)}/>
+            <Button onClickHandler={onClickHandler}/>
         </Fragment>
     )
 }
