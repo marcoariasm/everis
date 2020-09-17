@@ -6,12 +6,12 @@ import './App.css'
 
 const App = () => {
 
-    const [num, setNum] = useState("")
+    const [num, setNum] = useState("0")
 
     return (
         <main className='react-calculator'>
-            <Result />
-            <Numbers value="" clickHandler=""/>
+            <Result value={num}/>
+            <Numbers onClickHandler={(num) => setNum(num)}/>
         </main>)
 }
 
