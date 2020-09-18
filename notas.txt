@@ -38,3 +38,7 @@ https://www.figma.com/file/zcGqgFWFvjPOLXCmCkFXF1/Flujo-Sobrevivencia?node-id=0%
           
           {/* Tramites Digitales */}
           <Route exact path="/proceso95-5/login-pn" component={LoginPNatural} />
+
+
+repo nuevo botón
+https://dev.azure.com/PrimaAFPTeam/PrimaAppNewPac/_git/prima-new-pac-app

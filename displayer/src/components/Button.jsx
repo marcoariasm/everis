@@ -1,9 +1,10 @@
+import { number } from 'prop-types'
 import React from 'react'
 
-const Button = ({onClickHandler}) => {
+const Button = ({value, onClickNumber}) => {
     return (
-        <button onClickHandler={onClickHandler}>
-            {"1"}
+        <button onClick={() => onClickNumber(value)}>
+            {value}
         </button>
     )
 }
