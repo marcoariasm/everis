@@ -2,6 +2,7 @@
 
 git clone https://PrimaAFPTeam@dev.azure.com/PrimaAFPTeam/PrimaAppWebTransactional/_git/prima-transactional-web-app
 
+git remote add origin https://PrimaAFPTeam@dev.azure.com/PrimaAFPTeam/PrimaAppWebTransactional/_git/prima-transactional-web-app
 
 NAWu4rTbyP5w5eQ
 
