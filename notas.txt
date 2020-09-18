@@ -3,7 +3,6 @@ npm install -g npx
 git clone https://PrimaAFPTeam@dev.azure.com/PrimaAFPTeam/PrimaAppWebTransactional/_git/prima-transactional-web-app
 
 
-<<<<<<< HEAD
 NAWu4rTbyP5w5eQ
 
 
@@ -11,6 +10,11 @@ zeplin
 https://app.zeplin.io/project/5f4e6891cb9ca51104e8df65/screen/5f5123ac3e03f37db830613b
 
 
+zeplin diseños
+https://app.zeplin.io/project/5f4e6891cb9ca51104e8df65/screen/5f5122946f737a4d89b2d005
+
+figma diseños
+https://www.figma.com/file/zcGqgFWFvjPOLXCmCkFXF1/Flujo-Sobrevivencia?node-id=0%3A1
 
 
 27-46
@@ -34,9 +38,3 @@ https://app.zeplin.io/project/5f4e6891cb9ca51104e8df65/screen/5f5123ac3e03f37db8
           
           {/* Tramites Digitales */}
           <Route exact path="/proceso95-5/login-pn" component={LoginPNatural} />
-=======
-git remote add origin  https://PrimaAFPTeam@dev.azure.com/PrimaAFPTeam/PrimaAppWebTransactional/_git/prima-transactional-web-app
-
-
-NAWu4rTbyP5w5eQ
->>>>>>> d723cdd85dfb923aca06d50bcd01d18646b41c7b
