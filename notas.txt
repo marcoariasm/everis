@@ -1,4 +1,4 @@
-npm install -g npx
+﻿npm install -g npx
 
 git clone https://PrimaAFPTeam@dev.azure.com/PrimaAFPTeam/PrimaAppWebTransactional/_git/prima-transactional-web-app
 
@@ -42,3 +42,78 @@ https://www.figma.com/file/zcGqgFWFvjPOLXCmCkFXF1/Flujo-Sobrevivencia?node-id=0%
 
 repo nuevo botón
 https://dev.azure.com/PrimaAFPTeam/PrimaAppNewPac/_git/prima-new-pac-app
+
+
+
+global / components
+	Button
+		ButtonFileUpload	ButtonFileUpload.jsx	FileUploader
+		ButtonIcono		ButtonIcon.jsx		ButtonIcon
+		ButtonImagen		ButtonImage.jsx		Button
+		ButtonLink		Button.jsx		Button
+		ButtonNormal		Button.jsx		Button
+		ButtonValidation	ButtonValidation.jsx	ButtonValidation
+	CheckBox
+		CheckBox.jsx		CheckBox
+	Input
+		Input.jsx		Input
+	Menu
+		Navbar.jsx		Navbar
+		components/
+				CerrarSesion.jsx		CerrarSesion
+				Header.jsx			Header
+				Menu.jsx	menu.sass	Menu
+				Option.jsx			Option
+				Username.jsx			Username
+		
+	Modal
+		index.jsx
+		Modal.jsx
+		ModalPac.jsx
+	Paginator
+		Paginator.jsx		Paginator
+
+	RadioButton
+		RadioButton.jsx		RadioButton.sass	RadioButton
+
+	Select
+		Select.jsx		Option.scss		Select
+	
+	Tabs
+		Tab.jsx		Tab
+		Tabs.jsx	Tabs
+		style.sass
+
+shared
+	components
+		Card			
+			Card
+				Card.jsx	Card.scss	Card
+				Options.jsx			Options
+		DatePicker
+			DatePicker.jsx		datePicker.scss	DatePick
+		PopPupValidation
+			PopPupWarning.jsx			PopPupWarning
+		CardGrey.jsx			CardGray
+		Container.jsx			Container
+		ContainerPaginator.jsx		ContainerPaginator
+		Header.jsx			Header
+		Layout.jsx			Layout
+		Line.jsx			Line
+		WhiteCard.jsx			WhiteCard
+	constant
+		ConstAddBeneficiary.js
+		ConstantAlternatives.js
+		ConstantCompletionOfAdvisory.js
+		ConstantDataValidation.js
+		ConstantDocuments.js
+		ConstantHeader.js
+		ConstantHomeAdvice.js
+		ConstantNotAccess.js
+		ConstantRegisterBeneficiaries.js
+		ConstantTitlesTab.js
+		ConstantValidationPrerequisites.js
+		constantWorkingDays.js
+	styles
+		index.js
+		Responsive.js
