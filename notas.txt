@@ -7,6 +7,10 @@ git remote add origin https://PrimaAFPTeam@dev.azure.com/PrimaAFPTeam/PrimaAppWe
 NAWu4rTbyP5w5eQ
 
 
+ZEPLIN FINALES
+https://app.zeplin.io/project/5f47ef7c59ba5f8269b8a53a
+
+
 zeplin
 https://app.zeplin.io/project/5f4e6891cb9ca51104e8df65/screen/5f5123ac3e03f37db830613b
 
