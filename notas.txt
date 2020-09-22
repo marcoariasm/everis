@@ -7,6 +7,7 @@ git remote add origin https://PrimaAFPTeam@dev.azure.com/PrimaAFPTeam/PrimaAppWe
 NAWu4rTbyP5w5eQ
 
 
+
 ZEPLIN FINALES
 https://app.zeplin.io/project/5f47ef7c59ba5f8269b8a53a
 
@@ -122,3 +123,47 @@ shared
 	styles
 		index.js
 		Responsive.js
+
+
+
+box-shadow: 0 4px 8px 1px rgba(53, 53, 53, 0.12);
+
+
+Layout:
+
+Menu lateral
+	logo
+	Usuario
+		items
+	Cerrar Sesión
+
+Main
+	Card Blanco
+
+
+
+
+Card Blanco:
+
+elementos:
+	Título naranja con línea debajo
+	Subtítulo naranja     		Bienvenido(a)	
+	Card gris sin borde		
+	Titulo gris    			Hola Roberto
+	Subtitulo gris
+	Subtitulo verde
+	Texto gris
+	Caja de búsqueda
+	Select con flechita naranja y texto normal
+	Input normal
+	Input con select     		DNI y flechita abajo
+	
+	Card clickable con imagen centrada	icono, titulo y texto
+	Card clickable con imagen izquierda	icono y titulo
+
+	Texto info rojo			icono y texto normal bckgr rosa
+					icono loading cargando
+	Modal
+	Botón fondo naranja
+	Botón fondo gris
+	stepper naranja
