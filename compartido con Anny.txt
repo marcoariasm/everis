@@ -1,11 +1,11 @@
-Desktop / Cliente / Login - Dashboard
-	ultima pantalla Dashboard
+	Desktop / Cliente / Login - Dashboard
+ok		ultima pantalla Dashboard
 
-Desktop / Cliente / Nueva Solic. Trámite personal
-Desktop / Cliente / Nueva Solic. Trámite  Beneficiario
-Desptoio / Solicitantes / Dashboard
-Desktop / Solicitante / Persona jurídica / Nueva Solic. trámite
-	1ras 3 pantallas
+ok	Desktop / Cliente / Nueva Solic. Trámite personal
+	Desktop / Cliente / Nueva Solic. Trámite  Beneficiario
+	Desptoio / Solicitantes / Dashboard
+	Desktop / Solicitante / Persona jurídica / Nueva Solic. trámite
+		1ras 3 pantallas
 
 
 
