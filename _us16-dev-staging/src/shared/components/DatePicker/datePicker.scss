@@ -1,0 +1,16 @@
+.datepicker {
+  display: flex;
+  font-size: 18px;
+  line-height: 22px;
+  position: relative;
+  width: 97%;
+  padding: 7px 15px;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+  background-color: #f9f9fb;
+  color: #696158;
+  .datepicker error {
+    border: '1.5px solid #FF0000';
+  }
+}

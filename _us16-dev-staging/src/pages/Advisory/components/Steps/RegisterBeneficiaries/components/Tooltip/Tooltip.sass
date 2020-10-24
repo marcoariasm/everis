@@ -1,0 +1,23 @@
+@import "src/global/scss/_variables.sass"
+@import "src/global/scss/_breakpoint.sass"
+
+.tooltip
+  position: relative
+  justify-content: center
+  .tooltiptext
+    display: grid
+    grid-template-columns: 1fr
+    grid-row-gap: 16px
+    z-index: 500
+    background: $colorTooltip
+    padding: 30px 20px
+    border-radius: 8px
+    width: calc(calc(100vw * 89.5) / 100 )
+    & > h1
+      color: $colorWhiteBase
+      margin-bottom: 4px
+    & > span
+      color: $colorWhiteBase
+@media only screen and (min-width: $tablet)
+  .tooltiptext
+    width: 417px !important
