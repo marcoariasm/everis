@@ -3,19 +3,21 @@ import { procedures } from './MockData/procedures';
 
 export class ProcedureService {
 
-    endpoint = `/procedures/v1/list/`;
+    endpoint = `bff-digital-procedures-transactional-web/procedure/type/v1/1/configuration/`;
 
     async getProcedure(idTypeRequest) {
         // let response = await fetch(`${URL_BACKEND}${this.endpoint}${idTypeRequest}`);
         // let oneProcedure = await response.json();
-        let oneProcedure = procedures[idTypeRequest-1];
+        // console.log(procedures.filter( procedure => procedure.typeRequestId===idTypeRequest));
+        let oneProcedure = procedures.filter( procedure => procedure.typeRequestId===idTypeRequest);
 
         return oneProcedure;
     }
 
     async getAllProcedures() {
-        // let response = await fetch(`${URL_BACKEND}${this.endpoint}`);
-        // let procedures = await response.json();
+        let response = await fetch(`${URL_BACKEND}${this.endpoint}`);
+        let procedures = await response.json();
+        console.log(procedures);
         let listProcedures = procedures;
 
         return listProcedures;

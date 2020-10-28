@@ -83,17 +83,19 @@ const linkTramitesPersonales = {
 const TramitesPersonales = () => {
 
   let history = useHistory();
-  // const user = persons && persons[0].personalData;
+  const user = persons && persons[0].personalData;
 
   const procedureService = new ProcedureService();
   
-  const li = procedures.map(procedure => procedure.name);
+  // const li = procedures.map(procedure => procedure.name);
   
   const toggleGetProcedure = (idTypeRequest) => {
     procedureService.getProcedure(idTypeRequest).then(
       response => {
         console.log(response);
-        history.push(`/nueva-solicitud/tramite?id=${idTypeRequest}`, {resp: response});
+        history.push(`/nueva-solicitud/tramite?id=${idTypeRequest}`
+        , {resp: response, user:user}
+        );
       }
     );
   }

@@ -1,19 +1,24 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { useHistory, useLocation } from 'react-router-dom';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { useHistory, useLocation } from "react-router-dom";
 
-import { size } from 'shared/styles/Responsive';
-import { allColors } from 'shared/styles';
-import CheckIcon from '../../../shared/images/email.svg';
+import { createStore } from "redux";
+import { useSelector, useDispatch } from "react-redux";
+import { Provider } from "react-redux";
+import { addDetail } from "../../redux/actions/Detail";
+import { allReducers } from "../../redux/reducers";
 
-import ConfirmationModal from '../../components/Modals/ConfirmationModal'
-import MainTitle from '../../components/Titles/MainTitle';
-import Stepper from '../../../shared/components/Stepper';
-import TextArea from '../../components/TextArea/TextArea';
-import TitleGreen from '../../components/Titles/TitleGreen';
-import WhiteCard from '../../../shared/components/Cards/WhiteCard';
-import Button from '../../../shared/components/Button';
+import { size } from "shared/styles/Responsive";
+import { allColors } from "shared/styles";
+import CheckIcon from "../../../shared/images/email.svg";
 
+import ConfirmationModal from "../../components/Modals/ConfirmationModal";
+import MainTitle from "../../components/Titles/MainTitle";
+import Stepper from "../../../shared/components/Stepper";
+import TextArea from "../../components/TextArea/TextArea";
+import TitleGreen from "../../components/Titles/TitleGreen";
+import WhiteCard from "../../../shared/components/Cards/WhiteCard";
+import Button from "../../../shared/components/Button";
 
 const CardList = styled.div`
   display: grid;
@@ -63,58 +68,72 @@ const Grid2Col = styled.div`
   @media only screen and (min-width: ${size.tablet}) {
     grid-template-columns: 1fr 1fr;
   }
-`
+`;
 
 const ContainerStepper = styled.div`
   margin-top: 40px;
   display: flex;
   min-width: 100%;
   justify-content: center;
-`
+`;
 
 const steps1 = [
   {
-    label: 'Detalle del trámite',
-    status: 'active'
+    label: "Detalle del trámite",
+    status: "active",
   },
   {
-    label: 'Adjunta documentos',
-    status: ''
+    label: "Adjunta documentos",
+    status: "",
   },
 ];
 
 const steps2 = [
   {
-    label: 'Detalle del trámite',
-    status: 'active'
+    label: "Detalle del trámite",
+    status: "active",
   },
   {
-    label: 'Beneficiarios',
-    status: ''
+    label: "Beneficiarios",
+    status: "",
   },
   {
-    label: 'Adjunta documentos',
-    status: ''
+    label: "Adjunta documentos",
+    status: "",
   },
 ];
 
 const StepOne = () => {
+  // const store = createStore(allReducers
+  //   , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  //   );
+  // // const global = useContext(store);
+  // let addDetail = useSelector((state) => state.detail);
+  // let dispatch = useDispatch();
 
   const history = useHistory();
-  const [showModal, setShowModal] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState(false);
-  const handleBtnModal = () => {
-    history.push('/generic-procedures/with-beneficiaries');
-  };
+
+  const location = useLocation();
+  const idProcedure = location.search.charAt(4);
+  // console.log(`tramite id es: ${idProcedure}`);
 
   const { state } = useLocation();
   const { resp, user } = state;
-  console.log(resp.inBeneficiary);
+  console.log(resp);
+
+  const saveDetail = () => {
+    history.push(`/nueva-solicitud/paso-dos/tramite?id=${resp.typeRequestId}`
+    , {resp: resp, user: user}
+    );
+    // dispatch(addDetail(textAreaValue));
+    console.log(`comment es ${textAreaValue}`);
+  }
 
   return (
-    <>
-      <WhiteCard>
-        <MainTitle title={resp.name} />
+    // <Provider store={store}>
+    <WhiteCard>
+      <MainTitle title={resp.name} />
         <Text>
           <span>{"Nueva solicitud de trámite"}</span>
         </Text>
@@ -137,7 +156,7 @@ const StepOne = () => {
 
         <div className="alignCenterVertically">
           <Button
-            onClick={() => history.push(`/nueva-solicitud/paso-dos/tramite?id=${resp.typeRequestId}`, {resp: resp, user: user})}
+            onClick={saveDetail}
             className="buttonRegularResponsive primary-btn"
             disabled={!textAreaValue}
           >
@@ -145,15 +164,9 @@ const StepOne = () => {
           </Button>
         </div>
 
-      </WhiteCard>
-      <ConfirmationModal
-        showModal={showModal}
-        onClose={() => setShowModal(false)}
-        icon={CheckIcon}
-        handleBtnModal={handleBtnModal}
-      />
-    </>
-  )
+          </WhiteCard>
+    // </Provider>
+  );
 };
 
 export default StepOne;

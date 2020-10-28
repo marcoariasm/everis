@@ -218,7 +218,7 @@
             ]
         },
         {
-            "typeRequestId": 6,
+            "typeRequestId": 7,
             "name": "Actualización del vínculo laboral",
             "idCategory": 1,
             "nameCategory": 1,
@@ -252,7 +252,7 @@
             ]
         },
         {
-            "typeRequestId": 7,
+            "typeRequestId": 8,
             "name": "Inicio de cobranza",
             "idCategory": 1,
             "nameCategory": 1,

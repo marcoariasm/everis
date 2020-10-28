@@ -1,1 +1,1 @@
-export const URL_BACKEND = "";
+export const URL_BACKEND = "http://10.105.9.152/";
