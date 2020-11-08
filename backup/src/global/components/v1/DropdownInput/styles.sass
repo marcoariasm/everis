@@ -1,0 +1,66 @@
+.group 
+  border: 2px solid
+  border-radius: 8px
+  height: 48px
+  position: relative
+  display: flex
+
+  &.error-input
+    border: 2px solid #FF4646 !important
+    box-shadow: none
+
+    .dropdown-input
+      border-left: 2px solid #FF4646 !important
+      box-shadow: none
+
+
+  & + .error-msg
+    display: block
+    font-family: Calibri
+    font-style: normal
+    font-weight: normal
+    font-size: 14px
+    height: 18px
+    line-height: 16px
+    color: #FF4646 !important
+    padding: 3px 0 0 3px
+
+  .dropdown-input 
+    font-size: 14px
+    padding: 10px 10px 10px 5px
+    width: 80%
+    border: none
+    height: 44px
+    color: #696158
+    padding-right: 0px
+    padding-left: 15px
+    border-left-style: solid
+    border-left-width: 2px
+    display: flex
+    flex: 5
+    border-radius: 0px 8px 8px 0px
+    &:focus 
+      outline: none
+    
+  .dropdown-input:required 
+    box-shadow: none
+
+  .dropdown-input::-webkit-input-placeholder 
+    color: #9d9994
+
+  .dropdown-input:-moz-placeholder 
+    color: #9d9994
+
+  .dropdown-input::-moz-placeholder 
+    color: #9d9994
+
+  .dropdown-input:-ms-input-placeholder 
+    color: #9d9994
+
+  .dropdown-input::-ms-input-placeholder 
+    color: #9d9994
+
+  ::-webkit-credentials-auto-fill-button 
+    visibility: hidden
+    position: absolute
+    right: 0

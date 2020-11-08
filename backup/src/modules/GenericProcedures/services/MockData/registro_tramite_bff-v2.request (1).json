@@ -1,0 +1,73 @@
+{
+	"requestID" : 1,
+    "beneficiaries" : [
+        {
+			"beneficiaryId" : null,
+			"firstName" : "Ramon",
+			"secondName" : "Albert",
+			"fatherLastname" : "Perez",
+			"motherLastname" : "Gomez",
+			"documentType" : "00",
+			"documentNumber" : "50505050",
+			"birthdate" : "24-01-1919",
+			"genre" : "M",
+			"relationship" : "40",
+			"hasDisability" : false,
+			"nativeCountry" : "114",
+			"representative": {
+                "beneficiaryId" : 1,
+                "applicantId" : null,
+                "affiliateId" : null,
+				"firstName" : null,
+				"secondName" : null,
+				"fatherLastname" : null,
+                "motherLastname" : null,
+                "documentType" : null,
+                "documentNumber" : null,
+                "birthdate" : null,
+                "genre" : null,
+                "typeRelationShip" : null,
+                "typeCondition" : null
+            }
+        },
+        {
+            "beneficiaryId" : null,
+			"firstName" : "Ramon",
+			"secondName" : "Albert",
+			"fatherLastname" : "Perez",
+			"motherLastname" : "Gomez",
+			"documentType" : "00",
+			"documentNumber" : "50505050",
+			"birthdate" : "24-01-1919",
+			"genre" : "M",
+			"relationship" : "40",
+			"hasDisability" : false,
+			"nativeCountry" : "114",
+			"representative": {
+                "beneficiaryId" : 1,
+                "applicantId" : null,
+                "affiliateId" : null,
+				"firstName" : null,
+				"secondName" : null,
+				"fatherLastname" : null,
+                "motherLastname" : null,
+                "documentType" : null,
+                "documentNumber" : null,
+                "birthdate" : null,
+                "genre" : null,
+                "typeRelationShip" : null,
+                "typeCondition" : null
+            }
+        }
+    ],
+	"documents": [
+        {
+            "idRequestDocument": 1
+        }
+    ],
+    "documentsBeneficiary": [
+        {
+            "idRequestDocument": 1
+        }
+    ]
+}

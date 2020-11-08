@@ -1,0 +1,132 @@
+.componenet-text-input
+  position: relative
+  width: 100%
+
+  & .textfield
+    margin-top: 18px
+    padding: 10px
+    width: 100%
+    height: 45px
+    border: 2px solid rgba(105, 97, 88, 0.4)
+    border-radius: 8px
+    color: #696158
+    font-family: Calibri
+    font-style: normal
+    font-weight: normal
+    font-size: 14px
+    box-shadow: none
+    background: #FFFFFF
+    outline: none
+    &::placeholder
+      color: transparent
+
+    &:hover
+      border: 2px solid rgba(105, 97, 88, 0.5)
+      border-radius: 8px
+
+    &:focus
+      border: 2px solid #00AE99
+      border-radius: 8px
+
+      & ~ .placeholder
+        color: #00AE99
+        font-size: 14px
+
+      &::placeholder
+        transition: .7s
+        color: #9d9994
+
+      &::-webkit-datetime-edit
+        transition: .7s
+        color: #9d9994
+
+  & .placeholder
+    position: absolute
+    font-family: Calibri
+    font-style: normal
+    font-weight: normal
+    font-size: 14px
+    line-height: 16px
+    height: 15px
+    z-index: 1
+    top: 32px
+    left: 0px
+    color: #9d9994
+    padding: 0 5px
+    pointer-events: none
+
+.disabled-input
+  & .textfield
+    background: #F7F7F8
+    cursor: not-allowed
+    &:disabled ~ .placeholder
+      top: 3px
+      font-size: 14px
+    &:disabled:not(:valid) ~ .placeholder
+      top: 3px
+      font-size: 14px
+
+.disabled-input-with-value
+  & .textfield
+    background: #F7F7F8
+    cursor: not-allowed
+    &:disabled ~ .placeholder
+      top: 0px
+      font-size: 14px
+    &:disabled:not(:valid) ~ .placeholder
+      top: 0px
+      font-size: 14px
+.error-input
+  & .textfield
+    border: 2px solid #FF4646 !important
+    box-shadow: none
+    &:hover
+      border: 2px solid #FF4646 !important
+      box-shadow: none
+
+  & .error-msg
+    display: block
+    font-family: Calibri
+    font-style: normal
+    font-weight: normal
+    font-size: 14px
+    height: 18px
+    line-height: 16px
+    color: #FF4646 !important
+    padding: 3px 0 0 3px
+
+  & .placeholder
+    color: #FF4646 !important
+
+.theme-2
+  & .textfield
+    &:focus
+      border: 2px solid #FF4F00
+      // box-shadow: 0px 0px 0px 2px rgba(255, 79, 0, 0.2)
+      & ~ .placeholder
+        color: #FF4F00
+
+.input-date
+  & .textfield
+    appearance: none
+    &::placeholder
+      color: #696158
+    &::-webkit-calendar-picker-indicator
+      background-image: url('/shared/images/calendar.svg');
+      background-position: right
+      background-size: 18px 18px
+      background-repeat: no-repeat
+      cursor: pointer
+  & .placeholder
+    font-size: 14px
+
+.textfield:focus ~ .placeholder,
+.textfield:not(:focus):valid ~ .placeholder
+  top: 0px
+  font-size: 14px
+
+.textfield, .placeholder
+	transition: ease-in-out 0.2s all
+	-webkit-transition: ease-in-out 0.2s all
+	-moz-transition: ease-in-out 0.2s all
+	-o-transition: ease-in-out 0.2s all

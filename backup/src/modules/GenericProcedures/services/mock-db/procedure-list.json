@@ -1,0 +1,136 @@
+{
+  "backoffice/v1/procedures/1":{
+    "GET":{
+      "codeResponse": "200",
+      "responses": [
+        {
+          "statusCode": "200",
+          "headers": {
+            "response": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": "",
+              "x-prima-signature": ""
+            },
+            "request": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": "",
+              "x-prima-signature": ""
+            }
+          },
+          "body": [
+            {
+              "pageNumber": 1,
+              "numberOfElements": 10,
+              "size": 10,
+              "totalElements": 22,
+              "totalPages": 3,
+              "response": [
+                {
+                  "id": 0,
+                  "registerDate": "2020-10-12",
+                  "cuspp": "367967ÑTCTN1",
+                  "processingStage": "Asesoria",
+                  "requestType": "Jubilación y/o retiro de hasta el 95.5%",
+                  "executive": "ELSA GONZALES MEDINA",
+                  "status": "REGISTERED",
+                  "atentionTime": "yellow"
+                },
+                {
+                  "id": 1,
+                  "registerDate": "2020-10-14",
+                  "cuspp": "347967ATCTN1",
+                  "processingStage": "Inicio de tramite",
+                  "requestType": "Jubilación y/o retiro de hasta el 95.5%",
+                  "executive": "JOSE CARLOS GUERRERO CCOYA",
+                  "status": "IN_PROCESS",
+                  "atentionTime": "green"
+                },
+                {
+                  "id": 2,
+                  "registerDate": "2020-10-12",
+                  "cuspp": "897967ÑTCTN1",
+                  "processingStage": "Asesoria",
+                  "requestType": "Jubilación y/o retiro de hasta el 95.5%",
+                  "executive": "Marina Baylon Solis",
+                  "status": "REGISTERED",
+                  "atentionTime": "red"
+                },
+                {
+                  "id": 3,
+                  "registerDate": "2020-10-14",
+                  "cuspp": "367967ABCTN1",
+                  "processingStage": "Inicio de tramite",
+                  "requestType": "Jubilación y/o retiro de hasta el 95.5%",
+                  "executive": "Mario GUERRERO CCOYA",
+                  "status": "IN_PROCESS",
+                  "atentionTime": "green"
+                },
+                {
+                  "id": 4,
+                  "registerDate": "2020-10-12",
+                  "cuspp": "367967HGCTN1",
+                  "processingStage": "Asesoria",
+                  "requestType": "Jubilación y/o retiro de hasta el 95.5%",
+                  "executive": "Rodrigo CARRILLO SEGURA",
+                  "status": "REGISTERED",
+                  "atentionTime": "yellow"
+                },
+                {
+                  "id": 5,
+                  "registerDate": "2020-10-14",
+                  "cuspp": "367967ÑTCTN1",
+                  "processingStage": "Inicio de tramite",
+                  "requestType": "Jubilación y/o retiro de hasta el 95.5%",
+                  "executive": "JOSE GUERRERO Moreno",
+                  "status": "IN_PROCESS",
+                  "atentionTime": "green"
+                },
+                {
+                  "id": 6,
+                  "registerDate": "2020-10-12",
+                  "cuspp": "367967ÑTCTM8",
+                  "processingStage": "Asesoria",
+                  "requestType": "Jubilación y/o retiro de hasta el 95.5%",
+                  "executive": "Marible Cortez Lozano",
+                  "status": "REGISTERED",
+                  "atentionTime": "red"
+                },
+                {
+                  "id": 7,
+                  "registerDate": "2020-10-14",
+                  "cuspp": "367967ÑTCTL9",
+                  "processingStage": "Inicio de tramite",
+                  "requestType": "Jubilación y/o retiro de hasta el 95.5%",
+                  "executive": "JOSE Acevedo Vera",
+                  "status": "IN_PROCESS",
+                  "atentionTime": "green"
+                },
+                {
+                  "id": 8,
+                  "registerDate": "2020-10-12",
+                  "cuspp": "367967ÑTCTK4",
+                  "processingStage": "Asesoria",
+                  "requestType": "Jubilación y/o retiro de hasta el 95.5%",
+                  "executive": "Luz Bedregal Molina",
+                  "status": "REGISTERED",
+                  "atentionTime": "red"
+                },
+                {
+                  "id": 9,
+                  "registerDate": "2020-10-14",
+                  "cuspp": "327967ÑTCTN4",
+                  "processingStage": "Inicio de tramite",
+                  "requestType": "Jubilación y/o retiro de hasta el 95.5%",
+                  "executive": "Nelson Solis Solis",
+                  "status": "IN_PROCESS",
+                  "atentionTime": "green"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+
+  }
+}
