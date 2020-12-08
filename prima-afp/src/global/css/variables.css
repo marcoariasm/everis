@@ -1,0 +1,24 @@
+:root{
+    --blackColor: #000000;
+    --grayColorBorder: #E8E8E8;
+    --grayColorComponents: #F9F9FB;
+    --grayColorHover: #F4F4F4;
+    --grayColorDisabled: #BBBBBB;
+    --grayColorCard: #F7F7F7;
+    --grayColorText: #696158;
+    --grayColorCardDashed: #D7D9D9;
+    --grayColorLineDashed: #BABABA;
+    --grayColorStep: #A29D98;
+    --greenColor: #00A499;
+    --greenColorBalance: #00AE99;
+    --greenColorHover: #059F8D;
+    --greenColorSelectCard: #EEFBF9;
+    --orangeColorHover: #EA4800;
+    --orangeColorMain: #FF4F00;
+    --orangeColorMainActive: #F04C02;
+    --redColorError: #FF0000;
+    --tooltipColor: rgb(105, 97, 88);
+    --whiteColorBase: #FFFFFF;
+    --placeholderColor: #9D9994;
+    --yellowBoldColor: #FFCD00;
+}

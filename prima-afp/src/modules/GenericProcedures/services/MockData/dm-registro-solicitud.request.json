@@ -1,0 +1,59 @@
+{
+    "typeRequestId" : 1,
+    "typeTaskId": "1",
+    "affiliateId" : "1",
+    "applicantId" : null,
+	"comment" : null,	
+    "beneficiaries" : [
+        {
+            "beneficiaryId" : 1,
+			"representative": {
+                "beneficiaryId" : 1,
+                "applicantId" : null,
+                "affiliateId" : "",
+				"firstName" : null,
+				"secondName" : null,
+				"fatherLastname" : null,
+                "motherLastname" : null,
+                "documentType" : null,
+                "documentNumber" : null,
+                "birthdate" : null,
+                "genre" : null,
+                "typeRelationShip" : null,
+                "typeCondition" : null
+            },
+            "documents":[
+                {
+                    "requestDocumentId" : 2,
+                    "documentId": 1
+                }
+            ]
+        },
+        {
+            "beneficiaryId" :10002,
+			"representative": {
+                "beneficiaryId" : 10002,
+                "applicantId" : null,
+                "affiliateId" : "",
+				"firstName" : null,
+				"secondName" : null,
+				"fatherLastname" : null,
+                "motherLastname" : null,
+                "documentType" : null,
+                "documentNumber" : null,
+                "birthdate" : null,
+                "genre" : null,
+                "typeRelationShip" : null,
+                "typeCondition" : null
+            },
+            "documents":null
+        }
+    ],
+    "documents" : [
+        {
+            "requestDocumentId" : 3,
+            "documentId": 1
+        }
+    ],
+    "user":"jbenitoUp"
+}

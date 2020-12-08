@@ -1,0 +1,33 @@
+{
+    "afiliado/v1/login":{
+        "POST":{
+            "codeResponse": "202",
+            "responses": [
+                {
+                    "statusCode": "202",
+                    "headers": {
+                      "response": {
+                        "x-afp-signature": "",
+                        "Ocp-Apim-Subscription-Key": "",
+                        "x-prima-signature": ""
+                      },
+                      "request": {
+                        "x-afp-signature": "",
+                        "Ocp-Apim-Subscription-Key": "",
+                        "x-prima-signature": ""
+                      }
+                    },
+                    "body": { 
+                        "idApplicant": "1",
+                        "dateRegister": "17/10/2020"
+                    }
+                  }    
+
+            ]
+        }
+
+    }
+
+
+
+}

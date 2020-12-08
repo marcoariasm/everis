@@ -1,0 +1,166 @@
+{
+  "procedures-detail/v1/procedure": {
+    "GET": {
+      "codeResponse": "200",
+      "responses": [
+        {
+          "statusCode": "200",
+          "headers": {
+            "response": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": "",
+              "x-prima-signature": ""
+            },
+            "request": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": "",
+              "x-prima-signature": ""
+            }
+          },
+          "body": {
+            "id": 1,
+            "requestTypeId": 1,
+            "requestType": "Actualización de datos",
+            "requestCode": "ACTA-ASE-0000000001",
+            "statusId": 2,
+            "status": "REGISTERED",
+            "registerDate": "14/10/2020",
+            "executive": { "fullname":"Jesus Benito"},
+            "affiliate": {
+              "documentType": "DNI",
+              "documentNumber": "40404033",
+              "firstName": "Juan",
+              "secondName": null,
+              "fatherLastname": "Perez",
+              "motherLastname": "Gomez",
+              "gender": "M",
+              "birthdate": null,
+              "maritialStatus": "S",
+              "email": "jperez@gmail.com"
+            },
+            "applicant": null,
+            "statuses": [
+              {
+                "id": 1,
+                "name": "REGISTERED",
+                "registerDate": "12/10/2020"
+              },
+              {
+                "id": 2,
+                "name": "ACCEPTED",
+                "registerDate": "14/10/2020"
+              }
+            ],
+            "beneficiaries": [
+              {
+                "firstName": "Jorge",
+                "secondName": null,
+                "fatherLastname": "Quispe",
+                "motherLastname": "Manrique",
+                "documentType": "DNI",
+                "documentNumber": "10101020",
+                "relationship": 2,
+                "gender": "H",
+                "birthdate": null
+              },
+              {
+                "firstName": "Ana",
+                "secondName": null,
+                "fatherLastname": "Manrique",
+                "motherLastname": "Riquelme",
+                "documentType": "DNI",
+                "documentNumber": "60606060",
+                "relationship": 2,
+                "gender": "M",
+                "birthdate": null
+              }
+            ],
+            "documents": [],
+            "messages": [
+              {
+                "id": 9,
+                "requestId": 1,
+                "affiliateId": null,
+                "executiveId": "1",
+                "message": "mensaje de prueba requestId - 1",
+                "documentName": "mensaje de prueba",
+                "documentCode": null,
+                "dateRegister": "17/10/2020"
+              },
+              {
+                "id": 8,
+                "requestId": 1,
+                "affiliateId": "1",
+                "executiveId": null,
+                "message": "mensaje de prueba requestId - 1",
+                "documentName": "mensaje de prueba",
+                "documentCode": null,
+                "dateRegister": "17/10/2020"
+              },
+              {
+                "id": 7,
+                "requestId": 1,
+                "affiliateId": null,
+                "executiveId": "1",
+                "message": "mensaje de prueba requestId - 1",
+                "documentName": "mensaje de prueba",
+                "documentCode": null,
+                "dateRegister": "16/10/2020"
+              },
+              {
+                "id": 6,
+                "requestId": 1,
+                "affiliateId": "1",
+                "executiveId": null,
+                "message": "mensaje de prueba requestId - 1",
+                "documentName": "mensaje de prueba",
+                "documentCode": null,
+                "dateRegister": "16/10/2020"
+              },
+              {
+                "id": 5,
+                "requestId": 1,
+                "affiliateId": "1",
+                "executiveId": null,
+                "message": "mensaje de prueba requestId - 1",
+                "documentName": "mensaje de prueba",
+                "documentCode": null,
+                "dateRegister": "16/10/2020"
+              },
+              {
+                "id": 4,
+                "requestId": 1,
+                "affiliateId": null,
+                "executiveId": "1",
+                "message": "mensaje de prueba requestId - 1",
+                "documentName": "mensaje de prueba",
+                "documentCode": null,
+                "dateRegister": "16/10/2020"
+              },
+              {
+                "id": 3,
+                "requestId": 1,
+                "affiliateId": "1",
+                "executiveId": null,
+                "message": "mensaje de prueba requestId - 1",
+                "documentName": "mensaje de prueba",
+                "documentCode": null,
+                "dateRegister": "16/10/2020"
+              },
+              {
+                "id": 2,
+                "requestId": 1,
+                "affiliateId": null,
+                "executiveId": "1",
+                "message": "mensaje de prueba requestId - 1",
+                "documentName": "mensaje de prueba",
+                "documentCode": null,
+                "dateRegister": "16/10/2020"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

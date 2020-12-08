@@ -1,0 +1,103 @@
+{
+  "backoffice/v1/executives":{
+    "GET":{
+      "codeResponse": "200",
+      "responses": [
+        {
+          "statusCode": "200",
+          "headers": {
+            "response": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": "",
+              "x-prima-signature": ""
+            },
+            "request": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": "",
+              "x-prima-signature": ""
+            }
+          },
+          "body": [
+            {
+              "idExecutive": "1",
+              "login":"P09887",
+              "names":"Ruben",
+              "lastNames":"Huamani",
+              "active":"0"
+            },
+            {
+              "idExecutive": "2",
+              "login":"P09845",
+              "names":"Pilar",
+              "lastNames":"Rivera",
+              "active":"1"
+            },            {
+              "idExecutive": "3",
+              "login":"P09898",
+              "names":"Pablo",
+              "lastNames":"Huamani",
+              "active":"1"
+            },
+            {
+              "idExecutive": "4",
+              "login":"P04537",
+              "names":"Milagros",
+              "lastNames":"Ariza",
+              "active":"1"
+            },
+            {
+              "idExecutive": "5",
+              "login":"P02287",
+              "names":"Berta",
+              "lastNames":"Huamani",
+              "active":"0"
+            },
+            {
+              "idExecutive": "6",
+              "login":"P01937",
+              "names":"Julianna",
+              "lastNames":"Ariza",
+              "active":"1"
+            },
+            {
+              "idExecutive": "7",
+              "login":"P06787",
+              "names":"Roberto",
+              "lastNames":"Huamani",
+              "active":"1"
+            },
+            {
+              "idExecutive": "8",
+              "login":"P03337",
+              "names":"Pilar",
+              "lastNames":"Flores",
+              "active":"0"
+            },
+            {
+              "idExecutive": "9",
+              "login":"P08887",
+              "names":"Ruben",
+              "lastNames":"Ramos",
+              "active":"1"
+            },
+            {
+              "idExecutive": "10",
+              "login":"P00037",
+              "names":"Pilar",
+              "lastNames":"Gomez",
+              "active":"1"
+            }
+          ]
+        }
+
+      ]
+    }
+
+  }
+
+
+
+}
+
+
+

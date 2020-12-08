@@ -1,0 +1,45 @@
+{
+  "backoffice/v1/procedure-list-select":{
+    "GET":{
+      "codeResponse": "200",
+      "responses": [
+        {
+          "statusCode": "200",
+          "headers": {
+            "response": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": "",
+              "x-prima-signature": ""
+            },
+            "request": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": "",
+              "x-prima-signature": ""
+            }
+          },
+          "body": [
+            {
+              "idProcedure": "1",
+              "procedure": "Jubilación y/o retiro de hasta el 95.5%"
+            },
+            {
+              "idProcedure": "2",
+              "procedure": "Gastos Sepelio"
+            },            {
+              "idProcedure": "3",
+              "procedure": "Actualizacion de datos"
+            }
+          ]
+        }
+
+      ]
+    }
+
+  }
+
+
+
+}
+
+
+
