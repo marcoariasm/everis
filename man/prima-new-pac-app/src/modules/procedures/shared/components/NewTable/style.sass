@@ -1,0 +1,53 @@
+.t-row
+  display: flex
+  justify-content: space-between
+  padding-left: 45px
+  padding-right: 39px
+  box-shadow: 0 1px 30px rgba(0, 0, 0, 0.04)
+  border-radius: 10px
+  margin-bottom: 10px
+  background: #FFFFFF
+  & > div
+    display: flex
+    align-items: center
+    justify-content: center
+    font-family: Calibri, serif
+    font-weight: normal
+    font-size: 16px
+    color: #696158
+    padding-left: 8px
+    padding-right: 8px
+
+    &.key
+      color: #00AE99
+      cursor: pointer
+      font-style: normal
+      font-weight: bold
+    &.key2
+      font-family: Calibri, serif
+      font-style: normal
+      font-weight: bold
+      font-size: 16px
+      line-height: 20px
+      display: flex
+      align-items: center
+      color: #696158
+
+  & > .p-small
+    padding-left: 15px
+    padding-right: 15px
+  & > .p-mid
+    padding-left: 25px
+    padding-right: 25px
+  & > .p-big
+    padding-left: 40px
+    padding-right: 40px
+  & > .left
+    justify-content: flex-start
+  & > .right
+    justify-content: flex-end
+
+
+.key.notLink, .key2.notLink
+  cursor: default !important
+

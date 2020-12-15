@@ -1,0 +1,107 @@
+@import '../../../../global/scss/variables'
+
+#main-menu
+  height: 100vh
+  padding-top: 31px
+  background-color: $colorGray
+  position: relative
+
+  .logo-container
+    padding-left: 36px
+    margin-bottom: 52px
+
+    img
+      width: 128px
+
+  .u-wrapper
+    max-width: 1280px
+    margin: auto
+    padding: 0
+
+    .option-menu
+      padding-left: 20px
+      border-radius: 0 22px 22px 0
+      display: block
+      border: 0
+      background-color: $colorGray
+      font-family: FS Emeric, serif
+
+      a
+        text-decoration: none
+
+      li
+        font-family: FS Emeric, serif
+        font-style: normal
+        font-weight: bold
+        font-size: 20px
+        line-height: 22px
+        letter-spacing: 0.02em
+        text-align: left
+        height: 45px
+        margin-left: 0
+        padding-left: 20px
+        padding-right: 15px
+        border-top-left-radius: 30px
+        border-bottom-left-radius: 30px
+        color: $colorWhite
+
+      &.active
+        position: relative
+
+        .option-content
+          background-color: #f7f7f8
+          color: $colorGray
+
+    .option-content
+      display: flex
+      align-items: center
+      height: 45px
+      position: relative
+      background-color: #0000
+      color: $colorWhite
+      font-size: 16px
+      font-weight: 500
+      line-height: 20px
+      text-align: left
+      margin-left: 0
+      padding-left: 20px
+      padding-right: 15px
+      border-top-left-radius: 30px
+      border-bottom-left-radius: 30px
+
+      .icon
+        padding: 0
+        margin-right: 16px
+        width: 16px
+        height: 18px
+        cursor: pointer
+
+      label
+        cursor: pointer
+        font-family: FS Emeric, sans-serif
+        font-weight: 500
+
+  .cerrar-sesion
+    display: flex
+    position: absolute
+    align-items: center
+    width: 100%
+    margin: 0
+    padding-left: 15%
+    bottom: 10%
+    font-style: normal
+    font-weight: 500
+    font-size: 16px
+    line-height: 16px
+    cursor: pointer
+    img
+      margin: 0 15px 0 0
+      width: 16px
+
+    p
+      font-family: FS Emeric, sans-serif
+      color: #FFFFFF
+      font-size: 16px
+      line-height: 16px
+
+

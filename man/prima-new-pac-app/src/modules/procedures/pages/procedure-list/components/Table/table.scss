@@ -1,0 +1,31 @@
+.attentionTimeHeader {
+  color: #FFFFFF;
+  font-family: FS Emeric;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+}
+.jc-start {
+  justify-content: start!important;
+}
+
+.jc-center {
+  justify-content: center!important;
+}
+
+.table-header {
+  div {
+    text-align: center;
+  }
+}
+
+.t-row {
+  &:hover {
+    background: #E3E3E3;
+    cursor: pointer;
+  }
+}
+
+.checkbox-header {
+  margin-right: 28px;
+}

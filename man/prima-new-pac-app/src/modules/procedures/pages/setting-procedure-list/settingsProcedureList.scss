@@ -1,0 +1,21 @@
+.list-procedure-button {
+  background-color: transparent !important;
+  font-size: 16px;
+  color: #00ae99 !important;
+  border: 2px solid #00ae99;
+  padding: 0;
+  background: #ffffff;
+  border: 1.4px solid #00a499 !important;
+  box-sizing: border-box !important;
+  border-radius: 6px !important;
+  &:hover {
+    background-color: #00ae99;
+  }
+  &:disabled {
+    background-color: #b9b9b9;
+  }
+}
+
+.m-left {
+  margin-left: 20px;
+}

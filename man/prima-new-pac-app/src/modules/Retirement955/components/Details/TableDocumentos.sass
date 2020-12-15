@@ -1,0 +1,96 @@
+@import "../../../../global/scss/variables"
+.table.validacion-documentos
+  display: flex
+  flex-direction: column
+
+  .sub
+    font-family: FS Emeric, sans-serif
+    font-style: normal
+    font-weight: 500
+    font-size: 15px
+    line-height: 17px
+    color: #696158
+    margin-bottom: 22px
+
+  .column1
+    width: 12%
+
+  .column2
+    width: 35%
+
+  .column3
+    width: 45%
+
+  .column4
+    width: 7%
+
+    .tooltip
+      cursor: pointer
+
+  .table-header
+    margin-top: 20px
+
+  .table-body
+    .tooltip
+      margin: 0 auto
+
+    .table-item
+      padding: 0 10px 0 0
+
+  .table-header,
+  .table-body
+    background: #FFFFFF
+    border-radius: 10px
+    display: flex
+    width: 99%
+    margin: 0 auto
+    justify-content: space-around
+    padding: 0 50px
+
+    .table-item
+      font-family: FS Emeric, sans-serif
+      font-weight: 600
+      line-height: 54px
+      font-size: 16px
+      color: #FFFFFF
+      display: flex
+      align-items: center
+
+  .table-header
+    background: $colorGreen
+    font-size: 14px
+    letter-spacing: 0.02em
+    height: 54px
+
+    .table-header-items
+      display: flex
+      width: 100%
+
+    .table-item
+      font-size: 14px
+
+  .table-body
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1)
+    border-radius: 10px
+    margin: 10px auto
+    height: 71px
+
+    .table-item
+      line-height: 18px
+      color: #696158
+      font-family: Calibri, sans-serif
+      font-style: normal
+      font-weight: 400
+
+      .value
+        font-size: 16px
+
+        &.green
+          color: $colorGreen
+
+        &.orange
+          color: $colorMainOrange
+
+      .tooltip
+        .tooltiptext
+          bottom: 130%

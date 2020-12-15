@@ -1,0 +1,108 @@
+@import "../../../scss/variables"
+
+.card-component
+  background: #FFFFFF
+  box-sizing: border-box
+  box-shadow: 0 1.72063px 29.5496px rgba(0, 0, 0, 0.04)
+  border-radius: 14px
+  margin-bottom: 25px
+
+  &.with-title
+    border-radius: 12px 12px 0 0
+
+  & .no-padding
+    & .card-body
+      padding: 0
+
+  & .card-body
+    padding: 40px
+
+    & .card-body
+      padding: 0 40px
+
+  & .paso2-block
+    display: flex
+    line-height: 60px
+    padding: 0 20px
+
+    &.with-border-bottom
+      border-bottom: 0.757098px dashed #9B9B9B
+  
+    & .paso2-left
+      min-width: 300px
+      font-family: 'FS Emeric', serif
+      font-style: normal
+      font-weight: 500
+      font-size: 18px
+      color: #00A499
+
+    & .paso2-right
+      font-family: 'Calibri', sans-serif
+      width: 100%
+      min-width: 300px
+      font-style: normal
+      font-weight: normal
+      font-size: 18px
+      color: #696158
+
+    & .align-right
+      justify-content: flex-end
+      display: flex
+      align-items: center
+  
+  .card-header
+    background: #00A499
+    border-radius: 12px 12px 0 0
+    font-style: normal
+    font-weight: bold
+    font-size: 23px
+    line-height: 60px
+    letter-spacing: 0.03em
+    padding-left: 30px
+    color: #FFFFFF
+    
+  .card-body
+    padding: 35px
+    display: flex
+    flex-direction: column
+
+  .card-footer
+    padding: 35px
+
+  .toggle:checked + .label-toggle > img
+    transform: rotate(180deg) translateX(-3px)
+    -webkit-transform: rotate(180deg) translateX(-3px)
+
+  .card-box
+    background: #F7F7F8
+    border-radius: 11px
+    padding: 35px 45px 0 50px
+    margin-top: 20px
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-between
+    margin-bottom: 30px
+
+    .card-item
+      margin-bottom: 40px
+      width: 23%
+
+      .label
+        margin-bottom: 10px
+
+      .value
+        &.green
+          color: $colorGreen
+
+        &.orange
+          color: $colorMainOrange
+
+    &::after
+      content: ""
+      width: 48%
+
+  &.white-theme
+    .card-header
+      color: $colorGreen
+      background: #FFFFFF
