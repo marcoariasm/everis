@@ -1,1 +1,0 @@
-export { default as useAffiliate } from './Afiliado/useAfiliado';
