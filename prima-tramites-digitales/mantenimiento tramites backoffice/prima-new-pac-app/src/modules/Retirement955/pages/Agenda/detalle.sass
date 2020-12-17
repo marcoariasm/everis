@@ -1,0 +1,213 @@
+@import "../../../../global/scss/variables"
+
+#status-page
+  display: flex
+  flex-direction: column
+  font-family: Calibri, serif
+  font-style: normal
+  font-weight: normal
+  font-size: 18px
+  line-height: 22px
+  color: #696158
+
+  .table.validacion-documentos .sub-title
+    margin-bottom: 30px
+
+  .head-container
+    display: flex
+    flex-direction: row
+    margin-bottom: 30px
+
+  .head-item
+    display: flex
+    flex-direction: column
+    width: 50%
+
+  .sub-header
+    font-family: FS Emeric, sans-serif
+    font-style: normal
+    font-weight: 500
+    font-size: 23px
+    line-height: 25px
+    letter-spacing: 0.01em
+    color: #FF4F00
+
+  .tramite-number
+    width: 250px
+    align-self: flex-end
+    text-align: center
+    background: #FCFCFC
+    border-radius: 3px
+    padding: 10px
+
+    p
+      font-family: FS Emeric, sans-serif
+      color: $colorGreen
+      font-size: 16px
+
+    strong
+      font-family: FS Emeric, sans-serif
+      font-size: 16px
+
+  .card-box
+    background: #F7F7F8
+    border-radius: 11px
+    padding: 35px 45px 0 50px
+    margin-top: 20px
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-between
+    margin-bottom: 30px
+
+    .card-item
+      margin-bottom: 40px
+      width: 23%
+
+      .label
+        margin-bottom: 10px
+
+      .value
+        &.green
+          color: $colorGreen
+
+        &.orange
+          color: $colorMainOrange
+
+    .button-container
+      margin-top: 30px
+
+    &.no-data
+      padding: 35px 45px
+      justify-content: center
+
+      p
+        width: 100%
+        text-align: center
+
+  .bottom
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+
+    .left
+      width: 25%
+
+      .card-box
+        flex-direction: column
+
+        .card-item
+          width: 100%
+
+          .value
+            height: 36px
+
+          &.reasons
+            width: 30%
+
+            .value
+              height: auto
+
+              ul
+                margin: 0
+                list-style-type: none
+
+              ul > li
+                text-indent: -5px
+
+              ul > li:before
+                content: "- "
+                text-indent: -5px
+
+    .right
+      width: 73%
+
+      .card-box
+        justify-content: flex-start
+
+        .card-item
+          width: 30%
+
+          .value
+            height: 36px
+            padding-right: 20px
+
+        &::after
+          content: ""
+          width: 30%
+
+    &.observed
+      flex-direction: column
+
+      .card-box
+        flex-direction: row
+        width: 100%
+
+      .left
+        width: 100%
+
+        .card-item
+          width: 23%
+
+      .right
+        width: 100%
+
+        .card-item
+          width: 23%
+
+    &.disabled
+      display: none
+
+  &.less-100
+    .bottom
+      .left
+        width: 100%
+
+        .number-id
+          display: none
+
+        .card-box
+          flex-direction: row
+
+          .card-item
+            width: 25%
+
+      .right
+        display: none
+
+  &.legal
+    .button-container
+      display: none
+
+    .bottom
+      .left
+        display: none
+
+      .right
+        width: 100%
+
+        .number-id
+          display: none
+
+        .card-item
+          width: 24%
+
+    &.less-100
+      .bottom
+        display: none
+
+    &.historial
+      .column1
+        width: 20%
+
+      .column2
+        width: 40%
+
+      .column3
+        width: 20%
+
+      .column4
+        width: 20%
+
+  .asesor-value
+    text-transform: capitalize

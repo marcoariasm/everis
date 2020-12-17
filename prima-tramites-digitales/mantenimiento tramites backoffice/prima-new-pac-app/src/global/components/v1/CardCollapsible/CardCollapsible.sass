@@ -1,0 +1,54 @@
+@import "../../../scss/variables"
+
+.card-component
+  &.with-title
+    border-radius: 14px
+
+  &.white-theme
+    .label-toggle
+      background: #FFFFFF
+      color: $colorGreen
+
+  .collapse-wrapper
+    border-bottom: 1px solid transparent
+
+  input[type="checkbox"]
+    display: none
+    
+  .label-toggle
+    background: $colorGreen
+    border-radius: 14px
+    color: #FFFFFF
+    cursor: pointer
+    display: block
+    font-weight: 600
+    font-family: "FS Emeric", serif
+    padding: 0 48px
+    text-align: left
+    transition: background-color 0.45s ease
+    user-select: none
+    line-height: 75px
+    position: relative
+
+    & img
+      position: absolute
+      top: 30px
+      right: 30px
+    
+  .collapse-inner 
+    background-color: #FFFFFF
+    border-radius: 14px
+    padding: 0 48px 40px
+
+  .collapse-content 
+    max-height: 0
+    overflow: hidden
+    transition: max-height 0.45s ease
+  
+  .toggle:checked + .label-toggle + .collapse-content 
+    max-height: 1500px
+  
+  .toggle:checked + .label-toggle
+    border-bottom-left-radius: 0
+    border-bottom-right-radius: 0
+

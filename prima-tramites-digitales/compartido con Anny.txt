@@ -1,0 +1,24 @@
+	Desktop / Cliente / Login - Dashboard
+ok		ultima pantalla Dashboard
+
+ok	Desktop / Cliente / Nueva Solic. Trámite personal
+	Desktop / Cliente / Nueva Solic. Trámite  Beneficiario
+	Desptoio / Solicitantes / Dashboard
+	Desktop / Solicitante / Persona jurídica / Nueva Solic. trámite
+		1ras 3 pantallas
+
+
+
+Componentes que arreglé y puedo factorizar para reutilizar
+
+ruta:   shared/components/
+
+/	WhiteCard  (lo arreglé, no funcionaba en responsive)
+/titles
+	ContentTitle (titulo con línea pequeña naranja)
+	GreenTitle (título verde tamaño 18px en negrita)
+	NormalText (texto gris tamaño 16px)
+	
+	
+	
+

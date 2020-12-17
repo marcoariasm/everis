@@ -1,0 +1,57 @@
+@import "../../../../global/scss/variables"
+
+.table-new
+  display: flex
+  flex-direction: column
+
+  .table-header,
+  .table-body
+    background: #FFFFFF
+    border-radius: 10px
+    display: flex
+    width: 99%
+    margin: 0 auto
+    justify-content: space-around
+    padding: 0 50px
+
+    .table-item
+      font-family: FS Emeric, sans-serif
+      font-weight: 600
+      font-size: 16px
+      display: flex
+      align-items: center
+
+  .table-header
+    background: $colorGreen
+    font-size: 14px
+    letter-spacing: 0.02em
+    height: 54px
+
+    .table-header-items
+      display: flex
+      width: 100%
+
+      .table-item
+        font-size: 14px
+        color: #FFFFFF
+
+  .table-body
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1)
+    border-radius: 10px
+    margin: 10px auto
+    height: 71px
+
+    .table-item
+      color: #696158
+      font-family: Calibri, sans-serif
+      font-style: normal
+      font-weight: 400
+
+      .value
+        font-size: 16px
+
+  .orange
+    color: $colorMainOrange
+
+  .green
+    color: $colorGreen

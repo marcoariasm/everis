@@ -1,0 +1,36 @@
+@import "../../../../../../global/scss/_variables.sass";
+
+.bodyTextSmall {
+  font-family: Calibri;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: #7c7c7c;
+}
+
+.cardTitle {
+  font-family: FS Emeric;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  color: #696158;
+}
+
+.bodyTextSecundary {
+  font-family: Calibri;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #696158;
+}
+
+.tableBodyTitle{
+  font-family: FS Emeric;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 18px;
+  color: #696158;
+}

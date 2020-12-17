@@ -1,0 +1,83 @@
+{
+  "affiliate/v1/procedure-types": {
+    "GET": {
+      "codeResponse": "200",
+      "responses": [
+        {
+          "statusCode": "200",
+          "headers": {
+            "response": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": "",
+              "x-prima-signature": ""
+            },
+            "request": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": "",
+              "x-prima-signature": ""
+            }
+          },
+          "body": [
+            {
+              "idCategory": 1,
+              "name": "Ahorros voluntarios",
+              "description":"Apertura de cuenta y plan flexible",
+              "typeRequests": [
+                {
+                  "idTypeRequest": 1,
+                  "name": "Apertura de cuentas de Aportes Voluntarios",
+                  "description": "apertura de cuentas",
+                  "abreviature": null
+                },
+                {
+                  "idTypeRequest": 2,
+                  "name": "Cancelación de Plan Flexible",
+                  "description": "cancelación",
+                  "abreviature": null
+                }
+              ]
+            },
+            {
+              "idCategory": 2,
+              "name": "Bono de Reconocimiento",
+              "description": "Bonos y apelaciones",
+              "typeRequests": [
+                {
+                  "idTypeRequest": 2,
+                  "name": "Carta para la ONP",
+                  "description": "",
+                  "abreviature": null
+                },
+                {
+                  "idTypeRequest": 2,
+                  "name": "Reconsideraciones y/o Apelaciones",
+                  "description": "--",
+                  "abreviature": null
+                },
+                {
+                  "idTypeRequest": 2,
+                  "name": "Trámite de Bono de Reconocmiento",
+                  "description": "...",
+                  "abreviature": null
+                }
+              ]
+            },
+            {
+              "idCategory": 3,
+              "name": "Devolución de Aportes",
+              "description": "Afiliados, jubilados en otro régimen y más",
+              "typeRequests": [
+                {
+                  "idTypeRequest": 2,
+                  "name": "Devolución de Aportes de Afiliados",
+                  "description": "...",
+                  "abreviature": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

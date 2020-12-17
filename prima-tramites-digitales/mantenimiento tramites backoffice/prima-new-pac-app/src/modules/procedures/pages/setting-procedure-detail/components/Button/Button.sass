@@ -1,0 +1,92 @@
+@import 'src/global/scss/variables'
+
+.button
+  outline: none
+  width: auto
+  min-width: 183px
+  height: 45px
+  background-color: $colorMainOrange
+  border-radius: 6px
+  font-family: FS Emeric, serif
+  font-style: normal
+  font-weight: 500
+  font-size: 18px
+  line-height: 20px
+  text-align: center
+  color: $colorWhite
+  cursor: pointer
+  user-select: none
+  border: none
+  display: flex
+  align-items: center
+  justify-content: center
+
+  &:hover
+    background-color: $colorMainOrange2
+
+  &:disabled
+    background-color: $colorDisabled
+    cursor: not-allowed
+
+  &.action
+    background-color: $colorWhite
+    border: 1px solid $colorMainOrange
+    color: $colorMainOrange
+    min-width: 185px
+
+    &:disabled
+      color: $colorDisabled
+      border-color: $colorDisabled
+      cursor: not-allowed
+
+  &.white
+    background: $colorWhite
+    border: 1px solid #E8E8E8
+    box-sizing: border-box
+    box-shadow: 0 4px 8px rgba(44, 39, 56, 0.08)
+    border-radius: 6px
+    color: $colorGray
+    font-size: 18px
+    line-height: 20px
+
+    &:hover
+      background: #F4F4F4
+
+  &.green
+    background: $colorGreen
+    box-shadow: 0 4px 8px rgba(0, 174, 153, 0.3)
+    border-radius: 6px
+
+    &:hover
+      background: $colorGreen2
+
+  &.white-green
+    background: $colorWhite
+    border: 1px solid $colorGreen
+    box-sizing: border-box
+    box-shadow: 0 4px 8px rgba(0, 174, 153, 0.3)
+    border-radius: 6px
+    color: $colorGreen
+    padding: 0 10px
+    height: auto
+    min-height: 45px
+
+  &.right-icon
+    background-repeat: no-repeat
+    background-position-x: calc(100% - 30px)
+    background-position-y: center
+    padding-right: 50px
+
+  &.left-icon
+    background-repeat: no-repeat
+    background-position-x: 30px
+    background-position-y: center
+    padding-left: 50px
+
+  &.size2
+    min-width: 186px
+    font-size: 18px
+    line-height: 20px
+
+  &.small
+    min-width: 152px

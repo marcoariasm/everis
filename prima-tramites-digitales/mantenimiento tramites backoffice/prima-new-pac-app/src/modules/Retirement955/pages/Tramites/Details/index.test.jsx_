@@ -1,0 +1,103 @@
+import React from 'react';
+import { mount } from 'enzyme';
+import { useParams } from 'react-router-dom';
+import Faker from 'faker';
+
+import moment from 'moment';
+import { act } from 'react-dom/test-utils';
+import Details from './index';
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useParams: jest.fn(),
+}));
+
+describe('Test Tramites Detalle - Toda la página ', () => {
+  let wrapper;
+
+  const procedures = [
+    {
+      IDPROCEDURE: '015',
+      PROCEDURE: 'Jubilación y/o retiro de hasta el 95.5%',
+      ID: '95.5-E1-0000045405',
+      FEC_SOL: '2020-10-12',
+      CUSPP: '170607LCSNS1',
+      NAME: 'AGUILAR JUAREZ CARLOS ALBERTO',
+      IDPROCEDURESTATUS: 4,
+      STATUS: 'Aceptado',
+      IDCHANEL: 'WEB',
+      CHANEL: 'Web',
+      IDAGENCY: 0,
+      AGENCY: '',
+      IDDOC: '01',
+      TYPE_DOC: 'Carnet de extranjería',
+      DOC: 'N-105320',
+      FEC_VAL: '',
+      ADVISERID: 2,
+    },
+  ];
+
+  const afiliadoInformacion = {
+    age: Faker.random.number({ min: 50, max: 100 }),
+    birthDate: moment(Faker.date.past(60)).format('DD/MM/yyyy'),
+    deceased: false,
+    disability: false,
+    documentNumber: Faker.random.number({ min: 11111111, max: 99999999 }),
+    documentType: Faker.random.arrayElement(['DNI', 'CE']),
+    documentTypeName: Faker.random.arrayElement(['DNI', 'CE']),
+    firstName: `${Faker.name.firstName()} ${Faker.name.firstName()}`,
+    gender: Faker.random.arrayElement(['FEMALE', 'MALE']),
+    genderName: Faker.random.arrayElement(['Femenino', 'Masculino']),
+    maritalStatus: Faker.random.arrayElement(['SINGLE', 'MARRIED']),
+    maritalStatusName: Faker.random.arrayElement(['Soltero(a)', 'Casado(a)']),
+    motherSurname: Faker.name.lastName(),
+    nativeCountry: 'PERUANO',
+    surname: Faker.name.lastName(),
+  };
+
+  beforeEach(() => {
+    useParams.mockReturnValue({
+      id: '95.5-E1-0000045405',
+    });
+
+    fetch.resetMocks();
+
+    fetch.mockIf(/^.*procedure$/, () => new Promise((resolve) => {
+      resolve({ status: 200, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(procedures) });
+    }));
+
+    fetch.mockIf(/^.*affiliate$/, () => new Promise((resolve) => {
+      resolve({ status: 200, headers: { 'Content-Type': 'application/json' }, body: afiliadoInformacion });
+    }));
+  });
+
+  test('Test de Loading', async () => {
+    wrapper = mount(<Details />);
+
+    await act(async () => wrapper);
+    wrapper.update();
+
+    expect(wrapper.find('Header[title="Validación del trámite"]').exists()).toBe(true);
+    expect(wrapper.find('img[src="loading.svg"]').exists()).toBe(true);
+  });
+
+  test('Test de Afiliado Loaded', async () => {
+    wrapper = mount(
+      <Details />,
+    );
+
+    await act(async () => wrapper);
+    wrapper.update();
+
+    expect(wrapper.find('Header[title="Validación del trámite"]').exists()).toBe(true);
+    expect(wrapper.find('img[src="loading.svg"]').exists()).toBe(true);
+
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
+    wrapper.update();
+
+    // console.log(wrapper.debug());
+  });
+});

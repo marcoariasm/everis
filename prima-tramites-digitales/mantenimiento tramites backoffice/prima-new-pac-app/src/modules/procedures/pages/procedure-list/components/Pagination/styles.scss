@@ -1,0 +1,38 @@
+.pagination {
+  margin: 1em 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.button-prev,
+.button-next {
+  padding: 3px;
+  display: flex;
+  border-radius: 15px;
+  border: 2px solid #00a499!important;
+  color: #059F8D;
+  width: 90px;
+  justify-content: space-around;
+  align-items: center;
+  &:focus {
+    outline: none;
+    border: 2px solid #059F8D;
+    border-radius: 15px;
+  }
+}
+
+.button-prev {
+  margin-right: 14px;
+}
+
+.button-next {
+  margin-left: 14px;
+}
+
+.ml-1{
+  margin-left: 5px;
+}
+.mr-1{
+  margin-left: 5px;
+}

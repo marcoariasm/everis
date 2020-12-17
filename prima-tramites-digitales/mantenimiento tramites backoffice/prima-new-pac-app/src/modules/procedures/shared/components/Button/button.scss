@@ -1,0 +1,11 @@
+.list-procedure-button {
+  background-color: #FF4F00;
+  font-size: 16px;
+  padding: 0;
+  &:hover {
+    background-color: #EA4800;
+  }
+  &:disabled {
+    background-color: #B9B9B9;
+  }
+}

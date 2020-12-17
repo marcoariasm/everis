@@ -1,0 +1,122 @@
+.modal-attach-document
+  .modal-container
+    height: 534px
+    position: absolute
+    top: 50%
+    margin-top: -267px
+    left: 50%
+    margin-left: -420px
+
+    .footer
+      display: flex
+      justify-content: space-between
+
+  .title
+    margin-bottom: 20px
+    text-align: center
+
+  div.status
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+
+    .status-item
+      display: flex
+      flex-direction: column
+      justify-content: center
+
+      .label
+        font-size: 17px
+        padding-bottom: 23px
+        font-weight: bold
+
+      .value
+        font-size: 17px
+
+  .custom-dropzone
+    background: #F8F8F8
+    border: 1.71081px dashed #D0D0D0
+    border-radius: 8px
+    width: 100%
+    height: 200px
+    margin-top: 30px
+    margin-bottom: 35px
+    padding-top: 30px
+    text-align: center
+
+    .title
+      font-weight: bold
+      font-size: 18px
+
+    p
+      margin-bottom: 15px
+      font-size: 16px
+
+    button.add
+      background: linear-gradient(90deg, #139686 0%,#139686 25%,#00AE99 25%,#00AE99 100%)
+      width: 163px
+      padding: 0
+      font-size: 17px
+      height: 44px
+      position: relative
+
+      img
+        position: absolute
+        left: 15px
+        top: 15px
+
+      span
+        position: absolute
+        left: 55px
+        top: 13px
+
+    &.hasError
+      border: 1.71081px dashed #FF0000
+
+      p
+        color: #FF0000
+        margin-top: 20px
+
+        strong
+          display: block
+
+    .file-progress-container
+      display: flex
+      flex-direction: row
+      justify-content: space-between
+      width: 70%
+      align-items: center
+      margin: 45px auto 0
+
+      .file-progress-info
+        display: flex
+        flex-direction: column
+        width: 400px
+
+        .file-progress-data
+          display: flex
+          flex-direction: row
+          color: #00A499
+          font-weight: bold
+          font-size: 18px
+          justify-content: space-between
+
+          .file-progress-percentage
+            font-size: 16px
+
+            .cancel-button
+              cursor: pointer
+
+        .file-progress-bar
+          background: #DBDBDB
+          border-radius: 15px
+          width: 100%
+          position: relative
+          height: 10px
+          margin-top: 5px
+
+          .file-progress-bar-progress
+            background: #00A499
+            height: 10px
+            border-radius: 16px
+            transition: width 1s

@@ -1,0 +1,2 @@
+export const ROLE_ADMIN = 'ROLE_ADMINISTRADOR';
+export const ROLE_SUPERVISOR = 'ROLE_SUPERVISOR';

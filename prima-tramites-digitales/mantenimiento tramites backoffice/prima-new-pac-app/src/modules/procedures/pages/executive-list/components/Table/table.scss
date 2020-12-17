@@ -1,0 +1,21 @@
+.table-header {
+  div {
+    text-align: left;
+  }
+}
+
+.t-row {
+  border: solid 1px #e8e8e8;
+  box-shadow: 0 4px 8px 1px rgba(53, 53, 53, 0.12);
+  div {
+    padding-left: 0;
+  }
+  &:hover {
+    background-color: #f1f0f0;
+  }
+  &.inactive:hover {
+    cursor: auto;
+    background-color: transparent;
+  }
+}
+

@@ -1,0 +1,48 @@
+@import "../../../../global/scss/variables"
+  
+#login
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: flex-end
+  & > .logo
+    position: absolute
+    top: 28px
+    left: 36px
+  & > .sentence
+    position: absolute
+    top: 30px
+    right: 51.36px
+  & > .form
+    height: 500px
+    width: 370px
+    margin-right: 206px
+    padding: 49px 35px 57px
+    box-shadow: 0px 2px 40px rgba(0, 0, 0, 0.2)
+    border-radius: 10.3944px
+    background: $colorWhite
+    & > .title
+      font-family: FS Emeric, serif
+      font-style: normal
+      font-weight: bold
+      font-size: 26px
+      line-height: 26px
+      color: $colorMainOrange
+      margin-bottom: 44px
+    & > p
+      font-family: Calibri
+      font-style: normal
+      font-weight: normal
+      font-size: 16px
+      line-height: 22px
+      letter-spacing: -0.00615385em
+      color: #696158
+      border-radius: 19.3085px
+      margin-bottom: 12px
+    & > .btn-login
+      margin-top: 44px
+      width: 100%
+
+@media screen and (min-width : 1500px)
+  .form
+    margin: 0 auto
