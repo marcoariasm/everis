@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import WhiteCard from "global/components/v2/Cards/WhiteCard";
-import MainTitle from "global/components/v2/Titles/MainTitle"
+import MainTitle from "global/components/v2/Titles/MainTitle";
 import newApplication2 from "shared/images/newApplication2.svg";
 import newApplication1 from "shared/images/newApplication1.svg";
 
@@ -11,9 +11,11 @@ import {
   ContentImageCard,
   ImageData,
   ContentData,
+  Text
 } from "./styles";
 
 const textMenu = {
+  subtitle: "Nueva solicitud de trámite",
   title: "¿Qué tipo de trámite quisieras realizar?",
   content1: "Trámites personales",
   content2: "Soy el beneficiario o representante / apoderado de un afiliado",
@@ -24,10 +26,14 @@ const linkMenu = {
   linkButton2: "/inicio/validar-afiliado",
 };
 
+
 const Menu = () => {
-  return (
+return (
     <>
       <WhiteCard>
+        <Text>
+          <span>{textMenu.subtitle}</span>
+        </Text>
         <MainTitle title={textMenu.title} />
 
         <GridButtons>
@@ -49,10 +55,9 @@ const Menu = () => {
             </ContentImageCard>
           </Link>
         </GridButtons>
-        
       </WhiteCard>
     </>
   );
 };
 
-export default Menu
+export default Menu;

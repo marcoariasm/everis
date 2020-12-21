@@ -1,5 +1,5 @@
 import {alternativeConstants} from '../../constants/alternative.constants'
-import {alternativeService} from '../../services/alternatives.service'
+import {alternativeService} from '../../../modules/Retirement955/services/alternatives.service'
 
 export const alternativeActions = {
     setPercentage

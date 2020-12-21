@@ -8,11 +8,11 @@ export const ContentCard = ({ cantPension, mount, title, titleMensual }) => {
       <ContainerText>
         <ContentSection>
           <span className="informativeBodyTitleGreen">{title}</span>
-          {cantPension && <CoinSection className="statementTableBody">S/ {cantPension}</CoinSection>}
+          {cantPension && <CoinSection className="statementTableBody">{cantPension}</CoinSection>}
         </ContentSection>
         <ContentSection>
           <span className="informativeBodyTitleGreen">{titleMensual}</span>
-          {mount && <CoinSection className="statementTableBody">S/ {mount}</CoinSection>}
+          {mount && <CoinSection className="statementTableBody">{mount}</CoinSection>}
         </ContentSection>
       </ContainerText>
     </>

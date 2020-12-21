@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { allColors } from '../../../styles/index';
+import { allColors } from 'global/styles/index';
 import styled from 'styled-components';
 import './styles.scss';
 import MaterialSelect from 'global/components/v2/MaterialSelect';
+import { size } from 'global/styles/Responsive';
 
 const DropdownContainer = styled.div`
   padding-top: ${props => props.noPadding || '1em'};
   padding-bottom: ${props => props.noPadding || '0.7em'};
   width: ${props => props.percentageWidth || 100}%;
+`;
+
+const ErrorContainer = styled.div`
+ margin-top: 1em;
+  @media screen and (max-width: ${size.tabletM})  {
+    position: relative;
+  }
 `;
 
 export default function DropdownInput({
@@ -29,7 +37,9 @@ export default function DropdownInput({
   className = '',
   onInputValidation,
   resetInputWhenSelectChange = false,
-  capitalizeInput = false
+  capitalizeInput = false,
+  reset,
+  error
 }) {
     const [labelColor, setLabelColor] = useState(allColors.colorPlaceholder);
     const [inputColor, setInputColor] = useState(allColors.colorGrayLight);
@@ -44,6 +54,10 @@ export default function DropdownInput({
       if (resetInputWhenSelectChange) resetInput();
       if (onChange) onChange(getComponentState());
     }, [selectValue]);
+
+    useEffect(() => {
+      resetInput();
+    }, [reset]);
 
     const resetInput = () => {
       if (!registerInput) return setInputValue('');
@@ -74,7 +88,7 @@ export default function DropdownInput({
 
     const handleChange = (event) => {
       const onlyNumbers =  /^[0-9\b]+$/;
-      if (!numericInput) return setInputValue(event.target.value);
+      if (!numericInput) return setInputValue(capitalizeInput ? event.target.value.toUpperCase() : event.target.value);
       if (onlyNumbers.test(Number(event.target.value))) return setInputValue(event.target.value);
     }
 
@@ -107,6 +121,7 @@ export default function DropdownInput({
               {...inputProps}
             />
         </div>
+        { error && <ErrorContainer>{error}</ErrorContainer>}
     </DropdownContainer>
   )
 };

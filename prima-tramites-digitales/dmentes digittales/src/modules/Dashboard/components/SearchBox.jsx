@@ -4,9 +4,6 @@ import { useHistory } from "react-router-dom";
 
 import { allColors } from "global/styles/index";
 import lupa from "shared/images/lupa.svg";
-// import List from "./List/List";
-
-import { personalProcedures } from "../pages/NewProcedureAffiliate/mockData"
 
 const Container = styled.div`
   margin: 30px auto;
@@ -65,105 +62,59 @@ const Filter = ({ value, handleChange }) => {
   );
 };
 
-const ListResults = ({ list, found = false, children, selectItem }) => {
+const ListResults = ({ list, found = false, selectItem }) => {
   return (
     <div hidden={false}>
       {found ? (
         <Card>
           <ul>
             {list.map((element, i) => (
-              <li key={i} onClick={() => selectItem(element)}>{element.name}</li>
+              <li key={i} onClick={() => selectItem(element)}>
+                {element.name}
+              </li>
             ))}
           </ul>
         </Card>
-      ) :
-        children
-      }
+      ): ''}
     </div>
   );
 };
 
-const SearchBox = ({ children }) => {
+const SearchBox = ({ categories }) => {
   const [word, setWord] = useState("");
   const [filterDisplay, setFilterDisplay] = useState([]);
+  const [category, setCategory] = useState([]);
   const history = useHistory();
 
   const makeList = (object) => {
     let list = [];
-    object.filter(_ => _.typeRequests.length > 0).forEach(_ => {
-      list = [...list, ..._.typeRequests];
-    });
+    object
+      .filter((_) => _.typeRequests.length > 0)
+      .forEach((_) => {
+        list = [...list, ..._.typeRequests];
+      });
     return list;
-  }
+  };
 
-  const lista = makeList(personalProcedures);
-
-  const [list] = useState(lista)
-
-  // const [list] = useState([
-  //   "Actualización de datos",
-  //   "Actualización de datos de beneficiarios",
-  //   "Actualización del Vínculo Laboral",
-  //   "Apertura de cuentas de Aportes Voluntarios",
-  //   "Aviso de Siniestro",
-  //   "Cancelación de Plan Flexible",
-  //   "Cambio de fondo",
-  //   "Cambio de forma de pago",
-  //   "Cambio de modalidad",
-  //   "Cargo en cuenta para tu aporte de independiente",
-  //   "Carta para la ONP",
-  //   "Convenio Perú-España, Ibero 1-CM ISS",
-  //   "Certificado de Afiliación",
-  //   "Certificado de Pensionista",
-  //   "Certificado de Supervivencia",
-  //   "Constancia de 4.5% - ESSALUD",
-  //   "Constancia de 95.5%",
-  //   "Contrato de Afiliación",
-  //   "Desafiliación",
-  //   "Denuncia al promotor",
-  //   "Devolución de Aportes de Afiliados",
-  //   "Devolución de Aportes de Jubilados en otro regimen (Circular 040-2004)",
-  //   "Devolución de Aportes por DU 037-94",
-  //   "Envío de Boletas de Pago",
-  //   "Estado de Cuenta",
-  //   "Evaluación y Calificación de Invalidez",
-  //   "Exclusión de beneficiarios",
-  //   "Fondo Complementario de Jubilación Minera, Metalúrgica y Siderúrgica",
-  //   "Gastos de Sepelio",
-  //   "Herencia",
-  //   "Inclusión de beneficiarios",
-  //   "Inicio de Cobranza",
-  //   "Multiafiliación",
-  //   "Nulidad",
-  //   "Pensión Complementaria de Pensión Mínima",
-  //   "Pensión de Invalidez",
-  //   "Pensión de Jubilación Anticipada por Enfermedad Terminal o Cancer",
-  //   "Pensión de Jubilación Anticipada Ordinaria",
-  //   "Pensión de Jubilación Anticipada por desempleo",
-  //   "Pensión de Jubilación Labores de Riesgo Genérico",
-  //   "Pensión de Jubilación Legal",
-  //   "Pensión de Jubilación por Labores de Riesgo Extraordinario",
-  //   "Pensión de Sobrevivencia",
-  //   "Pensión Mínima de Jubilación",
-  //   "Pensión por recupero de aportes en cobranza",
-  //   "Reconsideraciones y/o Apelaciones",
-  //   "Regimen Pesquero",
-  //   "Repacto de pensión",
-  //   "Retiro de hasta 50% de tu fondo por Enfermedad Terminal o Cancer",
-  //   "Retiro 25% Hipotecario",
-  //   "Retiro Aportes Voluntarios Sin Fin Previsional",
-  //   "Retiro de hasta el 100%",
-  //   "Revisión y/o Apelación de dictámenes",
-  //   "Trámite de Bono de Reconocmiento",
-  //   "Transferencias de Fondos al Exterior",
-  // ]);
-
+  useEffect(() => {
+    if (categories) {
+      setCategory(categories);
+    }
+  }, [categories]);
 
   const handleChange = (e) => {
     setWord(e);
-    const auxList = Object.assign([], list);
-    setFilterDisplay(word ? auxList.filter(_ => _.name.toLowerCase().indexOf(word.toLowerCase()) !== -1) : list);
+    const auxList = Object.assign([], lista);
+    setFilterDisplay(
+      word
+        ? auxList.filter(
+            (_) => _.name.toLowerCase().indexOf(word.toLowerCase()) !== -1
+          )
+        : lista
+    );
   };
+  const [...lista] = makeList(category);
+  const [list] = useState(lista);
 
   return (
     <>
@@ -171,8 +122,9 @@ const SearchBox = ({ children }) => {
       <ListResults
         list={word.length === 0 ? list : filterDisplay}
         found={word.length}
-        children={children}
-        selectItem={(e) => history.push(`/nueva-solicitud/tramite/${e.idTypeRequest}`)}
+        selectItem={(e) =>
+          history.push(`/nueva-solicitud/tramite/${e.idTypeRequest}`)
+        }
       />
     </>
   );

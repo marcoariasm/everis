@@ -66,4 +66,14 @@ export const ContentData = styled.div`
     grid-template-rows: 1fr;
     justify-self: left;
   }
-`
+`;
+
+export const Text = styled.div`
+  margin: 10px 0 0 0;
+  > span {
+    text-align: center;
+    font-size: 14px;
+    line-height: 21px;
+    color: ${allColors.colorGrayText};
+  }
+`;

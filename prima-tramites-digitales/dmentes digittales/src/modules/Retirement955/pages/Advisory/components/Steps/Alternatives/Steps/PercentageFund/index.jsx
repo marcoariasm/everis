@@ -8,7 +8,7 @@ import { Modalities } from './Modalities'
 import { Header } from '../Header'
 import { Footer } from './Footer'
 
-export const PercentageFund = ({ onChange, totalBalance, percentages }) => {
+export const PercentageFund = ({ onChange, totalBalance }) => {
   return (
     <>
       <Header
@@ -18,10 +18,10 @@ export const PercentageFund = ({ onChange, totalBalance, percentages }) => {
         totalBalance={totalBalance}
       />
       <MediaQuery minDeviceWidth={767}>
-        <Modalities percentages={percentages} totalBalance={totalBalance} />
+        <Modalities totalBalance={totalBalance} />
       </MediaQuery>
       <MediaQuery maxDeviceWidth={767}>
-        <ModalitiesCards percentages={percentages} totalBalance={totalBalance} />
+        <ModalitiesCards totalBalance={totalBalance} />
       </MediaQuery>
       <Footer onChange={onChange} />
     </>

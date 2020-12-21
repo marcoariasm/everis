@@ -5,11 +5,6 @@ export default [
     icon: '',
     iconActive: '',
     path: '/inicio',
+    pathLink: '/inicio',
   },
-  // {
-  //   text: 'Nueva solicitud de trámite',
-  //   icon: '',
-  //   iconActive: '',
-  //   path: '/home/new-procedure/affiliate'
-  // }, 
 ]

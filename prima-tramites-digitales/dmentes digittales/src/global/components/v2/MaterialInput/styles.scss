@@ -66,3 +66,20 @@
 .material-input::-ms-clear {
         display: none;
 }
+
+.material-input:-webkit-autofill,
+.material-input:-webkit-autofill:hover, 
+.material-input:-webkit-autofill:focus, 
+.material-input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.material-input::-webkit-outer-spin-button,
+.material-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.material-input[type=number] {
+    -moz-appearance:textfield;
+}

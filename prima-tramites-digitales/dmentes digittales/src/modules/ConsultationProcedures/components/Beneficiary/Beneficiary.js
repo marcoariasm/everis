@@ -11,8 +11,10 @@ function Beneficiary({ beneficary, index }) {
   const title = () => (
     <div>
       <span className="informationFooterText">{`Beneficiario ${index}:`}</span>
-    <br/>
-      <span>{`${beneficary.firstName} ${beneficary.fatherLastname} ${beneficary.motherLastname}`}</span>
+      <br />
+      <span>{`${beneficary.firstName} ${
+        beneficary.secondName ? beneficary.secondName : ""
+      } ${beneficary.fatherLastname} ${beneficary.motherLastname}`}</span>
     </div>
   );
   return (
@@ -20,7 +22,7 @@ function Beneficiary({ beneficary, index }) {
       <ContentTab>
         <ContactContainer>
           <div>
-            <ContactTitle>{"Tipo de doc"}</ContactTitle>
+            <ContactTitle>{"Tipo de doc."}</ContactTitle>
             <ContactDescription>{beneficary.documentType}</ContactDescription>
           </div>
           <div>
@@ -37,16 +39,18 @@ function Beneficiary({ beneficary, index }) {
         <ContactContainer>
           <div>
             <ContactTitle>{"Sexo"}</ContactTitle>
-            <ContactDescription>{beneficary.gender === "M" ? "Masculina" : "Femenina"}</ContactDescription>
+            <ContactDescription>
+              {beneficary.gender}
+            </ContactDescription>
           </div>
           <div>
             <ContactTitle>{"Parentesco"}</ContactTitle>
             <ContactDescription>{beneficary.relationship}</ContactDescription>
           </div>
-          {beneficary.condition && (
+          {beneficary.hasDisability && (
             <div>
               <ContactTitle>{"Condición"}</ContactTitle>
-              <ContactDescription>{beneficary.condition}</ContactDescription>
+              <ContactDescription className="capitalize">{beneficary.hasDisability.toLowerCase()}</ContactDescription>
             </div>
           )}
         </ContactContainer>

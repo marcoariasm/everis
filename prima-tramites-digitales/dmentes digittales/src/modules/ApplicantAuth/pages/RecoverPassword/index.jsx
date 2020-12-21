@@ -1,48 +1,88 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import PrimaWhiteLogo from 'shared/images/primaWhiteLogo.svg';
-import Slogan from 'shared/images/slogan.svg';
+import PrimaWhiteLogo from '../../../PrimaAccountAuth/assets/images/primaWhiteLogo.svg';
+import Slogan from '../../../PrimaAccountAuth/assets/images/slogan.svg';
 import MaterialInput from 'global/components/v2/MaterialInput';
 import Card from '../../components/Card';
-import { loginForm, loginConfirmationModal } from '../../../shared/constant/ConstantApplicantLogin';
+import { loginForm } from '../../../shared/constant/ConstantApplicantLogin';
 import CardHeader from '../../components/CardHeader';
+import { passwordInputValidations } from '../../../shared/constant/ConstantValidations';
 import { useForm } from 'react-hook-form';
+import ErrorHandler from 'global/components/v2/ErrorHandler';
+import { updatePassword } from '../../services/index.service';
+import Loading from 'global/components/v2/Loading';
+import Button from 'global/components/v2/Button';
+import WarningIcon from 'modules/shared/images/warningIcon.svg';
+import StaticAlert from 'global/components/v2/StaticAlert';
+import { readUrlParams } from 'modules/shared/helpers/HelperRoutes';
 import {
   FormContainer,
   NavSlogan,
   NavLogo,
   DetailsNav,
   LoginContainer,
-  AffiliateForm,
-  Button,
-  ButtonContainer, 
+  StyledPrimaryButton,
   Container
 } from '../../components/styles';
-import {
-  ModalContent,
-  ModalIcon,
-  ModalMessage,
-  ModalNotification,
-  ModalDescription,
-  ModalHighlitedDescription,
-  InputGrid, 
-  ModalButtonContainer
-} from './styledComponents';
 
-export default function RecoverPassword() {
+const ButtonSection = ({ loading = false, disabled = false }) => {
+  if (loading) return <div className="regularLoadingBtnPadding">
+    <Loading className="small-spinner">Cargando...</Loading>
+  </div>;
+  return (
+    <Button
+      className="marginBtnRegularPosition primary-btn"
+      disabled={disabled}
+      type="submit"
+    >
+      Crear contraseña
+    </Button>
+  )
+}
+
+export default function RecoverPassword(props) {
   const history = useHistory();
   const [formIsValid, setFormValidity] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [showModal, setModalVisibility] = useState(false);
   const [password, setPassword] = useState('');
+  const [recoveryToken, setRecoveryToken] = useState('');
   const [confirmationPassword, setConfirmationPassword] = useState('');
   const [idDocument, setIdDocument] = useState({});
+  const [errorMessage, setErrorMessage] = useState('');
   const [email, setEmail] = useState('');
-  const { register, handleSubmit, formState, control } = useForm({  mode: "onChange" });
-  const { isValid } = formState;
+  const { register, handleSubmit, formState, control, errors, reset } = useForm({
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+    defaultValues: { },
+    criteriaMode: 'all'
+  });
 
-  const updatePassword = () => {
-    // Servicio
-    history.push('/login-solicitante');
+  const { isValid, touched } = formState;
+
+  useEffect(() => {
+    parseToken();
+  }, []);
+
+  const parseToken = () => {
+    const path = props.location.search;
+    const params = readUrlParams(path);
+    if (params.token) setRecoveryToken(params.token);
+  }
+
+  const newPassword = async(payload) => {
+    setLoading(true);
+    const response = await updatePassword(recoveryToken, payload);
+    if (response.errorMessage) {
+      setErrorMessage(response.errorMessage);
+      return setLoading(false);
+    }
+    reset();
+    history.push(`login-solicitante`);
+  }
+
+  const isDisabled = () => {
+    return !isValid || !password.length || !confirmationPassword.length || password !== confirmationPassword
   }
 
   return (
@@ -51,33 +91,45 @@ export default function RecoverPassword() {
         <LoginContainer>
           <NavLogo className="display-mobile" src={PrimaWhiteLogo}/>
           <Card className="login-card">
-          <FormContainer onSubmit={handleSubmit(updatePassword)}>
+          <FormContainer onSubmit={handleSubmit(newPassword)}>
             <CardHeader
               anteTitle={'Cuenta solicitante'}
               title={'Recupero de contraseña'}
               subtitle={'Ingresa tu nueva contraseña'}
             />
             <MaterialInput
-              className="inputRegularResponsive"
-              register={register({ required: true })}
+              className="inputRegularResponsiveM"
+              onChange={setPassword}
+              register={register(passwordInputValidations)}
               placeholder={loginForm.passwordPlaceholder}
               type={'password'}
+              name={'newPassword'}
+            />
+            <ErrorHandler
+              isTouched={touched['password']}
+              errors={errors}
               name={'password'}
             />
             <MaterialInput
-              className="inputRegularResponsive"
-              register={register({ required: true })}
+              onChange={setConfirmationPassword}
+              className="inputRegularResponsiveM"
+              register={register(passwordInputValidations)}
               placeholder={'Confirmar contraseña'}
               type={'password'}
+              name={'verifyNewPassword'}
+            />
+            <ErrorHandler
+              isTouched={touched['confirmPassword']}
+              errors={errors}
               name={'confirmPassword'}
             />
-            <Button
-              className="marginBtnRegularPosition"
-              disabled={!isValid}
-              type="submit"
-            >
-              {'Crear contraseña'}
-            </Button>
+            <StaticAlert
+                show={errorMessage.length > 0}
+                message={errorMessage}
+                img={WarningIcon}
+                className="inputRegularResponsiveM"
+              />
+            <ButtonSection loading={loading} disabled={isDisabled()} />
           </FormContainer>
         </Card>
         </LoginContainer>

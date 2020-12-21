@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { size } from 'global/styles/Responsive';
 import { UrlStyles, ModalIcon, ModalContent } from '../styles';
+import { useSelector } from 'react-redux';
 
 export const ModalNotification = styled.div`
   border-radius: 6px;
@@ -20,11 +21,11 @@ export const ModalNotification = styled.div`
   }
 `;
 
-const ResendEmailModal = ({ showModal = false, onClose, icon, email }) => {
+const ResendEmailModal = ({ showModal = false, onClose, icon, email, hideResendBtn = false, documentData = {}, idApplicant }) => {
     const history = useHistory();
   
   const goToVerifyAgain = () => {
-    history.push('resend-verification');
+    history.push('/reenviar-verificacion', { email, ...documentData, idApplicant });
   }
   
     return (
@@ -36,11 +37,11 @@ const ResendEmailModal = ({ showModal = false, onClose, icon, email }) => {
           </p>
           <p className="tableBodyText textCenter pt1em">{loginConfirmationModal.description}</p>
           <ModalNotification>
-            <p className="tableBodyText textCenter">{loginConfirmationModal.message}</p>
-            <p className="modalHighlightedText">{email}</p>
+              <p className="tableBodyText textCenter">{email ? loginConfirmationModal.message : loginConfirmationModal.messageNoEmail}</p>
+              { email && <p className="modalHighlightedText">{email}</p>}
           </ModalNotification>
           <p className="informativeBodyText textCenter pt4em pb4em">{loginConfirmationModal.advice}</p>
-          <UrlStyles onClick={goToVerifyAgain}>{loginConfirmationModal.noEmail}</UrlStyles>
+          { !hideResendBtn && <UrlStyles className="textCenter" onClick={goToVerifyAgain}>{loginConfirmationModal.noEmail}</UrlStyles>}
         </ModalContent>
       </Modal>
     )

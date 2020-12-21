@@ -1,11 +1,6 @@
-import React, { useState, useEffect } from 'react'
-
+import React from 'react'
 import { textAlternatives } from 'modules/Retirement955/constants/ConstantAlternatives'
-
-import { alternativerService955, alternativerService45 } from '../../../../../../../../../../redux/services/alternatives.service'
-import { alternativeConstants } from '../../../../../../../../../../redux/constants/alternative.constants'
-import alternativeReducer from 'redux/reducers/Alternatives/alternative.reducer'
-import { currencyFormat } from '../../Header'
+import { useAlternatives, getSimulationValue } from '../../../../../../../../contexts/AlternativesProvider';
 
 import {
   ContentGrid,
@@ -16,35 +11,13 @@ import {
   TitleContent,
   TitleHeader,
 } from './style'
+import {propOr} from "ramda";
 
+export const Modalities = () => {
+  const { simulations } = useAlternatives();
+  const getSimulation955 = getSimulationValue(propOr({}, '95.5', simulations));
+  const getSimulation45 = getSimulationValue(propOr({}, '4.5', simulations));
 
-
-const retirement955 = {
-  "deferredLifeAnnuity": 0,
-  "deliveryAmount": 0,
-  "familyLifeAnnuity": 0,
-  "pensionAmount": 0,
-  "scheduledWithdrawal": 0,
-  "temporaryRent": 0
-}
-
-export const Modalities = ({ totalBalance, percentages }) => {
-  const [percentage955, setPercentage955] = useState(false)
-  const [percentage45, setPercentage45] = useState(false)
-
-  useEffect(() =>{
-    alternativerService955().then(response => {
-      dispatch({type: alternativeConstants.PERCENTAGE_955, response })
-      setPercentage955(response.deliveryAmount)
-    })
-
-    alternativerService45().then(response => {
-      dispatch({type: alternativeConstants.PERCENTAGE_45, response })
-      setPercentage45(response.deliveryAmount)
-    })
-  }, [])
-
-  const [state, dispatch] = React.useReducer(alternativeReducer, retirement955)
   return (
     <>
       <ContentGrid>
@@ -60,7 +33,7 @@ export const Modalities = ({ totalBalance, percentages }) => {
               </TitleContent>
               <TitleContent>
                 <span className="statementTableBody">
-                  S/ {currencyFormat(percentage955)}
+                  { getSimulation955('deliveryAmount') }
                 </span>
               </TitleContent>
             </GridRowTable>
@@ -78,7 +51,7 @@ export const Modalities = ({ totalBalance, percentages }) => {
               </TitleContent>
               <TitleContent>
                 <span className="statementTableBody">
-                  S/ {currencyFormat(percentage45)}
+                  { getSimulation45('deliveryAmount') }
                 </span>
               </TitleContent>
             </GridRowTable>

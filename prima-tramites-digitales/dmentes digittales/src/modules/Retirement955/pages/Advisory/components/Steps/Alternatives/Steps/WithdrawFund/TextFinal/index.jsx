@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import MediaQuery from 'react-responsive'
 import { textAlternatives } from 'modules/Retirement955/constants/ConstantAlternatives'
-import { alternativerService45 } from '../../../../../../../../../../redux/services/alternatives.service'
+import { alternativerService45 } from '../../../../../../../../services/alternatives.service'
 import { alternativeConstants } from '../../../../../../../../../../redux/constants/alternative.constants'
 
 import {
@@ -13,15 +13,12 @@ import {
   SubTitle,
   TitleFinal,
 } from './styles'
+import {getSimulationValue, useAlternatives} from "../../../../../../../../contexts/AlternativesProvider";
+import {propOr} from "ramda";
 
-export const TextFinal = ({ totalBalance, balance45 }) => {
-  const [percentage45, setPercentage45] = useState(false)
-
-  useEffect(() => {
-    setPercentage45(balance45)
-  })
-
-  
+export const TextFinal = ({ totalBalance }) => {
+  const { simulations } = useAlternatives();
+  const getSimulation45 = getSimulationValue(propOr({}, '4.5', simulations));
 
   return (
     <>
@@ -36,7 +33,7 @@ export const TextFinal = ({ totalBalance, balance45 }) => {
           <CardGrayEsSalud>
             <PensionEsSaludText>
               <span className="statementTableBody">
-                S/ {percentage45}
+                { getSimulation45('deliveryAmount') }
               </span>
             </PensionEsSaludText>
             <MediaQuery minDeviceWidth={767}>

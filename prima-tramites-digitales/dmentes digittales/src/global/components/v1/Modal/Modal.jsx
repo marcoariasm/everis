@@ -60,7 +60,7 @@ const Modal = ({
                 Cancelar
               </Button>
             )}
-            <Button onClick={onClick} disabled={disabledOnClick}>
+            <Button classButton="btn-no-shadow" onClick={onClick} disabled={disabledOnClick}>
               {nameButton}
             </Button>
           </Footer>

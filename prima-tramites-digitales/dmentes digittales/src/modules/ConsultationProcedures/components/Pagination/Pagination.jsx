@@ -94,7 +94,7 @@ function Pagination({ items, onChangePage, children, isFinished = false }) {
           <span className="mr-1">-</span>
           <span className="ml-1">{pager.endIndex + 1}</span>
           <span className="ml-1">de</span>
-          <span className="ml-1">`{items.length}</span>
+          <span className="ml-1">{items.length}</span>
         </ContainerNumbersPagination>
         <PaginationButton
           onClick={() => setPage(pager.currentPage + 1)}

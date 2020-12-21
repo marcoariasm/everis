@@ -10,7 +10,7 @@ export const validateAffiliate = (birth, document) => {
   });
 
   return ServiceFetcher(
-    `${process.env.REACT_APP_APPLICANT_API}affiliate/v1/validate`,
+    `${process.env.REACT_APP_APPLICANT_API}/affiliate/v1/validate`,
     {
       method: "POST",
       body: raw,

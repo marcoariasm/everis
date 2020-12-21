@@ -7,16 +7,18 @@ import RejaMin100k from 'modules/Retirement955/pages/HomeAdvice/components/MainS
 import LegalMin100k from 'modules/Retirement955/pages/HomeAdvice/components/MainSection/LegalMin100k'
 
 function GridAdviceInformation({ amount, profile }) {
-  return (
-    <>
-      {amount < MAIN_MIN_AMOUNT && (
-        <>
-          {(profile === profilingValue[0].value || profile === profilingValue[1].value) && <RejaMin100k />}
-          {(profile === profilingValue[2].value || profile === profilingValue[3].value) && <LegalMin100k />}
-        </>
-      )}
-      {amount >= MAIN_MIN_AMOUNT && <Max100k />}
-    </>
-  )
+	return (
+		<>
+			{amount < MAIN_MIN_AMOUNT && (
+				<>
+					{profile === profilingValue[0].value && <RejaMin100k />}
+					{(profile === profilingValue[1].value ||
+						profile === profilingValue[2].value ||
+						profile === profilingValue[3].value) && <LegalMin100k />}
+				</>
+			)}
+			{amount >= MAIN_MIN_AMOUNT && <Max100k />}
+		</>
+	)
 }
 export default GridAdviceInformation

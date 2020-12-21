@@ -82,6 +82,12 @@
 .date-input:-ms-input-placeholder { color: #9d9994; }  
 .date-input::-ms-input-placeholder { color: #9d9994; }  
 
+.hide-placeholder::-webkit-input-placeholder { color: transparent; }  
+.hide-placeholder:-moz-placeholder { color: transparent; }  
+.hide-placeholder::-moz-placeholder { color: transparent; }  
+.hide-placeholder:-ms-input-placeholder { color: transparent; }  
+.hide-placeholder::-ms-input-placeholder { color: transparent; }  
+
 .material-input-date::-webkit-outer-spin-button,
 .material-input-date::-webkit-inner-spin-button {
   -webkit-appearance: none;

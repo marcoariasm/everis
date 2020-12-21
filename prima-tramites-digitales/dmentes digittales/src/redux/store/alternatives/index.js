@@ -1,15 +1,11 @@
-import { applyMiddleware, createStore } from 'redux'
-import reduxThunk from 'redux-thunk'
-import { fromJS } from 'immutable'
+import { applyMiddleware, createStore } from 'redux';
+import reduxThunk from 'redux-thunk';
 
-import rootReducer from './reducers'
+import rootReducer from './reducers';
 
-const thunkMiddleware = reduxThunk()
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware), loadState())
+const thunkMiddleware = reduxThunk();
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware), loadState());
 
 store.subscribe(function () {
-    saveState(store.getState())
-  })
-
-  
-  
+	saveState(store.getState());
+});

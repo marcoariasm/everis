@@ -2,140 +2,169 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { loginForm } from '../../../shared/constant/ConstantApplicantLogin';
-import { idDocumentOptions } from '../../../shared/constant/ConstantMaterialSelect';
-import { login, autoLogin } from '../../core/ApplicantLoginService';
-import { ACCESS_TOKEN } from '../../core/ApplicantLoginService/constants';
-import Persistence from '../../core/ApplicantLoginService/persistence';
+import { documentDropdownValidations, passwordInputValidations } from '../../../shared/constant/ConstantValidations';
+import { login, getUser, getDocumentList } from '../../services/index.service';
+import { manageLoginSesion, userState } from '../../core/AppSession';
+import useDocumentType from 'modules/Retirement955/api/Login/useDocumentType';
+import { idDocumentOptions } from 'modules/shared/constant/ConstantMaterialSelect';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
-import PrimaWhiteLogo from 'shared/images/primaWhiteLogo.svg';
-import Slogan from 'shared/images/slogan.svg';
+import PrimaWhiteLogo from 'modules/PrimaAccountAuth/assets/images/primaWhiteLogo.svg';
+import Slogan from 'modules/PrimaAccountAuth/assets/images/slogan.svg';
 import CheckIcon from 'shared/images/check-ready.svg';
+import EmailIcon from 'modules/shared/images/email.svg';
+import WarningIcon from 'modules/shared/images/warningIcon.svg';
 
 import MaterialInput from 'global/components/v2/MaterialInput';
-import MaterialCheckbox from 'global/components/v2/MaterialCheckbox';
+import Loading from 'global/components/v2/Loading';
+import ErrorHandler from 'global/components/v2/ErrorHandler';
+import StaticAlert from 'global/components/v2/StaticAlert';
 import Button from 'global/components/v2/Button';
 import Card from '../../components/Card';
+
+
 import DropdownInput from 'global/components/v2/DropdownInput';
 import CardHeader from '../../components/CardHeader';
 import RecoverPassModal from './components/RecoverPassModal';
+import ResendEmailModal from 'modules/ApplicantAuth/components/ResendEmailModal';
 import { FormContainer, NavSlogan, NavLogo, DetailsNav, LoginContainer, UrlStyles, Container } from '../../components/styles';
 import './styles.scss';
 import '../../components/layout.scss';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { AUTH_Success, AUTH_TOKEN_session, AUTH_applicant } from 'redux/actions/User';
 
 export const UrlText = styled.p`
   text-align: center;
   margin-top: 2.8em;
 `;
 
-const documentNumberValidations = {
-  // ONLY NUMBERS WITHOUT SPACES - LENGTH: 8 - MÁXIMO NÚMERO DE CEROS SEGUIDOS AL INICIO 7
-  '00': (value = '') => {
-    const onlyNumbers =  /^[0-9\b]+$/;
-    if (!onlyNumbers.test(Number(value))) return false;
-
-    const hasSpaces = /\s/;
-    if (hasSpaces.test(value)) return false;
-
-    if (value.length > 8) return false;
-
-    const getArrayByZeros = value.split('0').length - 1;
-    if (getArrayByZeros > 7) return false;
-
-    return true;
-  },
-  // ONLY NUMBERS WITHOUT SPACES - SE PERMITEN LOS STRINGS 'N' Y 'N-' AL COMIENZO, EL RESTO DEBEN SER NÚMEROS
-  '01': (value = '') => {
-    const hasSpaces = /\s/;
-    if (hasSpaces.test(value)) return false;
-
-    let capitalizedText = value.toUpperCase();
-    const numberOfCharacters = capitalizedText.startsWith('N-') ? 2 : capitalizedText.startsWith('N') ? 1 : 0;
-
-    if (numberOfCharacters) {
-      const stringArray = capitalizedText.split('');
-      stringArray.splice(0, numberOfCharacters);
-      capitalizedText = stringArray.join('');
-    }
-
-    const stringWhithoutSpaces = capitalizedText.replace(/ /g,'');
-
-    const onlyNumbers =  /^[0-9\b]+$/;
-    if (!onlyNumbers.test(Number(stringWhithoutSpaces))) return false;
-
-    return true;
-  },
-  '02': (value = '') => {
-    const hasSpaces = /\s/;
-    if (hasSpaces.test(value)) return false;
-    const onlyNumbers =  /^[0-9\b]+$/;
-    if (!onlyNumbers.test(Number(value))) return false;
-    const stringWhithoutSpaces = value.replace(/ /g,'');
-    if (stringWhithoutSpaces.length > 8) return false;
-    return true;
-  },
-  '03': (value = '') => {
-    const hasSpaces = /\s/;
-    if (hasSpaces.test(value)) return false;
-    const stringWhithoutSpaces = value.replace(/ /g,'');
-    if (stringWhithoutSpaces.length > 12) return false;
-    return true;
-  },
-  '04': (value = '') => {
-    const hasSpaces = /\s/;
-    if (hasSpaces.test(value)) return false;
-    const stringWhithoutSpaces = value.replace(/ /g,'');
-    if (stringWhithoutSpaces.length > 12) return false;
-    const letterNumber = /^[0-9a-zA-Z]+$/;
-    if (!letterNumber.test(stringWhithoutSpaces)) return false;
-    return true;
-  }
+const ButtonSection = ({ loading = false, disabled = false }) => {
+  if (loading) return <div className="regularLoadingBtnPadding">
+    <Loading className="small-spinner">Cargando...</Loading>
+  </div>;
+  return (
+    <Button
+      className="marginBtnRegularPosition primary-btn"
+      disabled={disabled}
+      type="submit"
+    >
+      {loginForm.submitBtnLabel}
+    </Button>
+  )
 }
 
 export default function ApplicantLogin() {
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const history = useHistory();
   const [showModal, setModalVisibility] = useState(false);
+  const [showResendModal, setResendModal] = useState(false);
+  const [currentUser, setCurrentUser] = useState();
   const [docType, setDocType] = useState();
-  const [docNum, setDocNum] = useState();
-  const [docNumValidation, setDocNumValidation] = useState();
-  const { register, handleSubmit, formState, getValues, errors } = useForm({
-    mode: "onChange",
-    defaultValues: { }
+  const [userEmail, setUserEmail] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [selectOptions, setSelectOptions] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const { register, handleSubmit, formState, errors } = useForm({
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+    criteriaMode: 'all'
   });
-  const { isValid } = formState;
+  const { isValid, touched } = formState;
+  const { documentType } = useDocumentType({ authenticated: false });
+  const dispatch = useDispatch();
+  const authStore = useSelector(state => state.auth);
+  const { tokenSessionInfo, idApplicant } = authStore;
+  
+  useEffect(() => {
+    chargeSelect();
+  }, []);
+
+  useEffect(() => {
+    if (loading) setErrorMessage('');
+  }, [loading]);
+
+  useEffect(() => {
+    if (currentUser && currentUser.idApplicant) manageSuccessfulAction();
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (tokenSessionInfo && tokenSessionInfo.accessToken) {
+        getLoginUser(tokenSessionInfo);
+    } 
+
+    if (tokenSessionInfo && tokenSessionInfo.accessToken === '') {
+      setResendModal(true);
+      return setLoading(false);
+    }
+  }, [tokenSessionInfo])
+
+  const getLoginUser = async(tokenInfo) => {
+      const userResponse = await getUser(tokenInfo);
+      if (userResponse.errorMessage) {
+        setErrorMessage(userResponse.errorMessage);
+        return setLoading(false);
+      }
+      manageLogin(userResponse);
+  }
+
+  const manageLogin = (userResponse) => {
+    const getUserState = manageLoginSesion(userResponse, tokenSessionInfo);
+    if (getUserState === userState.inactive) {
+      setResendModal(true);
+      setLoading(false);
+      return setUserEmail(userResponse.email.toUpperCase());
+    }
+    setCurrentUser(userResponse);
+    if (getUserState === userState.incomplete) return history.push(`completar-registro`, { currentUser: userResponse, tokenSessionInfo });
+    setLoading(false);
+    history.push(`inicio`);
+  }
+
+  const chargeSelect = async() => {
+     const options = await getDocumentList();
+     if (!options || options && !options.length) return setSelectOptions(idDocumentOptions);
+     setSelectOptions(options);
+  }
+
+  const handleError = (errorMessage) => {
+    setErrorMessage(errorMessage);
+  }
+
+const resendEmailHandler = () => {
+  setResendModal(true);
+  setUserEmail(currentUser.email.toUpperCase());
+}
+
+const manageSuccessfulAction = () => {
+  if (!Number(currentUser.active)) return resendEmailHandler();
+  if (Number(currentUser.complete)) return history.push(`inicio`);
+  history.push(`completar-registro`, { currentUser, tokenSessionInfo });
+}
 
   const formSubmitAction = async(payload) => {
-    try {
-      const user = await login(payload);
-      if (user.active) return history.push(`inicio`);
-      return history.push(`completar-registro`);
-    } catch (error) {
-      console.trace(error);
+    setLoading(true);
+    const token = await executeRecaptcha('login');
+    const loginResponse = await login({ ...payload, captchaToken: token });
+    if (!loginResponse.errorMessage) {
+      if (loginResponse.accessToken) return dispatch(AUTH_TOKEN_session(loginResponse));
+      if (!loginResponse.accessToken) {
+        setResendModal(true);
+        setLoading(false);
+        return dispatch(AUTH_applicant(loginResponse.idApplicant))
+      };
     }
-  }; 
-
-  useEffect(() => {
-    // const token = Persistence.getValue(ACCESS_TOKEN);
-    // if (token) handleAutoLogin(token);
-  }, [docNum])
-
-  useEffect(() => {
-    setDocNum('');
-  }, [docType])
+    setErrorMessage(loginResponse.errorMessage);
+    setLoading(false);
+  };
 
   const goToCreateAccount = () => history.push(`crear-cuenta`);
 
-  const handleAutoLogin = async(token) => {
-    const user = await autoLogin(token);
-    if (user) return history.push(`inicio/${user.applicantId}`);
-  }
-
-
   const handleDocumentChange = (value) => {
-    setDocNum(value.inputValue);
     if (value.selectValue) setDocType(value.selectValue.value);
   }
 
+ 
   return (
     <>
       <Container>
@@ -146,33 +175,49 @@ export default function ApplicantLogin() {
             <FormContainer onSubmit={handleSubmit(formSubmitAction)}>
               <CardHeader anteTitle={loginForm.anteTitle} title={loginForm.title} />
               <DropdownInput
-                    className="inputRegularResponsive"
-                    resetInputWhenSelectChange={true}
-                    registerSelect={register({ required: true })}
-                    registerInput={register({ required: true })}
+                  className="inputRegularResponsiveM"
+                  resetInputWhenSelectChange={true}
+                  onChange={handleDocumentChange}
+                  capitalizeInput={docType === 2}
+                  registerSelect={register}
+                  registerInput={register(documentDropdownValidations(docType))}
+                  name={loginForm.inputNames.documentNumber}
+                  selectName={loginForm.inputNames.documentType}
+                  selectOptions={selectOptions}
+                  placeholder={loginForm.dropdownPlaceholder}
+                  noPadding={true}
+                />
+                <ErrorHandler
+                    isTouched={touched[loginForm.inputNames.documentNumber]}
+                    errors={errors}
                     name={loginForm.inputNames.documentNumber}
-                    selectName={loginForm.inputNames.documentType}
-                    selectOptions={idDocumentOptions}
-                    placeholder={loginForm.dropdownPlaceholder}
-                  />
+                    className="errorHandlerDropdown"
+                  /> 
                   <MaterialInput
-                    register={register({ required: true })}
-                    className="inputRegularResponsive"
+                    register={register(passwordInputValidations)}
+                    className="inputRegularResponsiveM"
                     name={loginForm.inputNames.password}
                     placeholder={loginForm.passwordPlaceholder}
                     type="password"
+                    error={
+                      <ErrorHandler
+                        isTouched={touched[loginForm.inputNames.password]}
+                        errors={errors}
+                        name={loginForm.inputNames.password}
+                      />
+                    }
+                  />
+                  <StaticAlert
+                    show={errorMessage.length > 0}
+                    message={errorMessage}
+                    img={WarningIcon}
+                    className="inputRegularResponsiveM"
                   />
                   <UrlText className="informationFooterText">
                     {loginForm.forgotPassword}{' '}
                     <UrlStyles onClick={() => setModalVisibility(true)}>{loginForm.recoverHere}</UrlStyles>
                   </UrlText>
-                  <Button
-                    className="marginBtnRegularPosition"
-                    disabled={!isValid}
-                    type="submit"
-                  >
-                    {loginForm.submitBtnLabel}
-                  </Button>
+                  <ButtonSection loading={loading} disabled={!isValid} />
                   <UrlText className="display-desktop informationFooterText">
                     {loginForm.dontHaveAccount} <UrlStyles onClick={goToCreateAccount}>{loginForm.createHere}</UrlStyles>
                   </UrlText>
@@ -182,6 +227,12 @@ export default function ApplicantLogin() {
             showModal={showModal}
             onClose={() => setModalVisibility(false)}
             icon={CheckIcon}
+          />
+          <ResendEmailModal
+            email={userEmail}
+            showModal={showResendModal}
+            onClose={() => setResendModal(false)}
+            icon={EmailIcon}
           />
           <UrlText className="display-mobile informationFooterText">
             {loginForm.dontHaveAccount} <UrlStyles onClick={goToCreateAccount}>{loginForm.createHere}</UrlStyles>

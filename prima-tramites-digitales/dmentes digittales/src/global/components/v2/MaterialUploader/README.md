@@ -44,7 +44,7 @@ const documents = [
       <MaterialUploader
         files={documents}
         loading={false}
-        description={'Copia de documento de identidad de persona que realizó el gasto}
+        description={'Copia de documento de identidad de persona que realizó el gasto'}
         btnLabel={'Subir archivo'}
       />
   )

@@ -5,6 +5,8 @@ import styled from 'styled-components'
 
 const BodyContent = styled.div`
     position: relative;
+    text-align: center;
+    color: #696158;
     -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;

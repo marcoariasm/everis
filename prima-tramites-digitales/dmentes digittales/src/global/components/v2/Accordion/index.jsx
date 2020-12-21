@@ -3,7 +3,7 @@ import React from 'react';
 import StepSections, { AccordionItemTitle } from './components/StepSections';
 import BulletedList from './components/BulletedList';
 
-export const DoubleLabel = ({ title, subtitle, selectItem }) => (
+export const DoubleLabel = ({ title, subtitle, selectItem = () => {} }) => (
   <div onClick={() => selectItem()}>
     <p className="titleFooter">{title}</p>
     <p className="informationFooterText">{subtitle}</p>

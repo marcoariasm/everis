@@ -6,8 +6,19 @@ import MaterialInput from 'global/components/v2/MaterialInput';
 import MaterialDateInput from 'global/components/v2/MaterialDateInput';
 import DropdownInput from 'global/components/v2/DropdownInput';
 import Button from 'global/components/v2/Button';
+import {
+  docDropdownValidationsBenefyApi,
+  fatherValidations,
+  motherValidations,
+  firstNameValidations,
+  secondNameValidations,
+  birthdateValidations,
+  movilPhoneValidations
+} from 'modules/shared/constant/ConstantValidations';
 
+import ErrorHandler from 'global/components/v2/ErrorHandler';
 
+import { manageDateValidity } from 'modules/ApplicantAuth/core/FormValidations';
 import MaterialSelect, { OutlinedSelectContainer } from 'global/components/v2/MaterialSelect';
 import { SectionTitle } from './styledComponents.jsx';
 import Modal from 'global/components/v2/Modal';
@@ -15,7 +26,14 @@ import { RadioButtonSection } from 'global/components/v2/UtilityComponents/compo
 import { TwoColumnsContainer } from 'global/components/v2/UtilityComponents';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { ADD_BENEFICIARY_TO_NEW_request, EDIT_BENEFICIARY_FROM_NEW_request } from 'redux/actions/Procedures';
+import { ADD_BENEFICIARY_TO_NEW_request, EDIT_BENEFICIARY_FROM_NEW_request, ADD_BENEFICIARY_OWN_request } from 'redux/actions/Procedures';
+import { addBeneficiary } from 'modules/GenericProcedures/services';
+import { UserContext } from 'modules/App/pages/MainDashboardLayout';
+
+import StaticAlert from 'global/components/v2/StaticAlert';
+import Loading from 'global/components/v2/Loading';
+import WarningIcon from 'modules/shared/images/warningIcon.svg';
+import ScrollableModal from 'modules/GenericProcedures/components/ScrollableModal';
 
 export const SectionTitleMedium = styled.p`
   font-size: 16px;
@@ -81,50 +99,59 @@ const Content = styled.div`
     max-height: 660px;
     max-height: auto;
   }
-`
+`;
 
-const applicantState = [
-  { textContent: 'Inválido', value: 'invalid', shortContent: 'Inválido' },
-  { textContent: 'Sano', value: 'healthy', shortContent: 'Sano' },
-  { textContent: 'Enfermo', value: 'illness', shortContent: 'Enfermo' }
-];
+const relationShipCodes = {
+  'Cónyuge': '10',
+  'Concubina': '11',
+  'Hijo': '20',
+  'Padre o Madre': '30'
+}
 
-const sexItems = [
-  { value: 'female', label: 'Femenino' },
-  { value: 'male', label: 'Masculino' }
-]
+const ButtonSection = ({ loading = false, disabled = false, onClick }) => {
+  if (loading) return <div className="regularLoadingBtnPadding">
+    <Loading className="small-spinner">Cargando...</Loading>
+  </div>;
+  return (
+    <Button
+      onClick={onClick}
+      className="buttonSmallWithoutMargin alignSelfCenter primary-btn"
+      disabled={disabled}
+    >
+      Guardar
+    </Button>
+  )
+}
 
-const idDocumentOptions = [
-  { textContent: 'Documento Nacional de Identidad', value: '00', shortContent: 'DNI' },
-  { textContent: 'Carnet de extranjería', value: '01', shortContent: 'CE' },
-  { textContent: 'Carnet de Identificación Militar o Policial', value: '02', shortContent: 'CIM / CIP' },
-  { textContent: 'Libreta  del Adolescente Trabajador', value: '03', shortContent: 'LAT' },
-  { textContent: 'Pasaporte', value: '04', shortContent: 'PAS' }
-];
-
-
-const beneficiaryRelationship = [
-  { textContent: 'Cónyuge', value: 'spouse', shortContent: 'Cónyuge' },
-  { textContent: 'Concubino(a)', value: 'concubine', shortContent: 'Concubino(a)' },
-  { textContent: 'Padres', value: 'parents', shortContent: 'Padres' },
-  { textContent: 'Hijos', value: 'offspring', shortContent: 'Hijos' },
-  { textContent: 'Otro familiar', value: 'family', shortContent: 'Otro familiar' },
-  { textContent: 'Representante', value: 'representative', shortContent: 'Representante' }
-];
-
-
-
-const NewBeneficiaryModal = ({ show = false, onClose, icon, handleBtnModal, defaultState = {}, edit = false, index }) => {
-    
+const NewBeneficiaryModal = ({
+  show = false,
+  onClose,
+  icon,
+  handleBtnModal,
+  defaultState = {},
+  edit = false,
+  index,
+  relationshipOptions = [],
+  documentResponse = [],
+  conditionResponse = [],
+  genderOptions = [],
+  onClick
+}) => {
+    const user = React.useContext(UserContext);
     const [loading, setLoading] = useState(false);
     const [resetInputs, setResetInputs] = useState(0);
     const [birthdate, setBirthdate] = useState('');
-    const [relationship, setRelationship] = useState('');
-    const [condition, setCondition] = useState('');
+    const [relationship, setRelationship] = useState(0);
+    const [condition, setCondition] = useState(0);
     const [documentType, setDocumentType] = useState('');
     const [documentNumber, setDocumentNumber] = useState('');
     const dispatch = useDispatch();
-    const storeProcedures = useSelector(state => state.procedures);
+    const [birthdateTouch, setBirthDateTouch] = useState(false);
+    const [birthdateError, setBirthdateError] = useState('');
+    const storeAffiliate = useSelector(state => state.affiliate);
+
+    const { affiliate } = storeAffiliate;
+    const [errorMessage, setErrorMessage] = useState('');
     
   const { register, handleSubmit, formState, control, errors, reset, setValue } = useForm({
       mode: "onChange",
@@ -133,50 +160,83 @@ const NewBeneficiaryModal = ({ show = false, onClose, icon, handleBtnModal, defa
     const { isValid, touched } = formState;
 
     useEffect(() => {
+     setErrorMessage('');
+     setResetInputs(Math.random());
+    }, []);
+
+    useEffect(() => {
       if (!show) return;
-      if (edit) {
-        reset(defaultState);
-        return setResetInputs(0);
-      }
-      reset();
+      // if (edit) {
+      //   reset(defaultState);
+      //   return setResetInputs(0);
+      // }
+      setErrorMessage('');
+      setBirthdateError('');
+      setBirthDateTouch(false);
       setResetInputs(Math.random());
+      reset();
     }, [show])
 
+    useEffect(() => {
+    if (loading) setErrorMessage('');
+  }, [loading]);
 
-    const handleOnClick = (formObj) => {
+
+    const handleOnClick = async(formObj) => {
+      // TODO: Refactor this function
       setLoading(true);
-      if (edit) {
-        dispatch(EDIT_BENEFICIARY_FROM_NEW_request({ index, formState: formObj }));
-        onClose();
-      } else {
-        const payload = {
-          beneficiaryId : 1,
-          representative: {
-            beneficiaryId : 1,
-            applicantId : null,
-            affiliateId : '',
-            ...formObj
-          },
-          documents:[]
-        };
-        console.log('payload', payload);
-        dispatch(ADD_BENEFICIARY_TO_NEW_request(payload));
-        reset();
-        onClose();
+      let serviceBeneficiary;
+      const payload = {
+        documentType: Number(formObj.documentType),
+        documentNumber: formObj.documentNumber,
+        genderId: Number(formObj.gender),
+        affiliateId: (affiliate?.affiliateId ?? null) || user.idAffiliate,
+        disabilityId: Number(formObj.hasDisability),
+        nativeCountry: "114",
+        relationshipId: Number(formObj.relationship),
+        birthdate: birthdate.split('/').reverse().join('-'),
+        surname: formObj.surname.toUpperCase(),
+        motherSurname: formObj.motherSurname.toUpperCase(),
+        firstName: formObj.firstName.toUpperCase(),
+        secondName: formObj.secondName.toUpperCase(),
+        beneficiaryId: null
+      };
+      if (!edit) {
+        serviceBeneficiary = await addBeneficiary(payload);
+        if (serviceBeneficiary.errorMessage) {
+          setErrorMessage(serviceBeneficiary.errorMessage);
+          return setLoading(false);
+        }
       }
-      setResetInputs(Math.random());
+        setResetInputs(Math.random());
+        setLoading(false);
+        reset();
+        if (edit) {
+           dispatch(EDIT_BENEFICIARY_FROM_NEW_request({ index, payload }));
+        } else {
+          if(affiliate) {
+            dispatch(ADD_BENEFICIARY_TO_NEW_request({...serviceBeneficiary, newBeneficiary: true }));
+          } else {
+          dispatch(ADD_BENEFICIARY_OWN_request({...serviceBeneficiary, newBeneficiary: true }));
+          }
+        }
+        onClose();
     }
 
     const getValidity = () => {
-      return condition.length && relationship.length && birthdate.length === 10 && isValid;
+      const birthdateValidity = birthdate.length === 10 && !birthdateError.length;
+      const selectValidity = condition > 0 && relationship > 0;
+      return isValid && birthdateValidity && selectValidity;
     }
 
     const handleRelationship = (value) => {
-       if (value) setRelationship(value.value);
+       if (value) return setRelationship(value.value);
+       setRelationship(0);
     }
 
     const handleCondition = (value) => {
-      if (value) setCondition(value.value);
+      if (value) return setCondition(value.value);
+      setCondition(0);
     }
 
     const handleDocumentField = (value) => {
@@ -185,107 +245,163 @@ const NewBeneficiaryModal = ({ show = false, onClose, icon, handleBtnModal, defa
       setDocumentNumber(value.inputValue);
     }
 
+    const getBirthdateError = (actualValue, numericValue) => {
+      const dateValidity = manageDateValidity(actualValue);
+      if (!numericValue.length) return setBirthdateError(birthdateValidations.required);
+      if (numericValue.length !== 8) return setBirthdateError(birthdateValidations.length);
+      if (dateValidity) return setBirthdateError(dateValidity);
+      if (!dateValidity && numericValue.length === 8) return setBirthdateError('');
+    }
+
+    const handleBirthChange = (newValue) => {
+      if (newValue.target.numericValue.length > 0) setBirthDateTouch(true);
+      setBirthdate(newValue.target.value);
+      getBirthdateError(newValue.target.value, newValue.target.numericValue);
+    }
+
     return (
-    
-      <Modal width={'60vw'} hidden={true} show={show} onClose={onClose} maxHeight={'700px'}>
-        <div style={{ display: 'grid', placeItems: 'center', padding: '2.6em 0 0em 0' }}>
+      <ScrollableModal width={'60vw'} hidden={true} show={show} onClose={onClose}>
+        <div style={{ display: 'grid', placeItems: 'center', padding: '2em 0 1.5em 0' }}>
             <SectionTitle>Nuevo beneficiario</SectionTitle>
         </div>
 
-        <form id="beneficiary-form" style={{ padding: '1em 5.5em' }}>
+        <form id="beneficiary-form" style={{ padding: '0.7em 2em 0 2em' }}>
            <SectionTitleMedium>Datos personales del beneficiario</SectionTitleMedium>
-           <TwoColumnsContainer paddingBottom={'2em'} paddingTop={'1.5em'}>
+           <div className="twoColInputsMedium">
                 <OutlinedSelectContainer>
                     <MaterialSelect
                       register={register({ required: true })}
-                      name={'typeRelationShip'}
+                      name={'relationship'}
                       onChange={handleRelationship}
                       placeholder={'Parentesco'}
                       optionsContainerStyles={{ marginTop: '10px' }}
-                      selectOptions={beneficiaryRelationship}
+                      selectOptions={relationshipOptions}
                       reset={resetInputs}
-                      initialValue={defaultState.typeRelationShip}
+                      initialValue={defaultState.relationship}
                     />
                 </OutlinedSelectContainer>
                 <OutlinedSelectContainer>
                     <MaterialSelect
                       register={register({ required: true })}
                       onChange={handleCondition}
-                      name={'typeCondition'}
+                      name={'hasDisability'}
                       placeholder={'Condición'}
                       optionsContainerStyles={{ marginTop: '10px' }}
-                      selectOptions={applicantState}
+                      selectOptions={conditionResponse}
                       reset={resetInputs}
-                      initialValue={defaultState.typeCondition}
+                      initialValue={defaultState.hasDisability}
                     />
                 </OutlinedSelectContainer>
                 <DropdownInput
+                    className="mb-1em"
                     onChange={handleDocumentField}
-                    registerInput={register({ required: true })}
-                    registerSelect={register({ required: true })}
+                    registerInput={register(docDropdownValidationsBenefyApi(documentType))}
+                    registerSelect={register}
                     noPadding={true}
                     name={'documentNumber'}
                     selectName={'documentType'}
-                    selectOptions={idDocumentOptions}
+                    selectOptions={documentResponse}
                     placeholder={'Nro de documento'}
                     noPadding={true}
                     reset={resetInputs}
+                    error={
+                      <ErrorHandler
+                        isTouched={touched.documentNumber}
+                        errors={errors}
+                        name={'documentNumber'}
+                        className="errorHandlerDropdown"
+                      /> 
+                    }
                 />
                 <MaterialDateInput
-                    register={register({ required: true })}
                     name={'birthdate'}
-                    onChange={setBirthdate}
+                    onChange={handleBirthChange}
                     placeholder={'Fecha de nacimiento'}
-                    reset={resetInputs}
                     initialValue={defaultState.birthdate}
+                    error={birthdateTouch ? birthdateError : null} 
+                    getTarget={true}
+                    reset={resetInputs} 
                 />
                 <MaterialInput
                     capitalizeInput={true}
-                    register={register({ required: true })}
-                    name={'fatherLastname'}
+                    register={register(fatherValidations)}
+                    name={'surname'}
                     placeholder={'Apellido paterno'}
                     reset={resetInputs}
+                    error={
+                      <ErrorHandler
+                        noMargin={true}
+                        isTouched={touched['surname']}
+                        errors={errors}
+                        name={'surname'}
+                      />
+                    }
                 />
                 <MaterialInput
-                  register={register({ required: true })}
+                  register={register(motherValidations)}
                   capitalizeInput={true}
-                  name={'motherLastname'}
+                  name={'motherSurname'}
                   placeholder={'Apellido materno'}
                   reset={resetInputs}
+                  error={
+                    <ErrorHandler
+                      noMargin={true}
+                      isTouched={touched['motherSurname']}
+                      errors={errors}
+                      name={'motherSurname'}
+                    />
+                  }
                 />
                 <MaterialInput
-                    register={register({ required: true })}
+                    register={register(firstNameValidations)}
                     capitalizeInput={true}
                     name={'firstName'}
                     placeholder={'Primer nombre'}
                     reset={resetInputs}
+                    error={
+                      <ErrorHandler
+                        noMargin={true}
+                        isTouched={touched['firstName']}
+                        errors={errors}
+                        name={'firstName'}
+                      />
+                    }
                 />
                 <MaterialInput
-                    register={register({ required: true })}
+                    register={register(secondNameValidations)}
                     capitalizeInput={true}
                     name={'secondName'}
                     placeholder={'Segundo nombre'}
                     reset={resetInputs}
+                    error={
+                      <ErrorHandler
+                        noMargin={true}
+                        isTouched={touched['secondName']}
+                        errors={errors}
+                        name={'secondName'}
+                      />
+                    }
                 />
-            </TwoColumnsContainer>
+            </div>
             <RadioButtonSection
                 register={register({ required: true })}
                 show={true}
                 title={'Sexo'}
-                name={'genre'}
-                options={sexItems}
+                name={'gender'}
+                options={genderOptions}
             />
+            <StaticAlert
+                show={errorMessage.length > 0}
+                message={errorMessage}
+                img={WarningIcon}
+                className={"alertRegularResponsiveColumnsM"}
+                noMargin={true}
+              />
             <div className="alignCenterVertically">
-            <Button
-              disabled={!getValidity()}
-              className="buttonSmallResponsive alignSelfCenter primary-btn"
-              onClick={handleSubmit(handleOnClick)}
-            >
-              Siguiente
-            </Button>
+               <ButtonSection loading={loading} disabled={!getValidity()}  onClick={handleSubmit(handleOnClick)} />
             </div>
         </form>
-      </Modal>
+      </ScrollableModal>
     )
   }
 

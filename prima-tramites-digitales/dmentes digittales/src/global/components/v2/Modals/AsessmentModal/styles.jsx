@@ -1,6 +1,6 @@
-import { allColors } from '../../../../shared/styles/index';
+import { allColors } from 'global/styles/index';
 import styled from 'styled-components';
-import { size } from '../../../../shared/styles/Responsive';
+import { size } from 'global/styles/Responsive';
 
 export const FormContainer = styled.div`
   display: flex;
@@ -294,7 +294,6 @@ export const ModalDescription = styled.p`
   margin: 0 70px;
   color: #696158;
   font-size: 16px;
-
   font-family: 'Calibri';
   display: flex;
   text-align: center;

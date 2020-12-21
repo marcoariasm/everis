@@ -1,6 +1,7 @@
 import React, { useEffect, useState , useRef} from 'react';
-import { allColors } from '../../../../global/styles/index';
+import { allColors } from 'global/styles/index';
 import styled from 'styled-components';
+import { size } from 'global/styles/Responsive';
 import './styles.scss';
 
 const deletingKey = 'Backspace';
@@ -10,6 +11,15 @@ const SlashDate = styled.span`
   display: grid;
   place-items: center;
   color: ${allColors.colorPlaceholder};
+`;
+
+const ErrorText = styled.p`
+  color: #ff0000;
+  font-size: 11px;
+`;
+
+const ErrorContainer = styled.div`
+    position: relative;
 `;
 
 const isValidValue = (event) => {
@@ -35,15 +45,19 @@ const MaterialDateInput = ({
     name = '',
     getTarget = false,
     register, 
-    className = ''
+    className = '',
+    error,
+    disabled = false,
+    reset = 0
 }) => {
-    const initialDate = initialValue.split('/');
+    const initialDate = initialValue.split('-');
+    const [defaultValue, setDefaultValue] = useState(initialValue.split('-'))
     const [labelColor, setLabelColor] = useState(allColors.colorPlaceholder);
     const [inputColor, setInputColor] = useState(allColors.colorGrayLight);
     const [showLabelClass, setShowLabelClass] = useState('');
-    const [dayValue, setDayValue] = useState(initialDate[0] || '');
+    const [dayValue, setDayValue] = useState(initialDate[2] || '');
     const [monthValue, setMonthValue] = useState(initialDate[1] || '' );
-    const [yearValue, setYearValue] = useState(initialDate[2] || '');
+    const [yearValue, setYearValue] = useState(initialDate[0] || '');
     const dayRef = useRef(null);
     const monthRef = useRef(null);
     const yearRef = useRef(null);
@@ -58,14 +72,25 @@ const MaterialDateInput = ({
         setShowLabelClass('show-label');
         setLabelColor(allColors.colorGrayText);
       }
-    },[])
+    },[]);
+
+    useEffect(() => {
+      if (reset) {
+       setDayValue('');
+       setMonthValue('');
+       setYearValue('');
+       setLabelColor(allColors.colorPlaceholder);
+       setInputColor(allColors.colorGrayLight);
+       setShowLabelClass('');
+      }
+    }, [reset]);
 
     useEffect(onChangeHandler, [dayValue]);
     useEffect(onChangeHandler, [monthValue]);
     useEffect(onChangeHandler, [yearValue]);
 
     const getInputState = (value) => ({
-        target: { name, value, type }
+        target: { name, value, type, numericValue: `${dayValue}${monthValue}${yearValue}` }
     });
 
     const handleOnFocus = () => {
@@ -107,13 +132,16 @@ const MaterialDateInput = ({
     }
 
   return (
+    <>
     <div style={{ ...containerStyles }} className={className}>
         <input
+          id={`date-input-${name}`}
           name={name}
           value={`${dayValue}/${monthValue}/${yearValue}`}
           ref={register}
           onChange={() => {}}
           style={{ display: 'none' }}
+          disabled={disabled}
         />
         <div style={{ borderColor: inputColor }} className="group-date-inputs">   
                 <input
@@ -127,6 +155,7 @@ const MaterialDateInput = ({
                   className="material-input-date date-input"
                   style={{ maxWidth: '50px' }}
                   ref={dayRef}
+                  disabled={disabled}
                 />
                 <SlashDate>/</SlashDate>
                 <input
@@ -140,6 +169,7 @@ const MaterialDateInput = ({
                   className="material-input-date date-input"
                   style={{ maxWidth: '50px' }}
                   ref={monthRef}
+                  disabled={disabled}
                 />
                 <SlashDate>/</SlashDate>
                 <input
@@ -150,8 +180,9 @@ const MaterialDateInput = ({
                   onKeyDown={yearKeyUpHandler}
                   onFocus={handleOnFocus}
                   onBlur={handleOnBlur}
-                  className="material-input-date date-input year-input"
+                  className={`material-input-date date-input year-input ${showLabelClass === '' ? 'hide-placeholder' : ''}`}
                   ref={yearRef}
+                  disabled={disabled}
                 />
             <label
               className={`material-input-label ${showLabelClass}`}
@@ -160,7 +191,9 @@ const MaterialDateInput = ({
               <p className="label-text-date">{placeholder}</p>
             </label>
         </div>
+    { error && <ErrorContainer> <ErrorText className={className}>{error}</ErrorText> </ErrorContainer>}
     </div>
+    </>
   )
 };
 

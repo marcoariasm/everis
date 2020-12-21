@@ -23,11 +23,12 @@ const Content = styled.div`
     font-size: 14px;
     line-heigth: 16px;
     display: grid;
-    grid-template-columns: 0.6fr 1fr;
+    grid-template-columns: 0.25fr 1fr;
   }
 `
 
 const Image = styled.div`
+  margin-top: 20px;
   & > img {
     width: 100%;
     max-width: 56px;
@@ -37,11 +38,12 @@ const Image = styled.div`
 `
 
 const Title = styled.div`
+  align-self: center;
   font-family: Calibri;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
-  line-height: 18px;
+  line-height: 16px;
   color: ${allColors.colorGrayText};
   @media only screen and (min-width: ${size.laptopM}) {
     font-size: 16px;
@@ -59,6 +61,7 @@ const Text = styled.div`
 `
 
 const Description = styled.div`
+  margin-top: 8px;
   font-family: Calibri;
   font-style: normal;
   font-size: 14px;

@@ -19,6 +19,10 @@ const InputBtn = styled.button`
 `;
 
 const ErrorContainer = styled.div`
+    position: relative;
+`;
+
+const ErrorStaticContainer = styled.div`
   position: absolute;
   @media screen and (max-width: ${size.tabletM})  {
     position: relative;
@@ -35,6 +39,7 @@ const InputBtnComponent = ({ show = true, showBtnIcon = true, handleInputButton,
 }
 
 const MaterialInput = ({
+    disabled = false,
     initialValue = '',
     type = 'text',
     placeholder = '',
@@ -48,7 +53,10 @@ const MaterialInput = ({
     capitalizeInput = false,
     inputRealPlaceholder = '',
     showDateMask = false,
-    error
+    error,
+    staticError = true,
+    numericInput = false,
+    reset
 }) => {
     const showRightButton = (type === 'password');
     const [labelColor, setLabelColor] = useState(allColors.colorPlaceholder);
@@ -77,6 +85,14 @@ const MaterialInput = ({
         if (inputValue.length && !showBtnIcon) return setShowButtonIcon(true);
         if (!inputValue.length) setShowButtonIcon(false);
     }, [inputValue]);
+
+    useEffect(() => {
+       if (!reset) return;
+       setInputValue('');
+       setLabelColor(allColors.colorPlaceholder);
+       setInputColor(allColors.colorGrayLight);
+       setShowLabelClass('');
+    }, [reset]);
 
     const handleInputButton = () => {
         setShowPassword(!showPassword);
@@ -110,7 +126,9 @@ const MaterialInput = ({
         }
     }
 
-    const handleChange = (event) => setInputValue(event.target.value);
+    const handleChange = (event) => {
+        setInputValue(capitalizeInput ? event.target.value.toUpperCase() : event.target.value);
+    }
 
     const inputProps = register ? (showDateMask ? { onKeyUp : handleOnKeyUp } : {}) : { value: inputValue };
 
@@ -118,6 +136,7 @@ const MaterialInput = ({
     <div style={{ ...containerStyles }} className={className}>
         <div style={{ borderColor: inputColor }} className="group">      
             <input
+                disabled={disabled}
                 id={name}
                 className={`material-input ${capitalizeInput ? 'capitalize' : ''}`}
                 style={{ marginRight: showRightButton ? '0px' : '15px' }}
@@ -144,7 +163,8 @@ const MaterialInput = ({
                 btnIcon={showPassword ? hidePasswordIcon : showPasswordIcon}
             />
         </div>
-        { error && <ErrorContainer>{error}</ErrorContainer>}
+        { (error && staticError) && <ErrorStaticContainer>{error}</ErrorStaticContainer>}
+        { (error && !staticError) && <ErrorContainer>{error}</ErrorContainer>}
     </div>
   )
 };

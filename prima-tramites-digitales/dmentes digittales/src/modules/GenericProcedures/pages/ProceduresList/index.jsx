@@ -84,7 +84,6 @@ const TramitesPersonales = () => {
   const toggleGetProcedure = (idTypeRequest) => {
     procedureService.getProcedure(idTypeRequest).then(
       response => {
-        console.log(response);
         history.push(`/generic-procedures/procedure?id=${idTypeRequest}`, {resp: response, user: user});
       }
     );

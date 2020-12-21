@@ -1,63 +1,114 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import PrimaWhiteLogo from 'shared/images/primaWhiteLogo.svg';
-import Slogan from 'shared/images/slogan.svg';
+import PrimaWhiteLogo from '../../../PrimaAccountAuth/assets/images/primaWhiteLogo.svg';
+import Slogan from '../../../PrimaAccountAuth/assets/images/slogan.svg';
 import MaterialInput from 'global/components/v2/MaterialInput';
-import { TwoColumnsContainer } from 'global/components/v2/UtilityComponents';
 import MaterialDateInput from 'global/components/v2/MaterialDateInput';
+import { TwoColumnsContainer } from 'global/components/v2/UtilityComponents';
 import MaterialCheckbox from 'global/components/v2/MaterialCheckbox';
 import { applicantCard, detailsForm } from '../../../shared/constant/ConstantApplicantDetailsForm';
-import { completeRegistration, autoLogin } from '../../core/ApplicantLoginService';
+import { completeRegistration } from '../../services/index.service';
+import { setSession } from '../../core/AppSession';
 import { Redirect } from 'react-router-dom';
-import Persistence from '../../core/ApplicantLoginService/persistence';
-import { ACCESS_TOKEN } from '../../core/ApplicantLoginService/constants';
+import { manageDateValidity } from 'modules/ApplicantAuth/core/FormValidations';
+import Persistence from '../../services/persistence';
 import { useForm } from 'react-hook-form';
 import {
   LoginContainer,
   DetailsNav,
   LoginCardDescription,
-  RowInputContainer,
-  InputGrid,
-  CardLogo,
   NavLogo,
   NavSlogan,
-  CheckboxSection,
   CheckboxLabel,
-  ButtonContainer
+  TwoColumnsForm
 } from './styledComponents';
 import Button from 'global/components/v2/Button';
 import Card from '../../components/Card';
+import Loading from 'global/components/v2/Loading';
 import { FormContainer, Container } from '../../components/styles';
 import DropdownInput from 'global/components/v2/DropdownInput';
 import { LoginTitle } from '../../components/CardHeader';
+import {
+  fatherValidations,
+  motherValidations,
+  firstNameValidations,
+  secondNameValidations,
+  birthdateValidations,
+  movilPhoneValidations
+} from '../../../shared/constant/ConstantValidations';
+import ErrorHandler from 'global/components/v2/ErrorHandler';
+import StaticAlert from 'global/components/v2/StaticAlert';
+import WarningIcon from 'modules/shared/images/warningIcon.svg';
 
-export default function ApplicantDetailsForm() {
+
+const ButtonSection = ({ loading = false, disabled = false }) => {
+  if (loading) return <div className="regularLoadingBtnPadding">
+    <Loading className="small-spinner">Cargando...</Loading>
+  </div>;
+  return (
+    <Button
+      className="buttonRegularResponsiveSmallMargin alignSelfCenter primary-btn"
+      disabled={disabled}
+      type="submit"
+    >
+      {applicantCard.submitBtnLabel}
+    </Button>
+  )
+}
+
+export default function ApplicantDetailsForm(props) {
     const history = useHistory();
     const [formIsValid, setFormValidity] = useState(false);
     const [termsAccepted, setTermsAccepted] = useState(false);
-    const { register, handleSubmit, formState, control } = useForm({
+    const [loading, setLoading] = useState(false);
+    const [birthdate, setBirthdate] = useState('');
+    const [birthdateError, setBirthdateError] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [currentUser, setCurrentUser] = useState({});
+    const [currentSession, setCurrentSession] = useState();
+    const [birthdateTouch, setBirthDateTouch] = useState(false);
+    const { register, handleSubmit, formState, control, errors } = useForm({
       mode: "onChange",
       defaultValues: {
       }
     });
-    const { isValid } = formState;
+    const { isValid, touched } = formState;
 
-  //   useEffect(() => {
-  //   const token = Persistence.getValue(ACCESS_TOKEN);
-  //   if (token) handleAutoLogin(token);
-  // }, [])
-
-  // const handleAutoLogin = async(token) => {
-  //   const user = await autoLogin(token);
-  //   if (user) return  history.push(`validation-prerequisites/${user.applicantId}`);
-  // }
+    useEffect(() => {
+      const user = props.location.state.currentUser;
+      if (user) setCurrentUser(user);
+      const session = props.location.state.tokenSessionInfo;
+      if (session) setCurrentSession(session);
+    }, [])
 
   const completeRegistry = async(payload) => {
-    // console.log(payload);
-    sessionStorage.setItem('user', JSON.stringify({token: 'loginmock'}));
-    const user = await completeRegistration(payload);
-    if (user) history.push(`/inicio/`);
+      setLoading(true);
+      delete payload['terms-and-conditions'];
+      const formData = { ...payload, birthdate };
+      const userResponse = await completeRegistration(formData, currentUser.idApplicant, currentSession.accessToken);
+      if (userResponse.errorMessage) {
+        setErrorMessage(userResponse.errorMessage);
+        return setLoading(false);
+      }
+      await setSession(currentSession);
+      history.push(`inicio`);
   }
+
+  const getBirthdateError = (actualValue, numericValue) => {
+    const dateValidity = manageDateValidity(actualValue);
+    if (!numericValue.length) return setBirthdateError(birthdateValidations.required);
+    if (numericValue.length !== 8) return setBirthdateError(birthdateValidations.length);
+    if (dateValidity) return setBirthdateError(dateValidity);
+    if (!dateValidity && numericValue.length === 8) return setBirthdateError('');
+  }
+
+  const handleBirthChange = (newValue) => {
+    if (birthdate.length > 0) setBirthDateTouch(true);
+    setBirthdate(newValue.target.value);
+    getBirthdateError(newValue.target.value, newValue.target.numericValue);
+  }
+
+  const getFormValidity = () => isValid && birthdate.length === 10 && !birthdateError.length;
 
   return (
     <>
@@ -69,56 +120,103 @@ export default function ApplicantDetailsForm() {
             <FormContainer onSubmit={handleSubmit(completeRegistry)}>
             <LoginTitle className="headerTitleHighligh">{applicantCard.title}</LoginTitle>
             <LoginCardDescription className="bodyTextSecundary">{applicantCard.description}</LoginCardDescription>
-            <TwoColumnsContainer>
+            <div className="twoColInputs mt05em">
                <MaterialInput
-                 className="inputRegularResponsive"
+                 className="inputBigResponsive"
+                 capitalizeInput={true}
                   name={'fatherLastname'}
-                  register={register({ required: true })}
+                  register={register(fatherValidations)}
                   placeholder={detailsForm.paternalSurname}
+                  error={
+                    <ErrorHandler
+                      noMargin={true}
+                      isTouched={touched['fatherLastname']}
+                      errors={errors}
+                      name={'fatherLastname'}
+                    />
+                  }
                 />
                 <MaterialInput
-                  className="inputRegularResponsive"
+                  className="inputBigResponsive"
+                  capitalizeInput={true}
                   name={'motherLastname'}
-                  register={register({ required: true })}
+                  register={register}
                   placeholder={detailsForm.maternalSurname}
+                  error={
+                    <ErrorHandler
+                      noMargin={true}
+                      isTouched={touched['motherLastname']}
+                      errors={errors}
+                      name={'motherLastname'}
+                    />
+                  }
                 />
                 <MaterialInput
-                  className="inputRegularResponsive"
+                  className="inputBigResponsive"
                   name={'firstName'}
-                  register={register({ required: true })}
+                  capitalizeInput={true}
+                  register={register(firstNameValidations)}
                   placeholder={detailsForm.firstName}
+                  error={
+                    <ErrorHandler
+                      noMargin={true}
+                      isTouched={touched['firstName']}
+                      errors={errors}
+                      name={'firstName'}
+                    />
+                  }
                 />
                 <MaterialInput
-                  className="inputRegularResponsive"
+                  className="inputBigResponsive"
                   name={'secondName'}
-                  register={register({ required: true })}
+                  capitalizeInput={true}
+                  register={register(secondNameValidations)}
                   placeholder={detailsForm.middleName}
+                  error={
+                    <ErrorHandler
+                      noMargin={true}
+                      isTouched={touched['secondName']}
+                      errors={errors}
+                      name={'secondName'}
+                    />
+                  }
                 />
                 <MaterialDateInput
-                  className="inputRegularResponsive"
-                  register={register({ required: true })}
+                  className="inputBigResponsive"
+                  onChange={handleBirthChange}
                   name={'birthdate'}
-                  placeholder={detailsForm.birthDate}
+                  placeholder={detailsForm.birthDate}   
+                  error={birthdateTouch ? birthdateError : null} 
+                  getTarget={true}     
                 />
                 <MaterialInput
-                  className="inputRegularResponsive"
+                  className="inputBigResponsive"
                   name={'cellphone'}
-                  register={register({ required: true })}
+                  register={register(movilPhoneValidations)}
                   placeholder={detailsForm.phone}
+                  error={
+                    <ErrorHandler
+                      noMargin={true}
+                      isTouched={touched['cellphone']}
+                      errors={errors}
+                      name={'cellphone'}
+                    />
+                  }
                 />
-            </TwoColumnsContainer>
+            </div>
             <MaterialCheckbox register={register({ required: true })} name={applicantCard.checkboxName}>
                 <CheckboxLabel>
                   {applicantCard.checkboxLabel}<span>{applicantCard.checkboxLabelHighlighted}</span>
                 </CheckboxLabel>
             </MaterialCheckbox>
-            <Button
-              className="buttonRegularResponsive alignSelfCenter"
-              disabled={!isValid}
-              type="submit"
-            >
-              {applicantCard.submitBtnLabel}
-            </Button>
+            <StaticAlert
+                show={errorMessage.length > 0}
+                message={errorMessage}
+                img={WarningIcon}
+                className={"alertRegularResponsiveColumnsM"}
+                noMargin={true}
+              />
+            <ButtonSection loading={loading} disabled={!getFormValidity()} />
             </FormContainer>
           </Card>
         </LoginContainer>

@@ -1,242 +1,375 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { allColors } from "global/styles/index";
 import asessment from "shared/images/asessment.png";
+import {
+  CardComponent,
+  Text,
+  Description,
+  ButtonOutlinedAdvisory,
+  IconPDF,
+  DocumentLink,
+  CheckboxLabel,
+} from "./styles";
 
 import Accordion, { BulletedList } from "global/components/v2/Accordion";
+import AlertCard2 from "global/components/v2/Cards/AlertCard2";
 import AsessmentModal from "../../components/Modals/AsessmentModal";
 import Button from "global/components/v2/Button";
 import MainTitle from "global/components/v2/Titles/MainTitle";
 import WhiteCard from "global/components/v2/Cards/WhiteCard";
 import { TwoColumnsFlexContainer } from "global/components/v2/UtilityComponents";
+import Loading from "global/components/v2/Loading";
+import StaticAlert from "global/components/v2/StaticAlert";
+import MaterialCheckbox from "global/components/v2/MaterialCheckbox";
+import pdfIcon from "modules/shared/images/pdfIcon.svg";
+import WarningIcon from "modules/shared/images/warningIcon.svg";
 
 import useProcedureInformation from "../../services/useProcedureInformation";
-import { setAsessment } from "../../redux/actions/Procedure";
-import useGenericDataProcedure from "modules/GenericProcedures/services/useGenericDataProcedure";
+import {
+  setAsessment,
+  setCellphone,
+  setEmail,
+  setPersons,
+} from "../../redux/actions/Procedure";
 import { UserContext } from "modules/App/pages/MainDashboardLayout";
 import { registerAsessment } from "modules/GenericProcedures/services/registerAsessment";
-
-const Text = styled.div`
-  margin: 10px 0 0 0;
-  > span {
-    text-align: center;
-    font-size: 14px;
-    line-height: 21px;
-    color: ${allColors.colorGrayText};
-  }
-`;
-
-const Description = styled.div`
-  margin: 15px 0 25px 0;
-  > span {
-    text-align: center;
-    font-size: 14px;
-    line-height: 21px;
-    color: ${allColors.colorGrayText};
-  }
-`;
+import { obfuscateData } from "modules/shared/helpers/HelperObfuscate";
+import { validateProcedure } from "modules/GenericProcedures/services/validateProcedure";
+import { tryCatch } from "ramda";
 
 const textProcedure = {
   title: "Nueva solicitud de trámite",
-  titleAccordion1: "Importante",
-  titleAccordion2: "Etapas del proceso",
-  titleAccordion3: "Requisitos para el trámite",
-  titleAccordion4: "Documentos que necesitas tener a la mano",
-  titleAccordion5:
+  titleImportant: "Importante",
+  titleStages: "Etapas del proceso",
+  titleRequirements: "Requisitos para el trámite",
+  titleGeneralDocuments: "Documentos que necesitas tener a la mano",
+  titleBeneficiaryDocuments:
     "Documentos de los beneficiarios que necesitas tener a la mano",
 };
 
-let user = null;
+const DocumentsSection = ({ documentsInfo }) => {
+  return documentsInfo.map((document, index) => {
+    const documentsList = document.documents.map((item) => item.nameDocument);
+    return (
+      <div key={index + document.nameGroupDocument} className="pt1em pb1em">
+        <p className="informationFooterText bold pb1em">
+          <b>{document.nameGroupDocument}</b>
+        </p>
+        <BulletedList textList={documentsList} />
+      </div>
+    );
+  });
+};
 
 const Procedure = () => {
   const user = React.useContext(UserContext);
   const history = useHistory();
   const { id } = useParams();
 
+  const ide = parseInt(id);
+
   const INITIAL_REQUEST = {
     idTypeRequest: 0,
     idTypeTask: 0,
     idAffiliate: null,
     idApplicant: null,
+    idRepresentative: null,
   };
+
+  const { data: information } = useProcedureInformation(ide);
 
   const [dataAsessment, setDataAsessment] = useState(INITIAL_REQUEST);
-  // console.log(`id procedure is ${id}`);
-
-  const { data: information } = useProcedureInformation(id);
-  // console.log("information is ",information);
-
   const [showModal, setShowModal] = useState(false);
+  const [showAlertProcedure, setShowAlertProcedure] = useState(false);
+  const [showAlertAsessment, setShowAlertAsessment] = useState(false);
+  const [readDocuments, setReadDocuments] = useState(false);
+  const [showToolTip, setShowTooltip] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [checked, setChecked] = useState(false);
+
+  const [advisory, setAdvisory] = useState("");
+
   let dispatch = useDispatch();
-
-   const asess = useSelector((state) => state.idAsessment);
-
-  const handleRequestAssesment = async () => {
-    const response = await registerAsessment(dataAsessment);
-    if (response !== undefined)
-      console.log("asessment => ", response.codeRequest);
-    history.push(`/inicio/`);
-  };
 
   const handleClose = () => {
     setShowModal(false);
   };
 
-  const handleBeginProcedure = async () => {
-    let request = {
-      idTypeRequest: id,
-      idTypeTask: 2,
-      idAffiliate: user.idAffiliate,
-      idApplicant: user.idApplicant,
-    };
-    const response = await registerAsessment(request);
-    if (response !== undefined) {
-      console.log("procedure => ", response);
-      dispatch(setAsessment(response.idRequest));
-    }
-    history.push(`/nueva-solicitud/tramite/${id}/paso-uno`);
-  };
- 
-  const handleBeginAsessment = () => {
-    setShowModal(true);
-    let idAffiliate = null;
-    let idApplicant = null;
-    let idRepresentative = null;
-    // let validAffiliate = useSelector(state => state.validAffiliate);
-    if (user.usertype === "affiliate") {
-      // if (validAffiliate !== null){
-      idAffiliate = user.idAffiliate;
-      idApplicant = user.idApplicant;
-      // }
-    } else if (user.usertype === "applicant") {
-      idAffiliate = 0;
-      idApplicant = user.idApplicant;
-    }
-
-    const request = {
-      idTypeRequest: id,
-      idTypeTask: 1,
-      idAffiliate: user.idAffiliate,
-      idApplicant: user.idApplicant,
-    };
-
-    setDataAsessment(request);
-    // console.log("user data is ", user);
-    console.log("request to be sent: ", request);
-  };
-
   useEffect(() => {
-    // getToken();
-    // getProcedureConfiguration(`${id}`)
-    // getInitialData(`${id}`);
-  }, [id]);
+    if (readDocuments) {
+      setShowTooltip(false);
+      setChecked(true);
+    }
+  }, [readDocuments]);
 
-  // console.log(`user is ${user.usertype}`);
+  const inValidAffiliate = useSelector((state) =>
+    state.affiliate.affiliate ? true : false
+  );
+  const idValAff = useSelector((state) =>
+    state.affiliate.affiliate ? state.affiliate.affiliate.affiliateId : null
+  );
+
+  let email = user.email;
+  let cellphone = user.cellphone;
+
+  const createDataRequest = (idT, idTyRequest) => {
+    let idAff = null;
+    let idAppl = null;
+    let idRepr = null;
+    let idValidAff = idValAff;
+    if (user.usertype === "affiliate") {
+      if (!inValidAffiliate) {
+        idAff = user.idAffiliate;
+      } else {
+        idAff = idValidAff;
+        idRepr = user.idAffiliate;
+      }
+    } else if (user.usertype === "applicant") {
+      if (inValidAffiliate) {
+        idAff = idValidAff;
+        idAppl = user.idApplicant;
+      }
+    }
+    let request = {
+      idTypeRequest: idTyRequest,
+      idTypeTask: idT,
+      idAffiliate: idAff,
+      idApplicant: idAppl,
+      idRepresentative: idRepr,
+    };
+    dispatch(setEmail(email));
+    dispatch(setCellphone(cellphone));
+    return request;
+  };
+
+  const handleBeginAsessment = async () => {
+    const requestBeginAdvisory = createDataRequest(1, ide);
+    setDataAsessment(requestBeginAdvisory);
+    const response = await validateProcedure(requestBeginAdvisory);
+    if (!response) {
+      setShowAlertAsessment(true);
+      setReadDocuments(false);
+    } else {
+      setShowModal(true);
+    }
+  };
+
+  const handleRequestAssesment = async () => {
+    setShowModal(false);
+    const response = await registerAsessment(dataAsessment);
+    if (!response) {
+      setShowAlertAsessment(true);
+      setReadDocuments(false);
+    } else {
+      setAdvisory(response.codeRequest);
+      history.push("/inicio/");
+    }
+  };
+
+  const handleBeginProcedure = async () => {
+    if (ide === 61) {
+      history.push("/proceso95-5");
+    } else {
+      const request = createDataRequest(2, ide);
+      setDataAsessment(request);
+      dispatch(setPersons(request));
+      const response = await registerAsessment(request);
+      if (!response) {
+        setShowAlertProcedure(true);
+        setReadDocuments(false);
+      } else {
+        dispatch(setAsessment(response.idRequest));
+        history.push(`/nueva-solicitud/tramite/${id}/paso-uno`);
+      }
+    }
+  };
+
+  const sortDocuments = (documents) =>
+    documents.sort((a, b) => {
+      const x = a.documents[0].ordenation;
+      const y = b.documents[0].ordenation;
+      return x - y;
+    });
 
   return (
     <>
       <WhiteCard>
-        <Text>
-          <span>{textProcedure.title}</span>
-        </Text>
+        {information ? (
+          <>
+            <Text>
+              <span>{textProcedure.title}</span>
+            </Text>
 
-        <MainTitle title={information && information.name} />
+            <MainTitle title={information && information.name} />
 
-        <Description>
-          <span>{information && information.descriptionLarge}</span>
-        </Description>
+            <Description>
+              <span>{information && information.descriptionLarge}</span>
+            </Description>
 
-        {information && information.informationImportant ? (
-          <Accordion
-            title={textProcedure.titleAccordion1}
-            label={""}
-            children={information && information.informationImportant}
-          />
-        ) : (
-          ""
-        )}
+            {information && information.informationImportant && (
+              <Accordion
+                title={textProcedure.titleImportant}
+                label={""}
+                children={information && information.informationImportant}
+              />
+            )}
 
-        {information && information.stages.length > 0 ? (
-          <Accordion
-            title={textProcedure.titleAccordion2}
-            label={""}
-            children={
-              <BulletedList textList={information && information.stages} />
-            }
-          />
-        ) : (
-          ""
-        )}
-
-        {information && information.requirements.length > 0 ? (
-          <Accordion
-            title={textProcedure.titleAccordion3}
-            label={""}
-            children={
-              // ""
-              <BulletedList
-                textList={
-                  information &&
-                  information.requirements.map((req) => req.nameRequirement)
+            {information && information.stages.length > 0 && (
+              <Accordion
+                title={textProcedure.titleStages}
+                label={""}
+                children={
+                  <BulletedList
+                    textList={
+                      information &&
+                      information.stages.map((stage) => stage.nameStage)
+                    }
+                  />
                 }
               />
-            }
-          />
-        ) : (
-          ""
-        )}
+            )}
 
-        {information && information.documents.length > 0 ? (
-          <Accordion
-            title={textProcedure.titleAccordion4}
-            label={""}
-            children={
-              <BulletedList textList={information && information.documents} />
-            }
-          />
-        ) : (
-          ""
-        )}
+            {information && information.requirements.length > 0 && (
+              <Accordion
+                title={textProcedure.titleRequirements}
+                label={""}
+                children={
+                  <BulletedList
+                    textList={
+                      information &&
+                      information.requirements.map((req) => req.nameRequirement)
+                    }
+                  />
+                }
+              />
+            )}
 
-        {information &&
-        information.inBeneficiary &&
-        information.documents.length > 0 == "1" ? (
-          <Accordion
-            title={textProcedure.titleAccordion5}
-            label={""}
-            children={
-              <BulletedList textList={information && information.documents} />
-            }
-          />
-        ) : (
-          ""
-        )}
+            {information && information.documents.length > 0 && (
+              <Accordion
+                show={information.documents.length > 0}
+                title={textProcedure.titleGeneralDocuments}
+                children={
+                  <DocumentsSection
+                    documentsInfo={sortDocuments(information.documents)}
+                  />
+                }
+              />
+            )}
+            {information && information.documentsBeneficiary.length > 0 && (
+              <Accordion
+                show={information.documents.length > 0}
+                title={textProcedure.titleBeneficiaryDocuments}
+                children={
+                  <>
+                    <DocumentsSection
+                      documentsInfo={sortDocuments(
+                        information.documentsBeneficiary
+                      )}
+                    />
+                  </>
+                }
+              />
+            )}
+            {information.inDocumentInformative === "1" && (
+              <>
+                <CardComponent>
+                  <IconPDF src={pdfIcon} alt={"pdf_icon"} />
+                  <a href={
+                    `${process.env.REACT_APP_REPOSITORY_DOCUMENTS}/${encodeURI(information && information.name)}.pdf`
+                    } target="_blank" download>
+                  <DocumentLink className="link">
+                    {"Descarga la Cartilla informativa"}
+                  </DocumentLink>
+                  </a>
+                </CardComponent>
+              </>
+            )}
+            <MaterialCheckbox
+              disabled={checked}
+              onChange={setReadDocuments}
+              value={"read-information"}
+              showToolTip={showToolTip}
+              tooltipContent={
+                <>
+                  <p className="informationFooterText">
+                    Queremos que estés informado de todo el proceso, por ello es
+                    importante que leas toda la información.
+                  </p>
+                  <p className="informationFooterText bold mt1em">
+                    Para poder continuar con el trámite marca la casilla.
+                  </p>
+                </>
+              }
+            >
+              <CheckboxLabel>
+                {"Declaro haber leído la información"}
+              </CheckboxLabel>
+            </MaterialCheckbox>
+            <StaticAlert
+              show={errorMessage.length > 0}
+              message={errorMessage}
+              img={WarningIcon}
+              noMargin={true}
+              className="mt2em mb1em"
+            />
 
-        <TwoColumnsFlexContainer>
-          <Button
-            className="buttonSmallResponsive alignSelfCenter primary-outlined-btn"
-            onClick={handleBeginAsessment}
-          >
-            Necesito asesoría
-          </Button>
-          <Button
-            className="buttonSmallResponsive alignSelfCenter primary-btn"
-            onClick={handleBeginProcedure}
-          >
-            Iniciar trámite
-          </Button>
-        </TwoColumnsFlexContainer>
+            <TwoColumnsFlexContainer>
+              {id === "61" || id === "62" ? (
+                ""
+              ) : (
+                <ButtonOutlinedAdvisory
+                  onClick={handleBeginAsessment}
+                  disabled={!readDocuments}
+                >
+                  Necesito asesoría
+                </ButtonOutlinedAdvisory>
+              )}
+
+              <Button
+                className="buttonSmallResponsive alignSelfCenter primary-btn"
+                onClick={handleBeginProcedure}
+                disabled={!readDocuments}
+              >
+                Iniciar trámite
+              </Button>
+            </TwoColumnsFlexContainer>
+
+            <AlertCard2
+              showLink={true}
+              hidden={!showAlertProcedure}
+              text1={"Ya existe un trámite en curso"}
+              text2={"Por favor consulta sobre su estado en este "}
+              text3={"o verifica con tu afiliado/beneficiario"}
+              link={"/detalles-tramite/"}
+            />
+            <AlertCard2
+              showLink={true}
+              hidden={!showAlertAsessment}
+              text1={"Ya existe una asesoría en curso"}
+              text2={
+                "Por favor espera la respuesta para continuar. Para regresar haz clic en este "
+              }
+              link={"/inicio/"}
+            />
+          </>
+        ) : (
+          <div style={{ padding: "20vh 0" }}>
+            <Loading>Cargando...</Loading>
+          </div>
+        )}
       </WhiteCard>
       <AsessmentModal
         showModal={showModal}
-        onClose={() => setShowModal(false)}
+        onClose={handleClose}
         icon={asessment}
         handleOpen={handleRequestAssesment}
-        handleClose={handleClose}
-        dataUser={user ? user : null}
+        dataUser={{
+          email: obfuscateData(email),
+          cellphone: obfuscateData(cellphone),
+          code: advisory,
+        }}
       />
     </>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
-import Login from '../pages/ApplicantLogin';
+import ReCaptchaApplicant from '../pages/ApplicantLogin/ReCaptchaApplicant';
 import CreateAccount from '../pages/ApplicantCreateAccount';
 import ResendVerification from '../pages/ResendVerification';
 import ApplicantDetailsForm from '../pages/ApplicantDetailsForm';
@@ -9,17 +9,17 @@ import Welcome from '../pages/Welcome';
 
 const route = {
   path: '/login-solicitante',
-  component: Login,
+  component: ReCaptchaApplicant,
 }
 
 const LoginRoute = () => (
   <Switch>
     <Route path={'/bienvenido'} component={Welcome} />
     <Route exact path={route.path} component={route.component} /> 
-    <Route path={'/crear-cuenta/:registro?'} component={CreateAccount} /> 
+    <Route path={'/crear-cuenta'} component={CreateAccount} /> 
     <Route path={'/reenviar-verificacion'} component={ResendVerification} /> 
     <Route path={'/completar-registro'} component={ApplicantDetailsForm} /> 
-    <Route path={'/recuperar-contrasena/:token?'} component={RecoverPassword} />
+    <Route path={'/recuperar-contrasena'} component={RecoverPassword} />
   </Switch>
 );
 

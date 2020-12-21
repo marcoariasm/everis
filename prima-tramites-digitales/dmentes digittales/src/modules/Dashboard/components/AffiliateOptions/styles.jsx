@@ -9,7 +9,7 @@ grid-column-gap: 3%;
 grid-row-gap: 3%;
 grid-template-columns: 1fr 1fr;
 grid-template-rows: auto auto;
-margin: 10px 16px 16px 16px;
+margin: 16px 0;
 min-height: 100%;
 grid-template-areas:
   "button1 button1"
@@ -63,7 +63,6 @@ export const Content = styled.div`
   box-shadow: 0 4px 8px 1px rgba(53, 53, 53, 0.12);
   :hover{
     border: 2px ${allColors.colorOrangeMain} solid;
-    box-shadow: 0 4px 8px 1px rgba(53, 53, 53, 0.12);
 }
 `
 
@@ -100,7 +99,7 @@ font-style: normal;
 font-weight: bold;
 font-size: 16px;
 line-height: 18px;
-margin: 5px 20px;
+margin: 5px 12px;
 color: ${allColors.colorGrayText};
 @media only screen and (min-width: ${size.laptopM}) {
   font-size: 16px;

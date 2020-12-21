@@ -1,9 +1,9 @@
-import AuthRouter from './routes/AuthRouter'
-
-const router = {
-  AuthRouter
-};
+import router from './routes'
+import assets from './assets';
+import components from './components';
 
 export default {
-  router
+  router,
+  assets,
+  components
 }

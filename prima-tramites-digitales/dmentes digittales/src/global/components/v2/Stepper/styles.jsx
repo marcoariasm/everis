@@ -43,13 +43,13 @@ export const Step = styled.li`
   }
 
   &:after {
-    width: 90%;
+    width: 86%;
     height: 1px;
     content: "";
     position: absolute;
     background-color: #7d7d7d;
     top: 15px;
-    left: -45%;
+    left: -43%;
     z-index: 0;
 
     @media only screen and (max-width: ${size.laptop}) {

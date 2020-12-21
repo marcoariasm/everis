@@ -1,6 +1,12 @@
 import serviceFetcher from "modules/shared/libs/ServiceFetcher";
 
-export const uploadFile = async (file, idRequest) => {
+const defaultError = {
+    error: 'Hubo un problema al subir los archivos',
+    advice: 'Intente cargar el documento nuevamente'
+};
+
+
+export const uploadFile = async (file, idRequest, codeDocument) => {
   var formdata = new FormData();
   formdata.append(
     "file",
@@ -8,7 +14,7 @@ export const uploadFile = async (file, idRequest) => {
     file.name
   );
   formdata.append("idRequest", idRequest);
-  formdata.append("inTypeDocument", "R");
+  formdata.append("inTypeDocument", codeDocument);
 
   var requestOptions = {
     method: "POST",
@@ -20,7 +26,10 @@ export const uploadFile = async (file, idRequest) => {
     `${process.env.REACT_APP_APPLICANT_API}/document-manager/v1/upload`,
     requestOptions
   )
-  .catch(error => console.log(error));
+  .catch(error => {
+    console.log(error)
+    return defaultError;
+  });
   const result = await response;
   return result;
 

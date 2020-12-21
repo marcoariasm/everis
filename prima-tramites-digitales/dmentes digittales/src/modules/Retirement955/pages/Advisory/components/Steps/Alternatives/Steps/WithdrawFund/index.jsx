@@ -9,7 +9,7 @@ import { Modalities } from './Modalities'
 import { Header } from '../Header'
 import { Footer } from '../Footer'
 
-export const WithdrawFund = ({ pension, totalBalance, balance45 }) => {
+export const WithdrawFund = ({ totalBalance, balance45 }) => {
   return (
     <>
       <Header
@@ -19,12 +19,12 @@ export const WithdrawFund = ({ pension, totalBalance, balance45 }) => {
         totalBalance={totalBalance}
       />
       <MediaQuery minDeviceWidth={767}>
-        <Modalities pension={pension} />
+        <Modalities />
       </MediaQuery>
       <MediaQuery maxDeviceWidth={767}>
-        <ModalitiesCards pension={pension} />
+        <ModalitiesCards />
       </MediaQuery>
-      <TextFinal balance45={balance45} pension={pension} totalBalance={totalBalance} />
+      <TextFinal balance45={balance45} totalBalance={totalBalance} />
       <Footer />
     </>
   )

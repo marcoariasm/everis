@@ -9,23 +9,23 @@ import { Modalities } from './Modalities'
 import { Header } from '../Header'
 import { Footer } from '../Footer'
 
-export const RetirementPension = ({ pension, totalBalance, percentages }) => {
-  return (
-    <>
-      <Header
-        introText={textAlternatives.introText}
-        modalitiesText={textAlternatives.modalitiesText}
-        textTotalBalance={textAlternatives.totalBalance}
-        totalBalance={totalBalance}
-      />
-      <MediaQuery minDeviceWidth={767}>
-        <Modalities percentages={percentages} pension={pension} />
-      </MediaQuery>
-      <MediaQuery maxDeviceWidth={767}>
-        <ModalitiesCards pension={pension} />
-      </MediaQuery>
-      <TextFinal />
-      <Footer />
-    </>
-  )
+export const RetirementPension = ({ totalBalance }) => {
+	return (
+		<>
+			<Header
+				introText={textAlternatives.introText}
+				modalitiesText={textAlternatives.modalitiesText}
+				textTotalBalance={textAlternatives.totalBalance}
+				totalBalance={totalBalance}
+			/>
+			<MediaQuery minDeviceWidth={767}>
+				<Modalities />
+			</MediaQuery>
+			<MediaQuery maxDeviceWidth={767}>
+				<ModalitiesCards />
+			</MediaQuery>
+			<TextFinal />
+			<Footer />
+		</>
+	)
 }

@@ -1,6 +1,5 @@
 import React from "react";
 import Accordion from "global/components/v2/Accordion";
-import moment from "moment";
 
 import {
   ContactContainer,
@@ -9,66 +8,88 @@ import {
   ContentTab,
 } from "./styles";
 
-function InformationProcedures({ person, tittleAccordion }) {
+function InformationProcedures({ person, tittleAccordion, detail, procedure }) {
   return (
     <>
-      <Accordion
-        title={`Datos del ${tittleAccordion}`}
-      >
+      <Accordion title={`Datos del ${tittleAccordion}`}>
         <ContentTab>
-          <ContactContainer>
-            <div>
-              <ContactTitle>{"Apellidos y nombres"}</ContactTitle>
-              <ContactDescription>
-                {`${person.firstName} ${person.fatherLastname} ${person.motherLastname}`}
-              </ContactDescription>
-            </div>
-          </ContactContainer>
-          <ContactContainer>
-            <div>
-              <ContactTitle>{"Tipo de doc"}</ContactTitle>
-              <ContactDescription>{person.documentType}</ContactDescription>
-            </div>
-            <div>
-              <ContactTitle>{"N° de documento"}</ContactTitle>
-              <ContactDescription>{person.documentNumber}</ContactDescription>
-            </div>
-          </ContactContainer>
-          {(person.birthdate || person.relationship) && (
-            <ContactContainer>
-              {person.birthdate && (
+          {tittleAccordion != "tramite" && (
+            <>
+              <ContactContainer className="isResponsive">
                 <div>
-                  <ContactTitle>{"Fecha de nacimiento"}</ContactTitle>
+                  <ContactTitle>{"Apellidos y nombres"}</ContactTitle>
                   <ContactDescription>
-                    {moment(person.birthdate).format("DD/MM/YYYY")}
+                    {`${person.firstName} ${
+                      person.secondName ? person.secondName : ""
+                    } ${person.fatherLastname} ${person.motherLastname}`}
                   </ContactDescription>
                 </div>
-              )}
-              {person.relationship && (
+              </ContactContainer>
+              <ContactContainer>
                 <div>
-                  <ContactTitle>{"Parentesco"}</ContactTitle>
-                  <ContactDescription>{person.relationship}</ContactDescription>
+                  <ContactTitle>{"Tipo de doc"}</ContactTitle>
+                  <ContactDescription>{person.documentType}</ContactDescription>
                 </div>
+                <div>
+                  <ContactTitle>{"N° de documento"}</ContactTitle>
+                  <ContactDescription>
+                    {person.documentNumber}
+                  </ContactDescription>
+                </div>
+              </ContactContainer>
+              {tittleAccordion !== "afiliado" && (
+                <ContactContainer>
+                  {person.birthdate && (
+                    <div>
+                      <ContactTitle>{"Fecha de nacimiento"}</ContactTitle>
+                      <ContactDescription>
+                        {person.birthdate}
+                      </ContactDescription>
+                    </div>
+                  )}
+                  {person.relationship && (
+                    <div>
+                      <ContactTitle>{"Parentesco"}</ContactTitle>
+                      <ContactDescription>
+                        {person.relationship}
+                      </ContactDescription>
+                    </div>
+                  )}
+                </ContactContainer>
               )}
-            </ContactContainer>
+              <ContactContainer className="isResponsive">
+                <div>
+                  <ContactTitle>{"Correo electrónico"}</ContactTitle>
+                  <ContactDescription>{person.email}</ContactDescription>
+                </div>
+                {person.cellphone && (
+                  <div>
+                    <ContactTitle>{"Teléfono móvil"}</ContactTitle>
+                    <ContactDescription>{person.cellphone}</ContactDescription>
+                  </div>
+                )}
+              </ContactContainer>
+            </>
           )}
-          <ContactContainer className="isResponsive">
-            <div>
-              <ContactTitle>{"Correo electrónico"}</ContactTitle>
-              <ContactDescription>{person.email}</ContactDescription>
-            </div>
-            {person.phone && (
-              <div>
-                <ContactTitle>{"Teléfono móvil"}</ContactTitle>
-                <ContactDescription>{person.phone}</ContactDescription>
-              </div>
-            )}
-          </ContactContainer>
-          {person.detail && (
-            <div>
-              <ContactTitle>{"Detalle del trámite"}</ContactTitle>
-              <span>{person.detail}</span>
-            </div>
+          {detail && tittleAccordion === "tramite" && (
+            <>
+              <ContactContainer className="isResponsive">
+                <div>
+                  <ContactTitle>{"Correo electrónico"}</ContactTitle>
+                  <ContactDescription>{procedure.email}</ContactDescription>
+                </div>
+                <div>
+                  <ContactTitle>{"Teléfono móvil"}</ContactTitle>
+                  <ContactDescription>{procedure.cellphone}</ContactDescription>
+                </div>
+              </ContactContainer>
+              <ContactContainer className="isResponsive">
+                <div>
+                  <ContactTitle>{"Detalle del trámite"}</ContactTitle>
+                  <span>{detail}</span>
+                </div>
+              </ContactContainer>
+            </>
           )}
         </ContentTab>
       </Accordion>

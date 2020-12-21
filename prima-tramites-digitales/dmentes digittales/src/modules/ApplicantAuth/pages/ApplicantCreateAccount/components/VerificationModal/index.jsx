@@ -10,13 +10,16 @@ import { verifyModal } from '../../../../../shared/constant/ConstantApplicantSig
 
 const VerificationModal = ({ show = false, icon, error = false, isValid = false, onClose }) => {
    const history = useHistory();
-   const handleBtn = () => history.push('/login');
+   const handleBtn = () => history.push('/login-solicitante');
 
    const Icon = error ? ErrorIcon : isValid ? EmailIcon : HourGlass;
    const title = error ? verifyModal.errorTitle : isValid ? verifyModal.title : verifyModal.defeatedTitle;
 
    const ContentText = () => {
-       if (error) return <p className="tableBodyText textCenter">{verifyModal.errorDescription}</p>;
+       if (error) return <>
+          <p className="tableBodyText textCenter">{verifyModal.errorDescription}</p>
+          <p className="titleFooter textCenter pt1em">{verifyModal.invalidLink}</p>
+        </>;
        if (!isValid || error) return <p className="titleFooter textCenter">{verifyModal.invalidLink}</p>;
        return <></>
    }
@@ -30,7 +33,7 @@ const VerificationModal = ({ show = false, icon, error = false, isValid = false,
           </ModalContent>
           <Button
             onClick={handleBtn}
-            className="modalBtn"
+            className="modalBtn primary-btn"
           >
             {verifyModal.btnText}
           </Button>

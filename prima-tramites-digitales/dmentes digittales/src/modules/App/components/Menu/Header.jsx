@@ -1,11 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import { size } from 'global/styles/Responsive'
-import { allColors } from 'global/styles'
 
-import LogoImage from 'shared/images/logo.svg'
-import MenuBurger from 'shared/images/menusanguche.svg'
+import LogoImage from 'modules/App/assets/images/logo.svg'
+import MenuBurger from 'modules/App/assets/images/menusanguche.svg'
 
 const HeaderTop = styled.div`
   display: flex;
@@ -42,7 +40,7 @@ const HeaderTop = styled.div`
     align-items: center;
     justify-content: center;
     background-repeat: no-repeat;
-    color: ${allColors.colorWhiteBase};
+    color: var(--whiteColorBase);
     @media screen and (min-width: ${size.laptopL}) {
       display: none;
     }
@@ -52,7 +50,7 @@ const HeaderTop = styled.div`
 function Header() {
   return (
     <HeaderTop>
-      <a href="www.prima.com.pe" className="header-logo" />
+      <a className="header-logo" />
       <label htmlFor="open" className="menu-open"></label>
     </HeaderTop>
   )

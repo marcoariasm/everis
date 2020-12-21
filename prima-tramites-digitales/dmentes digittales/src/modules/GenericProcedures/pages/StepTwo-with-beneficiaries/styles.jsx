@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { size } from '../../../../shared/styles/Responsive';
-import { allColors } from '../../../../shared/styles/index';
+import { size } from 'global/styles/Responsive';
+import { allColors } from 'global/styles/index';
 
 export const FormContainer = styled.div`
   display: flex;
@@ -122,12 +122,86 @@ export const LoginCardDescription = styled.p`
   }
 `;
 
+// export const CheckboxContainer = styled.div`
+//   width: 100%;
+//   display: flex;
+//   justify-content: flex-start;
+//   margin-top: 2.7em;
+//   @media screen and (max-width: ${size.tabletM})  {
+//     margin-top: 1.5em;
+//   }
+// `;
+
+export const Text = styled.div`
+  margin: 10px 0 0 0;
+  > span {
+    text-align: center;
+    font-size: 14px;
+    line-height: 21px;
+    color: ${allColors.colorGrayText};
+  }
+`;
+
+export const ContainerButton = styled.div`
+  margin: 60px auto;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const CheckboxContainer = styled.div`
   width: 100%;
   display: flex;
-  justify-content: flex-start;
-  margin-top: 2.7em;
-  @media screen and (max-width: ${size.tabletM})  {
-    margin-top: 1.5em;
+  justify-content: center;
+  margin: 2.7em 0;
+  @media screen and (max-width: ${size.tabletM}) {
+    margin: 1.5em 0;
   }
+`;
+
+export const BeneficiariesButton = styled.button`
+  margin: 0 auto;
+  border: 1.4px solid #00ae99;
+  border-radius: 6px;
+  display: table;
+  padding: 1.6em 4em;
+  opacity: ${(props) => (props.disabled ? "0.7" : "1")};
+  outline: none;
+`;
+
+export const IconContainer = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+`;
+
+export const BeneficiariesContent = styled.div`
+  display: flex;
+  width: auto;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const BeneficiariesText = styled.p`
+  font-size: 16px;
+  font-weight: bold;
+  color: #00ae99;
+`;
+
+export const ContainerStepper = styled.div`
+  margin-top: 40px;
+  display: flex;
+  min-width: 100%;
+  justify-content: center;
+  margin-bottom: 4em;
+`;
+
+export const OutlinedButton = styled.button`
+  border: 1.4px solid #00ae99;
+  border-radius: 6px;
+  display: table;
+  padding: 0.8em 2em;
+  outline: none;
+  min-width: 110px;
 `;

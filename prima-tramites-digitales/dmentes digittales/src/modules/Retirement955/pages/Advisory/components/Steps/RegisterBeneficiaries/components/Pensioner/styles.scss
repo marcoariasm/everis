@@ -1,7 +1,13 @@
 .tippy-tooltip {
     background-color: transparent;
     @media only screen and (max-device-width: '767px') {
-        margin-left: -10%;
+       
+
     }
   }
 
+  .tippy-tooltip-content {
+    @media only screen and (max-device-width: '767px') {
+        max-width: 100% !important;
+    }
+  }
