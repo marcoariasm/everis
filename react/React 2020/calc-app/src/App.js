@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import './App.css';
 
 import Functions from './components/Functions'
@@ -9,11 +10,12 @@ import PropTypes from 'prop-types';
 
 function App() {
   console.log("renderización de App");
+  const [result, useResult] = useState(0);
 
   return (
     <main className="react-calculator">
-      <Result value={"0"} />
-      <Numbers onClickNumber={number => console.log(number)}/>
+      <Result value={result} />
+      <Numbers onClickNumber={useResult}/>
       <Functions 
         onContentClear={clear => console.log(clear)}
         onDelete={del => console.log(del)}
