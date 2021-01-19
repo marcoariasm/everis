@@ -4,7 +4,7 @@ import { allColors } from "global/styles";
 
 export const WriteResponseSection = styled.div`
   display grid;
-  margin-top: 1em;
+  margin: 1em 0 2em;
   grid-template-columns: 1fr 45px;
 `;
 
@@ -41,7 +41,7 @@ export const MessagesContainer = styled.div`
   height: 40vh;
   overflow-y: auto;
   padding-right: 1em;
-  
+
   &::-webkit-scrollbar {
     width: 8px;
   }
@@ -56,6 +56,13 @@ export const MessagesContainer = styled.div`
   &::-webkit-scrollbar-thumb:active {
     background-color: #999999;
   }
+`;
+
+export const ErroFile = styled.span`
+  margin-top: 1.5em;
+  display: block;
+  color: ${allColors.colorOrangeMain};
+  font-size: 14px;
 `;
 
 export const TextareaResponse = styled.textarea`
@@ -103,7 +110,7 @@ export const SendMessage = styled.button`
 
 export const UploadDocument = styled.div`
   cursor: pointer;
-  margin-top: 2.5em;
+  margin-right: 1em;
   display: flex;
   align-items: center;
   width: fit-content;

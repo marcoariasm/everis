@@ -38,7 +38,7 @@ export const LoginTitle = styled.h1`
 
 const CardHeader = ({ anteTitle, title, subtitle, mainAnteTitle, description }) => {
   return (
-    <div className="pb2em">
+    <div className="pb1em">
       { mainAnteTitle && <MainAnteTitle>{mainAnteTitle}</MainAnteTitle> }
       { anteTitle && <LogInAnteTitle>{anteTitle}</LogInAnteTitle>}
       <LoginTitle className="headerTitleHighligh">{title}</LoginTitle>
@@ -49,19 +49,3 @@ const CardHeader = ({ anteTitle, title, subtitle, mainAnteTitle, description }) 
 }
 
 export default CardHeader;
-
-
-
-// Applicant Details
-// export const LoginTitle = styled.h1`
-//   margin-top: 15px;
-//   display: block;
-//   padding-left: 0.3em;
-//   @media only screen and (max-width: ${size.mobileL}) {
-//     font-size: 23px;
-//     margin-top: 0px;
-//   }
-//   @media only screen and (max-width: ${size.mobileS}) {
-//     font-size: 20px;
-//   }
-// `;

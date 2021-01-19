@@ -7,7 +7,10 @@ export const textNotAccess = {
     noRequisites:
       'Por el momento no puedes acceder al trámite de Jubilación Anticipada por Desempleo y/o Retiro de hasta el 95.5% de tu fondo, porque no cumples con los requisitos:',
     complementText:
-      'Si quieres validar si calificas para el trámite de Jubilación Anticipada Ordinaria, acércate a cualquiera de nuestras agencias a nivel nacional. Saca previamente una cita llamando a Fono Prima al 615-7272.',
+      '  Si quieres validar si calificas para el trámite de Jubilación Anticipada Ordinaria, haz',
+      
+  urlValidar: 
+  '/nueva-solicitud/tramite/'
   },
   textContentInfoFail: {
     noBalance:
@@ -18,4 +21,5 @@ export const textNotAccess = {
   },
   urlBtn:
     'https://primazonasegura.prima.com.pe/PrimaWeb/zona-transaccional/afiliados/mis-datos-contrasenas/actualiza-tus-datos/',
+
 }

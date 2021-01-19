@@ -1,40 +1,15 @@
-import React, { useState, useEffect } from 'react'
-
+import React from 'react'
 import { textAlternatives } from 'modules/Retirement955/constants/ConstantAlternatives'
-import {alternativerService25 , alternativerService50, alternativerService75} from 'redux/services/alternatives.service'
 
 import { ContentGrid, GridHeader, GridTable, GridRowTable, TitleContent, TitleHeader } from './style'
-import { currencyFormat } from '../../Header'
+import { useAlternatives, getSimulationValue } from '../../../../../../../../contexts/AlternativesProvider'
+import {propOr} from "ramda"
 
-export const Modalities = ({ pension }) => {
-  var listPorcentTotals = []
-  if (pension) {
-    listPorcentTotals = pension.porcentTotals
-  }
-  const [percentage25, setPercentage25] = useState(false)
-  const [percen25, setPercen25] = useState(false)
-  const [percentage50, setPercentage50] = useState(false)
-  const [percen50, setPercen50] = useState(false)
-  const [percentage75, setPercentage75] = useState(false)
-  const [percen75, setPercen75] = useState(false)
-
-  useEffect(() => {
-    alternativerService25().then(response => {
-      setPercentage25(response.deliveryAmount)
-      setPercen25(response.scheduledWithdrawal)
-    })
-
-    alternativerService50().then(response => {
-      setPercentage50(response.deliveryAmount)
-      setPercen50(response.scheduledWithdrawal)
-    })
-
-    alternativerService75().then(response => {
-      setPercentage75(response.deliveryAmount)
-      setPercen75(response.scheduledWithdrawal)
-    })
-
-  }, [])
+export const Modalities = () => {
+  const { simulations } = useAlternatives();
+  const getSimulation25 = getSimulationValue(propOr({}, '25', simulations));
+  const getSimulation50 = getSimulationValue(propOr({}, '50', simulations));
+  const getSimulation75 = getSimulationValue(propOr({}, '75', simulations));
 
   return (
     <>
@@ -51,12 +26,12 @@ export const Modalities = ({ pension }) => {
             </TitleContent>
             <TitleContent>
               <span className="statementTableBody">
-                S/ {currencyFormat(percentage25)}
+                { getSimulation25('deliveryAmount')}
               </span>
             </TitleContent>
             <TitleContent>
               <span className="statementTableBody">
-                S/ {currencyFormat(percen25)}
+                { getSimulation25('scheduledWithdrawal')}
               </span>
             </TitleContent>
           </GridRowTable>
@@ -66,12 +41,12 @@ export const Modalities = ({ pension }) => {
             </TitleContent>
             <TitleContent>
               <span className="statementTableBody">
-                S/ {currencyFormat(percentage50)}
+                { getSimulation50('deliveryAmount')}
               </span>
             </TitleContent>
             <TitleContent>
               <span className="statementTableBody">
-                S/ {currencyFormat(percen50)}
+                { getSimulation50('scheduledWithdrawal')}
               </span>
             </TitleContent>
           </GridRowTable>
@@ -81,12 +56,12 @@ export const Modalities = ({ pension }) => {
             </TitleContent>
             <TitleContent>
               <span className="statementTableBody">
-                S/ {currencyFormat(percentage75)}
+                { getSimulation75('deliveryAmount')}
               </span>
             </TitleContent>
             <TitleContent>
               <span className="statementTableBody">
-                S/ {currencyFormat(percen75)}
+                { getSimulation75('scheduledWithdrawal')}
               </span>
             </TitleContent>
           </GridRowTable>

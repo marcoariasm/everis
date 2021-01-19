@@ -21,8 +21,8 @@ const StyleCard = styled.div`
     and (min-height: 1000px) 
     and (orientation: portrait) 
     and (-webkit-min-device-pixel-ratio: 1.5) {
-        width: 55%;
-        margin: 4% 3% 5% 3%;
+        width: 65%;
+        margin: -50% 18% 5% 3%;
         padding: 10% 8%;
   }
 `

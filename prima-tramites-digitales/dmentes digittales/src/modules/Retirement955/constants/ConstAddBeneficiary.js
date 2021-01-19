@@ -89,7 +89,7 @@ export const addBeneficiary = {
 	validation: [
 		{
 			value: 'surname',
-			label: 'Ingresa el  apellido paterno',
+			label: 'Ingresa el apellido paterno',
 		},
 		{
 			value: 'motherSurname',
@@ -120,24 +120,23 @@ export const addBeneficiary = {
 			label: 'Selecciona parentesco',
 		},
 		{
-			value: 'hasDisability',
+			value: 'disability',
 			label: 'Selecciona condición',
 		},
 	],
 	customValidation: {
 		samePerson: 'No puedes registrar dos veces al mismo Beneficiario, por favor verifica.',
-		Children15YearsMin:
-			'La edad de tu hijo(a) debe ser como mínimo 15 años menor que la tuya, por favor verifica.',
+		Children15YearsMin: 'La edad de tu hijo(a) debe ser como mínimo 15 años menor que la tuya, por favor verifica.',
 		ChildrenAgeMaxMinYearsOld: 'La edad de tu hijo(a) debe ser menor a 18 años, por favor verifica.',
-		Parents15YearsOlderThan:
-			'La edad de tu padre/madre debe ser al menos 15 años mayor que la tuya, por favor verifica.',
-		BirthGreatherThanCurrent:
-			'La fecha de nacimiento que has registrado no puede ser mayor a la fecha actual, por favor verifica.',
+		Parents15YearsOlderThan: 'La edad de tu padre/madre debe ser al menos 15 años mayor que la tuya, por favor verifica.',
+		BirthGreatherThanCurrent: 'La fecha de nacimiento que has registrado no puede ser mayor a la fecha actual, por favor verifica.',
 		hasParents: 'Ya registraste a tus padres, por favor verífica.',
 		hasParentsCuople: 'Ya registraste a tu Concubino(a)/Cónyugue, por favor verífica.',
 		CoupleOver15YearsOld: 'La edad de tu cónyuge/concubina(o) debe ser como mínimo 15 años, por favor verifica.',
+		hasCorrectSex: 'El sexo de tu cónyuge/concubina(o) es incorrecto, verifica nuevamente por favor.',
+		hasCorrectAgeForDocument: 'La edad no puede ser igual o mayor a 18 para ese tipo de documento, verifique por favor.',
 	},
-}
+};
 export const initialValues = {
 	surname: '',
 	motherSurname: '',
@@ -148,6 +147,6 @@ export const initialValues = {
 	birthdate: '',
 	gender: '',
 	relationship: '',
-	hasDisability: '',
+	disability: '',
 	beneficiaryId: '',
-}
+};

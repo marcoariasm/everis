@@ -27,12 +27,12 @@ const Tooltiptext = styled.div`
 export const Pensioner = () => {
   return (
     <Content>
-      <MediaQuery minDeviceWidth={`${size.tablet}`}>
+      <MediaQuery minDeviceWidth={710}>
         <h1 className="cardTitleLarge">¿Eres Pensionista en la ONP o en otra AFP?</h1>
         <Tooltip
           trigger="click"
           arrow="true"
-          position="top-start"
+          position="bottom"
           arrowSize="big"
           html={(
               <div>
@@ -60,17 +60,17 @@ export const Pensioner = () => {
           <HelpIcon src={Help} alt="tooltipPensioner" />
         </Tooltip>
       </MediaQuery>
-      <MediaQuery maxDeviceWidth={`${size.tablet}`}>
+      <MediaQuery maxDeviceWidth={700}>
         <Tooltip
           title="Welcome to React"
           trigger="click"
           arrow="true"
-          position="left-end"
+          position="bottom"
           arrowSize="big"
           sticky={true}
           stickyDuration={0}
           html={(
-              <div style={{ width: 240 }}>
+              <div style={{ width: 322 }}>
                 <Tooltiptext>
                   <h1 className="tableBodyText" style={{ color: 'white' }}>
                     <b>¿Por qué te preguntamos esto?</b>

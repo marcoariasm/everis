@@ -15,7 +15,6 @@ function Stepper(props) {
   }, [steps]);
 
   useEffect(() => {
-    // console.log(action);
     updateCurrent(props.action, steps);
   }, [props.action]);
 

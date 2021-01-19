@@ -4,9 +4,19 @@ import {
   assoc,
   ifElse,
   is,
-  pipe, prop, has, equals, includes, mergeRight, always, reject, isNil, test,
+  pipe,
+  prop,
+  has,
+  equals,
+  includes,
+  mergeRight,
+  always,
+  reject,
+  isNil,
+  test, isEmpty,
 } from 'ramda';
 import AppSession from './AppSession';
+
 const REFRESH_TOKEN_PATH = '/excluded/token/refresh';
 const LOGIN_PATH = '/auth/login';
 
@@ -17,8 +27,6 @@ const defaultMethod = 'GET';
 
 const logout = () => {
   AppSession.destroy();
-  window.location.reload();
-  //window.location.href = '/login';
 };
 
 const addAuth = (headers, authenticated) => {
@@ -30,21 +38,17 @@ const addAuth = (headers, authenticated) => {
   )(headers);
 };
 
-const generateNormalOptions = (authenticated) => (requestOptions) => (
-  reject(isNil, {
-    method: propOr(defaultMethod, 'method', requestOptions),
-    headers: mergeRight(addAuth(defaultHeaders, authenticated), prop('headers', requestOptions)),
-    body: ifElse(has('body'), pipe(prop('body'), toString), always(null))(requestOptions),
-  })
-);
+const generateNormalOptions = (authenticated) => (requestOptions) => reject(isNil, {
+  method: propOr(defaultMethod, 'method', requestOptions),
+  headers: mergeRight(addAuth(defaultHeaders, authenticated), prop('headers', requestOptions)),
+  body: ifElse(has('body'), pipe(prop('body'), toString), always(null))(requestOptions),
+});
 
-const generateFormDataOptions = (authenticated) => (requestOptions) => (
-  reject(isNil, {
-    method: propOr(defaultMethod, 'method', requestOptions),
-    headers: mergeRight(addAuth({}, authenticated), prop('headers', requestOptions)),
-    body: prop('body', requestOptions),
-  })
-);
+const generateFormDataOptions = (authenticated) => (requestOptions) => reject(isNil, {
+  method: propOr(defaultMethod, 'method', requestOptions),
+  headers: mergeRight(addAuth({}, authenticated), prop('headers', requestOptions)),
+  body: prop('body', requestOptions),
+});
 
 const requestUrl = ifElse(
   test(/(https?:\/\/)/g),
@@ -54,11 +58,7 @@ const requestUrl = ifElse(
 
 const parseError = (errorResponse, res) => {
   const error = new Error(errorResponse.error);
-  error.message = ifElse(
-    has('errorMessage'),
-    prop('errorMessage'),
-    prop('message'),
-  )(errorResponse);
+  error.message = ifElse(has('errorMessage'), prop('errorMessage'), prop('message'))(errorResponse);
   error.status = res.status;
   error.data = errorResponse;
   return error;
@@ -66,6 +66,11 @@ const parseError = (errorResponse, res) => {
 
 const getSessionFromProvider = () => AppSession.get();
 const createSessionFromProvider = ({ user }) => AppSession.create(user);
+const supportEmptyResponse = async (response) => {
+  const clonedResponse = await response.clone();
+  const contentText = await clonedResponse.text();
+  return isEmpty(contentText) ? contentText : response.json();
+};
 
 const serviceFetcher = async (url, requestOptions) => {
   const authenticated = propOr(true, 'authenticated', requestOptions);
@@ -81,6 +86,9 @@ const serviceFetcher = async (url, requestOptions) => {
   if (res.status !== 200) {
     if (res.status === 202) {
       return res.clone();
+    }
+    if (res.status === 204) {
+      return res.text();
     }
     if (includes(REFRESH_TOKEN_PATH, url)) {
       logout();
@@ -99,7 +107,7 @@ const serviceFetcher = async (url, requestOptions) => {
       throw error;
     }
   }
-  return res.json();
+  return supportEmptyResponse(res);
 };
 
 const refreshFetch = async () => {

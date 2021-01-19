@@ -24,23 +24,23 @@ const FileListContainer = styled.div`
 
 const FileList = ({ filesList, handleAction, IsEditable }) => {
   return filesList.map((file, i) => (
-     <FileItem key={i} IsEditable={IsEditable} file={file} handleAction={handleAction} />
+     <FileItem key={i} index={i} IsEditable={IsEditable} file={file} handleAction={handleAction} />
   ));
 }
 
 const InformationBanner = ({ loading = false, error, files = [], handleAction, IsEditable }) => {
-  if (loading) return <ProgressBar />;
-  if (error) return <ErrorBanner error={error} />;
-  if (files.length) return (
-    <FileListContainer>
+  return <>
+    {loading && <ProgressBar />}
+    {error && <ErrorBanner error={error} />}
+    { files.length ? <FileListContainer>
       <FileList
         IsEditable={IsEditable}
         filesList={files}
         handleAction={handleAction}
       />
-    </FileListContainer>
-  );
-  return <></>;
+    </FileListContainer> : <></>
+   }
+  </>;
 }
 
 const manageWarnings = () => console.warn(`Warning: You are missing a function parameter!`);
@@ -69,9 +69,9 @@ const MaterialUploader = ({
     if (onChange) onChange(fileList);
   }
 
-  const handleAction = (fileSelected) => {
+  const handleAction = (fileSelected, key) => {
     if (!fileSelected) return;
-    if (IsEditable) return deleteFile(fileSelected);
+    if (IsEditable) return deleteFile(fileSelected, key);
     return downloadFile(fileSelected);
   }
 

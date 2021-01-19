@@ -9,7 +9,7 @@ export const loginForm = {
     forgotPassword: '¿Olvidaste tu contraseña?',
     recoverHere: 'Recupérala aquí',
     dontHaveAccount: '¿No tienes cuenta?',
-    createHere: 'Creála aquí',
+    createHere: 'Créala aquí',
     inputNames: {
         documentNumber: 'documentNumber',
         documentType: 'documentType',
@@ -22,6 +22,7 @@ export const loginConfirmationModal = {
     title: 'Verifica tu email',
     description: 'Sólo falta verificar que realmente eres tú',
     message: 'Te hemos enviado un enlace de verificación a',
+    messageNoEmail: 'Te hemos enviado un enlace de verificación al correo electrónico con el que te registraste',
     confirmationButton: 'Continuar',
     advice: '(puede haber acabado en tu correo no deseado)',
     noEmail: '¿No has recibido el email?'

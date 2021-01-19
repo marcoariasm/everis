@@ -1,44 +1,40 @@
-import React from 'react'
-import styled from 'styled-components'
-import { textRegBeneficiaries } from 'modules/Retirement955/constants/ConstantRegisterBeneficiaries'
-import BtnAddBeneficiaries from './BtnAddBeneficiaries'
-import { allColors } from 'global/styles'
+import React from 'react';
+import styled from 'styled-components';
+import BtnAddBeneficiaries from './BtnAddBeneficiaries';
+import { allColors } from 'global/styles';
 
 const Content = styled.div`
-  width: 100%;
-  text-align: center;
-  margin-top: 30px;
-  padding-top: 54px;
-  border-radius: 11px;
-  box-sizing: border-box;
-  border: 3px dashed ${allColors.colorGrayCardDashed};
-  background: ${allColors.colorGrayCard};
-`
-const Title = styled.div`
-  text-align: center;
-  align-items: center;
-  margin: 0px 20px;
-`
-const ContentButton = styled.div`
-  margin-top: 30px;
-  margin-bottom: 54px;
-  width: 100%;
-`
-const AddBeneficiary = ({ beneficiaries, onclick }) => {
-  return (
-    <>
-      {beneficiaries && beneficiaries.length > 0 ? (
-        <BtnAddBeneficiaries onChange={onchange} setShowModal={onclick} />
-      ) : (
-        <Content>
-          <Title className="cardTitleLarge">{textRegBeneficiaries.noBeneficiaries.text}</Title>
-          <ContentButton>
-            <BtnAddBeneficiaries noBeneficiary marginT="19px" onChange={onchange} setShowModal={onclick} />
-          </ContentButton>
-        </Content>
-      )}
-    </>
-  )
-}
+	width: 100%;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	border-radius: 11px;
+	height: 200px;
+	box-sizing: border-box;
+	border: 3px dashed ${allColors.colorGrayCardDashed};
+	background: ${allColors.colorGrayCard};
+`;
 
-export default AddBeneficiary
+const ContentButton = styled.div`
+	width: 100%;
+	& > div {
+		margin: 0;
+	}
+`;
+const AddBeneficiary = ({ beneficiaries, onclick }) => {
+	return (
+		<>
+			{beneficiaries && beneficiaries.length > 0 ? (
+				<BtnAddBeneficiaries onChange={onchange} setShowModal={onclick} />
+			) : (
+				<Content>
+					<ContentButton>
+						<BtnAddBeneficiaries noBeneficiary marginT='19px' onChange={onchange} setShowModal={onclick} />
+					</ContentButton>
+				</Content>
+			)}
+		</>
+	);
+};
+
+export default AddBeneficiary;

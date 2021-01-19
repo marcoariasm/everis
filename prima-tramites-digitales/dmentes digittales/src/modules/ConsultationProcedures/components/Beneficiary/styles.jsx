@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { size } from "global/styles/Responsive";
 
 export const ContentTab = styled.div`
-padding: 0 1m;
-&.document-container {
+  padding: 0 1m;
+  &.document-container {
     > div {
       width: 100%;
     }
@@ -21,11 +21,7 @@ export const ContactContainer = styled.div`
   padding-bottom: 1.4em;
   @media screen and (max-width: ${size.tablet}) {
     grid-template-columns: 1fr 1fr;
-    &.isResponsive {
-      grid-template-columns: 100%;
-      grid-row-gap: 1em;
-      padding-bottom: 1em;
-    }
+    grid-row-gap: 1em;
   }
 `;
 
@@ -42,4 +38,7 @@ export const ContactDescription = styled.p`
   font-size: 14px;
   font-family: FS Emeric;
   font-weight: bold;
+  &.capitalize {
+    text-transform: capitalize;
+  }
 `;

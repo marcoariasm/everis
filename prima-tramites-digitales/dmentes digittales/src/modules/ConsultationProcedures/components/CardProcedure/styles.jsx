@@ -6,7 +6,7 @@ export const CardProcedureGrid = styled.div`
   display: grid;
   cursor: pointer;
   grid-template-columns: 5fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1em 1fr;
   grid-row-gap: ${(props) => (props.hasAffiliate ? "10px" : "0")};
   border: 1px solid #e8e8e8;
   box-shadow: 0 4px 8px 1px rgba(53, 53, 53, 0.12);

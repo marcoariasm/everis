@@ -1,76 +1,177 @@
-export const validateText = (e, datos) => {
-  let id = e.target.id
+import moment from 'moment';
+import { prop } from 'ramda';
 
-  if (id === 'surname' || id === 'motherSurname' || id === 'firstName' || id === 'secondName') {
-    let value = e.target.value
-    value = value.toLowerCase()
-    let letters = ' abcdefghijklmnñopqrstuvwxyzáóíúó'
-    if (e.target.value === '') {
-      return true
-    }
-    if (value.charAt(0) === ' ') {
-      return false
-    }
-    for (let i in letters) {
-      if (value.charAt(value.length - 1) === letters[i]) {
-        return true
-      }
-    }
-  } else if (id === 'documentType') {
-    return true
-  } else if (id === 'documentNumber' && datos.documentType === 'DNI') {
-    return numeric(e)
-  } else if (
-    (id === 'documentNumber' && datos.documentType === 'CE') ||
-    (id === 'documentNumber' && datos.documentType === 'PASSPORT') ||
-    (id === 'documentNumber' && datos.documentType === 'CARNET_PERMISO_TEMPORAL_PERMANENCIA') ||
-    (id === 'documentNumber' && datos.documentType === 'CARNET_POLICIAL_MILITAR') ||
-    (id === 'documentNumber' && datos.documentType === 'LIBRETA_ADELESCENTE_TRABAJO')
-  ) {
-    return alfaNumeric(e)
-  } else {
-    return true
-  }
-}
+import { typeDocument } from 'modules/shared/constant/ParametersValidation';
+import { typeDocumentLogin } from 'modules/shared/constant/ParametersValidation';
+import { validarFecha } from 'modules/shared/helpers/HelperDate';
+
+export const validateText = (e, datos) => {
+	let id = e.target.id;
+
+	if (id === 'surname' || id === 'motherSurname' || id === 'firstName' || id === 'secondName') {
+		return true;
+	} else if (id === 'documentType') {
+		return true;
+	} else if (
+		id === 'documentNumber' &&
+		(datos.documentType === '1' || datos.documentType === '5' || datos.documentType === '6' || datos.documentType === '8')
+	) {
+		return numeric(e);
+	} else if (
+		(id === 'documentNumber' && datos.documentType === '2') ||
+		(id === 'documentNumber' && datos.documentType === '3') ||
+		(id === 'documentNumber' && datos.documentType === '4') ||
+		(id === 'documentNumber' && datos.documentType === '7')
+	) {
+		return alfaNumeric(e);
+	} else {
+		return true;
+	}
+};
+export const validateTextLogin = (e, type) => {
+	let id = e.target.id;
+
+	if (
+		id === 'documentNumber' &&
+		(type === 'DNI' ||
+			type === 'TEMPORARY_WORKING_PERMIT_CARD' ||
+			type === 'FOREIGN_RELATIONS_IDENTITY_CARD' ||
+			type === 'REFUGEE_APPLICANT_CARD')
+	) {
+		return numeric(e);
+	} else if (
+		(id === 'documentNumber' && type === 'FOREIGN_CARD') ||
+		(id === 'documentNumber' && type === 'TEENAGER_WORKING_CARD') ||
+		(id === 'documentNumber' && type === 'PASSPORT') ||
+		(id === 'documentNumber' && type === 'FOREIGN_IDENTITY_CARD')
+	) {
+		return alfaNumeric(e);
+	} else {
+		return true;
+	}
+};
 
 const numeric = (e) => {
-  let value = e.target.value
-  value = value.toLowerCase()
-  let numbers = ' 0123456789'
-  if (e.target.value === '') {
-    return true
-  }
-  if (value.charAt(0) === ' ') {
-    return false
-  }
-  for (let i in numbers) {
-    if (value.charAt(value.length - 1) === numbers[i]) {
-      return true
-    }
-  }
-}
+	let value = e.target.value;
+	value = value.toLowerCase();
+	let numbers = ' 0123456789';
+	if (e.target.value === '') {
+		return true;
+	}
+	if (value.charAt(0) === ' ') {
+		return false;
+	}
+	for (let i in numbers) {
+		if (value.charAt(value.length - 1) === numbers[i]) {
+			return true;
+		}
+	}
+};
 const alfaNumeric = (e) => {
-  let value = e.target.value
-  value = value.toLowerCase()
-  let caracter = ' abcdefghijklmnñopqrstuvwxyzáóíúó0123456789'
-  if (e.target.value === '') {
-    return true
-  }
-  if (value.charAt(0) === ' ') {
-    return false
-  }
-  for (let i in caracter) {
-    if (value.charAt(value.length - 1) === caracter[i]) {
-      return true
-    }
-  }
-}
+	let value = e.target.value;
+	value = value.toLowerCase();
+	let caracter = ' abcdefghijklmnñopqrstuvwxyzáóíúó0123456789-';
+	if (e.target.value === '') {
+		return true;
+	}
+	if (value.charAt(0) === ' ') {
+		return false;
+	}
+	for (let i in caracter) {
+		if (value.charAt(value.length - 1) === caracter[i]) {
+			return true;
+		}
+	}
+};
 
 export function toCamelCase(values) {
-  const newValues = values
-    .toLowerCase()
-    .replace(/^[\u00C0-\u1FFF\u2C00-\uD7FF\w]|\s[\u00C0-\u1FFF\u2C00-\uD7FF\w]/g, function (letter) {
-      return letter.toUpperCase()
-    })
-  return newValues
+	const newValues = values.toLowerCase().replace(/^[\u00C0-\u1FFF\u2C00-\uD7FF\w]|\s[\u00C0-\u1FFF\u2C00-\uD7FF\w]/g, function (letter) {
+		return letter.toUpperCase();
+	});
+	return newValues;
 }
+
+export const formValidationInput = (value) => {
+	value = value
+		.replace(/[^a-zA-Z'\s:\u00C0-\u00FF]/g, '')
+		.replace('  ', ' ')
+		.toUpperCase();
+
+	return value;
+};
+
+export const validatedDocumentType = (id) => {
+	switch (id) {
+		case prop('idParameter', typeDocument[0]):
+			return { pattern: '[0-9]', length: 8 };
+		case prop('idParameter', typeDocument[2]):
+		case prop('idParameter', typeDocument[3]):
+			return { pattern: '[a-zA-ZñÑ0-9]', length: 12 };
+		case prop('idParameter', typeDocument[4]):
+		case prop('idParameter', typeDocument[7]):
+			return { pattern: '[0-9]', length: 9 };
+		case prop('idParameter', typeDocument[1]):
+		case prop('idParameter', typeDocument[6]):
+			return { pattern: '[0-9]', length: 13 };
+		default:
+			return { pattern: false, length: 8 };
+	}
+};
+
+export const validatedDocumentTypeLogin = (id) => {
+	switch (id) {
+		case prop('type', typeDocumentLogin[0]):
+			return { pattern: '[0-9]', length: 8 };
+		case prop('type', typeDocumentLogin[2]):
+		case prop('type', typeDocumentLogin[3]):
+			return { pattern: '[a-zA-ZñÑ0-9]', length: 12 };
+		case prop('type', typeDocumentLogin[4]):
+		case prop('type', typeDocumentLogin[7]):
+			return { pattern: '[0-9]', length: 9 };
+		case prop('type', typeDocumentLogin[1]):
+		case prop('type', typeDocumentLogin[6]):
+			return { pattern: '[0-9]', length: 13 };
+		default:
+			return { pattern: false, length: 8 };
+	}
+};
+
+export const validateDate = (valueDate) => {
+	const dateValidation = moment(valueDate).format('DD-MM-YYYY');
+	let isCorrect = true;
+
+	if (validarFecha(dateValidation)) {
+		isCorrect = true;
+	} else {
+		isCorrect = false;
+	}
+
+	const currentDate = moment().format('DD/MM/YYYY');
+	const newValueDate = moment(valueDate).format('DD/MM/YYYY');
+
+	const dayCurrent = parseInt(currentDate.split('/')[0]);
+	const monthCurrent = parseInt(currentDate.split('/')[1]);
+	const yearCurrent = parseInt(currentDate.split('/')[2]);
+	const day = parseInt(newValueDate.split('/')[0]);
+	const month = parseInt(newValueDate.split('/')[1]);
+	const year = parseInt(newValueDate.split('/')[2]);
+
+	if (year < 1900 || year > yearCurrent) isCorrect = false;
+	if (month < 1 || month > 12) isCorrect = false;
+	if (newValueDate === currentDate && month > monthCurrent) isCorrect = false;
+	if (newValueDate === currentDate && day >= dayCurrent) isCorrect = false;
+	if ((month === 4 || month === 6 || month === 9 || month === 11) && day > 30) isCorrect = false;
+	if ((month === 4 || month === 6 || month === 9 || month === 11) && day > 30) isCorrect = false;
+	if ((month === 1 || month === 3 || month === 5 || month === 10 || month === 12) && day > 30) isCorrect = false;
+	if (month == 2 && day > 29) isCorrect = false;
+	if (year % 4 !== 0 && month === 2 && day > 28) isCorrect = false;
+	if (year % 4 === 0 && month === 2 && day > 29) isCorrect = false;
+
+	return isCorrect;
+};
+
+export const getStringLengthPart = (value) => {
+	let isError = true;
+	value.startsWith('N') ? (isError = true) : (isError = false);
+	return isError;
+};

@@ -17,3 +17,6 @@ debug.log
 .env.production.local
 
 .DS_Store
+module
+
+package-lock.json

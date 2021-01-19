@@ -16,6 +16,11 @@
     }
 }
 
+.alertRegularResponsiveColumnsM {
+  width: auto;
+  margin: 1em 0 -1em 0;
+}
+
 .responsiveElementInputSizeM {
     width: 300px;
     @media screen and (max-width: 960px)  {
@@ -77,6 +82,19 @@
   }
 }
 
+.marginBtnSmallPosition {
+  margin-top: 1.8em;
+}
+
+.marginBtnNoMarginPosition {
+  margin-top: 0em;
+}
+
+.buttonRegularResponsiveSmallMargin {
+  @extend .buttonRegularResponsive;
+  @extend .marginBtnSmallPosition;
+}
+
 .buttonRegularResponsive {
   @extend .marginBtnRegularPosition;
   width: 296px;
@@ -111,19 +129,40 @@
   }
 }
 
-// export const size = {
-//   mobileXS: '280px',
-//   mobileS: '320px',
-//   mobileM: '374px',
-//   mobileL: '425px',
-//   tabletS: '600px',
-//   tablet: '767px',
-//   tabletM: '960px',
-//   laptop: '1023px',
-//   laptopL: '1365px',
-//   laptopM: '1679px',
-//   desktop: '2559px',
-// }
+.buttonSmallWithoutMargin {
+  margin-top: 2.3em;
+  width: 296px;
+  @media screen and (max-width: 960px)  {
+    width: 220px;
+  }
+   @media screen and (max-width: 767px)  {
+    width: 70%;
+  }
+  @media screen and (max-width: 600px)  {
+    width: 60%;
+  }
+  @media screen and (max-width: 425px)  {
+   width: 55%;
+  }
+}
+
+.rightBtnBeneficiary {
+  grid-column: 3;
+  grid-row: 1;
+  @media screen and (max-width: 767px) {
+    grid-column: 3;
+    grid-row: 2
+  }
+}
+
+.leftBtnBeneficiary {
+  grid-column: 2;
+  grid-row: 1;
+  @media screen and (max-width: 767px) {
+    grid-column: 3;
+    grid-row: 1
+  }
+}
 
 .modalBtn {
   width: 296px;
@@ -175,12 +214,36 @@
     padding-bottom: 4em;
 }
 
+.mt05em {
+  margin-top: 0.5em;
+}
+
 .mt1em {
   margin-top: 1em;
 }
 
+.mb1em {
+  margin-top: 1em;
+}
+
+.mb2em {
+  margin-top: 2em;
+}
+
 .mt2em {
   margin-top: 2em;
+}
+
+.mt-1em {
+  margin-top: -1em;
+}
+
+.mt-2em {
+  margin-top: -2em;
+}
+
+.mb-1em {
+  margin-bottom: -1em;
 }
 
 .capitalize {
@@ -231,4 +294,49 @@
 
 .width-100 {
   width: 100%;
+}
+
+.regularLoadingBtnPadding {
+  padding: 2em 0;
+}
+
+.errorHandlerMargin {
+  margin-top: 0.3em;
+  margin-left: 0.3em;
+}
+
+.errorHandlerDropdown {
+  margin-top: -0.9em;
+  margin-bottom: 0.5em;
+  margin-left: 0.3em;
+}
+
+.twoColInputs {
+  display: grid;
+  grid-template-columns: 48% 48%;
+  grid-column-gap: 4%;
+  padding-top: 1.4em;
+  padding-bottom: 0.8em;
+  margin-bottom: 1.6em;
+  grid-row-gap: 1em;
+  @media screen and (max-width: 960px)  {
+    grid-template-columns: 100%;
+    grid-row-gap: 1em;
+    padding-bottom: 1.9em;
+  }
+}
+
+.twoColInputsMedium {
+  display: grid;
+  grid-template-columns: 48% 48%;
+  grid-column-gap: 4%;
+  padding-top: 1em;
+  padding-bottom: 0.8em;
+  margin-bottom: 1.6em;
+  grid-row-gap: 1.7em;
+  @media screen and (max-width: 960px)  {
+    grid-template-columns: 100%;
+    grid-row-gap: 0.6em;
+    padding-bottom: 1.4em;
+  }
 }

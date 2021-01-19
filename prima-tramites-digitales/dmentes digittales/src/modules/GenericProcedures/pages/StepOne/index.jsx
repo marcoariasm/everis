@@ -1,20 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { UserContext } from "modules/App/pages/MainDashboardLayout";
-import { setComment } from "modules/GenericProcedures/redux/actions/Procedure";
-import { setCellphone } from "modules/GenericProcedures/redux/actions/Procedure"
+import { setCellphone, setEmail, setComment } from "modules/GenericProcedures/redux/actions/Procedure";
 
 import { Text, ContainerStepper, Email, NormalText } from "./styles.jsx";
 
 import Button from "global/components/v2/Button";
 import MainTitle from "global/components/v2/Titles/MainTitle";
 import MaterialInput from "global/components/v2/MaterialInput";
+import ErrorHandler from "global/components/v2/ErrorHandler";
 import Stepper from "global/components/v2/Stepper";
 import TextArea from "global/components/v2/TextArea/TextArea";
 import TitleGreen from "global/components/v2/Titles/TitleGreen";
 import WhiteCard from "global/components/v2/Cards/WhiteCard";
 import { TwoColumnsContainer } from "global/components/v2/UtilityComponents";
+import useProcedureInformation from "modules/GenericProcedures/services/useProcedureInformation.js";
+import { useForm } from 'react-hook-form';
+import { emailValidations, telephoneValidations } from 'modules/shared/constant/ConstantValidations';
 
 const stepsSimpleProcedure = [
   {
@@ -45,28 +48,64 @@ const stepsProcedureWithBeneficiaries = [
 const StepOne = () => {
   const user = React.useContext(UserContext);
   let dispatch = useDispatch();
-  let comment = useSelector((state) => state.procedure.comment);
-  let configuration = useSelector((state) => state.procedure.configuration);
-
+  const mainRoute = `/nueva-solicitud/tramite/`;
   const history = useHistory();
-  const [textAreaValue, setTextAreaValue] = useState(false);
+  const [textAreaValue, setTextAreaValue] = useState('');
   const [cell, setCell] = useState("");
+  const [email, setEmailUser] = useState("");
 
   const { id } = useParams();
-  // console.log(`tramite id es: ${id}`);
+  const { data: configuration } = useProcedureInformation(id);
 
-  const saveDetailSimple = () => {
-    dispatch(setCellphone(cell));
-    dispatch(setComment(`${textAreaValue}`));
-    history.push(`/nueva-solicitud/tramite/${id}/paso-dos`);
-  };
+  const { register, handleSubmit, formState, control, errors } = useForm({
+      mode: "onChange",
+      defaultValues: { cellphone: user.cellphone, email: user.email }
+    });
 
-  const saveDetailBeneficiary = () => {
-    dispatch(setCellphone(cell));
-    dispatch(setComment(`${textAreaValue}`));
-    history.push(`/nueva-solicitud/tramite/${id}/registrar-beneficiarios`);
-  };
+    const { isValid, touched } = formState;
 
+  const submitForm = (formData) => {
+    const nextRoute = configuration.inBeneficiary == "1" ? `${id}/registrar-beneficiarios` : `${id}/paso-dos`;
+    dispatch(setCellphone(formData.cellphone));
+    dispatch(setEmail(formData.email));
+    dispatch(setComment(textAreaValue));
+    history.push(`${mainRoute}${nextRoute}`);
+  }
+
+  const CellValidAff = useSelector((state) =>
+    state.affiliate.affiliate ? state.affiliate.affiliate.cellphone : null
+  );
+
+  const EmailValidAff = useSelector((state) =>
+    state.procedure.email ? state.procedure.email : null
+  );
+
+  const inAffiliate = user.affiliateId?true:false;
+
+  const GetCellFromDB = () =>{
+    if (inAffiliate){
+      if (CellValidAff === null || EmailValidAff === null){
+        setCell(user.cellphone);
+        setEmailUser(user.email);
+      }
+      else {
+        setCell(CellValidAff);
+        setEmailUser(EmailValidAff);
+      }
+    }
+    else{
+      setCell(CellValidAff);
+      setEmailUser(EmailValidAff);
+    }
+  }
+
+  const isValidForm = () => {
+    return isValid && textAreaValue && textAreaValue.length;
+  }
+
+  useEffect(()=>{
+    GetCellFromDB();
+  },[cell, email])
 
   return (
     <WhiteCard>
@@ -87,19 +126,35 @@ const StepOne = () => {
 
       <TitleGreen text={"Confirma tus datos de contacto"} />
       <TwoColumnsContainer paddingBottom={"2em"} paddingTop={"1.5em"}>
-        {user.email ? (
-          <Email>{user.email}</Email>
-        ) : (
-          <Email>correo@correo.com</Email>
-        )}
         <MaterialInput
-          capitalizeInput={false}
-          onChange={setCell}
-          // register={register({ required: true })}
-          name={"cellphone"}
+          name={'email'}
+          register={register(emailValidations)}
+          placeholder={"Correo"}
+          staticError={false}
+          type="email"
+          error={
+            <ErrorHandler
+              noMargin={true}
+              isTouched={touched['Correo']}
+              errors={errors}
+              name={'email'}
+            />
+          }
+        />
+        <MaterialInput
+          name={'cellphone'}
+          register={register(telephoneValidations)}
           placeholder={"Teléfono móvil"}
-          // reset={resetInputs}
-          value={user.cellphone}
+          staticError={false}
+          type="number"
+          error={
+            <ErrorHandler
+              noMargin={true}
+              isTouched={touched['cellphone']}
+              errors={errors}
+              name={'cellphone'}
+            />
+          }
         />
       </TwoColumnsContainer>
 
@@ -121,23 +176,13 @@ const StepOne = () => {
       />
 
       <div className="alignCenterVertically">
-        {configuration.inBeneficiary == "1" ? (
           <Button
-            onClick={saveDetailBeneficiary}
+            onClick={handleSubmit(submitForm)}
             className="buttonRegularResponsive primary-btn"
-            disabled={!textAreaValue}
+            disabled={!isValidForm()}
           >
             Continuar
           </Button>
-        ) : (
-          <Button
-            onClick={saveDetailSimple}
-            className="buttonRegularResponsive primary-btn"
-            disabled={!textAreaValue}
-          >
-            Continuar
-          </Button>
-        )}
       </div>
     </WhiteCard>
   );

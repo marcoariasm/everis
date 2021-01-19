@@ -1,4 +1,12 @@
-import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_FAILURE, AUTH_LOGOUT, AUTH_LOAD_DOCUMENTS_TYPES } from 'redux/types/Auth'
+import {
+  AUTH_REQUEST,
+  AUTH_SUCCESS,
+  AUTH_FAILURE,
+  AUTH_LOGOUT,
+  AUTH_LOAD_DOCUMENTS_TYPES,
+  AUTH_APPLICANT,
+  AUTH_TOKEN_SESSION
+} from 'redux/types/Auth';
 
 const initialState = {
   documentsTypes: [],
@@ -7,6 +15,8 @@ const initialState = {
   user: null,
   error: '',
   isLoading: false,
+  idApplicant: '',
+  tokenSessionInfo: {} 
 }
 
 export default (state = initialState, action) => {
@@ -48,7 +58,17 @@ export default (state = initialState, action) => {
         form: {},
         user: null,
         error: '',
-        isLoading: false,
+        isLoading: false
+      }
+    case AUTH_APPLICANT:
+      return {
+        ...state,
+        idApplicant: action.payload
+      }
+    case AUTH_TOKEN_SESSION:
+      return {
+        ...state,
+        tokenSessionInfo: action.payload
       }
     default:
       return state

@@ -5,8 +5,12 @@ import {
     ADD_BENEFICIARY_TO_NEW_REQUEST,
     DELETE_BENEFICIARY_FROM_NEW_REQUEST,
     EDIT_BENEFICIARY_FROM_NEW_REQUEST,
-    DELETE_ALL_BENEFICIARIES
+    DELETE_ALL_BENEFICIARIES,
+    REPLACE_ALL_BENEFICIARIES,
+    SET_SELECTED_BENEFICIARIES
 } from 'redux/types/Procedures';
+
+import { addNewBeneficiary } from '../Affiliate';
 
 export const PROCEDURES_request = (procedures) => ({
     type: PROCEDURES_REQUEST,
@@ -23,10 +27,24 @@ export const ADD_COMMENT_TO_NEW_request = (comment) => ({
     payload: comment
 });
 
-export const ADD_BENEFICIARY_TO_NEW_request = (beneficiary) => ({
-    type: ADD_BENEFICIARY_TO_NEW_REQUEST,
-    payload: beneficiary
-});
+export const ADD_BENEFICIARY_TO_NEW_request = (beneficiary) => {
+    function addBenefyciaryToState() {
+        return { type: ADD_BENEFICIARY_TO_NEW_REQUEST, payload: beneficiary };
+    }
+    return async (dispatch) => {
+        dispatch(addBenefyciaryToState());
+        dispatch(addNewBeneficiary(beneficiary));
+    }
+};
+
+export const ADD_BENEFICIARY_OWN_request = (beneficiary) => {
+    function addBenefyciaryToState() {
+        return { type: ADD_BENEFICIARY_TO_NEW_REQUEST, payload: beneficiary };
+    }
+    return async (dispatch) => {
+        dispatch(addBenefyciaryToState());
+    }
+};
 
 export const DELETE_BENEFICIARY_FROM_NEW_request = (index) => ({
     type: DELETE_BENEFICIARY_FROM_NEW_REQUEST,
@@ -40,6 +58,16 @@ export const EDIT_BENEFICIARY_FROM_NEW_request = (payload) => ({
 
 export const DELETE_ALL_beneficiaries = () => ({
     type: DELETE_ALL_BENEFICIARIES
+})
+
+export const REPLACE_ALL_beneficiaries = (payload) => ({
+    type: REPLACE_ALL_BENEFICIARIES,
+    payload
+})
+
+export const SET_SELECTED_beneficiaries = (payload) => ({
+    type: SET_SELECTED_BENEFICIARIES,
+    payload
 })
 
 

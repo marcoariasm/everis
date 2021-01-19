@@ -4,7 +4,7 @@ import React from "react";
 import pdfIcon from "shared/images/pdfIcon.svg";
 import Beneficiary from "../Beneficiary/Beneficiary";
 import { downloadFileRequest } from "../../services";
-import {downloadFile} from "../../../shared/helpers/HelperDowloadFile";
+import { downloadFile } from "../../../shared/helpers/HelperDowloadFile";
 import InformationProcedures from "../InformationProcedure/InformationProcedure";
 import {
   ContentStepTwo,
@@ -24,12 +24,12 @@ function StepTwo({ procedure }) {
     const payload = { idRequestDocument: id };
 
     downloadFileRequest(payload)
-    .then((response) => response.blob())
-    .then((blob) => downloadFile(blob, documentName))
-    .catch((error) => {
-      console.log(error)
-      alert(error);
-    });
+      .then((response) => response.blob())
+      .then((blob) => downloadFile(blob, documentName))
+      .catch((error) => {
+        console.log(error);
+        alert(error);
+      });
   };
 
   return (
@@ -37,14 +37,14 @@ function StepTwo({ procedure }) {
       {procedure.affiliate && (
         <InformationProcedures
           person={procedure.affiliate}
-          tittleAccordion="solicitante"
+          tittleAccordion="afiliado"
         />
       )}
 
       {procedure.applicant && (
         <InformationProcedures
           person={procedure.applicant}
-          tittleAccordion="afiliado"
+          tittleAccordion="solicitante"
         />
       )}
 
@@ -52,6 +52,14 @@ function StepTwo({ procedure }) {
         <InformationProcedures
           person={procedure.representative}
           tittleAccordion="representante"
+        />
+      )}
+
+      {procedure.comment && (
+        <InformationProcedures
+          detail={procedure.comment}
+          tittleAccordion="tramite"
+          procedure={procedure}
         />
       )}
 
@@ -81,7 +89,7 @@ function StepTwo({ procedure }) {
       )}
 
       {procedure.documentsBeneficiary.length > 0 && (
-        <Accordion title={"Documentos del afiliado"}>
+        <Accordion title={"Documentos de beneficiarios"}>
           <ContentTab className="document-container">
             <DocumentList
               handleAction={downloadFileOfMessage}
@@ -94,12 +102,14 @@ function StepTwo({ procedure }) {
       )}
 
       <DownloadInformativeDocuments
-        href={procedure.documentInformative}
-        target="_blank"
+        href={
+          `${process.env.REACT_APP_REPOSITORY_DOCUMENTS}/${encodeURI(procedure && procedure.name)}.pdf`
+          }
+        target="_blank" download
       >
         <img src={pdfIcon} alt="pdfIcon" />
         <span className="headerSubTitleHighligh">
-          Descarga los documentos informativos
+          Descarga la cartilla informativa
         </span>
       </DownloadInformativeDocuments>
     </ContentStepTwo>

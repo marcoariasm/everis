@@ -10,7 +10,7 @@ import { ContentImage } from './style'
 
 import Validacion from 'shared/images/validacion.svg'
 
-export const GridAdvisoryInformation = ({ amount, days, email, profile, ruc }) => {
+export const GridAdvisoryInformation = ({ amount, days, email, profile, hasRuc }) => {
   return (
     <>
       {amount < MAIN_MIN_AMOUNT && (
@@ -18,7 +18,7 @@ export const GridAdvisoryInformation = ({ amount, days, email, profile, ruc }) =
           <ContentImage>
             <img src={Validacion} alt="Validacion" />
           </ContentImage>
-          <LegalRejaMin100 days={days} email={email} profile={profile} ruc={ruc} />
+          <LegalRejaMin100 days={days} email={email} profile={profile} hasRuc={hasRuc} />
         </CardGray>
       )}
       {amount >= MAIN_MIN_AMOUNT && <LegalRejaMax100 email={email} />}

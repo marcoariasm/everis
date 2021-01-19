@@ -3,55 +3,61 @@ import styled from 'styled-components'
 import { allColors } from 'global/styles'
 import { size } from 'global/styles/Responsive'
 
-import LoginMainImg from '../../assets/images/loginMainImagePrimaAccount.png'
-import LoginMainImgMobile from '../../assets/images/rectangulofondo.svg'
-
 export const FormContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto auto;
-  align-items: center;
-  height: 100vh;
-  background-image: url(${LoginMainImg});
-  background-repeat: no-repeat;
-  background-size: 100% 40%;
-  background-color: ${allColors.colorGrayCard};
-  @media only screen and (min-width: ${size.tablet}) {
-    background-size: 100%;
-    background-size: cover;
+  @media only screen and (min-width: ${size.tabletM}) {
+    display: flex;
+    justify-content: flex-end;
   }
-  @media only screen and (max-width: 768px) {
-    background-size: 100%;
-    background-image: url(${LoginMainImgMobile});
-  }
-  @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-ratio: 1.5) {
-    background-size: 100%;
-    background-image: url(${LoginMainImgMobile});
-  }
-`
-export const LogoContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: space-between;
-  justify-content: flex-start;
-  margin: 1em auto 0 auto;
-  height: 20vh;
-  width: 90vw;
-  @media only screen and (min-width: ${size.tablet}) {
-    height: 10vh;
-  }
-`
+`;
+
 export const ContentForm = styled.div`
   display: flex;
   flex-direction: column;
   justify-items: center;
   margin: 0 auto;
-  @media only screen and (min-width: ${size.tablet}) {
+  @media only screen and (min-width: ${size.tabletM}) {
+    width: 29vw;
+    min-height: 33vw;
+    height: auto;
+  }
+  .group .dropdown-input {
+    font-family: Calibri;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0px;
+    text-align: left;
+  }
+  
+  .md-select .option-list li {
+      font-family: Calibri;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 21px;
+      letter-spacing: 0px;
+      text-align: left;
+  }
+  
+  .componenet-text-input .textfield {
+      font-family: Calibri;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 21px;
+  }
+  @media only screen 
+  and (min-width: 1024px) 
+  and (max-height: 1366px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
     justify-self: flex-end;
     align-self: flex-start;
-    margin: 0 14% 0 0;
+    margin: 5% 10% 0 0;
     height: 75vh;
-  }
+
+}
 `
 export const ContentDataForm = styled.div`
   display: grid;
@@ -62,31 +68,60 @@ export const ContentDataForm = styled.div`
   width: 90vw;
   height: 65vh;
   background: ${allColors.colorWhiteBase};
+  margin: 0 auto;
   @media only screen and (min-width: ${size.tablet}) {
     width: 72vw;
     min-height: 60vw;
     height:auto;
   }
-  @media only screen and (min-width: ${size.laptop}) {
-    width: 75vw;
-    min-height: 60vw;
+  @media only screen and (min-width: ${size.laptop}) and (max-width: ${size.laptopL}) {
+    margin-left: 65%;
+    width: 40vw;
+    min-height: 40vw;
     height:auto;
   }
   @media only screen and (min-width: ${size.laptopL}) {
     width: 29vw;
     min-height: 33vw;
     height:auto;
+    margin-left: 75%;
+  }
+  @media only screen 
+  and (min-width: 1024px) 
+  and (max-height: 1366px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+    width: 70vw;
+    min-height: 52vw;
+    height: auto;
+    margin: 50% 10% 0 -60%;
+  }
+  @media only screen 
+  and (min-width: 1024px) 
+  and (max-height: 1366px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+    width: 33vw;
+    min-height: 33vw;
+    height:auto;
+    margin: auto 0;
   }
 `
 export const ContentTitle = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
-`
-export const ContentSubTitle = styled.div`
+  font-family: FS Emeric;
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 31px;
+  letter-spacing: 0px;
   text-align: left;
+  color: var(--orangeColorMain);
 `
-export const SPAN1 = styled.span`
+export const ContentSubTitle = styled.p`
+  text-align: left;
   font-family: Calibri;
   font-size: 16px;
   font-style: normal;
@@ -94,17 +129,7 @@ export const SPAN1 = styled.span`
   line-height: 21px;
   letter-spacing: 0px;
   text-align: left;
-`
-
-export const SPANTITLE =styled.span`
-font-family: FS Emeric;
-font-size: 26px;
-font-style: normal;
-font-weight: 700;
-line-height: 31px;
-letter-spacing: 0px;
-text-align: left;
-
+  color: var(--grayColorText);
 `
 
 export const Line = styled.hr`
@@ -112,7 +137,6 @@ export const Line = styled.hr`
   width: 50%;
   border: 0;
   margin-bottom: 1em;
-  background-color: #FFF;
 `
 export const AffiliateForm = styled.div`
   display: grid;
@@ -126,10 +150,7 @@ export const RecoverAccountSection = styled.div`
   align-items: center;
   justify-content: flex-end;
 `
-export const RecoverAccounText = styled.p`
-  color: ${allColors.colorGrayText};
-  text-align: center;
-`
+
 export const UrlStyles = styled.a`
   color: ${allColors.colorOrangeMain};
   text-decoration: underline;
@@ -160,7 +181,4 @@ export const NewContainer = styled.div`
   @media only screen and (min-width: ${size.tablet}) {
     display: none;
   }
-`
-export const content = styled.div`
-  font-size: 50px;
 `

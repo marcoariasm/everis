@@ -13,6 +13,7 @@ const Content = styled.div`
   border-radius: 8px;
   padding: 9px 8px;
   background-color: #FFF2F5;
+  margin: 0 0 14px 0;
   `
   
 const Image = styled.div`
@@ -44,7 +45,7 @@ const linkAlertCard = {
   link1: "https://www2.sbs.gob.pe/afiliados/paginas/consulta.aspx"
 }
 
-const AlertCard = ({ hidden }) => {
+const AlertCard = ({ hidden, text1, text2, showLink=true, link}) => {
   return (
     <div hidden={hidden}>
       <Content>
@@ -53,12 +54,12 @@ const AlertCard = ({ hidden }) => {
         </Image>
         <Text>
           <span>
-            {textAlertCard.firstLine}
+            {text1?text1:textAlertCard.firstLine}
           </span><br/>
           <span>
-            {textAlertCard.secondLine}
+            {text2?text2:textAlertCard.secondLine}
           </span>
-          <span><a href={linkAlertCard.link1} target="_blank"><strong>{textAlertCard.textLink}</strong></a></span>
+          <span><a href={showLink?linkAlertCard.link1:link} target="_blank"><strong>{showLink?textAlertCard.textLink:""}</strong></a></span>
         </Text>
       </Content>
     </div>

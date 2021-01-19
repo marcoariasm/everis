@@ -9,7 +9,6 @@ export const registerAsessment = async (request) => {
     }
   ).catch((error) => console.log(error));
   let data = await response;
-  if (data !== undefined) {
-    return data;
-  } else data = "";
+  if (!data) ;
+  else {return data}
 };

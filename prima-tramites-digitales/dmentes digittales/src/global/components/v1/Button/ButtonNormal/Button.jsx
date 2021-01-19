@@ -58,6 +58,16 @@ const StyledButton = styled.button`
             background-color: ${allColors.colorOrangeHover};
           }
         `
+      case 'btn-no-shadow':
+        return css`
+          color: ${allColors.colorWhiteBase};
+          background: ${allColors.colorOrangeMain};
+          box-sizing: border-box;
+          border-radius: 6px;
+          :hover {
+            background-color: ${allColors.colorOrangeHover};
+          }
+        `
       case 'btn-actualizar':
         return css`
           color: ${allColors.colorWhiteBase};

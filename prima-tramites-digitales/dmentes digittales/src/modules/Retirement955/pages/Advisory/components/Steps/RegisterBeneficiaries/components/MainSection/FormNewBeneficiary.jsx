@@ -1,418 +1,277 @@
-import React, { useState, useEffect, memo } from 'react'
-import moment from 'moment'
+import React, { useState, useEffect, memo } from 'react';
+import moment from 'moment';
 
 //redux
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
+
+import { textRegBeneficiaries } from 'modules/Retirement955/constants/ConstantRegisterBeneficiaries';
+import { fieldValidationConstraint, typeDocument } from 'modules/shared/constant/ParametersValidation';
+
+import useValidationBeneficiaries from 'modules/Retirement955/hooks/beneficiaries/useValidationBeneficiaries';
+
+import {
+	formValidationInput,
+	getStringLengthPart,
+	validateDate,
+	validateText,
+	validatedDocumentType,
+} from 'modules/shared/helpers/HelperForm';
 
 //Components
-import GlobalModule from 'global'
+import Select from 'global/components/v1/Select/Select';
+import { Title, Card, FailData, ContentForm, GridAddBeneficiary } from './CardAddBeneficiary';
+import Modal from 'global/components/v1/Modal';
+import Input from 'global/components/v1/Input/Input';
+import Botonera from './BtnSaveCancel';
+import { addBeneficiary, initialValues } from 'modules/Retirement955/constants/ConstAddBeneficiary';
+import { isEmpty, prop, propEq, assoc, keys, map, allPass, findIndex, values, pipe, applySpec, concat } from 'ramda';
+import styled from 'styled-components';
 
-import Select from 'global/components/v1/Select/Select'
-import { Title, Card, FailData, ContentForm, GridAddBeneficiary } from './CardAddBeneficiary'
-import { textRegBeneficiaries } from 'modules/Retirement955/constants/ConstantRegisterBeneficiaries'
-import Modal from 'global/components/v1/Modal'
-import Input from 'global/components/v1/Input/Input'
-import { validateText } from 'modules/shared/helpers/HelperForm'
-import Botonera from './BtnSaveCancel'
-import { addBeneficiary, initialValues } from 'modules/Retirement955/constants/ConstAddBeneficiary'
-import {
-	isEmpty,
-	prop,
-	propEq,
-	assoc,
-	keys,
-	map,
-	allPass,
-	findIndex,
-	values,
-	mapObjIndexed,
-	pipe,
-	applySpec,
-} from 'ramda'
-import styled from 'styled-components'
+import Alert from 'global/components/v1/Alert/Alert';
 
-const { Alert } = GlobalModule.components.v1
-
-let currentDay = moment().format('YYYY-MM-DD')
+let yesterDay = moment().subtract(1, 'days').format('YYYY-MM-DD');
 
 const AlertContainer = styled.div`
 	padding: 0px 2.2rem;
 	@media only screen and (max-width: 49.9em) {
 		padding: 0 1rem 0 0.8rem;
 	}
-`
-const addDefaultOptionSelect = (list) => [{ label: 'Seleccionar', value: '' }, ...list]
+`;
+const addDefaultOptionSelect = (list) => [{ label: 'Seleccionar', value: '' }, ...list];
 
-const parseObjectToSelect = pipe(
-	mapObjIndexed((val, key) => ({
-		label: val,
-		value: key,
-	})),
-	values,
-	addDefaultOptionSelect
-)
-const parseDocumentTypeToSelect = pipe(
-	map(applySpec({ label: prop('description'), value: prop('type') })),
-	addDefaultOptionSelect
-)
+const parseObjectToSelect = pipe(map(applySpec({ label: prop('value'), value: prop('idParameter') })), addDefaultOptionSelect);
 
 const FormNewBeneficiary = ({
-	modal,
-	setAddBeneficiary,
-	setListBeneficiaries,
-	infoIni,
-	setEditBenef,
-	listBeneficiaries,
 	affiliateInfo,
-	listDocumentsTypes,
+	conditionDisability,
 	genders,
+	infoIni,
+	listBeneficiaries,
+	listDocumentsTypes,
+	modal,
 	relationShips,
+	selectBenef,
+	setAddBeneficiary,
+	setEditBenef,
+	setListBeneficiaries,
+	setSelectedBeneficiares,
 }) => {
-	const isEdition = () => !isEmpty(prop('documentNumber', infoIni)) || !isEmpty(prop('beneficiaryId', infoIni))
-	let focus = 'surname'
-	const [validation, setValidation] = useState({})
-	const [customValidation, setCustomValidation] = useState(null)
-	const [datos, setDatos] = useState(infoIni)
-	const [showModal, setShowModal] = useState(modal)
+	const isEdition = () => !isEmpty(prop('documentNumber', infoIni)) || !isEmpty(prop('beneficiaryId', infoIni));
+	let focus = 'surname';
+	const [validation, setValidation] = useState({});
+	const [datos, setDatos] = useState(infoIni);
+	const [showModal, setShowModal] = useState(modal);
+	const [customValidation2, setCustomValidation2] = useState(null);
 
 	//REDUX
-	const store = useSelector((state) => state.advisor)
+	const store = useSelector((state) => state.advisor);
+	const dispatch = useDispatch();
+
+	const [
+		customValidation,
+		customValidationPrev,
+		BirthGreatherThanCurrent,
+		checkIfExistSamePerson,
+		ChildrenAgeMaxMinYearsOld,
+		Children15YearsMin,
+		CoupleOver15YearsOld,
+		hasCouples,
+		hasParents,
+		Parents15YearsOlderThan,
+		validDocumentForMinors,
+		ValidSexOfConcubine,
+	] = useValidationBeneficiaries(affiliateInfo, infoIni, store, customValidation2);
 
 	useEffect(() => {
-		if (modal) setShowModal(modal)
+		if (modal) setShowModal(modal);
 		return () => {
-			setEditBenef(initialValues)
-			clearForm()
-			setShowModal(false)
-		}
-	}, [])
+			setEditBenef(initialValues);
+			clearForm();
+			setShowModal(false);
+		};
+	}, []);
 
 	const validate = () => {
-		const errors = {}
+		const errors = {};
 		addBeneficiary.validation.forEach((object) => {
 			Object.keys(datos).forEach((item, i) => {
 				if (item === object.value) {
 					if (!Object.values(datos)[i]) {
-						errors[item] = object.label
+						errors[item] = object.label;
 					}
 				}
-			})
-		})
-		const keysErrors = Object.keys(errors)
+			});
+		});
+		const keysErrors = Object.keys(errors);
 		if (keysErrors.length) {
-			focus = keysErrors[0]
+			focus = keysErrors[0];
 		}
-		return errors
-	}
+
+		return errors;
+	};
 
 	const handleCloseModal = () => {
-		setShowModal(false)
-		setAddBeneficiary(() => false)
-	}
+		setShowModal(false);
+		setAddBeneficiary(() => false);
+	};
 
 	const clearForm = () => {
-		setDatos(initialValues)
-		setValidation({})
-		setShowModal(false)
-	}
+		setDatos(initialValues);
+		setValidation({});
+		setShowModal(false);
+	};
+
+	const handleKeyUp = (e) => {
+		let valorNew = e.target.value;
+
+		if (datos.documentType === prop('idParameter', typeDocument[1])) {
+			valorNew = valorNew.replace('n', 'N');
+		}
+
+		if (e.target.name !== 'documentNumber') {
+			valorNew = formValidationInput(valorNew);
+		}
+
+		e.target.value = valorNew;
+		setDatos({
+			...datos,
+			[e.target.name]: valorNew,
+		});
+	};
+
+	const handleOnBlur = (e) => {
+		const { name, value } = e.target;
+
+		if (name === 'documentNumber') {
+			if (datos.documentType === prop('idParameter', typeDocument[1])) {
+				const isCorrect = getStringLengthPart(value);
+
+				if (!isCorrect) {
+					setValidation({ documentNumber: 'El número de documento no es correcto.' });
+					setCustomValidation2('El número de documento no es correcto.');
+					return false;
+				} else {
+					setValidation({});
+					setCustomValidation2(null);
+				}
+			}
+			if (datos.documentType === prop('idParameter', typeDocument[0])) {
+				if (value.length !== 8) {
+					setValidation({ documentNumber: 'El número de documento debe tener 8 dígitos.' });
+					setCustomValidation2('El número de documento debe tener 8 dígitos.');
+				} else {
+					setValidation({});
+					setCustomValidation2(null);
+				}
+			}
+		}
+
+		if (name === 'birthdate') {
+			const isCorrect = validateDate(value);
+
+			if (!isCorrect) {
+				setValidation({ birthdate: 'La fecha de nacimiento es incorrecta y/o válida.' });
+				setCustomValidation2('La fecha de nacimiento es incorrecta y/o válida.');
+			} else {
+				setValidation({});
+				setCustomValidation2(null);
+			}
+		}
+
+		if (value) {
+			setDatos({
+				...datos,
+				[name]: value.trim(),
+			});
+		}
+	};
 
 	const handleOnchange = (e) => {
-		const { name, value } = e.target
-		const validate = validateText(e, datos)
+		const { name, value } = e.target;
+		const validate = validateText(e, datos);
+
 		if (validate) {
 			setDatos({
 				...datos,
 				[name]: value,
-			})
+			});
 		}
-	}
+	};
 
 	const getFocus = () => {
-		document.getElementById(focus).focus()
-	}
+		document.getElementById(focus).focus();
+	};
 
 	const hasFormError = () => {
 		if (!isEmpty(keys(validate()))) {
-			getFocus()
-			setValidation(validate())
-			return true
+			getFocus();
+			setValidation(validate());
+			if (!isEmpty(validation)) {
+				return false;
+			}
+			return true;
 		}
-		return false
-	}
+
+		return false;
+	};
 
 	//Custom Validations
 	const checkDocumentTypeLength = (type) => {
-		switch (type) {
-			case 'DNI':
-				return 9
-			default:
-				return null
-		}
-	}
+		let dataDocument = validatedDocumentType(type);
+		return dataDocument;
+	};
 
-	const checkIfExistSamePerson = (benReceived, isEdition) => {
-		let beforeBeneficiary = {
-			documentType: infoIni.documentType,
-			documentNumber: infoIni.documentNumber,
+	const validationInputIsCorrect = () => {
+		let isError = true;
+		if (isEmpty(validation)) {
+			isError = false;
 		}
 
-		let benReceivedFormated = {
-			documentType: benReceived.documentType,
-			documentNumber: benReceived.documentNumber,
-		}
-
-		let arrayBeneficiaries = store.dataBeneficery.map((ben) => {
-			return {
-				documentType: ben.documentType,
-				documentNumber: ben.documentNumber,
-			}
-		})
-
-		let exist = false
-
-		exist = arrayBeneficiaries.some((ben) => {
-			return (
-				ben.documentType === benReceivedFormated.documentType &&
-				ben.documentNumber === benReceivedFormated.documentNumber
-			)
-		})
-
-		if (isEdition && JSON.stringify(beforeBeneficiary) === JSON.stringify(benReceivedFormated)) {
-			exist = false
-		} else if (isEdition && JSON.stringify(beforeBeneficiary) !== JSON.stringify(benReceivedFormated)) {
-			exist = arrayBeneficiaries.some((ben, ind) => {
-				return (
-					ben.documentType === benReceivedFormated.documentType &&
-					ben.documentNumber === benReceivedFormated.documentNumber &&
-					infoIni.index !== ind
-				)
-			})
-		}
-
-		if (exist) {
-			setCustomValidation(addBeneficiary.customValidation['samePerson'])
-		} else {
-			setCustomValidation(null)
-		}
-		return exist
-	}
-
-	const Children15YearsMin = (benReceived) => {
-		const AfiliatebirthDay = moment(
-			moment(
-				affiliateInfo.birthDate.split('/')[2] +
-					'-' +
-					affiliateInfo.birthDate.split('/')[1] +
-					'-' +
-					affiliateInfo.birthDate.split('/')[0]
-			).format('YYYY-MM-DD')
-		)
-
-		const yearsDifference = moment(benReceived.birthdate).diff(AfiliatebirthDay, 'years')
-		const res = yearsDifference < 15 && benReceived.relationship === 'CHILD'
-
-		if (res) {
-			setCustomValidation(addBeneficiary.customValidation['Children15YearsMin'])
-		} else {
-			setCustomValidation(null)
-		}
-		return res
-	}
-
-	const Parents15YearsOlderThan = (benReceived) => {
-		const AfiliatebirthDay = moment(
-			moment(
-				affiliateInfo.birthDate.split('/')[2] +
-					'-' +
-					affiliateInfo.birthDate.split('/')[1] +
-					'-' +
-					affiliateInfo.birthDate.split('/')[0]
-			).format('YYYY-MM-DD')
-		)
-		const yearsDifference = AfiliatebirthDay.diff(moment(benReceived.birthdate), 'years')
-		const isParent = benReceived.relationship === 'PARENT'
-		const res = yearsDifference < 15 && isParent
-
-		if ((yearsDifference < 0 && isParent) || (yearsDifference === 0 && isParent)) {
-			setCustomValidation('La fecha de nacimiento de los padres no pueden ser mayor o igual que la del afiliado')
-			return true
-		}
-
-		if (res) {
-			setCustomValidation(addBeneficiary.customValidation['Parents15YearsOlderThan'])
-		} else {
-			setCustomValidation(null)
-		}
-
-		return res
-	}
-
-	const CoupleOver15YearsOld = (benReceived) => {
-		let hoy = new Date()
-		let birthDate = new Date(benReceived.birthdate)
-		let age = hoy.getFullYear() - birthDate.getFullYear()
-		let diferenciaMeses = hoy.getMonth() - birthDate.getMonth()
-		if (diferenciaMeses < 0 || (diferenciaMeses === 0 && hoy.getDate() < birthDate.getDate())) {
-			age--
-		}
-
-		const res = age < 15 && (benReceived.relationship === 'SPOUSE' || benReceived.relationship === 'CONCUBINE')
-
-		if (res) {
-			setCustomValidation(addBeneficiary.customValidation['CoupleOver15YearsOld'])
-		} else {
-			setCustomValidation(null)
-		}
-
-		return res
-	}
-
-	const ChildrenAgeMaxMinYearsOld = (benReceived) => {
-		let hoy = new Date()
-		let birthDate = new Date(benReceived.birthdate)
-		let age = hoy.getFullYear() - birthDate.getFullYear()
-		let diferenciaMeses = hoy.getMonth() - birthDate.getMonth()
-		if (diferenciaMeses < 0 || (diferenciaMeses === 0 && hoy.getDate() < birthDate.getDate())) {
-			age--
-		}
-
-		const res = age >= 18 && benReceived.relationship === 'CHILD' && benReceived.hasDisability === 'false'
-
-		if (res) {
-			setCustomValidation(addBeneficiary.customValidation['ChildrenAgeMaxMinYearsOld'])
-		} else {
-			setCustomValidation(null)
-		}
-
-		return res
-	}
-
-	const BirthGreatherThanCurrent = (benReceived) => {
-		const daysDifference = moment(currentDay).diff(moment(benReceived.birthdate), 'days')
-		const res = daysDifference < 0
-
-		if (res) {
-			setCustomValidation(addBeneficiary.customValidation['BirthGreatherThanCurrent'])
-		} else {
-			setCustomValidation(null)
-		}
-
-		return res
-	}
-
-	const hasParents = (benReceived, isEdition) => {
-		let hasError = false
-
-		let hasFather =
-			store.dataBeneficery.filter(
-				(ben, i) => ben?.relationship?.toUpperCase() === 'PARENT' && ben?.gender === 'MALE'
-			).length > 0
-		let hasMother =
-			store.dataBeneficery.filter(
-				(ben, i) => ben?.relationship?.toUpperCase() === 'PARENT' && ben?.gender === 'FEMALE'
-			).length > 0
-
-		if (isEdition && JSON.stringify(infoIni) !== JSON.stringify(benReceived)) {
-			hasFather =
-				store.dataBeneficery.filter(
-					(ben, i) =>
-						infoIni.index !== i && ben?.relationship?.toUpperCase() === 'PARENT' && ben?.gender === 'MALE'
-				).length > 0
-			hasMother =
-				store.dataBeneficery.filter(
-					(ben, i) =>
-						infoIni.index !== i && ben?.relationship?.toUpperCase() === 'PARENT' && ben?.gender === 'FEMALE'
-				).length > 0
-		}
-
-		if (benReceived.relationship === 'PARENT' && benReceived?.gender === 'MALE' && hasFather) {
-			hasError = true
-		}
-		if (benReceived.relationship === 'PARENT' && benReceived?.gender === 'FEMALE' && hasMother) {
-			hasError = true
-		}
-
-		if (isEdition && JSON.stringify(infoIni) === JSON.stringify(benReceived)) {
-			hasError = false
-		}
-
-		if (hasError) {
-			setCustomValidation(addBeneficiary.customValidation['hasParents'])
-		} else {
-			setCustomValidation(null)
-		}
-		return hasError
-	}
-
-	const hasCouples = (benReceived, isEdition) => {
-		let hasError = false
-
-		let hasCouple =
-			store.dataBeneficery.filter(
-				(ben, i) =>
-					ben?.relationship?.toUpperCase() === 'SPOUSE' || ben?.relationship?.toUpperCase() === 'CONCUBINE'
-			).length > 0
-
-		if (isEdition && JSON.stringify(infoIni) !== JSON.stringify(benReceived)) {
-			hasCouple =
-				store.dataBeneficery.filter(
-					(ben, i) =>
-						infoIni.index !== i &&
-						(ben?.relationship?.toUpperCase() === 'SPOUSE' || ben?.relationship?.toUpperCase() === 'CONCUBINE')
-				).length > 0
-		}
-
-		if ((benReceived.relationship === 'SPOUSE' || benReceived.relationship === 'CONCUBINE') && hasCouple) {
-			hasError = true
-		}
-
-		if (isEdition && JSON.stringify(infoIni) === JSON.stringify(benReceived)) {
-			hasError = false
-		}
-
-		if (hasError) {
-			setCustomValidation(addBeneficiary.customValidation['hasParentsCuople'])
-		} else {
-			setCustomValidation(null)
-		}
-		return hasError
-	}
+		return isError;
+	};
 
 	const updateBeneficiary = (beneficiaryData) => {
 		const elementIndex = findIndex(
-			allPass([
-				propEq('beneficiaryId', prop('beneficiaryId', infoIni)),
-				propEq('documentNumber', prop('documentNumber', infoIni)),
-			]),
+			allPass([propEq('beneficiaryId', prop('beneficiaryId', infoIni)), propEq('documentNumber', prop('documentNumber', infoIni))]),
 			listBeneficiaries
-		)
-		return values(assoc(elementIndex, beneficiaryData, listBeneficiaries))
-	}
+		);
+		return values(assoc(elementIndex, beneficiaryData, listBeneficiaries));
+	};
 
 	const onAcceptClicked = () => {
-		if (hasFormError()) return
+		let arrayBen = [];
+
+		if (hasFormError()) return;
+
+		setCustomValidation2(customValidationPrev);
 
 		//intercept for custom validations
-		if (checkIfExistSamePerson(datos, isEdition())) return
-		if (Children15YearsMin(datos)) return
-		if (hasParents(datos, isEdition())) return
-		if (hasCouples(datos, isEdition())) return
-		if (Parents15YearsOlderThan(datos)) return
-		if (BirthGreatherThanCurrent(datos)) return
-		if (CoupleOver15YearsOld(datos)) return
-		if (ChildrenAgeMaxMinYearsOld(datos)) return
+		if (checkIfExistSamePerson(datos, isEdition())) return;
+		if (Children15YearsMin(datos)) return;
+		if (hasParents(datos, isEdition())) return;
+		if (hasCouples(datos, isEdition())) return;
+		if (Parents15YearsOlderThan(datos)) return;
+		if (BirthGreatherThanCurrent(datos)) return;
+		if (CoupleOver15YearsOld(datos)) return;
+		if (ChildrenAgeMaxMinYearsOld(datos)) return;
+		if (ValidSexOfConcubine(datos)) return;
+		if (validDocumentForMinors(datos)) return;
+		if (validationInputIsCorrect()) return;
 
 		const getNewBeneficiariesList = () => {
-			datos.birthDate = datos.birthdate // ToDo remove lowercase birthdate
-			return isEdition() ? updateBeneficiary(datos) : [...listBeneficiaries, datos]
-		}
-		setListBeneficiaries(getNewBeneficiariesList())
-		clearForm()
-	}
+			datos.birthDate = datos.birthdate; // ToDo remove lowercase birthdate
+			return isEdition() ? updateBeneficiary(datos) : [...listBeneficiaries, datos];
+		};
+		setListBeneficiaries(getNewBeneficiariesList());
+
+		dispatch(setSelectedBeneficiares(concat(selectBenef, [datos.documentNumber])));
+
+		clearForm();
+	};
 
 	const onCancelClicked = () => {
-		clearForm()
-	}
+		clearForm();
+	};
 
 	return (
 		<Modal
@@ -447,8 +306,10 @@ const FormNewBeneficiary = ({
 									name='surname'
 									value={datos.surname || ''}
 									onChange={handleOnchange}
+									onKeyUp={handleKeyUp}
+									onBlur={handleOnBlur}
 									color={validation?.surname ? '1.5px solid #FF0000' : 'none'}
-									maxLength='40'
+									maxLength={fieldValidationConstraint.surname.maxLength}
 									autoFocus
 								/>
 							</span>
@@ -465,8 +326,10 @@ const FormNewBeneficiary = ({
 									name='motherSurname'
 									value={datos.motherSurname}
 									onChange={handleOnchange}
+									onKeyUp={handleKeyUp}
+									onBlur={handleOnBlur}
 									color={validation?.motherSurname ? '1.5px solid #FF0000' : 'none'}
-									maxLength='40'
+									maxLength={fieldValidationConstraint.motherSurname.maxLength}
 								/>
 							</span>
 							{validation?.motherSurname ? <FailData>{validation?.motherSurname}</FailData> : <FailData />}
@@ -482,8 +345,10 @@ const FormNewBeneficiary = ({
 									name='firstName'
 									value={datos.firstName}
 									onChange={handleOnchange}
+									onKeyUp={handleKeyUp}
+									onBlur={handleOnBlur}
 									color={validation?.firstName ? '1.5px solid #FF0000' : 'none'}
-									maxLength='40'
+									maxLength={fieldValidationConstraint.firstName.maxLength}
 								/>
 							</span>
 							{validation?.firstName ? <FailData>{validation?.firstName}</FailData> : <FailData />}
@@ -499,8 +364,10 @@ const FormNewBeneficiary = ({
 									name='secondName'
 									value={datos.secondName}
 									onChange={handleOnchange}
+									onKeyUp={handleKeyUp}
+									onBlur={handleOnBlur}
 									color={validation?.secondName ? '1.5px solid #FF0000' : 'none'}
-									maxLength='40'
+									maxLength={fieldValidationConstraint.secondName.maxLength}
 								/>
 							</span>
 							{validation?.secondName ? <FailData>{validation?.secondName}</FailData> : <FailData />}
@@ -510,7 +377,7 @@ const FormNewBeneficiary = ({
 							<span>
 								<Select
 									id='documentType'
-									options={parseDocumentTypeToSelect(listDocumentsTypes)}
+									options={parseObjectToSelect(listDocumentsTypes)}
 									width='156px'
 									name='documentType'
 									value={datos.documentType}
@@ -532,8 +399,10 @@ const FormNewBeneficiary = ({
 									name='documentNumber'
 									value={datos.documentNumber}
 									onChange={handleOnchange}
+									onBlur={handleOnBlur}
+									onKeyUp={handleKeyUp}
 									color={validation?.documentNumber ? '1.5px solid #FF0000' : 'none'}
-									maxLength={checkDocumentTypeLength(datos.documentType)}
+									maxLength={checkDocumentTypeLength(datos.documentType).length}
 								/>
 							</span>
 							{validation?.documentNumber ? <FailData>{validation?.documentNumber}</FailData> : <FailData />}
@@ -546,14 +415,14 @@ const FormNewBeneficiary = ({
 									type='date'
 									placeholder='dd/mm/yyyy'
 									format='DD/MM/YYYY'
-									width='127px'
 									name='birthdate'
 									value={datos.birthdate}
 									onChange={handleOnchange}
+									onBlur={handleOnBlur}
 									color={validation?.birthdate ? '1.5px solid #FF0000' : 'none'}
 									maxLength='40'
 									min='1900-01-01'
-									max={currentDay}
+									max={yesterDay}
 								/>
 							</span>
 							{validation?.birthdate ? <FailData>{validation?.birthdate}</FailData> : <FailData />}
@@ -592,16 +461,16 @@ const FormNewBeneficiary = ({
 							<span className='valueFormTitle'>{textRegBeneficiaries.beneficiary[9].value}</span>
 							<span>
 								<Select
-									id='hasDisability'
-									options={addBeneficiary.condition}
+									id='disability'
+									options={parseObjectToSelect(conditionDisability)}
 									width='156px'
-									name='hasDisability'
-									value={datos.hasDisability}
+									name='disability'
+									value={datos.disability}
 									onChange={handleOnchange}
-									color={validation?.hasDisability ? '1.5px solid #FF0000' : 'none'}
+									color={validation?.disability ? '1.5px solid #FF0000' : 'none'}
 								/>
 							</span>
-							{validation?.hasDisability ? <FailData>{validation?.hasDisability}</FailData> : <FailData />}
+							{validation?.disability ? <FailData>{validation?.disability}</FailData> : <FailData />}
 						</Card>
 					</GridAddBeneficiary>
 				</div>
@@ -611,15 +480,14 @@ const FormNewBeneficiary = ({
 					<Alert type='error' message={customValidation} hasImage={false} fontSize='13px' />
 				</AlertContainer>
 			)}
-
-			<Botonera
-				onAccepted={onAcceptClicked}
-				onCanceled={onCancelClicked}
-				closeModal={handleCloseModal}
-				marginR='17px'
-			/>
+			{customValidation2 && (
+				<AlertContainer>
+					<Alert type='error' message={customValidation2} hasImage={false} fontSize='13px' />
+				</AlertContainer>
+			)}
+			<Botonera onAccepted={onAcceptClicked} onCanceled={onCancelClicked} closeModal={handleCloseModal} marginR='17px' />
 		</Modal>
-	)
-}
+	);
+};
 
-export default memo(FormNewBeneficiary)
+export default memo(FormNewBeneficiary);

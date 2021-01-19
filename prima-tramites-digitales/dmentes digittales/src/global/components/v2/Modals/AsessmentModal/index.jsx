@@ -1,33 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import Card from '../../../../../global/components/v2/Card/Card'
-import { allColors } from '../../../../shared/styles/index'
-import styled from 'styled-components'
-import { size } from '../../../../shared/styles/Responsive'
-import CheckIcon from 'shared/images/email.svg'
-import MaterialInput from 'shared/components/MaterialInput'
-//import { loginForm, loginConfirmationModal } from '../../../shared/constant/ConstantApplicantLogin';
-import DropdownInput from 'shared/components/DropdownInput'
-import MaterialCheckbox from 'shared/components/MaterialCheckbox'
-import MaterialSelect from 'shared/components/MaterialSelect'
-import CoverPage from '../../../components/CoverPage'
-import Modal from '../../../../global/components/Modal'
+import React from 'react';
+import Modal from 'global/components/v2/Modal';
 
 import {
-  LoginContainer,
-  FormContainer,
-  LogInAnteTitle,
-  LoginTitle,
-  TitleUnderline,
-  AffiliateForm,
-  EmailContainer,
-  RecoverAccountSection,
-  RecoverAccounText,
-  CheckboxContainer,
-  ButtonContainer,
   Button,
   Button2,
-  UrlStyles,
   ModalContent,
   ModalIcon,
   ModalMessage,
@@ -37,7 +13,7 @@ import {
   ModalNotice,
   ModalText,
   ModalButtonContainer,
-} from './styles'
+} from './styles';
 
 const loginForm = {
   subtitle: 'Cuenta solicitante',
@@ -53,7 +29,7 @@ const loginForm = {
 
 const loginConfirmationModal = {
   title: '¡Estamos para ayudarte!',
-  description: 'Un asesor se comunicará contigo en un plazo de hasta "x" días, al siguiente correo o teléfono:',
+  description: 'Un asesor se comunicará contigo en un plazo de hasta 10 días, al siguiente correo o teléfono:',
   message: 'Correo electrónico',
   message2: 'Teléfono móvil',
   notice: 'Importante',
@@ -89,4 +65,4 @@ const AsessmentModal = ({ showModal = false, onClose, icon, handleBtnModal }) =>
   )
 }
 
-export default AsessmentModal
+export default AsessmentModal;

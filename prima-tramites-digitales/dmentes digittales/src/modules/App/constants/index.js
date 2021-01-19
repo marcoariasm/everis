@@ -1,3 +1,3 @@
-export const homePath = '/inicio';
+export const homePath = '/inicio'
 
-export default {};
+export default {}

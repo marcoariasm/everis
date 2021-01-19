@@ -100,7 +100,7 @@ export const StepperContainer = styled.div`
 `;
 
 export const StepperContent = styled.div`
-  margin-top: 7.5em;
+  margin-top: 2.5em;
 `;
 
 export const LabelStep = styled.div`

@@ -1,17 +1,16 @@
-import useSWR from 'swr'
-import SharedModule from 'modules/shared'
+import useSWR from 'swr';
+import SharedModule from 'modules/shared';
 
-const { ServiceFetcher } = SharedModule.libs
+const { ServiceFetcher } = SharedModule.libs;
+
+const documentTypesApi = '/excluded/information/id-document/types';
 
 const useDocumentType = (fetchOptions = {}, options = {}) => {
   const { data, error } = useSWR(
-    '/excluded/information/id-document/types',
+    documentTypesApi,
     (url) => ServiceFetcher(url, fetchOptions),
-    {
-      ...options,
-      revalidateOnFocus: false,
-    }
-  )
+    { ...options, revalidateOnFocus: false }
+  );
 
   return {
     documentType: {
@@ -22,4 +21,4 @@ const useDocumentType = (fetchOptions = {}, options = {}) => {
   }
 }
 
-export default useDocumentType
+export default useDocumentType;

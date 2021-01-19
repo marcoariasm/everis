@@ -23,15 +23,20 @@ import {
   UploadDocument,
   SendMessage,
   IconPDF,
+  ErroFile,
 } from "./styles";
 
-const MessagesCards = ({ messages, executiveName, downloadFileOfMessage }) => {
+const MessagesCards = ({ messages, downloadFileOfMessage }) => {
   return messages.map((messageItem, i) => (
     <CardMessage key={i} isExecutive={!!messageItem.idExecutive}>
       <span className="bodyTextSmall">{messageItem.dateRegister}</span>
-      {messageItem.executiveId && (
-        <span className="cardTitle">Ejecutivo: {executiveName}</span>
-      )}
+      <span className="cardTitle">
+        {`${
+          !!messageItem.idExecutive
+            ? `Ejecutivo: ${messageItem.executive}`
+            : messageItem.userName
+        }`}
+      </span>
       {messageItem.message && (
         <span className="bodyTextSecundary">{messageItem.message}</span>
       )}
@@ -60,6 +65,7 @@ function Messages() {
     procedureDetail.status === "Finalizado" ||
     procedureDetail.status === "Rechazado";
   const [messages, setmessages] = useState([]);
+  const [erroFile, setErrorFile] = useState(false);
   const [currentMessage, setCurrentmessage] = useState("");
   const [currentFileToSend, setCurrentFileToSend] = useState(null);
 
@@ -96,7 +102,7 @@ function Messages() {
     if (!!currentFileToSend || !!currentMessage) {
       const formData = new FormData();
       formData.append("idRequest", procedureDetail.idRequest);
-      formData.append("message", currentMessage);
+      formData.append("message", currentMessage.trim());
       formData.append("file", currentFileToSend);
 
       sendMessage(formData)
@@ -108,6 +114,8 @@ function Messages() {
         .catch((error) => {
           console.log(error);
           alert(error);
+          setCurrentmessage("");
+          setCurrentFileToSend(null);
         });
     }
   };
@@ -116,18 +124,16 @@ function Messages() {
     event.preventDefault();
     const fileList = event.target.files;
     if (fileList.length > 0) {
-      setCurrentFileToSend(fileList[0]);
+      var allowedExtensions = /(.jpg|.png|.pdf|.jpeg)$/i;
+      if (!allowedExtensions.exec(fileList[0].name)) {
+        setErrorFile(true);
+        setCurrentFileToSend(null);
+      } else {
+        setErrorFile(false);
+        setCurrentFileToSend(fileList[0]);
+      }
     }
   };
-
-  useEffect(() => {
-    if (!!currentFileToSend) {
-      generateMessagePayload();
-    }
-    return () => {
-      setCurrentFileToSend(null);
-    };
-  }, [currentFileToSend]);
 
   useEffect(() => {
     if (Object.values(procedureDetail).length === 0) {
@@ -139,7 +145,7 @@ function Messages() {
       procedureDetail.messages.length > 0
     ) {
       const messageDiv = document.getElementById("messages");
-      const messages = procedureDetail.messages.reverse();
+      const messages = [...procedureDetail.messages].reverse();
       setmessages(messages);
       setTimeout(() => {
         messageDiv.scrollTop =
@@ -149,7 +155,8 @@ function Messages() {
   }, [procedureDetail]);
 
   const handleMessageChange = (e) => {
-    setCurrentmessage(e.target.value.trim());
+    e.preventDefault();
+    setCurrentmessage(e.target.value.trimStart());
   };
 
   return (
@@ -168,11 +175,6 @@ function Messages() {
               <MessagesCards
                 messages={messages}
                 downloadFileOfMessage={downloadFileOfMessage}
-                executiveName={
-                  procedureDetail.executive
-                    ? procedureDetail.executive.fullname
-                    : ""
-                }
               />
             )}
         </MessagesContainer>
@@ -190,16 +192,27 @@ function Messages() {
                   <img src={sendMessageIcon} alt="sendMessage" />
                 </SendMessage>
               </WriteResponseSection>
-              <UploadDocument onClick={handleClick}>
-                <IconPDF src={fileClick} alt="fileClick" />
-                <span>Cargar documento</span>
-                <input
-                  className="upload-input"
-                  onChange={(event) => getFiles(event)}
-                  ref={uploadRef}
-                  type="file"
-                />
-              </UploadDocument>
+              <div className="flex">
+                <UploadDocument onClick={handleClick}>
+                  <IconPDF src={fileClick} alt="fileClick" />
+                  <span>Cargar documento</span>
+                  <input
+                    className="upload-input"
+                    onChange={(event) => getFiles(event)}
+                    ref={uploadRef}
+                    type="file"
+                  />
+                </UploadDocument>
+                <span className="bodyTextSecundary">
+                  {currentFileToSend ?  currentFileToSend.name : ""}
+                </span>
+              </div>
+              {erroFile && (
+                <ErroFile>
+                  Solo se pemite subir archivos del tipo (.png, .jpg, .jpeg,
+                  .pdf)
+                </ErroFile>
+              )}
             </form>
           </>
         )}

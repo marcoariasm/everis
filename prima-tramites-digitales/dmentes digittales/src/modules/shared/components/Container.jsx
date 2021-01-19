@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import 'App.css'
+import 'PrimaWebTransactionalApp.css'
 
 const StyledContainer = styled.div`
   min-height: 100vh;

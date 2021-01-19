@@ -34,6 +34,10 @@ function States({ isFinished }) {
             <Point colorClassName="colorGreensuccess" />
             <span className="bodyTextSmall">Aceptado</span>
           </State>
+          <State>
+            <Point colorClassName="colorGreen" />
+            <span className="bodyTextSmall">En pagos</span>
+          </State>
         </>
       )}
     </ContainerStates>

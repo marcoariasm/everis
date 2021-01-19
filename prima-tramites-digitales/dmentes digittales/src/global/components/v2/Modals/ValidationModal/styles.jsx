@@ -339,3 +339,8 @@ export const ModalButtonContainer = styled.div`
     width: 9em;
   }
 `;
+
+export const GoBack = styled.span`
+  color: ${allColors.colorOrangeMain};
+  cursor: pointer;
+`;

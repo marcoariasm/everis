@@ -29,7 +29,7 @@ const loginForm = {
 
 const loginConfirmationModal = {
   title: '¡Estamos para ayudarte!',
-  description: 'Un asesor se comunicará contigo en un plazo de hasta "x" días, al siguiente correo o teléfono:',
+  description: 'Un asesor se comunicará contigo en un plazo de hasta 10 días, al siguiente correo o teléfono:',
   message: 'Correo electrónico',
   message2: 'Teléfono móvil',
   notice: 'Importante',
@@ -38,7 +38,7 @@ const loginConfirmationModal = {
   confirmationButton: 'Continuar'
 }
 
-const AsessmentModal = ({ showModal = false, onClose, icon, handleOpen, handleClose, dataUser }) => {
+const AsessmentModal = ({ showModal = false, onClose, icon, handleOpen, dataUser }) => {
   return (
     <Modal hidden={true} show={showModal} onClose={onClose}>
       <ModalContent>
@@ -47,14 +47,14 @@ const AsessmentModal = ({ showModal = false, onClose, icon, handleOpen, handleCl
         <ModalDescription>{loginConfirmationModal.description}</ModalDescription>
         <ModalNotification>
           <ModalDescription>{loginConfirmationModal.message}</ModalDescription>
-          <ModalHighlitedDescription>{dataUser.email? dataUser.email:"correo***@correo.com"}</ModalHighlitedDescription><br/>
+          <ModalHighlitedDescription>{dataUser.email? dataUser.email:"-"}</ModalHighlitedDescription><br/>
           <ModalDescription>{loginConfirmationModal.message2}</ModalDescription>
-          <ModalHighlitedDescription>{dataUser.cellphone? dataUser.cellphone: "9** *** *57"}</ModalHighlitedDescription>
+          <ModalHighlitedDescription>{dataUser.cellphone? dataUser.cellphone:"-"}</ModalHighlitedDescription>
         </ModalNotification>
         <ModalNotice>{loginConfirmationModal.notice}</ModalNotice>
         <ModalText>{loginConfirmationModal.text}</ModalText>
         <ModalButtonContainer>
-          <Button2 classButton="btn-cancelar" onClick={handleClose}>{loginConfirmationModal.gobackButton}</Button2>
+          <Button2 classButton="btn-cancelar" onClick={onClose}>{loginConfirmationModal.gobackButton}</Button2>
           <Button onClick={handleOpen}>{loginConfirmationModal.confirmationButton}</Button>
         </ModalButtonContainer>
       </ModalContent>

@@ -26,6 +26,7 @@ export const DownloadInformativeDocuments = styled.a`
     font-family: Calibri;
     font-size: 16px;
     font-weight: bold;
+    text-decoration: underline;
     color: #ff4f00;
   }
 `;

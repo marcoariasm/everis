@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import './styles.scss';
 
 const RadioButtonList = ({ items, name = '', className = '', onChange, register }) => {
-  console.log('register', register);
     const [currentValue, setCurrentValue] = useState('');
 
     useEffect(() => {
@@ -19,7 +18,7 @@ const RadioButtonList = ({ items, name = '', className = '', onChange, register 
   return (
     <div className={`radio-group ${className}`}>
         {items.map(item => {
-          const radioProps = register ? {} : { checked: currentValue === item.value, disabled: item.disabled };
+          const radioProps = register ? {} : { checked: currentValue === item.value.toString(), disabled: item.disabled };
                 return (
                     <label key={item.value}>
                         <input

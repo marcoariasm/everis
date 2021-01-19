@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //Main Page
-import App from './App.jsx';
+import PrimaWebTransactionalApp from './PrimaWebTransactionalApp.jsx';
 
 //Redux
 import { Provider } from 'react-redux';
@@ -22,7 +22,7 @@ import './fonts.scss';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={storeConfig}>
-      <App />
+      <PrimaWebTransactionalApp />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

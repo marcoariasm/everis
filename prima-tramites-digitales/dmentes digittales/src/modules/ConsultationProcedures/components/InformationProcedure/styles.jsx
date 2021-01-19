@@ -23,7 +23,6 @@ export const ContactContainer = styled.div`
     &.isResponsive {
       grid-template-columns: 100%;
       grid-row-gap: 1em;
-      padding-bottom: 1em;
     }
   }
 `;

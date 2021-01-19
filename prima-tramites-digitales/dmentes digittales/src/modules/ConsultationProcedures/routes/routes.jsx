@@ -26,22 +26,28 @@ const routesProcedureDetail = [
 
 const ConsultationProceduresRoute = () => {
   const [procedureDetail, setProcedureDetail] = useState({});
+  const [statesTypes, setStatesTypes] = useState([]);
 
   return (
     <>
-      <Route
-        exact
-        path="/detalles-tramite"
-        component={ConsultationProcedures}
-      />
-      <Route
-        exact
-        path="/detalles-tramite/apoderados"
-        component={ConsultationProcedures}
-      />
       <ProcedureDetailContext.Provider
-        value={{ procedureDetail, setProcedureDetail }}
+        value={{
+          procedureDetail,
+          statesTypes,
+          setProcedureDetail,
+          setStatesTypes,
+        }}
       >
+        <Route
+          exact
+          path="/detalles-tramite"
+          component={ConsultationProcedures}
+        />
+        <Route
+          exact
+          path="/detalles-tramite/apoderados"
+          component={ConsultationProcedures}
+        />
         {routesProcedureDetail.map((_, i) => (
           <Route exact key={i} path={_.path} component={_.component} />
         ))}

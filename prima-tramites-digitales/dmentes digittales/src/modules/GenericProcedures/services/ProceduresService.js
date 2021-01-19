@@ -38,8 +38,6 @@ export class ProcedureService {
     // }
     // mock service get configuration
 
-    console.log(this.URL_BACKEND);
-    console.log(procedureConfiguration);
     return procedureConfiguration;
   }
 
@@ -61,8 +59,6 @@ export class ProcedureService {
     );
     let result = await response.json();
 
-    // console.log(response);
-    console.log(result);
     return result;
   }
 
@@ -95,7 +91,6 @@ export class ProcedureService {
     );
     const result = await response.json();
 
-    console.log(result);
     return result;
   }
 
@@ -119,7 +114,6 @@ export class ProcedureService {
       requestOptions
     );
     let result = await response.json();
-    console.log(result);
 
     return result;
   }

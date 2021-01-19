@@ -2,18 +2,28 @@ import React, {useEffect, useRef} from 'react'
 import styled from 'styled-components'
 
 import { size } from 'global/styles/Responsive'
-import { allColors } from 'global/styles'
 
 import Navbar from 'modules/App/components/Menu/Navbar'
 import {useLocation} from "react-router-dom";
 import useUserInfo from '../hooks/useUserInfo'
 
+import ConfirmLeaveModal from '../components/Modals/ConfirmLeaveModal';
+
 const Menu = styled.div`
   grid-area: menu;
   width: 248px;
   max-height: 100vh;
-  background-color: ${allColors.colorOrangeMain};
-  @media screen and (max-width: ${size.laptopL}) {
+  background-color: var(--orangeColorMain);
+  @media screen and (max-width: ${size.laptop}) {
+    display: grid;
+    justify-items: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    height: 63px;
+    z-index: 1;
+  }
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (max-height: 1366px) and (min-width: 1024px) and (orientation: portrait) {
     display: grid;
     justify-items: space-between;
     align-items: center;
@@ -27,7 +37,7 @@ const Content = styled.div`
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
-  background-color: ${allColors.colorGrayCard};
+  background-color: var(--grayColorCard);
   @media screen and (min-width: ${size.laptopL}) {
     width: calc(100% - 248px);
   }
@@ -42,7 +52,7 @@ const Footer = styled.div`
   text-align: center;
   width: 100%;
   padding: 30px;
-  color: ${allColors.colorOrangeMain};
+  color: var(--orangeColorMain);
 `
 
 const Wrapper = styled.div`
@@ -70,8 +80,9 @@ const MainDashboardLayout = ({ children, lateralMenu = {} }) => {
           <Navbar>
             { lateralMenu }
           </Navbar>
+          <ConfirmLeaveModal />
         </Menu>
-        <Content ref={contentRef}>
+        <Content ref={contentRef} id="app-main-content">
           {children}
           <Footer>
           <span className="bodyText">

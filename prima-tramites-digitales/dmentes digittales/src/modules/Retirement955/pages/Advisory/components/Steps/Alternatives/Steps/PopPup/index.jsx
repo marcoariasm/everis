@@ -47,12 +47,14 @@ function PopPup({
             <CharacteristicsText className="bodyText">- {textAlternatives.popUpText2}</CharacteristicsText>
             <CharacteristicsText className="bodyText">- {textAlternatives.popUpText3}</CharacteristicsText>
             <CharacteristicsText className="bodyText">- {textAlternatives.popUpText4}</CharacteristicsText>
-            {bond && (
-              <CharacteristicsText className="bodyText">
-                - Para el cálculo se ha tomado en cuenta el valor actualizado de tu Bono de Reconocimiento: S/
-                {currencyFormat(bond.updatedValue)}
-              </CharacteristicsText>
-            )}
+            {
+              bond && bond.confirmed == "CONFIRMADO" && bond.stateDescription != 'BONO REDIMIDO' ? (
+                <CharacteristicsText className="bodyText">
+                  - Para el cálculo se ha tomado en cuenta el valor actualizado de tu Bono de Reconocimiento: S/
+                  {currencyFormat(bond.updatedValue)}
+                </CharacteristicsText>
+              ): ''
+            }
           </CharacterList>
         </Content>
       </Modal>
