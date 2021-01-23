@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "calcul-app-r",
+    "calcu": "calcul-app-r"
+  }
+}
