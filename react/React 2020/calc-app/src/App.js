@@ -4,18 +4,18 @@ import './App.css';
 import Functions from './components/Functions'
 import MathOperations from './components/MathOperations'
 import Numbers from './components/Numbers'
-import Result from './components/Result';
+import Result from './components/Result';|
 
 import PropTypes from 'prop-types';
 
 function App() {
   console.log("renderización de App");
-  const [result, useResult] = useState(0);
+  const [result, setResult] = useState(0);
 
   return (
     <main className="react-calculator">
       <Result value={result} />
-      <Numbers onClickNumber={useResult}/>
+      <Numbers onClickNumber={setResult}/>
       <Functions 
         onContentClear={clear => console.log(clear)}
         onDelete={del => console.log(del)}
