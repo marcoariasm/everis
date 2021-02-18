@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "id template",
+    "title": "titulo de template",
+    "type": "object",
+    "properties": {
+        "name": {
+            "description": "propiedad nombre",
+            "type": "string",
+            "x-prompt": "ingresa el nombre"
+        },
+        "test":{
+            "description": "extra",
+            "type": "string",
+            "enum": [
+                "hola",
+                "mundo",
+                "schematics"
+            ],
+            "x-prompt": "ingresa extra"
+        }
+    },
+    "required": [
+        "name"
+    ]
+}
