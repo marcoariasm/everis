@@ -1,0 +1,41 @@
+FERNANDO HERRERA
+UDEMY
+
+
+Angular 11
+Typescript
+Git GitHub
+12 proyectos de Angular
+
+Instalaciones necesarias:
+    Google chrome
+    Visual Studio Code
+    Postman
+    Mongo Compass
+    Git + cuenta en github
+    Node
+
+Extensiones VS Code:
+    angular snippets
+    angular language service
+    angular inline
+    auto close tag
+    typescript importer
+
+
+
+start-process PowerShell -verb runas
+
+5  Instalar Angular CLI
+    npm i -g @angular/cli
+
+
+
+PORQUÉ ANGULAR USA Typescript
+- por la ayuda y un intellisense fuerte
+- por el tipado estricto y errores en el momento de la escritura
+- permite la inyección de dependencias (disponer de clases desde cualquier lugar de la aplicación)
+
+
+MITOS
+- Solucion a SEO Friendly:  hacer SSR con Angular Universal
