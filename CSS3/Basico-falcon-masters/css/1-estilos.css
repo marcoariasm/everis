@@ -1,0 +1,14 @@
+/* 
+una regla CSS se compone de:
+selector y propiedad
+    body {color:#FFFFFF;}
+
+una propiedad se compone de
+    clave y valor
+      color: #FFFFF;
+*/
+
+body{
+    background: #000000;
+    color: #FAFAFA;
+}

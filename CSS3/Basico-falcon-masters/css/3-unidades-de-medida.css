@@ -1,0 +1,47 @@
+/*
+existen dos unidades de medida
+absolutas y relativas
+
+absolutas: establecen un valor fijo que no se modifica para nada
+ej
+    pixeles
+
+relativas: se adaptan a nuestro trabajo, en el diseño responsive
+ej 
+    em, rem     para las fuentes
+    %           para las cajas
+
+*/
+
+
+body {
+    font-size: 12x;
+}
+
+/*
+
+unidad em
+
+1 em  =  valor del elemento PADRE MÁS CERCANO
+
+*/
+
+div {
+    font-size: 20px;
+}
+
+div p{
+    font-size: 1.rem;
+}
+
+/*
+unidad rem
+
+se verá después
+*/
+
+.black{
+    background: #000;
+    color: #fff;
+    width: 50%;
+}

@@ -1,0 +1,40 @@
+/* el modelo de caja es una parte fundamental para el diseño de sitios web con CSS
+
+es el encargado de que los elementos se representen como cajas rectangulares
+
+la caja tiene 3 partes:
+
+margin:  margen externo
+padding:  margen interno
+border:  borde */
+
+
+/* h1, div, a, p {
+    background: orange;
+} */
+
+/*
+elemento BLOCK: se estira lo más que pueda para abarcar todo el ancho de su contenedor
+
+elemento INLINE: abarca solo el contenido de su elemento.
+ojo!  NO SE LE PUEDE DAR ANCHO Y ALTO
+
+
+*/
+
+
+div {
+    width: 300px;
+    height: auto;
+    background: lightblue;
+    margin: 20px 50px;
+    padding: 20px 50px;
+}
+
+/*
+normalmente no se usa HEIGHT
+
+MARGIN  es el margen externo    20px 50px   significa que arriba y abajo es 20 y  a los costados 50
+PADDING es el margen interno
+
+*/
