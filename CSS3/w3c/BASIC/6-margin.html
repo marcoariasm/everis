@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+div {
+  width:300px;
+  margin: auto;
+  border: 1px solid red;
+}
+h1 {
+  margin: 0 0 50px 0;
+}
+
+h2 {
+  margin: 20px 0 0 0;
+}
+
+/* Here, the <div> element is given a width of 300px. 
+However, the actual width of the <div> element will be 350px 
+(300px + 25px of left padding + 25px of right padding): */
+
+div.ex1 {
+  width: 300px;
+  background-color: yellow;
+}
+
+div.ex2 {
+  width: 300px;
+  padding: 25px;
+  background-color: lightblue;
+}
+
+</style>
+</head>
+<body>
+
+<h2>Use of margin:auto</h2>
+<p>You can set the margin property to auto to horizontally center the element within its container. The element will then take up the specified width, and the remaining space will be split equally between the left and right margins:</p>
+
+<div>
+This div will be horizontally centered because it has margin: auto;
+</div>
+
+<p>In this example the h1 element has a bottom margin of 50px and the h2 element has a top margin of 20px. So, the vertical margin between h1 and h2 should have been 70px (50px + 20px). However, due to margin collapse, the actual margin ends up being 50px.</p>
+
+<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+
+<h2>Padding and element width</h2>
+
+<div class="ex1">This div is 300px wide.</div>
+<br>
+
+<div class="ex2">The width of this div is 350px, even though it is defined as 300px in the CSS.</div>
+
+</body>
+</html>
