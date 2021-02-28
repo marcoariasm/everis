@@ -1,0 +1,10 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "new-project": {
+      "description": "Schematics to create Jest and Puppeteer Project for testing",
+      "factory": "./new-project/index#generateNewProject",
+      "schema": "./new-project/schema.json"
+    }
+  }
+}
