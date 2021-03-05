@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  /* para que se compatible se usa 100% en body */
+body {
+  font-size: 100%;
+}
+/* y en el resto se usa em */
+h1 {
+  font-size: 2.5em;
+}
+h2 {
+  font-size: 1.875em;
+}
+p {
+  font-size: 0.875em;
+}
+</style>
+</head>
+<body>
+
+<h1>This is heading 1</h1>
+<h2>This is heading 2</h2>
+<p>This is a paragraph.</p>
+<p>Specifying the font-size in percent and em displays the same size in all major browsers, and allows all browsers to resize the text!</p>
+
+<!-- usar vw es para el tema responsivo -->
+<h1 style="font-size:10vw;">Responsive Text</h1>
+
+<p style="font-size:5vw;">Resize the browser window to see how the text size scales.</p>
+
+<p style="font-size:5vw;">Use the "vw" unit when sizing the text. 10vw will set the size to 10% of the viewport width.</p>
+
+<p>Viewport is the browser window size. 1vw = 1% of viewport width. If the viewport is 50cm wide, 1vw is 0.5cm.</p>
+
+</body>
+</html>
