@@ -46,7 +46,7 @@ interface PersonajeLOR {
 }
 
 
-function sanar(personaje: PersonajeLOR, curarX):void {
+function sanar(personaje: PersonajeLOR, curarX: number):void {
     personaje.pv += curarX;
 
     console.log(personaje);

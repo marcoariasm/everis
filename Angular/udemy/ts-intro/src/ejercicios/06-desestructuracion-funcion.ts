@@ -30,7 +30,7 @@ export function calculaISV(productos: Producto[]): [number, number] {
 
 
 
-const articulos = [telefono, tableta];
+const articulos: Producto[] = [telefono, tableta];
 
 const [total, isv] = calculaISV(articulos);
 

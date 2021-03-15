@@ -30,7 +30,7 @@ interface Personaje  {
 }
 
 const personaje: Personaje = {
-    nombre: 'Srider',
+    nombre: 'Strider',
     hp: 100,
     habilidades: habilidades
 }

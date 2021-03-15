@@ -5,7 +5,6 @@ import { Producto, calculaISV } from './06-desestructuracion-funcion';
 */
 
 
-
 const carritoCompras: Producto[] = [
     {
         desc: 'Telefono 1',

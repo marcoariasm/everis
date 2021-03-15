@@ -25,5 +25,7 @@ const superHeroe: SuperHeroe = {
     }
 }
 
-const direccion = superHeroe.mostrarDireccion();
-console.log(direccion);
+// const direccion = superHeroe.mostrarDireccion();
+// console.log(direccion);
+
+console.log(superHeroe.mostrarDireccion());

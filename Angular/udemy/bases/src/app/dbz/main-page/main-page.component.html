@@ -1,0 +1,30 @@
+<h1>Dragon Ball Z</h1>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <app-personajes></app-personajes>
+        <!-- <h3>Personajes</h3>
+        <hr>
+        <ul> -->
+            <!-- pipe number:  | number  es una caracteristica de Angular 
+                                  sirve para formatear el número con coma
+            -->
+            <!-- <li *ngFor="let personaje of personajes">{{personaje.nombre}} - {{personaje.poder | number}}</li>
+        </ul> -->
+    </div>
+    <div class="col">
+        
+        <!-- app-nuevo  solo debería emitir un personaje agregado
+            por lo tanto no se neceita la prop   personajes
+
+            ojo a: (onNuevoPersonaje)      es un evento
+            y "agregarNuevoPersonaje( $event)   es el método que se llama
+         -->
+        <app-nuevo 
+            [nuevo]="nuevo">
+            <!-- (onNuevoPersonaje)="agregarNuevoPersonaje( $event)"> -->
+        </app-nuevo>
+
+    </div>
+</div>
