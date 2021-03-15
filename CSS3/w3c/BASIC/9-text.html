@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        /* Note: For W3C compliant CSS: If you define the color property, you must also define the background-color. */
+        div {
+            border: 1px solid gray;
+            padding: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+            color: #4CAF50;
+        }
+
+        p {
+            text-indent: 50px;
+            text-align: justify;
+            letter-spacing: 3px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #008CBA;
+        }
+        /* dirección al revés como en letra áraba */
+        p.ex1 {
+            direction: rtl;
+            unicode-bidi: bidi-override;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <h1>text formatting</h1>
+        <p>This text is styled with some of the text formatting properties. The heading uses the text-align,
+            text-transform, and color properties.
+            The paragraph is indented, aligned, and the space between characters is specified. The underline is removed
+            from this colored
+            <a target="_blank" href="tryit.asp?filename=trycss_text">"Try it Yourself"</a> link.
+        </p>
+        <p>This is right-to-left text direction.</p>
+        <p class="ex1">This is right-to-left text direction.</p>
+    </div>
+
+</body>
+
+</html>
