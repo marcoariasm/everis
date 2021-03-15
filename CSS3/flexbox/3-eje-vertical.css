@@ -1,0 +1,73 @@
+/* https://www.youtube.com/watch?v=74ueYD42VWc */
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+/* para flex  padre debe tener width y height definido */
+.padre{
+    background: #7216af;
+    /* width es para trabajar con el eje principal */
+    width: 80%;
+    margin: 20px auto;
+    /* height es para trabajar con el eje secundario */
+    height: 600px;
+    display: flex;
+
+    /* para que no se rompa la maquetación al achicar la pantalla */
+    /*flex-direction: row; /* row | row-reverse | column-reverse */
+
+    /* para que los cuadrados naranjas no cambien de tamaño */
+    /* flex-wrap: wrap; */
+
+    /* shorthand que une flex-direction y flex-wrap */
+    flex-flow: row wrap;
+
+    /* por defecto es   flex-start */
+    /* justify-content: flex-end; */
+    /* justify-content: center; */
+    /* justify-content: space-between; separacion al medio y elem en extremos */
+    /* justify-content: space-around; */
+    justify-content: space-evenly;
+
+    /* valor por defecto es stretch */
+    /* STRETCH   si no hay height lo toma todo en el alto  */
+    /* align-items: stretch; */
+    /* CENTER  */
+    /* align-items: center; */
+    /* FLEX-START   FLEX-END */
+    /* align-items: flex-end; */
+    /* BASELINE   los alinea de acuerdo al texto */
+    align-items: baseline;
+    
+    /* align-content    es cuando hay dos lineas del eje principal */
+    /* es el equivalente de justify-content para dos líneas */
+    align-content: space-evenly;
+}
+
+.hijo{
+    background: coral;
+    width: 23%;
+    height: 100px;
+
+}
+
+.hijo:nth-child(2){
+    line-height: 48px;;
+}
+
+@media screen and (max-width: 1230px){
+    /* .padre {
+        flex-direction: column;
+    } */
+    .hijo{
+        width: 46%;
+    }
+}
+@media screen and (max-width: 630px){
+    .hijo{
+        width: 93%;
+    }
+}
