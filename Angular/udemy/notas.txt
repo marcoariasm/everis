@@ -117,3 +117,33 @@ ng g c gifs/gifPage --skipTests -is
 
 
 ng g s gifs/services/gif --skipTests
+
+
+
+[95]
+
+modularizar la aplicación
+carpeta principal  Pais    es un módulo
+	agrupa  components
+		interfaces
+		pages
+		services
+
+ng g m shared
+ng g m pais
+
+** revertir borrado de componentes
+
+
+ng g c pais/pages/porCapital --skip-tests -is
+ng g c pais/pages/porPais --skip-tests -is
+ng g c pais/pages/porRegion --skip-tests -is
+ng g c pais/pages/verPais --skip-tests -is
+
+exportar sidebar  en el   shared.module.ts
+
+
+
+
+https://restcountries.eu/rest/v2/name/united
+
