@@ -147,3 +147,40 @@ exportar sidebar  en el   shared.module.ts
 
 https://restcountries.eu/rest/v2/name/united
 
+
+[103]
+ng g s pais/services/pais --skip-tests
+
+[107]
+
+1   pais-tabla.componente.ts
+  /pais/components/pais-tabla
+
+2   HTML=   <table></table>
+
+3   por-pais  component
+    <app-pais-tabla></..>
+
+4   @Input() paises: Country[] = [ ]
+
+ng g c pais/paisInput --skip-tests -is
+
+[109]
+
+Debounce time:
+Se usa cuando en una caja de busqueda se escribe unas letras y se espera un poco y se hace una llamada automatica a la busqueda para conectarse
+y traer la info sin necesidad de presionar enter
+
+
+[110]
+
+Por capital: hacerlo funcionar
+
+
+[126] Sección 10
+
+[131] Angular cli
+
+npm i primeng --save
+npm i primeicons --save
+

@@ -5,13 +5,20 @@ import { Component,
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  // styleUrls: ['./sidebar.component.css']
+  styles: [
+    `
+    li {
+      cursor: pointer;
+    }
+    `
+  ]
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
 
   constructor() { }
 
-  // ngOnInit(): void {
-  // }
+  ngOnInit(): void {
+  }
 
 }

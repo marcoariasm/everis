@@ -1,0 +1,18 @@
+ver las ramas remotas
+git branch -r
+
+
+git checkout -b 1-signup origin/1-signup
+
+git branch
+
+
+npm install
+
+
+
+para renderizar nuestro servidor
+npm server
+
+
+

@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { PorCapitalComponent } from './pais/pages/por-capital/por-capital.component';
-import { PorPaisComponent } from './pais/pages/por-pais/por-pais.component';
-import { PorRegionComponent } from './pais/pages/por-region/por-region.component';
-import { VerPaisComponent } from './pais/pages/ver-pais/ver-pais.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { PaisModule } from './pais/pais.module';
+import { SharedModule } from './shared/shared.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -14,11 +13,10 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
   ],
   imports: [
     BrowserModule,
-    PorCapitalComponent, 
-    PorPaisComponent, 
-    PorRegionComponent, 
-    VerPaisComponent,
-    SidebarComponent
+    AppRoutingModule,
+    HttpClientModule,
+    PaisModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
