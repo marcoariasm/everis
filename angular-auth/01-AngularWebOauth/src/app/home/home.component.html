@@ -1,0 +1,26 @@
+<div class="my-auto mt-5 vh-100">
+
+  <div *ngIf="!user" class="card text-center">
+    <h6 class="card-header">Angular Google Login OAuth</h6>
+    <div class="card-block">
+      <h4 class="card-title">Not Signed In</h4>
+      <p class="card-text">Sign In With</p>
+    </div>
+    <div class="card-block">
+      <button class="btn btn-social-icon btn-google mx-1" (click)="signInWithGoogle()">Sign In</button>
+    </div>
+  </div>
+
+  <div *ngIf="user" class="card text-center">
+    <h6 class="card-header">Angular Google Login OAuth</h6>
+    <div class="card-block"></div>
+    <img src="{{user.photoUrl}}" class="card-img-top img-responsive photo">
+    <div class="card-block">
+      <h4 class="card-title">{{user.name}}</h4>
+      <p class="card-text">{{user.email}}</p>
+    </div>
+    <div class="card-block">
+      <button class="btn btn-social-icon btn-google mx-1" (click)="signOut()">Sign Out</button>
+    </div>
+  </div>
+</div>
