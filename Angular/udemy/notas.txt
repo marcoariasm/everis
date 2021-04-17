@@ -177,10 +177,152 @@ y traer la info sin necesidad de presionar enter
 Por capital: hacerlo funcionar
 
 
-[126] Sección 10
+[126]  * * * * Sección 10: PIPES * * * *
 
-[131] Angular cli
+npm i primeng primeicons --save
 
-npm i primeng --save
-npm i primeicons --save
+[131]
+
+1. Instalar primeng  y primeicons
+2. importar estilos en   angular.json   styles
+   importar estilos del   vela-blue
+3.  importar  ButtonModule  y CardModule  y  llamarlos de manera simplificada
+    crear estilos globales  simples pero utilizando  las variables globales de  vela-blue
+4.  Crear modulo centralizado  para consumir  los componentes de  primeng
+    ahí se importarán los componentes de PrimeNg y estarán a disposición de toda la app
+
+    ng g m primeNg
+5.  crear carpetas:
+    shared,  (colocar un modulo aqui y en ventas)
+    ventas >   interfaces,pages,pipes
+
+6.  ng g c shared/menu --skip-tests -is
+
+    exponer ese c menu a disposición del modulo shared
+
+
+
+[214] 15. Proteccion de Rutas
+
+ng g guard auth/guards/auth --skip-tests   
+  can activate   y  can load
+
+
+recomendable usar ambos  can activate y   can load  a la vez
+por un tema de seguridad
+
+[226] 16. Formularios
+1. crear módulo  shared  
+    ng g m shared --skip-tests -is
+
+2. crear 2 modulos routing
+    ng g m template --routing
+    ng g m reactive --routing
+
+  borrar sus exports
+
+3. crear componentes
+    ng g c reactive/basicos --skip-tests -is
+                   /dinamicos
+                   /switches
+
+    en el archivo app-routing.module.ts  hacer los respectivos lazyload
+
+  { path: 'template', 
+    loadChildren: () => import('./template/template.module').then( m => m.TemplateModule )
+  },
+
+5. diseñar el sidemenu  con sus items en forma de lista como tabla de bootstrap
+     li   +  routerLink="templates/basicos"
+
+   crear interface en  sidemenu.component   que contenga     ruta y texto
+   usar *ngFor  para pintar el  templateMenu   no olvidar usar
+      routerLinkActive
+
+6. Formulario por
+   template:  que angular se encargue de manera automática del lado del HTML
+   reactivos:  que la parte más pesada la tengamos en el lado de typescript
+
+   Crear el formulario con bootstrap  en el  template  html  respectivo
+
+7. import  FormsModule    en    el template.module
+   *  el botón de  Guardar   ya no refresca el formulario,  ya Angular tomó el control del formu  lario
+
+8.  referencio y creo  funcion guardar
+    <form #miFormulario="ngForm" (ngSubmit)="guardar(miFormulario)">
+
+    en cada input  agrego las propiedades   NgModel  y   name="..."   para mostrarlo en el modelo de formulario
+
+9. artificio para ver el cambio de valores en los inputs
+
+<div class="row">
+    <div class="col">
+        <span>Valid</span>
+        <pre>{{ miFormulario.valid }}</pre>
+
+        <span>Valor</span>
+        <pre>{{ miFormulario.value | json }}</pre>
+    </div>
+</div>
+
+  de esta forma  puedo agregar en cada  input    ->  required
+  y si además es número  puedo poner    min="0"
+
+10.  en el span de error validar con un  *ngIf
+            *ngIf="miFormulario.form.controls.producto?.invalid && 
+                   miFormulario.form.controls.producto?.touched"
+
+11. simplifico la funcion de validacion de *ngIf
+    en el   basicos.component   creo un  @viewchild que referencie a #miFormulario
+
+            @ViewChild('miFormulario') miFormulario!: NgForm; 
+
+    crear un método donde encapsule la validacion
+
+            nombreValido(): boolean {
+              return this.miFormulario?.form.controls.producto?.invalid && 
+                   this.miFormulario?.form.controls.producto?.touched
+            }
+    
+    igualmente para precio y para existencias
+
+12. para el botón agregamos un método:
+    [disabled] = "miFormulario.invalid"
+
+    verificar las validaciones
+
+[235] DIRECTIVAS
+se debe trabajar una nueva directiva en el campo existencias
+   hay que considerar:
+    - immportar esa directiva en el modulo respectivo en   Declarations
+    - poner un valor minimo   como Input
+    - validar que sea requerido
+    - implements   Validator
+
+
+[236] limpiar el formulario
+
+
+
+[339] 23.  DIRECTIVAS PERSONALIZADAS
+Para añadir estilos a html o tb existen directivas estructurales
+Aqui se verá una directiva para manejar msjs de error en formularios reactivos
+
+ennlaces:   bootstrap CSS
+            angular.io   attribute directives
+
+0.  ng new angularPipes
+
+1.  importar css bootstrap en  index.html
+    levantar el proyecto     npm start    (ng serve --o)
+
+2.  crear  carpetas:      productos  ( * * aquí se va a usar  lazyload * * )
+                          shared
+
+    ng g m productos --routing
+    ng g m shared
+
+3.  crear componentes   pages/agregar
+
+    ng g c pages/agregar --skip-tests -is
 
