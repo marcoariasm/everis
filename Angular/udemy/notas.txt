@@ -304,6 +304,79 @@ se debe trabajar una nueva directiva en el campo existencias
 
 
 
+
+[246] FORMULARIOS * * REACTIVOS * *  reactive > basicos
+      - Simplificamos el html de  reactivos >  basicos, dinamicos y switches   (copiado de template)
+      - Debe quedar un html limpio sin errores con     input → type,  class,  placeholder
+      - En el módulo respectivo (reactive)   importar  ReactiveFormsModule
+      - vincular cada campo html  con su etiqueta, ej:    formControlName = "nombre"    y en ts:
+
+                    miFormulario: FormGroup = new FormGroup({
+                      'nombre': new FormControl('RTX 4080ti'),
+                      'precio': new FormControl(800),
+                      'existencias': new FormControl(15)
+                    })  
+      
+      - las validaciones se hacen en el el  .ts  ya no en el  .html
+      - new FormArray([])   agrupa  FormControl s
+      - pero usaremos el  FormBuilder  que es un servicio por lo tanto se inyecta en el 
+            constructor ( private fb: FormBuilder ) {}
+      - ej:
+                  miFormulario: FormGroup = this.fb.group({
+                    nombre     : [ 'RTX 4080ti' ],
+                    precio     : [800],
+                    existencias: [15]
+                  })
+
+      - para las  * validaciones * , hay validadores síncronos y asíncronos
+        si se agrupan usarlos como arreglo simplemente, ej
+
+                  nombre     : [ 'RTX 4080ti', [Validators.required, Validators.minLength(3)] ],
+                
+        si hay que validar un botón, en su   .html
+
+                  [disabled]="miFormulario.invalid"
+
+      - para los  * msjs de error * 
+        creo una función en .ts
+
+                campoEsValido(campo: string) {
+                  return this.miFormulario.controls[campo].errors
+                        && this.miFormulario.controls[campo].touched
+                }
+
+        en el .html   uso esa función en el span de msj error
+
+                *ngIf="campoEsValido('nombre')
+
+        se podría jugar con el msj de error según el tipo de error  (prueba)
+
+                // campoEsCero(campo: string) {
+                //   return this.miFormulario.controls[campo].errors!.min.min == 0
+                // }
+
+      - para el envío de los datos  * submit *
+        borrar el disabled del botón y poner en    form     (ngSubmit)="guardar()"
+        
+        para mostrar errores si se envia el formulario presionando   Guardar  y
+        para resetear el form y poner los valores en 0 al ser enviado
+
+      - para setear  valores al inicio del formulario:
+
+                ngOnInit() {
+                  this.miFormulario.reset({
+                    nombre: 'RTX 44080ti',
+                    precio: 1600  //  notese que falta existencias y aun asi el form NO REVENTÓ!!!
+                  })
+                }
+
+[252]  * Formularios dinámicos  REACTIVOS *
+      - Simplificamos el html de  reactivos >  basicos, dinamicos y switches   (copiado de template)
+      - Debe quedar un html limpio sin errores con     input → type,  class,  placeholder
+      - En el módulo respectivo (reactive)   importar  ReactiveFormsModule
+
+
+
 [339] 23.  DIRECTIVAS PERSONALIZADAS
 Para añadir estilos a html o tb existen directivas estructurales
 Aqui se verá una directiva para manejar msjs de error en formularios reactivos

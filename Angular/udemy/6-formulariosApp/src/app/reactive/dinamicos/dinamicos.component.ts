@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DinamicosComponent implements OnInit {
 
+  a: number =0;
+
   constructor() { }
 
   ngOnInit(): void {
