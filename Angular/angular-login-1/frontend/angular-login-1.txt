@@ -1,0 +1,42 @@
+ng new frontend
+
+ng g m auth
+
+ng g c auth/login
+ng g c auth/register
+
+ng g s services/auth
+
+ng g i models/jwt-response
+ng g i models/user
+
+
+en los modelos (o interfaces):
+
+    user { id, name, email, password }
+    jwt-response { dataUser: {..., accessToken, expiresIn }  }
+
+ng g m auth
+
+crear las rutas en el router de auth
+    login     LoginComponent
+    register  RegisterComponent
+
+en  auth.module.ts    
+    importar de angular   FormsModule  y   HttpClientModule
+    importar    AuthRoutingModule
+    registrar   RegisterComponent, LoginComponent
+
+    en  declarations van:       LoginComponent  y RegisterComponent
+    y en imports van:      FormsModule, AuthRoutingModule y HttpClientModule
+
+en  app.module.ts
+    ''   /auth    pathMatch full
+    auth  ./auth/auth.module#AuthModule
+
+creación del servicio   auth.service.ts
+    importar de angular    HttpClient
+    importar de  rxjs    Observable, BehaviorSubject,  tap
+    importar    IUser, IJwt-response
+
+    
