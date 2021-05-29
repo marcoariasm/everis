@@ -1,0 +1,29 @@
+:host {
+  width: 100%;
+  color: #636374;
+  p {
+    font-size: 12px;
+  }
+  .primary-btn {
+    background-color: #18a0c2;
+    color: #fff;
+  }
+  .img-container {
+    margin: 10px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+      margin-top: 30px;
+    }
+    .help-digit {
+      width: 360px;
+      height: 360px;
+      @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+        width: 240px;
+        height: 240px;
+      }
+    }
+  }
+}

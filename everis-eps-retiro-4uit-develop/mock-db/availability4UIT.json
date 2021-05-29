@@ -1,0 +1,231 @@
+{
+  "retiro4uitprod/v2/query4uit/availability4UIT": {
+    "GET": {
+      "codeResponse": "AFP3012",
+      "responses": [
+        {
+          "statusCode": "200",
+          "errorCode": "000000",
+          "headers": {
+            "response": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": ""
+            },
+            "request": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": ""
+            }
+          },
+          "body": {
+            "documentType": "DNI",
+            "documentNumber": "24946000",
+            "firstName": "MARIA",
+            "secondName": "DELICIA",
+            "firstLastName": "BOJI",
+            "secondLastName": "BIVVOYSE",
+            "afp": "PROFUTURO",
+            "cuspp": "207840SZUIE1",
+            "birthdate": "1956-11-27",
+            "accessFlagDU038": "1",
+            "urgencyDecree": "385",
+            "amountAvailable": 14300,
+            "retentionFlag": "0",
+            "accessFlag4Uit": "1",
+            "reasonNoAccess": "",
+            "fundType": "N",
+            "age": "59",
+            "accountStatusFlag": "0",
+            "validationIdentity": "2",
+            "signature": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJhZnAiLCJpYXQiOjE2MDYzMzE2ODgsInN1YiI6ImFmcCIsImlzcyI6ImFmcCIsInBheWxvYWQiOiJQUk9GVVRVUk8yNDk0NjAwMEROSSIsImFtb3VudEF2YWlsYWJsZSI6MzAwMCwiZXhwIjoxNjA2MzMyMDg4fQ.OXDhelfZXUVKS4qPX8I9XYtaAylYTjmRUFEXNzNqQ6E"
+          }
+        },
+        {
+          "statusCode": "404",
+          "errorCode": "AFP3021",
+          "headers": {
+            "response": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": ""
+            },
+            "request": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": ""
+            }
+          },
+          "body": {
+            "code": "AFP3021",
+            "description": ""
+          }
+        },
+        {
+          "statusCode": "412",
+          "errorCode": "AFP3014",
+          "headers": {
+            "response": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": ""
+            },
+            "request": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": ""
+            }
+          },
+          "body": {
+            "code": "AFP3014",
+            "description": "El afiliado no tiene saldo disponible para el retiro.",
+            "meta": {
+              "accessFlag4Uit": "3",
+              "afp": "PRIMA"
+            }
+          }
+        },
+        {
+          "statusCode": "412",
+          "errorCode": "AFP3016",
+          "headers": {
+            "response": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": ""
+            },
+            "request": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": ""
+            }
+          },
+          "body": {
+            "code": "AFP3016",
+            "description": "El afiliado no puede acceder al retiro por el siguiente motivo.",
+            "meta": {
+              "reasonNoAccess": "this is a test",
+              "accessFlag4Uit": "5",
+              "afp": "PRIMA"
+            }
+          }
+        },
+        {
+          "statusCode": "401",
+          "errorCode": "AFP3001",
+          "headers": {
+            "response": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": ""
+            },
+            "request": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": ""
+            }
+          },
+          "body": {
+            "code": "AFP3001",
+            "description": "El afiliado debe realizar debe realizar una validación de Clave Web.",
+            "meta": {
+              "accessFlag4Uit": "3",
+              "afp": "PROFUTURO"
+            }
+          }
+        },
+        {
+          "statusCode": "401",
+          "errorCode": "AFP3003",
+          "headers": {
+            "response": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": ""
+            },
+            "request": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": ""
+            }
+          },
+          "body": {
+            "code": "AFP3003",
+            "description": "Usuario bloqueado por maximos intentos.",
+            "meta": {
+              "accessFlag4Uit": "1",
+              "afp": "HABITAT",
+              "validationIdentity": "0"
+            }
+          }
+        },
+        {
+          "statusCode": "401",
+          "errorCode": "AFP3002",
+          "headers": {
+            "response": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": ""
+            },
+            "request": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": ""
+            }
+          },
+          "body": {
+            "code": "AFP3002",
+            "description": "El afiliado debe realizar debe realizar una validación RENIEC.",
+            "meta": {
+              "accessFlag4Uit": "2",
+              "afp": "PROFUTURO"
+            }
+          }
+        },
+        {
+          "statusCode": "412",
+          "errorCode": "AFP3011",
+          "headers": {
+            "response": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": ""
+            },
+            "request": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": ""
+            }
+          },
+          "body": {
+            "code": "AFP3011",
+            "description": "El afiliado ya cuenta con una solicitud registrada en proceso."
+          }
+        },
+        {
+          "statusCode": "412",
+          "errorCode": "AFP3013",
+          "headers": {
+            "response": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": ""
+            },
+            "request": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": ""
+            }
+          },
+          "body": {
+            "code": "AFP3013",
+            "description": "El afiliado ya cuenta con una solicitud registrada en proceso.",
+            "meta": { "accessFlag4Uit": "5", "reasonNoAccess": "this is a test" }
+          }
+        },
+        {
+          "statusCode": "412",
+          "errorCode": "AFP3012",
+          "headers": {
+            "response": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": ""
+            },
+            "request": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": ""
+            }
+          },
+          "body": {
+            "code": "AFP3012",
+            "description": "Según el cronograma establecido hoy no hay registros de solicitudes.",
+            "meta": {"reasonNoAccess": "", "accessFlag4Uit": "4", "afp": "PRIMA", "validationIdentity": "0"}
+          }
+        }
+      ]
+    }
+  }
+}

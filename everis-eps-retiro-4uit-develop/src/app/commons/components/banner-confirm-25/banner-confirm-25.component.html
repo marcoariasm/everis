@@ -1,0 +1,16 @@
+<div class="message-container">
+  <div class="message-icon">
+    <mat-icon>announcement</mat-icon>
+  </div>
+  <div class="message">
+    <span>Sí accedes al retiro.</span>
+    <br><br>
+    <span>Puedes proceder con tu solicitud.</span>
+    <br>
+  </div>
+</div>
+
+<mat-dialog-actions class="btn-container">
+  <button class="btn action-button" mat-raised-button color="primary" (click)="next25Percent()">Solicitar retiro 25%</button>
+  <button class="btn" mat-button (click)="back()">Volver</button>
+</mat-dialog-actions>

@@ -1,0 +1,30 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@everis-afp-prima/designsystem": ["libs/designsystem/src/index.ts"],
+      "@everis-afp-prima/data": ["libs/data/src/index.ts"],
+      "@affiliates/env/*": ["apps/affiliates/src/environments/*"],
+      "@affiliates/commons/*": ["apps/affiliates/src/app/commons/*"],
+      "@backoffice/env/*": ["apps/backoffice/src/environments/*"],
+      "@backoffice/commons/*": ["apps/backoffice/src/app/commons/*"],
+      "exceljs": ["node_modules/exceljs/dist/exceljs.min"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

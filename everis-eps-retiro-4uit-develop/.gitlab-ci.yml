@@ -1,0 +1,106 @@
+#
+image: microsoft/azure-cli
+
+stages:
+  - approval
+  - build_qa
+  - build_prod
+  - deploy_qa
+  - deploy_prod
+  - clean_cache_qa
+  - clean_cache_prod
+
+approval:
+  when: manual
+  stage: approval
+  image: alpine:latest
+  script:
+    - echo "Aprobar manualmente desde pestaNa CI/CD"
+  allow_failure: false
+
+
+build_site_qa:
+  image: node:10
+  stage: build_qa
+  dependencies:
+    - approval
+  script:
+    - npm install
+    - npm install -g @angular/cli@9.0.1
+    - ng build --prod --configuration=dev
+  artifacts:
+    expire_in: 10 minutes
+    paths:
+      - ./dist/afp
+  only:
+    - develop
+  except:
+    - master
+
+build_site_prod:
+  image: node:10
+  stage: build_prod
+  dependencies:
+    - approval
+  script:
+    - npm install
+    - npm install -g @angular/cli@9.0.1
+    - ng build --prod --configuration=prod
+  artifacts:
+    expire_in: 10 minutes
+    paths:
+      - ./dist/afp
+  only:
+    - RC-V3.0.0
+
+deploy_qa:
+  stage: deploy_qa
+  image: microsoft/azure-cli
+  dependencies:
+    - build_site_qa
+  script:
+    - ls -la
+    - az login --service-principal -u $AZURE_SP_USER_QA -p $AZURE_SP_SECRET_QA -t $AZURE_SP_TENANT_QA
+    - az storage blob delete-batch -s "\$web" --connection-string $AZURE_STORAGE_CONNECTION_STRING_QA
+    - az storage blob upload-batch -d "\$web" -s ./dist/afp/ --connection-string $AZURE_STORAGE_CONNECTION_STRING_QA
+  only:
+    - develop
+  except:
+    - master
+
+deploy_prod:
+  stage: deploy_prod
+  image: microsoft/azure-cli
+  dependencies:
+    - build_site_prod
+  script:
+    - ls -la
+    - az login --service-principal -u $AZURE_SP_USER_PROD -p $AZURE_SP_SECRET_PROD -t $AZURE_SP_TENANT_PROD
+    - az storage blob delete-batch -s "\$web" --connection-string "DefaultEndpointsProtocol=https;AccountName=webstatic4uitprod;AccountKey=AVJSzoomTj73+Z5e/pGSLR4bEaVGyTKQStb07BG1VCN64xcEnp5rIGwifOSIkhsVlyn7a6pFHkQJd/I1p2c/Pg==;EndpointSuffix=core.windows.net"
+    - az storage blob upload-batch -d "\$web" -s ./dist/afp/ --connection-string "DefaultEndpointsProtocol=https;AccountName=webstatic4uitprod;AccountKey=AVJSzoomTj73+Z5e/pGSLR4bEaVGyTKQStb07BG1VCN64xcEnp5rIGwifOSIkhsVlyn7a6pFHkQJd/I1p2c/Pg==;EndpointSuffix=core.windows.net"
+  only:
+    - RC-V3.0.0
+
+cleanup_cache_cdn_qa:
+  stage: clean_cache_qa
+  image: microsoft/azure-cli
+  dependencies:
+    - deploy_qa
+  script:
+    - az login --service-principal -u $AZURE_SP_USER_QA -p $AZURE_SP_SECRET_QA -t $AZURE_SP_TENANT_QA
+    - az cdn endpoint purge -g $RG_NAME_QA -n $CDN_ENDPOINT_QA --profile-name $CDN_PROF_NAME_QA --content-paths '/*'
+  only:
+    - develop
+  except:
+    - master
+
+# cleanup_cache_cdn_prod:
+#   stage: clean_cache_prod
+#   image: microsoft/azure-cli
+#   dependencies:
+#     - deploy_prod
+#   script:
+#     - az login --service-principal -u $AZURE_SP_USER_PROD -p $AZURE_SP_SECRET_PROD -t $AZURE_SP_TENANT_PROD
+#     - az cdn endpoint purge -g $RG_NAME_PROD_2K -n $CDN_ENDPOINT_PROD_4UIT --profile-name $CDN_PROF_NAME_PROD --content-paths '/*'
+#   only:
+#     - master

@@ -1,0 +1,784 @@
+<div class="nombre-contacto">
+  A continuación, te solicitamos ingresar<br />
+  tus
+  <strong>datos de contacto y de pago</strong>
+</div>
+
+<div class="monto-disponible-residente" [ngClass]="{
+    'monto-disponible-residente__three-column': !!isApvAccept && isApvAmountLowerDisbursement,
+    'monto-disponible-residente__two-column': !!isApvAccept && isApvAmountEqualDisbursement,
+    'monto-disponible-residente__one-column': !isApvEnable || !isApvAccept }">
+  <div class="box" *ngIf="isApvEnable && isApvAccept">
+    <div class="title-contacto">MONTO RETIRADO</div>
+    <div class="montos-contacto">{{ amountDisbursement| currency: 'S/': 'symbol': '.0-0' }}</div>
+  </div>
+  <div class="box" *ngIf="isApvAmountLowerDisbursement">
+    <div class="title-contacto">MONTO A TRANSFERIR AL BANCO</div>
+    <div class="montos-contacto">{{ amountWithdraw | currency: 'S/': 'symbol': '.0-0' }}</div>
+  </div>
+  <div class="box" *ngIf="isApvEnable && isApvAccept">
+    <div class="title-contacto">MANTENER EN AFP CON LIBRE DISPONIBILIDAD</div>
+    <div class="montos-contacto">{{ amountAPV | currency: 'S/': 'symbol': '.0-0' }}</div>
+  </div>
+</div>
+
+<ng-container [formGroup]="form">
+
+  <!-- LUGAR DE RESIDENCIA -->
+  <div class="retiro-fondo-pension">
+    <div class="title">Lugar de residencia*:</div>
+    <div class="block-saldo-monto">
+      <div class="group-radio">
+        <mat-radio-group formControlName="residencia" (change)="changeResidence($event)">
+          <mat-radio-button value="RESIDE_IN_PERU">Resido en Perú</mat-radio-button>
+          <mat-radio-button value="NO_RESIDE_IN_PERU">No resido en Perú</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+    <!-- RESIDE EN PERÚ -->
+    <div class="options-lugar-residencia" *ngIf="residenceIsPeru">
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="outline" class="rp-form-element">
+            <mat-label>Departamento</mat-label>
+            <mat-select formControlName="departamento"
+              (selectionChange)="onSelectProvince($event.value);departmentsChange($event.value)" required>
+              <mat-option *ngFor="let departments of ubigeo.departments" value={{departments.code}}>
+                {{departments.description | titlecase}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="hasErrors('departamento') && form.get('departamento').errors.required">Es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="column">
+          <mat-form-field appearance="outline" class="rp-form-element">
+            <mat-label>Provincia</mat-label>
+            <mat-select formControlName="provincia"
+              (selectionChange)="onSelectDistrict($event.value);provincesChange($event.value)" required>
+              <mat-option *ngFor="let province of ubigeo.provinces" value="{{province.code}}">
+                {{province.description | titlecase}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="hasErrors('provincia') && form.get('provincia').errors.required">Es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="outline" class="rp-form-element">
+            <mat-label>Distrito</mat-label>
+            <mat-select formControlName="distrito" (selectionChange)="districtsChange($event.value)" required>
+              <mat-option *ngFor="let district of ubigeo.districts" value="{{district.code}}">
+                {{district.description | titlecase}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="hasErrors('distrito') && form.get('distrito').errors.required">Es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="column">
+          <mat-form-field appearance="outline" class="rp-form-element">
+            <mat-label>Dirección</mat-label>
+            <input matInput placeholder="Vía - Número - Localidad" formControlName="direccion" maxlength="100" required />
+            <mat-error *ngIf="hasErrors('direccion') && form.get('direccion').errors.required">Es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <!-- NO RESIDE EN PERÚ -->
+    <div class="options-lugar-residencia no-residencia" *ngIf="!residenceIsPeru">
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="outline" class="rp-form-element">
+            <mat-label>País de residencia *</mat-label>
+            <mat-select formControlName="pais" (selectionChange)="countriesChange($event.value)">
+              <mat-option *ngFor="let country of ubigeo.countries" value={{country.code}}>
+                {{country.description | titlecase}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="hasErrors('pais') && form.get('pais').errors.required">Es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="column">
+          <mat-form-field appearance="outline" class="rp-form-element">
+            <mat-label>Ciudad de residencia *</mat-label>
+            <input matInput placeholder="Ciudad de residencia" formControlName="ciudadResidencia" />
+            <mat-error *ngIf="hasErrors('ciudadResidencia') && form.get('ciudadResidencia').errors.required">Es
+              requerido
+            </mat-error>
+            <mat-error
+              *ngIf="hasErrors('ciudadResidencia') && form.get('ciudadResidencia').errors.alphaNumericWithSpace">
+              Solo se permiten letras
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="outline" class="rp-form-element">
+            <mat-label>Dirección de residencia *</mat-label>
+            <input matInput placeholder="Dirección de residencia" formControlName="direccionResidencia" maxlength="100" />
+            <mat-error *ngIf="hasErrors('direccionResidencia') && form.get('direccionResidencia').errors.required">Es
+              requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- <ng-container *ngTemplateOutlet="infoNotResidenceIsPeru"></ng-container> -->
+    </div>
+  </div>
+
+  <!-- APV y APV IGUAL A MONTO A RETIRAR -->
+  <ng-container *ngIf="isApvAmountEqualDisbursement">
+
+  </ng-container>
+
+  <ng-container *ngIf="isApvAmountLowerDisbursement || !isApvAccept">
+    <div class="retiro-fondo-pension">
+      <!-- APV MENOR A MONTO A RETIRAR -->
+
+      <!-- RESIDE EN PERU -->
+      <div class="banco-de-residencia" *ngIf="residenceIsPeru" formGroupName="saldoResidoPeru">
+        <div class="title">Elige tu tipo de retiro:</div>
+        <div class="block-saldo-monto">
+          <div class="group-radio">
+            <mat-radio-group #radioGroupCuenta="matRadioGroup" formControlName="tipoRetiro"
+              (change)="changeRetirementType($event)">
+              <mat-radio-button [checked]="true" value="BANK_DEPOSIT">Depósito en cuenta</mat-radio-button>
+              <mat-radio-button value="WINDOW_PAYMENT">No tengo cuenta</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="options-lugar-residencia" *ngIf="radioGroupCuenta.value === 'BANK_DEPOSIT'">
+          <div class="row">
+            <div class="column">
+              <mat-form-field appearance="outline" class="rp-form-element">
+                <mat-label>Elige tu banco</mat-label>
+                <mat-select formControlName="banco" (selectionChange)="banksChange($event.value)" required>
+                  <mat-option *ngFor="let bank of ubigeo.banks" value="{{bank.code}}">{{bank.description}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="hasErrorsResidoPeru('banco') && formResidePeru().get('banco').errors.required">
+                  Es requerido
+                </mat-error>
+                <mat-error
+                  *ngIf="hasErrorsResidoPeru('banco') && formResidePeru().get('banco').errors.alphaNumericWithSpace">
+                  Solo se permiten letras
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="column">
+              <mat-form-field appearance="outline" class="rp-form-element">
+                <mat-label>Número de cuenta</mat-label>
+                <input matInput placeholder="" [maxlength]="accountMaxLenght" formControlName="numeroDeCuenta" required />
+                <mat-hint *ngIf="!formResidePeru().get('numeroDeCuenta').value">
+                  <span>
+                    Ingresa el número de tu cuenta bancaria.
+                  </span>
+                </mat-hint>
+                <mat-error
+                  *ngIf="hasErrorsResidoPeru('numeroDeCuenta') && formResidePeru().get('numeroDeCuenta').errors.required">
+                  Es requerido
+                </mat-error>
+                <mat-error
+                  *ngIf="hasErrorsResidoPeru('numeroDeCuenta') && formResidePeru().get('numeroDeCuenta').errors.accountNumberFormat">
+                  Número de cuenta inválido
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div class="options-lugar-residencia" *ngIf="radioGroupCuenta.value === 'WINDOW_PAYMENT'">
+          <div class="row">
+            <div class="column">
+              <mat-form-field appearance="outline" class="rp-form-element" *ngIf="showBankListWindowPayment">
+                <mat-label>Elige tu banco</mat-label>
+                <mat-select formControlName="banco" (selectionChange)="banksChange($event.value)">
+                  <mat-option *ngFor="let bank of banks056" value="{{bank.code}}">{{bank.description}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="hasErrorsResidoPeru('banco') && formResidePeru().get('banco').errors.required">
+                  Es requerido
+                </mat-error>
+                <mat-error
+                  *ngIf="hasErrorsResidoPeru('banco') && formResidePeru().get('banco').errors.alphaNumericWithSpace">
+                  Solo se permiten letras
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="column">
+            </div>
+          </div>
+
+          <div class="info-retiro no-cuenta" *ngIf="districtInGroupOneWithDNI">
+            <span class="icono-info">
+              <img src="../../../assets/info.png" alt="info" />
+            </span>
+            <p>
+              La AFP te informará cómo te realizará el pago.
+            </p>
+          </div>
+
+          <div class="info-retiro no-cuenta" *ngIf="districtInGroupOneWithoutDNI">
+            <span class="icono-info">
+              <img src="../../../assets/info.png" alt="info" />
+            </span>
+            <p>
+              Para registrar tu solicitud debes contar con una cuenta en alguna de las entidades con las que trabajamos.
+              Por favor, <strong>ingresa tu solicitud cuando tengas una cuenta</strong>.
+            </p>
+          </div>
+
+          <div class="info-retiro no-cuenta" *ngIf="districtInGroupTwo">
+            <span class="icono-info">
+              <img src="../../../assets/info.png" alt="info" />
+            </span>
+            <p>
+              Selecciona el banco donde la AFP solicitará la apertura de una cuenta a tu nombre, en la cual te realizará el
+              abono del retiro.
+            </p>
+          </div>
+
+          <div class="info-retiro no-cuenta" *ngIf="districtWithoutGroupAfpValid">
+            <span class="icono-info">
+              <img src="../../../assets/info.png" alt="info" />
+            </span>
+            <p>
+              Selecciona el banco donde la AFP solicitará la apertura de una cuenta a tu nombre, en la cual te realizará el
+              abono del retiro. Los bancos indicados no tienen una agencia en tu distrito, <b>asegúrate de poder acercarte</b>.
+            </p>
+          </div>
+
+          <div class="info-retiro no-cuenta" *ngIf="districtWithoutGroupAfpNoValid">
+            <span class="icono-info">
+              <img src="../../../assets/info.png" alt="info" />
+            </span>
+            <p>
+              Para registrar tu solicitud debes contar con una cuenta en alguna de las entidades con las que trabajamos.
+              Por favor, <strong>ingresa tu solicitud cuando tengas una cuenta</strong>.
+            </p>
+          </div>
+
+          <div *ngIf="districtNotSelected">
+            <div class="info-retiro no-cuenta" >
+              <span>Debes ingresar tu dirección</span>
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- ESTE CASO YA NO IRIA -->
+        <div class="info-retiro" *ngIf="false">
+          <span class="icono-info">
+            <img src="../../../assets/info.png" alt="info" />
+          </span>
+          <p>
+            La cuenta debe estar activa a nombre del afiliado, ser en soles y unipersonal (no mancomunada).
+            <br /><br />
+            Si tu cuenta es del Banco de la Nación, ésta debe estar libre de cualquier cargo, gravamen, retención,
+            embargo y/o cualquier otra disposición que afecte la intangibilidad del retiro.
+          </p>
+        </div>
+      </div>
+      <!-- NO RESIDE EN PERU -->
+
+      <div class="banco-no-residencia" *ngIf="!residenceIsPeru" formGroupName="saldoResidoNoPeru">
+        <div class="title">Datos banco lugar de residencia:</div>
+        <div class="row">
+          <div class="column">
+            <mat-form-field appearance="outline" class="rp-form-element">
+              <mat-label>Banco destino *</mat-label>
+              <input matInput placeholder="Banco destino *" formControlName="bancoDestino" />
+              <mat-error
+                *ngIf="hasErrorsResidoNoPeru('bancoDestino') && formNoResidePeru().get('bancoDestino').errors.required">
+                Es requerido
+              </mat-error>
+              <mat-error
+                *ngIf="hasErrorsResidoNoPeru('bancoDestino') && formNoResidePeru().get('bancoDestino').errors.alphaWithSpace">
+                Solo se permiten letras
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="column">
+            <mat-form-field appearance="outline" class="rp-form-element">
+              <mat-label>Ciudad banco destino</mat-label>
+              <input matInput placeholder="Ciudad banco destino" formControlName="ciudadBancoDestino" />
+              <mat-error
+                *ngIf="hasErrorsResidoNoPeru('ciudadBancoDestino') && formNoResidePeru().get('ciudadBancoDestino').errors.required">
+                Es requerido
+              </mat-error>
+              <mat-error
+                *ngIf="hasErrorsResidoNoPeru('ciudadBancoDestino') && formNoResidePeru().get('ciudadBancoDestino').errors.alphaWithSpace">
+                Solo se permiten letras
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <mat-form-field appearance="outline" class="rp-form-element">
+              <mat-label>Nombres registrados en banco *</mat-label>
+              <input matInput placeholder="Nombres registrados en banco" formControlName="nombreRegistradoBanco" />
+              <mat-error
+                *ngIf="hasErrorsResidoNoPeru('nombreRegistradoBanco') && formNoResidePeru().get('nombreRegistradoBanco').errors.required">
+                Es requerido
+              </mat-error>
+              <mat-error
+                *ngIf="hasErrorsResidoNoPeru('nombreRegistradoBanco') && formNoResidePeru().get('nombreRegistradoBanco').errors.alphaWithSpace">
+                Solo se permiten letras
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="column">
+            <mat-form-field appearance="outline" class="rp-form-element">
+              <mat-label>Apellidos registrados en banco *</mat-label>
+              <input matInput placeholder="Apellidos registrados en banco" formControlName="apellidoRegistradoBanco" />
+              <mat-error
+                *ngIf="hasErrorsResidoNoPeru('apellidoRegistradoBanco') && formNoResidePeru().get('apellidoRegistradoBanco').errors.required">
+                Es requerido
+              </mat-error>
+              <mat-error
+                *ngIf="hasErrorsResidoNoPeru('apellidoRegistradoBanco') && formNoResidePeru().get('apellidoRegistradoBanco').errors.alphaWithSpace">
+                Solo se permiten letras
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="title">Datos de la cuenta:</div>
+        <div class="row">
+          <div class="column">
+            <mat-form-field appearance="outline" class="rp-form-element">
+              <mat-label>Moneda banco destino *</mat-label>
+              <mat-select formControlName="monedaBancoDestino" (selectionChange)="currenciesBankChange($event.value)">
+                <mat-option *ngFor="let currency of ubigeo.currencies" value={{currency.code}}>
+                  {{currency.description | titlecase}}
+                </mat-option>
+              </mat-select>
+              <mat-error
+                *ngIf="hasErrorsResidoNoPeru('monedaBancoDestino') && formNoResidePeru().get('monedaBancoDestino').errors.required">
+                Es requerido
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="column">
+            <mat-form-field appearance="outline" class="rp-form-element">
+              <mat-label>Tipo de cuenta</mat-label>
+              <mat-select formControlName="tipoDeCuenta"  (selectionChange)="accountTypeName($event.value)">
+                <mat-option value="checking">Cuenta corriente</mat-option>
+                <mat-option value="savings">Cuenta de ahorros</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <mat-form-field appearance="outline" class="rp-form-element">
+              <mat-label>Número de cuenta banco destino *</mat-label>
+              <input matInput placeholder="12125454545454*" maxlength="30" formControlName="numeroCuentaBancoDestino" />
+              <mat-error
+                *ngIf="hasErrorsResidoNoPeru('numeroCuentaBancoDestino') && formNoResidePeru().get('numeroCuentaBancoDestino').errors.required">
+                Es requerido
+              </mat-error>
+              <mat-error
+                *ngIf="hasErrorsResidoNoPeru('numeroCuentaBancoDestino') && formNoResidePeru().get('numeroCuentaBancoDestino').errors.alphaNumeric">
+                Sólo se permiten caracteres alfanuméricos
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <!-- <div class="column">
+            <mat-form-field appearance="outline" class="rp-form-element">
+              <mat-label>Documento o voucher (*)</mat-label>
+              <input matInput placeholder="Documento o voucher (*)" formControlName="documentoVoucher" />
+            </mat-form-field>
+          </div> -->
+          <div class="column">
+            <mat-file-upload #file
+                             hidden
+                             [labelText]="'Documento o voucher (*)'"
+                             [selectButtonText]="'Agregar archivo (.jpg/.png)'"
+                             [selectFilesButtonType]="'button'"
+                             [uploadButtonText]="'Submit'"
+                             [uploadButtonType]="'submit'"
+                             [allowMultipleFiles]="false"
+                             [showUploadButton]="false"
+                             [acceptedTypes]="'.png, .jpg, .jpeg, .pdf'"
+                             (selectedFilesChanged)="evaluateFileUpload($event)">
+              </mat-file-upload>
+            <mat-form-field appearance="outline" class="rp-form-element" floatLabel="always" (click)="file.fileInputRef.nativeElement.click()">
+              <mat-label>Documento del banco</mat-label>
+              <input matInput
+                     formControlName="documentoVoucher"
+                     placeholder="Adjuntar archivo (.jpeg, .jpg, .png, .pdf). Max. 1 MB"
+                     [matTooltip]="tooltipMessage"
+                     matTooltipPosition="above"
+                     readonly
+                     required>
+              <mat-icon matSuffix
+                        [matTooltip]="tooltipMessage"
+                        matTooltipPosition="above"
+                        color="primary">attachment</mat-icon>
+              <mat-hint>Adjunta la imagen de tu número de cuenta.</mat-hint>
+              <mat-error
+                *ngIf="hasErrorsResidoNoPeru('documentoVoucher') && formNoResidePeru().get('documentoVoucher').errors.required">
+                Sólo se permiten archivos de tipo .jpeg, .jpg .png o .pdf y máximo de 1 MB
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <mat-form-field appearance="outline" class="rp-form-element">
+              <mat-label>Tipo SWIFT o BIC *</mat-label>
+              <mat-select formControlName="tipoSwiftBic">
+                <mat-option value="SWIFT">SWIFT</mat-option>
+                <mat-option value="BIC">BIC</mat-option>
+              </mat-select>
+              <mat-error
+                *ngIf="hasErrorsResidoNoPeru('tipoSwiftBic') && formNoResidePeru().get('tipoSwiftBic').errors.required">
+                Es requerido
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="column">
+            <mat-form-field appearance="outline" class="rp-form-element">
+              <mat-label>Número SWIFT/BIC *</mat-label>
+              <input matInput placeholder="XXXXXXXXXXX" formControlName="numeroSwiftBic" minlength="8" maxlength="11" />
+              <mat-error
+                *ngIf="hasErrorsResidoNoPeru('numeroSwiftBic') && formNoResidePeru().get('numeroSwiftBic').errors.required">
+                Es requerido
+              </mat-error>
+              <mat-error
+                *ngIf="hasErrorsResidoNoPeru('numeroSwiftBic') && formNoResidePeru().get('numeroSwiftBic').errors.alphaNumeric">
+                Sólo se permiten caracteres alfanuméricos
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <mat-form-field appearance="outline" class="rp-form-element">
+              <mat-label>Tipo ABA o IBAN</mat-label>
+              <mat-select formControlName="tipoAbaIban">
+                <mat-option value="ABA">ABA</mat-option>
+                <mat-option value="IBAN">IBAN</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="column">
+            <mat-form-field appearance="outline" class="rp-form-element">
+              <mat-label>Número ABA o IBAN</mat-label>
+              <input matInput placeholder="XXXXXXXXXXX" formControlName="numeroAbaIban" minlength="8" maxlength="34" />
+              <mat-error
+                *ngIf="hasErrorsResidoNoPeru('numeroAbaIban') && formNoResidePeru().get('numeroAbaIban').errors.alphaNumeric">
+                Sólo se permiten caracteres alfanuméricos
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <mat-form-field appearance="outline" class="rp-form-element">
+              <mat-label>Tipo CLABE o Transit Number</mat-label>
+              <mat-select formControlName="tipoClaveTransitNumber" (selectionChange)="transitNumberClabe($event)">
+                <mat-option value="CLABE">CLABE</mat-option>
+                <mat-option value="TRANSIT">Transit number</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="column">
+            <mat-form-field appearance="outline" class="rp-form-element">
+              <mat-label>Número CLABE o Transit Number</mat-label>
+              <input matInput placeholder="0000000000000000" formControlName="numeroClaveTransitNumber"  minlength="8" maxlength="20"/>
+              <mat-error
+                *ngIf="hasErrorsResidoNoPeru('numeroClaveTransitNumber') && formNoResidePeru().get('numeroClaveTransitNumber').errors.alphaNumeric">
+                Sólo se permiten caracteres alfanuméricos
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="title">Datos banco intermediario:</div>
+
+        <div class="group-radio">
+          <mat-radio-group #radioGroupNobank="matRadioGroup" formControlName="tengoBancoIntermediario"
+            (change)="changeIntermediaryBank($event)">
+            <mat-radio-button value="INTERMEDIARY_BANK_ACCOUNT">Si tengo un banco intermediario</mat-radio-button>
+            <mat-radio-button value="NO_INTERMEDIARY_BANK_ACCOUNT">No tengo un banco intermediario
+            </mat-radio-button>
+          </mat-radio-group>
+
+          <div class="no-bannk-intermediario" *ngIf="radioGroupNobank.value !== 'NO_INTERMEDIARY_BANK_ACCOUNT'">
+            <div class="campos-obligatorios">
+              Todos los campos son obligatorios
+            </div>
+            <div class="row">
+              <div class="column">
+                <mat-form-field appearance="outline" class="rp-form-element">
+                  <mat-label>Banco intermediario *</mat-label>
+                  <input matInput placeholder="Banco de credito" formControlName="bancoIntermediario" />
+                  <mat-error
+                    *ngIf="hasErrorsResidoNoPeru('bancoIntermediario') && formNoResidePeru().get('bancoIntermediario').errors.required">
+                    Es requerido
+                  </mat-error>
+                  <mat-error
+                    *ngIf="hasErrorsResidoNoPeru('bancoIntermediario') && formNoResidePeru().get('bancoIntermediario').errors.alphaNumericWithSpace">
+                    Sólo se permiten caracteres alfanuméricos
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="column">
+                <mat-form-field appearance="outline" class="rp-form-element">
+                  <mat-label>País banco intermediario *</mat-label>
+                  <mat-select formControlName="paisBancoIntermediario"
+                    (selectionChange)="countryBankInterChange($event.value)">
+                    <mat-option *ngFor="let country of ubigeo.countries" value={{country.code}}>
+                      {{country.description | titlecase}}</mat-option>
+                  </mat-select>
+                  <mat-error
+                    *ngIf="hasErrorsResidoNoPeru('paisBancoIntermediario') && formNoResidePeru().get('paisBancoIntermediario').errors.required">
+                    Es requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column">
+                <mat-form-field appearance="outline" class="rp-form-element">
+                  <mat-label>Ciudad banco intermediario *</mat-label>
+                  <input matInput placeholder="Ciudad banco intermediario" formControlName="ciudadBancoIntermediario" />
+                  <mat-error
+                    *ngIf="hasErrorsResidoNoPeru('ciudadBancoIntermediario') && formNoResidePeru().get('ciudadBancoIntermediario').errors.required">
+                    Es requerido
+                  </mat-error>
+                  <mat-error
+                    *ngIf="hasErrorsResidoNoPeru('ciudadBancoIntermediario') && formNoResidePeru().get('ciudadBancoIntermediario').errors.alphaWithSpace">
+                    Sólo se permiten caracteres alfanuméricos
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="column">
+                <mat-form-field appearance="outline" class="rp-form-element">
+                  <mat-label>Número de cuenta banco intermediario *</mat-label>
+                  <input matInput placeholder="Número de cuenta banco intermediario"
+                    formControlName="cuentaBancoIntermediario" minlength="3" maxlength="30"/>
+                  <mat-error
+                    *ngIf="hasErrorsResidoNoPeru('cuentaBancoIntermediario') && formNoResidePeru().get('cuentaBancoIntermediario').errors.required">
+                    Es requerido
+                  </mat-error>
+                  <mat-error
+                    *ngIf="hasErrorsResidoNoPeru('cuentaBancoIntermediario') && formNoResidePeru().get('cuentaBancoIntermediario').errors.alphaNumeric">
+                    Sólo se permiten caracteres alfanuméricos
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column">
+                <mat-form-field appearance="outline" class="rp-form-element">
+                  <mat-label>Tipo SWIFT o ABA</mat-label>
+                  <mat-select formControlName="tipoSwiftAba" required>
+                    <mat-option value="SWIFT">SWIFT</mat-option>
+                    <mat-option value="ABA">ABA</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="column">
+                <mat-form-field appearance="outline" class="rp-form-element">
+                  <mat-label>Número SWIFT o ABA</mat-label>
+                  <input matInput formControlName="numeroSwiftAba"
+                         placeholder="Código Swift"
+                         minlength="8"
+                         maxlength="34"
+                         required/>
+                  <mat-error
+                    *ngIf="hasErrorsResidoNoPeru('numeroSwiftAba') && formNoResidePeru().get('numeroSwiftAba').errors.required">
+                    Es requerido
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </ng-container>
+
+  <!-- INFORMACIÓN DE CONTACTO -->
+  <div class="retiro-fondo-pension">
+    <div class="title">Información de contacto del afiliado:</div>
+    <div class="options-lugar-residencia">
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="outline" class="rp-form-element">
+            <mat-label>Correo electrónico</mat-label>
+            <input matInput placeholder="Correo electrónico" formControlName="correoElectronico" autocomplete="off" required>
+            <mat-error *ngIf="hasErrors('correoElectronico')">Formato inválido</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="column">
+          <mat-form-field appearance="outline" class="rp-form-element">
+            <mat-label>Número de teléfono</mat-label>
+            <input matInput required placeholder="Número de teléfono" [maxLength]="maxlengthPhone" formControlName="numeroTelefono"
+                   autocomplete="off" />
+            <mat-error *ngIf="form.get('numeroTelefono').hasError('required')">Es requerido</mat-error>
+            <mat-error *ngIf="form.get('numeroTelefono').hasError('minlength')">El número mínimo es 9</mat-error>
+            <mat-error *ngIf="form.get('numeroTelefono').hasError('pattern')">Debe empezar en 9</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="banner-termina-registro">
+    <p>
+      Cuando tu solicitud haya sido registrada, en el transcurso del día recibirás la constancia de registro a través de un correo electrónico. <br />
+      Si los datos bancarios que colocaste en tu solicitud son rechazados, recibirás un correo electrónico informando el motivo del rechazo, en el transcurso del día.
+    </p>
+  </div>
+  <div class="consideraciones" *ngIf="!isApvAccept">
+    <h4>Consideraciones:</h4>
+    <ul>
+      <li>
+        Un afiliado puede registrar solo una solicitud de retiro.
+      </li>
+      <li>
+        Usaremos los datos que ingresaste para fines de verificación y toda posterior comunicación en tu condición de
+        afiliado.
+      </li>
+      <li>
+        Recuerda que, si retiras todo el dinero de tu fondo, no contarás con saldo para una posible pensión jubilación, pensión
+        de invalidez o pensión de sobrevivencia para tus beneficiarios; y que cualquier retiro extraordinario afectará estas pensiones.
+      </li>
+      <p><strong>Si elegiste "tengo cuenta"</strong></p>
+      <li>
+        La cuenta debe estar activa a nombre del afiliado, ser en soles y unipersonal (no mancomunada).
+      </li>
+      <li>
+        Tu banco podrá abrir una cuenta a tu nombre para depositar el monto de tu retiro. Asegúrate de mantenerla
+        activa hasta recibir todas las armadas correspondientes a tu retiro.
+      </li>
+      <p><strong>Si elegiste "no tengo cuenta"</strong></p>
+      <li>El banco seleccionado abrirá una cuenta a tu nombre para depositar el monto de tu retiro. Asegúrate de
+        mantenerla activa hasta recibir todas las armadas correspondientes a tu retiro.</li>
+
+        <p><strong>Si resides en el extranjero: </strong></p>
+        <li>El costo de la transferencia al exterior es asumido por el afiliado.</li>
+        <li><b>Consulta con tu banco</b> si requiere de un banco intermediario para recibir transferencias desde el
+          exterior, si fuera necesario y no lo registras, es posible que tu pago rebote y te genere gastos adicionales.</li>
+          <li>Si la moneda no se encuentra en la lista, elije dólares o euros.</li>
+          <li>La AFP realiza el cambio del importe retirado al tipo de cambio que obtenga con el banco emisor de la
+            transferencia, siendo posible que se instruya en dólares o euros.
+          </li>
+          <li>Si no has ingresado todos los datos requeridos para realizar la transferencia bancaria al exterior, el pago de tu retiro
+            podría no hacerse efectivo, lo cual podría conllevar costos bancarios adicionales que serán descontados de la transferencia
+            y tiempos adicionales para la transferencia.
+            <ul>
+              <li>El SWIFT es obligatorio</li>
+              <li>El IBAN es obligatorio para bancos europeos</li>
+              <li>La Cuenta CLABE es obligatoria para bancos de México </li>
+              <li>El Transit Number es obligatorio para bancos de Canadá</li>
+            </ul>
+          </li>
+          <li>De requerir mayor información para procesar tu solicitud, tu AFP se comunicará contigo.</li>
+        </ul>
+      </div>
+      <div class="consideraciones" *ngIf="isApvAccept">
+        <h4>Consideraciones:</h4>
+        <ul>
+          <li>
+            Un afiliado puede registrar solo una solicitud de retiro.
+          </li>
+          <li>
+            Usaremos los datos que ingresaste para fines de verificación y toda posterior comunicación en tu condición de
+            afiliado.
+          </li>
+          <li>
+            Recuerda que, si retiras todo el dinero de tu fondo, no contarás con saldo para una posible pensión jubilación, pensión
+            de invalidez o pensión de sobrevivencia para tus beneficiarios; y que cualquier retiro extraordinario afectará estas pensiones.
+          </li>
+          <p><strong>Si elegiste "tengo cuenta"</strong></p>
+          <li>
+            La cuenta debe estar activa a nombre del afiliado, ser en soles y unipersonal (no mancomunada).
+          </li>
+          <li>
+            Tu banco podrá abrir una cuenta a tu nombre para depositar el monto de tu retiro. Asegúrate de mantenerla
+            activa hasta recibir todas las armadas correspondientes a tu retiro.
+          </li>
+          <p><strong>Si elegiste "no tengo cuenta"</strong></p>
+          <li>El banco seleccionado abrirá una cuenta a tu nombre para depositar el monto de tu retiro. Asegúrate de
+            mantenerla activa hasta recibir todas las armadas correspondientes a tu retiro.</li>
+
+            <p><strong>Si resides en el extranjero: </strong></p>
+            <li>El costo de la transferencia al exterior es asumido por el afiliado.</li>
+            <li><b>Consulta con tu banco</b> si requiere de un banco intermediario para recibir transferencias desde el
+              exterior, si fuera necesario y no lo registras, es posible que tu pago rebote y te genere gastos adicionales.</li>
+              <li>Si la moneda no se encuentra en la lista, elije dólares o euros.</li>
+              <li>La AFP realiza el cambio del importe retirado al tipo de cambio que obtenga con el banco emisor de la
+                transferencia, siendo posible que se instruya en dólares o euros.
+              </li>
+              <li>Si no has ingresado todos los datos requeridos para realizar la transferencia bancaria al exterior, el pago de tu retiro
+                podría no hacerse efectivo, lo cual podría conllevar costos bancarios adicionales que serán descontados de la transferencia y
+                tiempos adicionales para la transferencia.
+                <ul>
+                  <li>El SWIFT es obligatorio</li>
+                  <li>El IBAN es obligatorio para bancos europeos</li>
+                  <li>La Cuenta CLABE es obligatoria para bancos de México </li>
+                  <li>El Transit Number es obligatorio para bancos de Canadá</li>
+                </ul>
+              </li>
+              <li>De requerir mayor información para procesar tu solicitud, tu AFP se comunicará contigo.</li>
+            </ul>
+          </div>
+          <div class="group-checkbox">
+            <mat-checkbox name="autorizo-virtual"
+                          [color]="'primary'"
+                          formControlName="accountStatusFlag"
+                          aria-label="First checkbox"
+                          *ngIf="!classEECC">
+              Autorizo el envío de mi estado de cuenta de manera virtual
+          </mat-checkbox>
+          <mat-checkbox required [color]="'primary'"
+                        name="cambio-cuenta"
+                        [ngClass]="{'mat-error': form.get('personalDataCheck').invalid && form.get('personalDataCheck').dirty}"
+                        value="Autorizo a mi AFP a la utilización de mis datos personales ingresados en esta solicitud.
+                        Cláusula de protección de datos personales."
+                        aria-label="First checkbox"
+                        formControlName="personalDataCheck">
+          Autorizo a mi AFP a la utilización de mis datos personales
+          ingresados en esta solicitud
+        </mat-checkbox>
+        <div style="margin-top: 10px;">
+    <!-- <a href="https://www2.sbs.gob.pe/afiliados/paginas/consulta.aspx" target="_blank" style="color: #007bff;">Cláusula de protección de datos personales.
+    </a> -->
+    <span (click)="openAfpClause()" class="clause-link">Cláusula de protección de datos personales.
+    </span>
+  </div>
+</div>
+
+</ng-container>
+
+<!-- <ng-template #infoNotResidenceIsPeru>
+  <div class="info-retiro">
+    <span class="icono-info">
+      <img src="../../../assets/info.png" alt="info" />
+    </span> -->
+    <!--<p>
+      Si supera el monto a transferir la solicitud no será procesada y asegurar de tener todos los datos para que
+      la solicitud proceda. La AFP podrá contactarte para solicitarte mayor información para procesar tu
+      solicitud. Mensaje sobre posible ampliación de plazo. Solicitar mensaje a AFP.
+    </p>-->
+    <!-- <p>
+      Cuando tu solicitud haya sido registrada, recibirás la constancia de registro a través de un correo electrónico.<br>
+      Si los datos bancarios que colocaste en tu solicitud son rechazados, recibirás un correo electrónico informando el motivo del rechazo.
+    </p>
+  </div>
+</ng-template> -->

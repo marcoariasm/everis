@@ -1,0 +1,75 @@
+<div class="main">
+  <div class="step-3">
+    <div class="nombre-contacto">
+      <div class="icono-check">
+        <img src="../../../assets/approved.svg" alt="">
+      </div>
+      <strong>¡Listo!</strong>
+    </div>
+    <div class="message-solicitud">
+      {{ firstName | titlecase }}, tu solicitud se ha generado con éxito.
+    </div>
+    <div class="codigo-seguimiento">Solicitud N° {{ requestNumber }}</div>
+    <div class="datos-solicitud">
+      <table>
+        <tr *ngIf="amountAvailable > uit">
+          <td>Monto retirado:</td>
+          <td>{{ data.amountWithdraw | currency: 'S/':true:'2.0' }}</td>
+        </tr>
+        <tr *ngIf="data.amountVoluntaryFund && (amountAvailable > uit)">
+          <td>Monto con libre disponibilidad en tu AFP:</td>
+          <td>{{ data.amountVoluntaryFund | currency: 'S/':true:'2.0' }}</td>
+        </tr>
+        <tr>
+          <td>Monto a transferir al banco:</td>
+          <td>{{ amountWithdraw | currency: 'S/':true:'2.0'}}</td>
+        </tr>
+        <tr *ngIf="data && data.address.country === 'PE' && data.payment?.bankDeposit?.name">
+          <td>Entidad financiera:</td>
+          <td>{{ successData.bankName }}</td>
+        </tr>
+        <tr *ngIf="data && data.address.country === 'PE' && successData.bankAccountNumber ">
+          <td>Número de cuenta en soles:</td>
+          <td>{{ successData.bankAccountNumber }}</td>
+        </tr>
+        <tr *ngIf="data && data.address.residenceAbroad && data.payment?.bankDeposit?.name">
+          <td>Entidad financiera:</td>
+          <td>{{ data.payment?.bankDeposit?.name }}</td>
+        </tr>
+        <tr *ngIf="data && data.address.residenceAbroad">
+          <td>Número de cuenta:</td>
+          <td>{{ successData.bankAccountNumber }}</td>
+        </tr>
+        <tr>
+          <td>Fecha y hora de solicitud:</td>
+          <td>{{ getCurrentDate() }}</td>
+        </tr>
+        <tr>
+          <td>Correo electrónico:</td>
+          <td>{{ successData.email || '-' }}</td>
+        </tr>
+        <tr>
+          <td>Teléfono celular:</td>
+          <td>{{ successData.cellphone || '-' }}</td>
+        </tr>
+      </table>
+      <div class="aviso-legal">
+        La AFP o la Asociación de AFP <strong>no solicitan información personal</strong>, como
+        número de tarjeta,<br /> clave de tarjeta, CVV u otro, en los mensajes de
+        texto o correos que te envían.
+      </div>
+      <br>
+      <div class="aviso-legal">
+        <p>En el transcurso del día recibirás la constancia de registro al correo electrónico registrado en tu solicitud.<br>
+        <span *ngIf="afpType !== 'HABITAT'">
+          Después de dos días útiles de haber registrado tu solicitud, podrás consultar el estado de tu solicitud,
+          ingresando a <a href="www.consultaretiroafp.pe">www.consultaretiroafp.pe</a> en la opción <b>¿Cómo va mi solicitud?</b>
+        </span>
+        </p>
+        <p>En caso de que tu solicitud sea aprobada, tu pago se realizará hasta en 30 días posteriores al ingreso.</p>
+
+      </div>
+      <button (click)="goToHome()" class="btn-alternative" mat-flat-button color="primary">Cerrar</button>
+    </div>
+  </div>
+</div>

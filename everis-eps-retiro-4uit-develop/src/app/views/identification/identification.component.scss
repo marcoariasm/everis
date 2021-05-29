@@ -1,0 +1,183 @@
+// Variables
+$border-color: rgba(0, 0, 0 , .54);
+$accent-color: #009de4;
+
+div.main {
+  width: 80%;
+  min-width: 300px;
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 15px 0;
+
+  .form {
+    margin-bottom: 40px;
+  }
+}
+
+.content-questions {
+  min-height: 250px;
+}
+
+.questions {
+  padding: 10px 10px 20px;
+
+  .description {
+    margin: 0 0 10px;
+    font-size: 1.1em;
+    width: 100%;
+    display: block;
+  }
+
+  .option {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 10px;
+  }
+}
+
+.tittle {
+  margin-top:40px;
+  margin-bottom:24px;
+  color: #2c92ab;
+}
+
+.p-10 {
+  padding: 10px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column{
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+}
+
+@media screen and (min-width: 800px) {
+  .column {
+    flex: 1
+  }
+}
+.same-height {
+  min-height: 152px;
+  border-top: 5px solid #2c92ab;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+
+  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    min-height: unset;
+  }
+}
+
+.rp-form-element {
+  padding: 0 10px;
+
+  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    width: 95%;
+  }
+}
+
+.additionalInfo {
+  font-size: 10px;
+  margin-bottom: 24px;
+  color: #4d5b70;
+  padding-left: 12px;
+
+  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    width: 95%;
+  }
+}
+
+.timer {
+  float: right;
+}
+
+.action-button {
+  background-color: #18a0c2;
+  color: #fff;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+// Radio
+.radio {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    margin: 0 15px 10px;
+    font-size: 14px;
+    line-height: 24px;
+
+    &__input {
+        position: absolute;
+        top: 4px;
+        left: 0;
+        width: 36px;
+        height: 20px;
+        opacity: 0;
+        z-index: 0;
+    }
+
+    // Unchecked
+    &__label {
+        display: block;
+        padding: 0 0 0 24px;
+        cursor: pointer;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 1px;
+            left: 0;
+            width: 16px;
+            height: 16px;
+            background-color: transparent;
+            border: 2px solid $border-color;
+            border-radius: 14px;
+            z-index: 1;
+            transition: border-color 0.28s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 4px;
+            width: 12px;
+            height: 12px;
+            background-color: $accent-color;
+            border-radius: 50%;
+            z-index: 2;
+            transform: scale(0, 0);
+            transition: transform 0.28s cubic-bezier(.4, 0, .2, 1);
+        }
+    }
+
+    // Checked
+    &__input:checked + &__label {
+        &:before {
+            border-color: $accent-color;
+        }
+
+        &:after {
+            transform: scale(1, 1);
+        }
+    }
+
+    // Focus
+    // Uncomment for accessible outline
+    //  &__input:focus + &__label {
+    //      &:before {
+    //          outline: 1px dotted currentColor;
+    //      }
+    // }
+}

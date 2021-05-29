@@ -1,0 +1,171 @@
+{
+  "version": "0.0.1",
+  "views" : {
+    "query": {
+      "title": "Por favor ingresa los datos solicitados",
+      "controls": {
+        "documentType": {
+          "label": "Tipo de Documento"
+        },
+        "documentNumber": {
+          "placeholder": "Ej. 123456789",
+          "label": "Número de Documento"
+        },
+        "digit": {
+          "placeholder": "Ej. 1",
+          "label": "Dígito Verificador"
+        },
+        "birthdate": {
+          "label": "Fecha de Nacimiento"
+        }
+      }
+    },
+    "identification": {
+      "title": "Preguntas de identificación",
+      "subtitle": "Por favor, responde las preguntas para continuar con tú solicitud."
+    },
+    "request": {
+      "title": "Registro de solicitud",
+      "subtitle": "Por favor, completa los datos necesarios para la solicitud.",
+      "authorizeVirtualShipping": "Autorizo el envío de mi estado de cuenta de manera virtual.",
+      "controls": {
+        "email": {
+          "placeholder": "Ej. juanperez@gmail.com",
+          "label": "Correo Electrónico"
+        },
+        "cellphone": {
+          "placeholder": "Ej. 123123123",
+          "label": "Número de Teléfono"
+        },
+        "paymentType": {
+          "placeholder": "",
+          "label": "Tipo de retiro"
+        },
+        "bank": {
+          "placeholder": "",
+          "label": "Banco"
+        },
+        "bankAccountNumber": {
+          "placeholder": "Ej. 123123123123123123",
+          "placeholderBN": "Ej. 423123123123123123",
+          "label": "Número de cuenta"
+        },
+        "departamento": {
+          "placeholder": "",
+          "label": "Departamento"
+        },
+        "provincia": {
+          "placeholder": "",
+          "label": "Provincia"
+        },
+        "ubigeo": {
+          "placeholder": "",
+          "label": "Distrito"
+        },
+        "address": {
+          "placeholder": "Vía - Número - Localidad",
+          "label": "Dirección"
+        }
+      }
+    },
+    "request25": {
+      "title": "Registro de solicitud",
+      "subtitle": "Por favor, completa los datos necesarios para la solicitud.",
+      "authorizeVirtualShipping": "Autorizo el envío de mi estado de cuenta de manera virtual.",
+      "coin": "S/",
+      "controls": {
+        "amountWithdraw": {
+          "placeholder": "",
+          "label": "Monto a retirar:"
+        },
+        "email": {
+          "placeholder": "Ej. juanperez@gmail.com",
+          "label": "Correo Electrónico"
+        },
+        "cellphone": {
+          "placeholder": "Ej. 123123123",
+          "label": "Número de Teléfono"
+        },
+        "paymentType": {
+          "placeholder": "",
+          "label": "Tipo de retiro"
+        },
+        "bank": {
+          "placeholder": "",
+          "label": "Banco"
+        },
+        "bankAccountNumber": {
+          "placeholder": "Ej. 123123123123123123",
+          "placeholderBN": "Ej. 423123123123123123",
+          "label": "Número de cuenta"
+        },
+        "departamento": {
+          "placeholder": "",
+          "label": "Departamento"
+        },
+        "provincia": {
+          "placeholder": "",
+          "label": "Provincia"
+        },
+        "ubigeo": {
+          "placeholder": "",
+          "label": "Distrito"
+        },
+        "address": {
+          "placeholder": "Vía - Número - Localidad",
+          "label": "Dirección"
+        }
+      }
+    },
+    "voluntaryContribution": {
+      "title": "Monto a retirar",
+      "hello": "¡Hola {name}!",
+      "info": "Puedes retirar tú dinero de manera <strong>rápida y sencilla</strong> desde nuestra <strong>plataforma digital</strong>",
+      "infoAmountAvailable": "Monto disponible",
+      "coin": "S/",
+      "infoImportant": "Importante: este monto es referencial, el monto que podrás retirar se recalculará a la fecha del registro de tu solicitud de retiro.",
+      "question1": "¿Cuanto deseas retirar?",
+      "additionalInfo": [
+        "El monto retirado podría estar sujeto a medidas judiciales o administrativas ordenadas o dispuestas por personas distintas de la AFP, como autoridades competentes, que pueden afectar su disponibilidad (retenciones por alimentos, medidas de congelamiento parciales, entre otras).",
+        "La entrega del monto a retirar se hará hasta en dos armadas, la primera, dentro de los 10 días calendario posteriores al registro de tu solicitud y la segunda, dentro de los siguientes 30 días calendario posteriores al pago de la primera armada. La AFP te informará la fecha de la segunda armada."
+      ],
+      "controls": {
+        "amountWithdraw": {
+          "placeholder": "Colocar fondo",
+          "label": "Monto a retirar (S/)",
+          "error": "El monto que ingreses no debe superar tu monto disponible.",
+          "errorUIT": "El monto que ingreses debe ser mayor ó igual a una UIT (S/ 4400.00)."
+        }
+      }
+    }
+  },
+  "commons": {
+    "buttons": {
+      "back": "Volver",
+      "cancel": "Cancelar",
+      "validate": "Validar mi identidad",
+      "register": "Registrar Solicitud",
+      "retireNow": "Retirar ahora",
+      "query": "Consultar"
+    },
+    "affiliate": {
+      "queryData": "Datos de la consulta",
+      "affiliateInfo": "Información del afiliado",
+      "document": "Documento:",
+      "dateBirth": "Fecha de Nacimiento:",
+      "fullName": "Nombre completo:",
+      "afp": "AFP:",
+      "cuspp": "CUSPP:"
+    },
+    "additionalInfo": [
+      "Autorizo a mi AFP para que, con sujeción a sus protocolos de actualización de información, en caso fuera conveniente o necesario, actualice la información que se encuentra en su base datos con el correo electrónico y celular que se indican en la presente solicitud.",
+      "Un afiliado puede registrar solo una solicitud de retiro de hasta S/2,000 de su fondo. ",
+      "Si accedes al retiro porque el MTPE comunicó a la AFP tu condición laboral, la entrega del monto retirado se hará en una sola armada.",
+      "Si tienes en curso una solicitud de retiro de hasta 25% del fondo, el plazo para la atención de la solicitud de retiro de hasta S/2,000 del fondo será contabilizado luego del desembolso de la primera armada del retiro de hasta 25% del fondo.",
+      "Usaremos los datos que ingresaste para fines de verificación y toda posterior comunicación en tu condición de afiliado y para materializar el pago si elegiste <strong>No tengo cuenta bancaria</strong>.",
+      "Recuerda que, los retiros extraordinarios afectan negativamente el monto de tu futura pensión de jubilación, invalidez o sobrevivencia. En caso de retirar todo el dinero de tu fondo, no contarás con saldo para una acceder a una pensión.",
+      "Si elegiste <strong>Tengo cuenta bancaria</strong> y el número de cuenta registrado es incorrecto o no te pertenece, recibirás un correo y/o SMS indicando la fecha y el medio por el cual podrás retirar tu dinero, en un plazo adicional a los 10 días calendario que señala la normativa.",
+      "El afiliado toma conocimiento de que la cuenta bancaria declarada, es una cuenta personal de su titularidad (no deberá ser mancomunada). En caso la cuenta no cumpla con tal condición, el pago se realizará a través de otra modalidad para no afectar la disponibilidad del dinero."
+    ]
+  }
+}

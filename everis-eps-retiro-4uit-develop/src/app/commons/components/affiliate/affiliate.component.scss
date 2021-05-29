@@ -1,0 +1,31 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column{
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+}
+
+.p-10 {
+  padding: 10px;
+}
+
+@media screen and (min-width: 800px) {
+  .column {
+    flex: 1
+  }
+}
+.same-height {
+  min-height: 152px;
+  border-top: 5px solid #2c92ab;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+
+  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    min-height: unset;
+  }
+}

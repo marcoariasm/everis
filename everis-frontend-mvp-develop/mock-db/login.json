@@ -1,0 +1,77 @@
+{
+  "backoffice-login/v1/login": {
+      "POST": {
+          "codeResponse": "202",
+          "responses": [
+              {
+                  "statusCode": "202",
+                  "headers": {
+                      "response": {
+                          "x-afp-signature": "",
+                          "Ocp-Apim-Subscription-Key": "",
+                          "x-prima-signature": ""
+                      },
+                      "request": {
+                          "x-afp-signature": "",
+                          "Ocp-Apim-Subscription-Key": "",
+                          "x-prima-signature": ""
+                      }
+                  },
+                  "body": {
+                      "id": 0,
+                      "firstName": "Gerardo",
+                      "secondName": "Eliezer",
+                      "fatherLastname": "Bracho",
+                      "motherLastname": "Peña",
+                      "lastAccess": "2020-08-21T00:18:13.371Z",
+                      "signature": "string"
+                  }
+              },
+              {
+                  "statusCode": "404",
+                  "errorCode": "PRI0007",
+                  "headers": {
+                      "response": {
+                          "x-afp-signature": "",
+                          "Ocp-Apim-Subscription-Key": "",
+                          "x-prima-signature": ""
+                      },
+                      "request": {
+                          "x-afp-signature": "",
+                          "Ocp-Apim-Subscription-Key": "",
+                          "x-prima-signature": ""
+                      }
+                  },
+                  "body": {
+                      "code": "PRI0007",
+                      "description": "Prima affiliate not found",
+                      "meta": {
+                          "requestNumber": "?",
+                          "registerDate": "{?date}"
+                      }
+                  }
+              },
+              {
+                  "statusCode": "412",
+                  "errorCode": "PRI0010",
+                  "headers": {
+                      "response": {
+                          "x-afp-signature": "",
+                          "Ocp-Apim-Subscription-Key": "",
+                          "x-prima-signature": ""
+                      },
+                      "request": {
+                          "x-afp-signature": "",
+                          "Ocp-Apim-Subscription-Key": "",
+                          "x-prima-signature": ""
+                      }
+                  },
+                  "body": {
+                      "code": "PRI0010",
+                      "description": "Invalid captcha token"
+                  }
+              }
+          ]
+      }
+  }
+}

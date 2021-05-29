@@ -1,0 +1,17 @@
+<div class="message-container">
+  <div class="message-icon" [ngClass]="{'error': info.title === 'ERROR'}">
+    <mat-icon>error_outline</mat-icon>
+  </div>
+  <div class="message">
+    <h4 class="title" *ngIf="info.title === 'ERROR'">Error</h4>
+    <span [innerHTML]="info.content"></span>
+  </div>
+</div>
+<mat-dialog-actions align="center">
+  <ng-container *ngIf="info.textButton">
+    <button class="action-button" mat-raised-button color="primary" (click)="exit()">{{info.textButton}}</button>
+  </ng-container>
+  <ng-container *ngIf="!info.textButton">
+    <button class="action-button" mat-raised-button color="primary" (click)="exit()">Salir</button>
+  </ng-container>
+</mat-dialog-actions>

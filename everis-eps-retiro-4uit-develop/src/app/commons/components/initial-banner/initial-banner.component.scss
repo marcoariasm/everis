@@ -1,0 +1,36 @@
+:host {
+  width: 100%;
+  color: #636374;
+
+  p {
+    font-size: 13px;
+  }
+
+  .modal-tittle{
+    color: #6B7C93;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .modal-subtittle{
+    color: #2c92ab;
+    font-size: 16px;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+
+  .primary-btn{
+    background-color: #18a0c2;
+    color: #fff;
+  }
+
+  .legend {
+    font-size: 11px;
+    line-height: 1.2 !important;
+
+    span {
+      padding-bottom: 5px;
+    }
+  }
+}

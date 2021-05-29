@@ -1,0 +1,387 @@
+<section class="Procedure">
+  <div class="layer" *ngIf="isLoading">
+    <everis-afp-prima-spinner-inline
+      class="loader"
+      [diameter]="60"
+    ></everis-afp-prima-spinner-inline>
+  </div>
+  <div class="Procedure-inner mat-elevation-z16" *ngIf="!isLoading">
+    <div class="view-top">
+      <div class="titles">
+        <div class="view-title">Detalle del Trámite</div>
+        <div class="view-sub-title">
+          <b>{{ procedure.requestType }}</b>
+        </div>
+      </div>
+      <div class="procedure-id">
+        <span>Código de Trámite</span><br />
+        <b>{{ procedure.requestNumber }}</b>
+      </div>
+    </div>
+
+    <span class="separator">&nbsp;</span>
+    <everis-afp-prima-status-step
+      [current]="currentStatus"
+    ></everis-afp-prima-status-step>
+
+    <everis-afp-prima-detail-card>
+      <div title>Datos del Afiliado</div>
+      <div content>
+        <span class="separator">&nbsp;</span>
+        <div class="Row-control">
+          <div class="Col detail-tile lg">
+            <b>
+              Apellidos y Nombres
+            </b>
+            <div>{{ affiliate.fullname | titlecase }}</div>
+          </div>
+          <div class="Col detail-tile">
+            <b>CUSPP</b>
+            <span>{{ affiliate.cuspp }}</span>
+          </div>
+          <div class="Col detail-tile">
+            <b>Tipo de Documento</b>
+            <span>{{ affiliate.documentType }}</span>
+          </div>
+          <div class="Col detail-tile">
+            <b>N° de Documento</b>
+            <span>{{ affiliate.documentNumber }}</span>
+          </div>
+        </div>
+        <span class="separator">&nbsp;</span>
+        <div class="Row-control">
+          <div class="Col detail-tile lg">
+            <b>
+              Fecha de Nacimiento
+            </b>
+            <div>{{ affiliate.birthdate || '-' }}</div>
+          </div>
+          <div class="Col detail-tile">
+            <b>Estado Civil</b>
+            <span>{{ affiliate.maritalStatus || '-' }}</span>
+          </div>
+        </div>
+      </div>
+    </everis-afp-prima-detail-card>
+    <span class="separator">&nbsp;</span>
+    <everis-afp-prima-detail-card>
+      <div title>Datos de Representante / Apoderado</div>
+      <div content>
+        <span class="separator">&nbsp;</span>
+        <div class="Row-control">
+          <div class="Col detail-tile lg">
+            <b>
+              Apellidos y Nombres
+            </b>
+            <div>{{ petitioner?.fullname || '-' }}</div>
+          </div>
+          <div class="Col detail-tile">
+            <b>Tipo de Documento</b>
+            <span>{{ petitioner?.documentType || '-' }}</span>
+          </div>
+          <div class="Col detail-tile">
+            <b>N° de Documento</b>
+            <span>{{ petitioner?.documentNumber || '-' }}</span>
+          </div>
+          <div class="Col detail-tile">
+            <b>Fecha de Nacimiento</b>
+            <span>{{ petitioner?.birthdate || '-' }}</span>
+          </div>
+        </div>
+        <span class="separator">&nbsp;</span>
+        <div class="Row-control">
+          <div class="Col detail-tile">
+            <b>Parentesco</b>
+            <span>{{ petitioner?.relationshipType || '-' }}</span>
+          </div>
+          <div class="Col detail-tile lg">
+            <b>
+              Correo Electrónico
+            </b>
+            <div>{{ petitioner?.email || '-' }}</div>
+          </div>
+          <div class="Col detail-tile">
+            <b>
+              Teléfono Móvil
+            </b>
+            <div>{{ petitioner?.cellphone || '-' }}</div>
+          </div>
+          <div class="Col detail-tile">
+            <b>
+              Teléfono Fijo
+            </b>
+            <div>{{ petitioner?.telephone || '-' }}</div>
+          </div>
+        </div>
+      </div>
+    </everis-afp-prima-detail-card>
+
+    <span class="separator">&nbsp;</span>
+    <div class="Row">
+      <everis-afp-prima-detail-card>
+        <div title>Detalle del trámite</div>
+        <div content>
+          <span class="separator">&nbsp;</span>
+          <div class="Row-control">
+            <div class="Col detail-tile">
+              <b>Tipo de trámite:</b>
+              {{ details.requestType }}
+            </div>
+            <div class="Col detail-tile">
+              <b>Fecha:</b>
+              {{ details?.registerDate }}
+            </div>
+            <div class="Col detail-tile">
+              <b>Estado:</b>
+              <span>{{ currentStatus }}</span>
+            </div>
+            <div class="Col detail-tile">
+              <b>Motivo:</b>
+              <span>{{ reason }}</span>
+            </div>
+          </div>
+        </div>
+      </everis-afp-prima-detail-card>
+    </div>
+    <span class="separator">&nbsp;</span>
+    <div class="Row">
+      <everis-afp-prima-detail-card>
+        <div title>
+          Beneficiarios
+        </div>
+        <div class="scrollable-area" content>
+          <table mat-table [dataSource]="beneficiaries">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Nombres y Apellidos</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.fullname | titlecase }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="relationship">
+              <th mat-header-cell *matHeaderCellDef>Parentesco</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.relationshipType }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="documentNumber">
+              <th mat-header-cell *matHeaderCellDef>Documento de Identidad</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.documentNumber }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="birthdate">
+              <th mat-header-cell *matHeaderCellDef>Fecha de Nacimiento</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.birthdate }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="sex">
+              <th mat-header-cell *matHeaderCellDef>Sexo</th>
+              <td mat-cell *matCellDef="let element">{{ element.genre }}</td>
+            </ng-container>
+            <ng-container matColumnDef="condition">
+              <th mat-header-cell *matHeaderCellDef>Condición</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.conditionType }}
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+      </everis-afp-prima-detail-card>
+    </div>
+    <span class="separator">&nbsp;</span>
+
+    <div class="Row-control multi-card">
+      <everis-afp-prima-detail-card class="item">
+        <div title>Documentos Generales Presentados</div>
+        <div content>
+          <div class="scrollable-area">
+            <table mat-table [dataSource]="documentList">
+              <ng-container matColumnDef="document">
+                <th mat-header-cell *matHeaderCellDef>Fecha</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.registerDate }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef>Documento</th>
+                <td mat-cell *matCellDef="let element">
+                  <p class="filename">
+                    {{ element.fileName }}
+                  </p>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="downloadIcon">
+                <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+                <td mat-cell *matCellDef="let element">
+                  <a class="download-icon cursor-not-allowed">
+                    <span class="material-icons">
+                      save_alt
+                    </span>
+                  </a>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="documentDisplay"></tr>
+              <tr mat-row *matRowDef="let row; columns: documentDisplay"></tr>
+            </table>
+          </div>
+        </div>
+      </everis-afp-prima-detail-card>
+      <everis-afp-prima-detail-card class="item">
+        <div title>Documentos de Beneficiarios Presentados</div>
+        <div content>
+          <div class="scrollable-area">
+            <table mat-table [dataSource]="beneficiaryDocumentList">
+              <ng-container matColumnDef="document">
+                <th mat-header-cell *matHeaderCellDef>Fecha</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.registerDate }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef>Documento</th>
+                <td mat-cell *matCellDef="let element">
+                  <p class="filename">
+                    {{ element.fileName }}
+                  </p>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="downloadIcon">
+                <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+                <td mat-cell *matCellDef="let element">
+                  <a class="download-icon cursor-not-allowed">
+                    <span class="material-icons">
+                      save_alt
+                    </span>
+                  </a>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="documentDisplay"></tr>
+              <tr mat-row *matRowDef="let row; columns: documentDisplay"></tr>
+            </table>
+          </div>
+        </div>
+      </everis-afp-prima-detail-card>
+    </div>
+    <span class="separator">&nbsp;</span>
+    <div class="Row-control multi-card">
+      <everis-afp-prima-detail-card class="item">
+        <div title>Historial de Conversaciones</div>
+        <div content>
+          <div class="scrollable-area">
+            <ul *ngFor="let comment of comments">
+              <li>
+                <p>
+                  <b>{{
+                    comment.functionary || comment.affiliate | titlecase
+                  }}</b
+                  ><br />
+                  <span class="comment-date">{{ comment.registerDate }}</span>
+                </p>
+                <p>{{ comment.comment }}</p>
+                <a
+                  class="attachment"
+                  *ngIf="comment.file"
+                  href="javascript:void(0)"
+                  (click)="
+                    downloadFile(
+                      comment.file,
+                      affiliate.documentNumber,
+                      affiliate.documentTypeId,
+                      affiliate.birthdate,
+                      comment.fileName
+                    )
+                  "
+                >
+                  <span class="material-icons attachment">attach_file</span>
+                  {{ comment.fileName }}</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </everis-afp-prima-detail-card>
+      <everis-afp-prima-detail-card class="item">
+        <div title>
+          Nueva Conversación
+          <span id="note"
+            >(Recuerde siempre marcar el botón enviar al terminar de escribir el
+            mensaje)
+          </span>
+        </div>
+        <div content>
+          <form [formGroup]="form">
+            <div class="Form-control mb note-area">
+              <mat-form-field class="Form-textarea" disabled="isActive">
+                <textarea
+                  formControlName="reply"
+                  matInput
+                  placeholder="Si tienes un comentario colocalo aquí"
+                ></textarea>
+              </mat-form-field>
+            </div>
+            <br />
+            <span
+              [ngClass]="{
+                error: uploadMessage.error,
+                success: !uploadMessage.error
+              }"
+              >{{ uploadMessage.message }}</span
+            >
+            <div *ngIf="fileBase64 && !commentSent" class="attachment">
+              <div class="attach-document">
+                <span class="material-icons">attachment</span> <b>Adjunto:</b>
+                {{ filename }}
+                <a
+                  class="material-icons download-icon"
+                  href="javascript:void(0)"
+                  (click)="clearUpload()"
+                  >delete_outline</a
+                >
+              </div>
+            </div>
+            <div class="message-notification" *ngIf="commentSent">
+              <span class="material-icons">
+                done_all
+              </span>
+              <span>
+                Mensaje enviado. Si adjuntaste documentos actualiza la página
+                para poder verlos en el historial de conversación.</span
+              >
+            </div>
+            <div class="note-area">
+              <everis-afp-prima-upload
+                *ngIf="isActive"
+                [text]="labelFileUpdate"
+                icon="attachment"
+                (changeUpload)="changeUpload($event)"
+                (messageError)="messageOutput($event)"
+                [loadRequest]="isUploadReady"
+              ></everis-afp-prima-upload>
+            </div>
+            <div class="note-area send-button">
+              <button
+                type="button"
+                mat-flat-button
+                color="accent"
+                (click)="addComment()"
+                [disabled]="!isActive"
+              >
+                Enviar
+              </button>
+            </div>
+          </form>
+        </div>
+      </everis-afp-prima-detail-card>
+    </div>
+    <span class="separator">&nbsp;</span>
+    <div class="return-button">
+      <button (click)="back()" color="primary" mat-raised-button>
+        Finalizar
+      </button>
+    </div>
+  </div>
+</section>

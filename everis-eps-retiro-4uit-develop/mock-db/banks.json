@@ -1,0 +1,104 @@
+{
+    "location/v2/ubigeo/banks": {
+        "GET": {
+            "codeResponse": "200",
+            "responses": [
+              {
+                "statusCode": "200",
+                "errorCode": "000000",
+                "headers": {
+                  "response": {
+                    "x-afp-signature": "",
+                    "g-recaptcha-response": "",
+                    "Ocp-Apim-Subscription-Key": "",
+                    "x-afp-signature": ""
+                  },
+                  "request": {
+                    "g-recaptcha-response": "",
+                    "Ocp-Apim-Subscription-Key": "",
+                    "x-afp-signature": ""
+                  }
+                },
+                "body": [
+                  {
+                    "code": "BBVA",
+                    "description": "BBVA"
+                  },
+                  {
+                    "code": "BCP",
+                    "description": "Banco de Credito del Peru"
+                  },
+                  {
+                    "code": "IBK",
+                    "description": "Interbank"
+                  },
+                  {
+                    "code": "SCOTIA",
+                    "description": "Scotiabank"
+                  },
+                  {
+                    "code": "BANBIF",
+                    "description": "BANBIF"
+                  },
+                  {
+                    "code": "PICHINCHA",
+                    "description": "PICHINCHA"
+                  },
+                  {
+                    "code": "BN",
+                    "description": "Banco de la Nación"
+                  },
+                  {
+                    "code": "CAJAHUANCAYO",
+                    "description": "Caja Huancayo"
+                  },
+                  {
+                    "code": "BANCODECOMERCIO",
+                    "description": "Banco de Comercio"
+                  },
+                  {
+                    "code": "GNB",
+                    "description": "Banco GNB"
+                  },
+                  {
+                    "code": "CAJAAREQUIPA",
+                    "description": "Caja Arequipa"
+                  },
+                  {
+                    "code": "CAJAPIURA",
+                    "description": "Caja Piura"
+                  },
+                  {
+                    "code": "CAJASULLANA",
+                    "description": "Caja Sullana"
+                  },
+                  {
+                    "code": "CAJATACNA",
+                    "description": "Caja Tacna"
+                  },
+                  {
+                    "code": "CREDISCOTIA",
+                    "description": "CrediScotia"
+                  },
+                  {
+                    "code": "CAJAMUNICIPALICA",
+                    "description": "Caja Municipal Ica"
+                  },
+                  {
+                    "code": "CAJAMETROPOLITANA",
+                    "description": "Caja Metropolitana"
+                  },
+                  {
+                    "code": "CAJATRUJILLO",
+                    "description": "Caja Trujillo"
+                  },
+                  {
+                    "code": "RIPLEY",
+                    "description": "Banco Ripley"
+                  }
+                ]
+              }
+            ]
+        }
+    }
+}

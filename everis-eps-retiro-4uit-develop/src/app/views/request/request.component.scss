@@ -1,0 +1,90 @@
+div {
+  &.main {
+    width: 80%;
+    min-width: 300px;
+    max-width: 768px;
+    margin: 0 auto 40px;
+    padding: 15px 0;
+  }
+}
+
+.tittle {
+  margin-top:40px;
+  margin-bottom:24px;
+  color: #2c92ab;
+}
+
+.p-10 {
+  padding: 10px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column{
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+}
+
+@media screen and (min-width: 800px) {
+  .column {
+    flex: 1
+  }
+}
+
+.same-height{
+  min-height: 152px;
+  border-top: 5px solid #2c92ab;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+
+  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    min-height: unset;
+  }
+}
+
+.rp-form-element {
+  padding: 0 10px;
+
+  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    width: 95%;
+  }
+}
+
+.additionalInfo{
+  font-size: 10px;
+  margin-bottom: 24px;
+  color: #4d5b70;
+  padding-left: 12px;
+
+  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    width: 95%;
+  }
+}
+
+.authorize {
+  margin-bottom: 20px;
+}
+
+.timer{
+  float: right;
+}
+
+.action-button {
+  background-color: #18a0c2;
+  color: #fff;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.label-fieldset {
+  margin: 0 10px 15px;
+  color: rgba(0, 0, 0, 0.6);
+}

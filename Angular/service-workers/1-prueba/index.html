@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <title>Prueba de Service Workers / Caching</title>
+</head>
+
+<body>
+  <div class="container">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Active</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+          aria-expanded="false">Dropdown</a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" href="#">Separated link</a></li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
+    </ul>
+
+    <div>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio necessitatibus, omnis fugiat unde eveniet sunt
+      labore animi quibusdam nostrum reiciendis ex natus ipsa vero expedita accusamus doloremque aliquam amet
+      laudantium!
+      Ipsam sit iusto tempora similique vitae. Dolores vitae inventore, sequi, modi eum voluptates in ea culpa ullam,
+      illum officiis! Ea unde atque reiciendis et ad similique aut. Vel, numquam officiis.
+      Nulla, nisi dolor reprehenderit perferendis voluptas omnis excepturi deserunt, dignissimos assumenda iste eaque
+      magni repellat temporibus ea est! Deleniti laboriosam repudiandae velit? Dignissimos cum sit repellat, commodi
+      quisquam tempora necessitatibus?
+      Nam aspernatur exercitationem modi neque culpa error? Amet, perferendis blanditiis iure deserunt deleniti magni
+      minus reprehenderit quae nesciunt. Quaerat beatae facere voluptatem architecto error perferendis iusto aliquam
+      temporibus deleniti nemo.
+      Deleniti placeat dolore saepe impedit est commodi quasi. Reiciendis nobis adipisci harum, id placeat ex recusandae
+      rem molestiae eius repellendus nam consequuntur officiis voluptates pariatur rerum sint optio dolore architecto.
+    </div> <br><br>
+    <form>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1">
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <script src="./js/main.js"></script>
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

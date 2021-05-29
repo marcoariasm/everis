@@ -1,0 +1,78 @@
+{
+    "retiro4uit/v1/verification4uit/verificationAfp4uit": {
+        "POST": {
+            "codeResponse": "AFP3005",
+            "responses": [
+                {
+                    "statusCode": "200",
+                    "errorCode": "000000",
+                    "headers": {
+                        "response": {
+                            "x-afp-signature": "",
+                            "Ocp-Apim-Subscription-Key": ""
+                        },
+                        "request": {
+                            "x-afp-signature": "",
+                            "Ocp-Apim-Subscription-Key": ""
+                        }
+                    },
+                    "body": {}
+                },
+                {
+                    "statusCode": "401",
+                    "errorCode": "AFP3004",
+                    "headers": {
+                        "response": {
+                            "x-afp-signature": "test",
+                            "Ocp-Apim-Subscription-Key": "961e1aed1fb14e8bb23f8852dac6d2fa"
+                        },
+                        "request": {
+                            "x-afp-signature": "test",
+                            "Ocp-Apim-Subscription-Key": "961e1aed1fb14e8bb23f8852dac6d2fa"
+                        }
+                    },
+                    "body": {
+                        "code": "AFP3004",
+                        "description": "Web password invalid for: PRIMA"
+                    }
+                },
+                {
+                    "statusCode": "401",
+                    "errorCode": "AFP3003",
+                    "headers": {
+                        "response": {
+                            "x-afp-signature": "test",
+                            "Ocp-Apim-Subscription-Key": "961e1aed1fb14e8bb23f8852dac6d2fa"
+                        },
+                        "request": {
+                            "x-afp-signature": "test",
+                            "Ocp-Apim-Subscription-Key": "961e1aed1fb14e8bb23f8852dac6d2fa"
+                        }
+                    },
+                    "body": {
+                        "code": "AFP3003",
+                        "description": "User blocked by: 3 attemps failed"
+                    }
+                },
+                {
+                    "statusCode": "401",
+                    "errorCode": "AFP3005",
+                    "headers": {
+                        "response": {
+                            "x-afp-signature": "test",
+                            "Ocp-Apim-Subscription-Key": "961e1aed1fb14e8bb23f8852dac6d2fa"
+                        },
+                        "request": {
+                            "x-afp-signature": "test",
+                            "Ocp-Apim-Subscription-Key": "961e1aed1fb14e8bb23f8852dac6d2fa"
+                        }
+                    },
+                    "body": {
+                        "code": "AFP3005",
+                        "description": ""
+                    }
+                }
+            ]
+        }
+    }
+}

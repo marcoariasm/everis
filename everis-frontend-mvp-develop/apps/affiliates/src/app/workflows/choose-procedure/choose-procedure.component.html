@@ -1,0 +1,42 @@
+<section class="Choose-procedure">
+  <div class="Choose-procedure-inner mat-elevation-z16">
+    <div class="">
+      <form class="Form" [formGroup]="form">
+        <div class="title"><h1>¡Bienvenido a Mis trámites virtuales!</h1></div>
+        <div class="sub-title">
+          <h2>¿En qué podemos ayudarte?</h2>
+        </div>
+        <div class="radio-group">
+          <mat-radio-group
+            aria-label="Seleccione una opción"
+            formControlName="typeProcedure"
+            class="radio-group"
+          >
+            <span class="radio-item">
+              <mat-radio-button value="REGISTER"
+                >Solicita tu trámite virtual</mat-radio-button
+              >
+            </span>
+            <span class="radio-item sec-radio">
+              <mat-radio-button value="QUERY"
+                >Consulta el estado de tu trámite</mat-radio-button
+              >
+            </span>
+          </mat-radio-group>
+        </div>
+        <div class="btn">
+          <button
+            class="submit-btn"
+            type="button"
+            mat-flat-button
+            color="primary"
+            [disabled]="!form.valid"
+            (click)="presenter.chooseProcedure(form.value)"
+          >
+            Continuar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

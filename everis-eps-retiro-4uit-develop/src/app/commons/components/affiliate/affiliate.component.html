@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="column p-10">
+    <mat-card class="same-height">
+      <mat-card-subtitle>{{text?.queryData}}</mat-card-subtitle>
+      <p><span><b>{{text?.document}} </b></span>
+        <span>{{affiliate?.documentType}} - </span>
+        <span>{{affiliate?.documentNumber}} </span></p>
+      <p><span><b>{{text?.dateBirth}} </b></span>
+        <span>{{affiliate?.birthdate | date: 'dd-MM-yyyy'}}</span></p>
+    </mat-card>
+  </div>
+  <div class="column p-10">
+    <mat-card class="same-height">
+      <mat-card-subtitle>{{text?.affiliateInfo}}</mat-card-subtitle>
+      <p><span><b>{{text?.fullName}} </b></span><span>{{affiliate?.names}}
+          {{affiliate?.lastNames}}</span></p>
+      <p><span><b>{{text?.afp}} </b></span> <span>{{affiliate?.afp}}</span></p>
+      <p><span><b>{{text?.cuspp}}  </b></span> <span>{{affiliate?.cuspp}}</span>
+      </p>
+    </mat-card>
+  </div>
+</div>

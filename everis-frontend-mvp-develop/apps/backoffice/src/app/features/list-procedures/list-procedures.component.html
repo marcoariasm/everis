@@ -1,0 +1,150 @@
+<section class="Sub-header mat-elevation-z2">
+  <h2 class="Title main mat-2">Asignaciones pendientes</h2>
+  <everis-afp-prima-filters (search)="search($event)" [loader]="loader">
+    <div buttonGenerate>
+      <button
+        type="button"
+        mat-flat-button
+        color="primary"
+        (click)="generateExcel()"
+      >
+        Generar informe en Excel
+      </button>
+    </div>
+  </everis-afp-prima-filters>
+</section>
+<section class="List-procedures">
+  <div class="List-procedures-inner">
+    <div class="List-table">
+      <div class="layer" *ngIf="loader">
+        <everis-afp-prima-spinner-inline
+          class="loader"
+          [diameter]="60"
+        ></everis-afp-prima-spinner-inline>
+      </div>
+
+      <div class="holder">
+        <table
+          mat-table
+          matSort
+          [dataSource]="dataSource"
+          class="mat-elevation-z2"
+        >
+          <ng-container matColumnDef="registerDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Fecha de registro
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.registerDate }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cuspp">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>CUSPP</th>
+            <td mat-cell *matCellDef="let element">{{ element.cuspp }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="affiliate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Nombre del afiliado
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.affiliate | titlecase }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="requestType">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Trámite</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.requestType }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="executive">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ejecutivo</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.executive || '-' | titlecase }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Estado de trámite
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="assignmentDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Fecha de<br />asignación
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.assignmentDate || '-' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="assigned">
+            <th mat-header-cell *matHeaderCellDef>Asignar</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                *ngIf="!element.executiveId"
+                (click)="assign(element)"
+                mat-icon-button
+                color="accent"
+                aria-label="Asignar"
+                matTooltip="Asignar"
+              >
+                <span class="material-icons">
+                  create
+                </span>
+              </button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actionView">
+            <th mat-header-cell *matHeaderCellDef>Ver</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                (click)="presenter.open(element)"
+                mat-icon-button
+                color="accent"
+                aria-label="Ver"
+                matTooltip="Ver"
+              >
+                <span class="material-icons">
+                  content_copy
+                </span>
+              </button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="reassigned">
+            <th mat-header-cell *matHeaderCellDef>Reasignar</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                *ngIf="allowReassigned"
+                (click)="reassigned(element)"
+                mat-icon-button
+                color="accent"
+                aria-label="Reasignar"
+                matTooltip="Reasignar"
+              >
+                <span class="material-icons">
+                  forward
+                </span>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+
+      <mat-paginator
+        [pageSizeOptions]="[20, 50, 100]"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
+  </div>
+</section>

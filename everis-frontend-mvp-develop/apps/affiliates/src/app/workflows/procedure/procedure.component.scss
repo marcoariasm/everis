@@ -1,0 +1,226 @@
+.Procedure {
+  min-height: 100%;
+  width: 100%;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  box-sizing: border-box;
+  background-color: #edeeef;
+
+  &-inner {
+    background-color: white;
+    border-radius: 4px;
+    padding: 32px;
+    width: 840px;
+    margin: 0 auto;
+  }
+
+  .fullName {
+    position: relative;
+
+    .icon {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      z-index: 2;
+      color: #009d92;
+      font-size: 30px;
+    }
+  }
+
+  .detail-tile {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    color: #696158;
+    &.lg {
+      flex-basis: 20%;
+    }
+  }
+
+  .separator {
+    margin-top: 16px;
+  }
+
+  th[mat-header-cell] {
+    background: #e2f5f3;
+    color: #00a499;
+  }
+  .multi-card {
+    display: flex;
+    justify-content: space-between;
+    .item {
+      width: 48%;
+    }
+  }
+
+  .multi-select {
+    display: flex;
+    margin: 8px;
+    justify-content: space-between;
+    color: #696158;
+    .item {
+      width: 48%;
+    }
+  }
+
+  .note-area {
+    margin: 16px;
+  }
+
+  .send-button {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .view-top {
+    display: flex;
+    justify-content: space-between;
+    .titles {
+      .view-title {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 30px;
+        letter-spacing: 0.01em;
+        color: #ff4f00;
+      }
+
+      .view-sub-title {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 29px;
+        letter-spacing: 0.01em;
+
+        color: #696158;
+      }
+    }
+    .procedure-id {
+      color: #696158;
+      justify-self: end;
+    }
+  }
+
+  .scrollable-area {
+    margin: 4px, 4px;
+    padding: 4px;
+    height: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: justify;
+  }
+
+  p.filename {
+    width: 160px;
+    padding: 2px 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .download-icon {
+    color: #696158;
+    &.cursor-not-allowed {
+      cursor: not-allowed;
+    }
+  }
+
+  .message-notification {
+    color: #00a499;
+    margin-left: 12px;
+  }
+
+  .comment-date {
+    font-size: 11px;
+  }
+
+  .return-button {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  .error {
+    margin-left: 16px;
+    color: red;
+  }
+
+  .success {
+    margin-left: 16px;
+    color: #00ae99;
+  }
+
+  .attachment {
+    font-size: 15px;
+    color: #ff4f00;
+    .attach-document {
+      margin-left: 16px;
+    }
+    &.cursor-not-allowed {
+      cursor: not-allowed;
+    }
+  }
+}
+#note {
+  font-size: 0.6em;
+}
+@media only screen and (max-width: 768px) {
+  .Procedure {
+    min-height: 100%;
+    width: 100%;
+
+    &-inner {
+      width: 100%;
+      padding: 16px;
+    }
+
+    .multi-card {
+      .item {
+        width: 100%;
+      }
+    }
+
+    .Steps li strong {
+      font-size: 13px;
+    }
+  }
+  .detail-tile {
+    display: flex;
+    flex-direction: row;
+  }
+  .Form-control,
+  .Row-control {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .info-card {
+    width: 100%;
+  }
+
+  .Col {
+    margin-top: 16px;
+  }
+
+  .view-top {
+    display: flex;
+    flex-direction: column;
+    .procedure-id {
+      color: #696158;
+      justify-self: end;
+      margin-top: 16px;
+    }
+  }
+  .multi-select {
+    display: flex;
+    margin: 8px;
+    color: #696158;
+    flex-direction: column;
+    .item {
+      mat-form-field {
+        width: 100%;
+      }
+    }
+  }
+}

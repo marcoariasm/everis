@@ -1,0 +1,735 @@
+<section class="Register">
+  <div class="Register-inner mat-elevation-z16">
+    <form class="Form" [formGroup]="form">
+      <div class="Title-actions">
+        <h2 class="title">
+          <span class="material-icons">
+            description
+          </span>
+          Nueva solicitud
+        </h2>
+        <span class="separated"></span>
+      </div>
+      <div class="Type-Request">
+        <mat-form-field appearance="outline" class="Form-input" color="accent">
+          <mat-label>Selecciona el trámite que quieres solicitar:</mat-label>
+          <mat-select
+            formControlName="procedureType"
+            (selectionChange)="selectProcedure($event.value)"
+          >
+            <mat-option value="">Seleccione un trámite</mat-option>
+            <mat-option *ngFor="let item of procedures" [value]="item.value">{{
+              item.name
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="detail-request">
+        <p>
+          Para solicitar tu trámite debes completar el formulario. Esta
+          solicitud será analizada por el área especialista, quién te informará
+          los resultados e indicará, de ser aprobada, los pasos siguientes
+        </p>
+      </div>
+
+      <div class="detail-afiliado">
+        <h4 class="mat-h2">Datos del afiliado</h4>
+        <p>
+          Es importante que contemos con tus datos actualizados. Por favor
+          verifica la información que tenemos registrada en nuestra base de
+          datos:
+        </p>
+      </div>
+      <mat-divider></mat-divider>
+
+      <div class="Form-fieldset readonly">
+        <div class="Form-control">
+          <div class="Col">
+            <mat-form-field appearance="outline" class="Form-input">
+              <mat-label>Apellido paterno:</mat-label>
+              <input
+                readonly
+                matInput
+                formControlName="fatherLastname"
+                autocomplete="off"
+              />
+            </mat-form-field>
+          </div>
+          <div class="Col">
+            <mat-form-field appearance="outline" class="Form-input">
+              <mat-label>Apellido materno:</mat-label>
+              <input
+                readonly
+                matInput
+                formControlName="motherLastname"
+                autocomplete="off"
+              />
+            </mat-form-field>
+          </div>
+          <div class="Col">
+            <mat-form-field appearance="outline" class="Form-input">
+              <mat-label>Primer nombre:</mat-label>
+              <input
+                readonly
+                matInput
+                formControlName="firstName"
+                autocomplete="off"
+              />
+            </mat-form-field>
+          </div>
+          <div class="Col">
+            <mat-form-field appearance="outline" class="Form-input">
+              <mat-label>Segundo nombre</mat-label>
+              <input
+                readonly
+                matInput
+                formControlName="secondName"
+                autocomplete="off"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="Form-control">
+          <div class="Col">
+            <mat-form-field appearance="outline" class="Form-input">
+              <mat-label>Tipo de documento:</mat-label>
+              <input
+                readonly
+                matInput
+                formControlName="documentType"
+                autocomplete="off"
+              />
+            </mat-form-field>
+          </div>
+          <div class="Col">
+            <mat-form-field appearance="outline" class="Form-input">
+              <mat-label>Número de Documento:</mat-label>
+              <input
+                readonly
+                matInput
+                [ngCustomValidator]="alphaNumeric" inputLength="20"
+                formControlName="documentNumber"
+                autocomplete="off"
+              />
+            </mat-form-field>
+          </div>
+          <div class="Col">
+            <mat-form-field appearance="outline" class="Form-input">
+              <mat-label>Fecha de nacimiento:</mat-label>
+              <input
+                readonly
+                matInput
+                formControlName="birthdate"
+                autocomplete="off"
+              />
+            </mat-form-field>
+          </div>
+          <div class="Col">
+            <mat-form-field appearance="outline" class="Form-input">
+              <mat-label>Sexo:</mat-label>
+              <input
+                readonly
+                matInput
+                formControlName="genero"
+                autocomplete="off"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+
+      <div class="Form-fieldset" *ngIf="isAffiliate">
+        <h4 class="mat-h2">
+          ¿Tus datos de contacto no son correctos?
+          <mat-slide-toggle
+            class="contactToggle"
+            (change)="changeToogle($event.checked)"
+            formControlName="contactToggle"
+          >
+            Actualizar datos
+          </mat-slide-toggle>
+        </h4>
+        <div
+          [className]="
+            form.controls.contactToggle.value
+              ? 'Form-control'
+              : 'Form-control readonly'
+          "
+        >
+          <div class="Col">
+            <mat-form-field
+              appearance="outline"
+              class="Form-input"
+              color="accent"
+            >
+              <mat-label>Correo electrónico:</mat-label>
+              <input
+                [readonly]="!form.controls.contactToggle.value"
+                matInput
+                ngCustomValidator inputLength="100"
+                formControlName="contactEmail"
+                autocomplete="off"
+              />
+            </mat-form-field>
+          </div>
+          <div class="Col">
+            <mat-form-field
+              appearance="outline"
+              class="Form-input"
+              color="accent"
+            >
+              <mat-label>Teléfono móvil:</mat-label>
+              <input
+                type="!form.controls.contactToggle.value ? text : number"
+                max="99999999999"
+                min="111111111"
+                [ngCustomValidator]="onlyNumeric" inputLength="11"
+                [readonly]="!form.controls.contactToggle.value"
+                matInput
+                formControlName="contactCellPhoneNumber"
+                autocomplete="off"
+              />
+              <mat-error *ngIf="errorForm('contactCellPhoneNumber', 'max')">
+                El número máximo de digitos permitidos es 11;
+              </mat-error>
+              <mat-error *ngIf="errorForm('contactCellPhoneNumber', 'min')">
+                El número minimo de digitos permitidos es 9;
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="Col">
+            <mat-form-field
+              appearance="outline"
+              class="Form-input"
+              color="accent"
+            >
+              <mat-label>Teléfono Fijo:</mat-label>
+              <input
+                [ngCustomValidator]="onlyNumeric" inputLength="9"
+                [readonly]="!form.controls.contactToggle.value"
+                matInput
+                formControlName="contactPhoneNumber"
+                autocomplete="off"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="Form-fieldset" *ngIf="!isAffiliate">
+        <h4 class="mat-h2">Datos del solicitante</h4>
+        <p>Es importante que contemos con tus datos personales y de contacto</p>
+        <div
+          formArrayName="applicant"
+          *ngFor="let field of a.controls; let i = index"
+        >
+          <div [formGroupName]="i">
+            <div class="Form-control">
+              <div class="Col">
+                <mat-form-field appearance="outline" class="Form-input">
+                  <mat-label>Apellido paterno:</mat-label>
+                  <input
+                    [ngCustomValidator]="onlyLetters" inputLength="100"
+                    formControlName="fatherLastName"
+                    matInput
+                    autocomplete="off"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="Col">
+                <mat-form-field appearance="outline" class="Form-input">
+                  <mat-label>Apellido materno:</mat-label>
+                  <input
+                    [ngCustomValidator]="onlyLetters" inputLength="100"
+                    formControlName="motherLastName"
+                    matInput
+                    autocomplete="off"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="Col">
+                <mat-form-field appearance="outline" class="Form-input">
+                  <mat-label>Primer nombre:</mat-label>
+                  <input
+                    [ngCustomValidator]="onlyLetters" inputLength="100"
+                    formControlName="firstName"
+                    matInput
+                    autocomplete="off"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="Form-control">
+              <div class="Col">
+                <mat-form-field appearance="outline" class="Form-input">
+                  <mat-label>Segundo nombre:</mat-label>
+                  <input
+                    [ngCustomValidator]="onlyLetters" inputLength="100"
+                    formControlName="secondName"
+                    matInput
+                    autocomplete="off"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="Col">
+                <mat-form-field appearance="outline" class="Form-input">
+                  <mat-label>Tipo de documento:</mat-label>
+                  <mat-select formControlName="documentType">
+                    <mat-option
+                      *ngFor="let type of documentTypeOptions"
+                      value="{{ type.value }}"
+                      >{{ type.abbr }}
+                      <span class="small">({{ type.name }})</span></mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="Col">
+                <mat-form-field appearance="outline" class="Form-input">
+                  <mat-label>Nro de documento:</mat-label>
+                  <input
+                    matInput
+                    [ngCustomValidator]="alphaNumeric" inputLength="20"
+                    formControlName="documentNumber"
+                    placeholder=""
+                    autocomplete="off"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="Form-control">
+              <div class="Col">
+                <mat-form-field
+                  appearance="outline"
+                  class="Form-input"
+                  (click)="picker1.open()"
+                >
+                  <mat-label>Fecha de nacimiento:</mat-label>
+                  <input
+                    formControlName="birthdate"
+                    matInput
+                    readonly
+                    [matDatepicker]="picker1"
+                    [min]="minDate"
+                    [max]="maxDate"
+                  />
+                  <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker1"
+                  ></mat-datepicker-toggle>
+                </mat-form-field>
+              </div>
+              <div class="Col">
+                <mat-form-field appearance="outline" class="Form-input">
+                  <mat-label>Sexo:</mat-label>
+                  <mat-select formControlName="gender">
+                    <mat-option value="F">Femenino</mat-option>
+                    <mat-option value="M">Masculino</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="Col">
+                <mat-form-field appearance="outline" class="Form-input">
+                  <mat-label>Relación con afiliado:</mat-label>
+                  <mat-select formControlName="relationship">
+                    <mat-option
+                      *ngFor="let type of relationTypeRequest"
+                      value="{{ type.value }}"
+                      >{{ type.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="Form-control">
+              <div class="Col">
+                <mat-form-field appearance="outline" class="Form-input">
+                  <mat-label>Correo electrónico:</mat-label>
+                  <input
+                    ngCustomValidator inputLength="100"
+                    formControlName="email"
+                    matInput
+                    autocomplete="off" />
+                </mat-form-field>
+              </div>
+              <div class="Col">
+                <mat-form-field appearance="outline" class="Form-input">
+                  <mat-label>Teléfono Movil:</mat-label>
+                  <input
+                    [ngCustomValidator]="onlyNumeric" inputLength="11"
+                    formControlName="cellPhoneNumber"
+                    matInput
+                    autocomplete="off"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="Col">
+                <mat-form-field appearance="outline" class="Form-input">
+                  <mat-label>Teléfono Fijo:</mat-label>
+                  <input
+                    [ngCustomValidator]="onlyNumeric" inputLength="9"
+                    formControlName="phoneNumber"
+                    matInput
+                    autocomplete="off"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="Form-fieldset"
+        *ngIf="
+          enableBeneficiary(form.controls.procedureType.value) &&
+          !NotBenificiary
+        "
+      >
+        <div class="Title-actions">
+          <h4 class="mat-h2">
+            Por favor ingresa los datos de tus beneficiarios
+          </h4>
+        </div>
+
+        <div
+          class="Beneficiary"
+          formArrayName="beneficiaries"
+          *ngFor="let beneficiary of b.controls; let i = index"
+        >
+          <div [formGroupName]="i">
+            <label for="beneficiaryGroup">Beneficiario {{ i + 1 }}</label>
+            <div id="beneficiaryGroup" class="Form-fieldset beneficiaryGroup">
+              <div class="Form-control">
+                <div class="Col">
+                  <mat-form-field appearance="outline" class="Form-input">
+                    <mat-label>Apellido paterno:</mat-label>
+                    <input
+                      [ngCustomValidator]="onlyLetters" inputLength="100"
+                      formControlName="fatherLastName"
+                      matInput
+                      autocomplete="off"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="Col">
+                  <mat-form-field appearance="outline" class="Form-input">
+                    <mat-label>Apellido materno:</mat-label>
+                    <input
+                      [ngCustomValidator]="onlyLetters" inputLength="100"
+                      formControlName="motherLastName"
+                      matInput
+                      autocomplete="off"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="Col">
+                  <mat-form-field appearance="outline" class="Form-input">
+                    <mat-label>Primer nombre:</mat-label>
+                    <input
+                      [ngCustomValidator]="onlyLetters" inputLength="100"
+                      formControlName="firstName"
+                      matInput
+                      autocomplete="off"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="Form-control">
+                <div class="Col">
+                  <mat-form-field appearance="outline" class="Form-input">
+                    <mat-label>Segundo nombre:</mat-label>
+                    <input
+                      [ngCustomValidator]="onlyLetters" inputLength="100"
+                      formControlName="secondName"
+                      matInput
+                      autocomplete="off"
+                    />
+                  </mat-form-field>
+                </div>
+                <div class="Col">
+                  <mat-form-field appearance="outline" class="Form-input">
+                    <mat-label>Tipo de documento:</mat-label>
+                    <mat-select formControlName="documentType">
+                      <mat-option
+                        *ngFor="let type of documentTypeOptions"
+                        value="{{ type.value }}"
+                        >{{ type.abbr }}
+                        <span class="small">({{ type.name }})</span></mat-option
+                      >
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="Col">
+                  <mat-form-field appearance="outline" class="Form-input">
+                    <mat-label>Número de documento:</mat-label>
+                    <input
+                      [ngCustomValidator]="alphaNumeric" inputLength="20"
+                      formControlName="documentNumber"
+                      matInput
+                      autocomplete="off"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="Form-control">
+                <div class="Col">
+                  <mat-form-field
+                    appearance="outline"
+                    class="Form-input"
+                    (click)="picker1.open()"
+                  >
+                    <mat-label>Fecha de nacimiento:</mat-label>
+                    <input
+                      formControlName="birthdate"
+                      matInput
+                      readonly
+                      [matDatepicker]="picker1"
+                      [min]="minDate"
+                      [max]="maxDate"
+                    />
+                    <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker1"
+                    ></mat-datepicker-toggle>
+                  </mat-form-field>
+                </div>
+                <div class="Col">
+                  <mat-form-field appearance="outline" class="Form-input">
+                    <mat-label>Sexo:</mat-label>
+                    <mat-select
+                      formControlName="gender"
+                      (selectionChange)="genderSelectionChange($event.value, i)"
+                    >
+                      <mat-option value="F">Femenino</mat-option>
+                      <mat-option value="M">Masculino</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="Col">
+                  <mat-form-field appearance="outline" class="Form-input">
+                    <mat-label>Parentesco:</mat-label>
+                    <mat-select formControlName="relationship">
+                      <mat-option
+                        *ngFor="let type of relationTypeBenificary[i]"
+                        value="{{ type.value }}"
+                        >{{ type.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="Col">
+                  <mat-form-field appearance="outline" class="Form-input">
+                    <mat-label>Condición:</mat-label>
+                    <mat-select formControlName="condition">
+                      <mat-option value="S">Sano</mat-option>
+                      <mat-option value="I">Inválido</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="Footer-actions end pb">
+                <button type="button" mat-button (click)="deleteBeneficiary(i)">
+                  <span class="material-icons">
+                    delete
+                  </span>
+                  Remover beneficiario
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="Footer-actions end mb">
+          <button
+            type="button"
+            color="accent"
+            mat-flat-button
+            (click)="addBeneficiary()"
+          >
+            <span class="material-icons">
+              add
+            </span>
+            Agregar beneficiario
+          </button>
+        </div>
+      </div>
+      <div *ngIf="enableBeneficiary(form.controls.procedureType.value)">
+        <h3>Declaración de no beneficiarios</h3>
+        <mat-checkbox class="custom-frame" formControlName="verifyBeneficiary">
+          Declaro que no tengo beneficiarios y mi respuesta tiene carácter de
+          declaración jurada.
+        </mat-checkbox>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="Form-fieldset attach-file">
+        <div style="display: none;">
+          <div id="tooltip-content-general" [innerHtml]="messageGeneral">
+            {{ messageGeneral }}
+          </div>
+        </div>
+        <h3 class="mat-h2">Adjunta documentos</h3>
+        <div class="attach-file-message">
+          <h4>
+            Documentos Generales
+
+            <span
+              ngCustomTooltip="tooltip-content-general"
+              class="tool-tip"
+            ></span>
+          </h4>
+          <p>
+            Sube aquí los documentos del trámite que estás realizando y/o los
+            documentos del apoderado o representante
+          </p>
+        </div>
+
+        <div class="Col attach-file-drap">
+          <h2>Carga de Documentos</h2>
+          <p>
+            El peso del documento no debe exceder de 8MB. y deben ser de
+            extensión: .pdf, .png o .jpg.
+          </p>
+          <everis-afp-prima-upload
+            [formatAllow]="formatAllow"
+            [text]="labelFileUpdate"
+            icon="add"
+            [loadRequest]="loadUploadFile"
+            (changeUpload)="changeUpload($event)"
+            (messageError)="messageOutput($event)"
+            [maxSize]="[maxSizeFile]"
+            (clearUpload)="clearUpload($event)"
+          ></everis-afp-prima-upload>
+          <span
+            [ngClass]="{
+              error: uploadMessage.error,
+              success: !uploadMessage.error
+            }"
+            >{{ uploadMessage.message }}</span
+          >
+        </div>
+        <div class="list-files" *ngIf="filesUpload.length">
+          <ul>
+            <li *ngFor="let file of filesUpload; let i = index">
+              {{ file.uploadName }}
+              <mat-icon
+                class="Icon remove"
+                (click)="clearFile(i)"
+                aria-label="Icon Remove"
+                >delete_outline</mat-icon
+              >
+            </li>
+          </ul>
+        </div>
+        <div style="display: none;">
+          <div
+            id="tooltip-content-beneficiary"
+            [innerHtml]="messageBeneficiary"
+          >
+            {{ messageBeneficiary }}
+          </div>
+        </div>
+        <div
+          class="attach-file-message"
+          *ngIf="
+            enableBeneficiary(form.controls.procedureType.value) &&
+            !NotBenificiary
+          "
+        >
+          <h4>
+            Documentos de los Beneficiarios<span
+              class="tool-tip"
+              ngCustomTooltip="tooltip-content-beneficiary"
+            ></span>
+          </h4>
+          <p>Sube aquí los documentos de tus beneficiarios</p>
+        </div>
+
+        <div
+          class="Col attach-file-drap"
+          *ngIf="
+            enableBeneficiary(form.controls.procedureType.value) &&
+            !NotBenificiary
+          "
+        >
+          <h2>Carga de Documentos</h2>
+          <p>
+            El peso del documento no debe exceder de 8MB. y deben ser de
+            extensión: .pdf, .png o .jpg.
+          </p>
+          <everis-afp-prima-upload
+            [text]="labelFileUpdate"
+            icon="add"
+            (changeUpload)="changeUploadBeneficiary($event)"
+            (clearUpload)="clearUpload($event)"
+          ></everis-afp-prima-upload>
+          <span
+            [ngClass]="{
+              error: uploadMessageBeneficiary.error,
+              success: !uploadMessageBeneficiary.error
+            }"
+            >{{ uploadMessageBeneficiary.message }}</span
+          >
+        </div>
+        <div class="list-files" *ngIf="filesUplaodBeneficiary.length">
+          <ul>
+            <li *ngFor="let file of filesUplaodBeneficiary; let i = index">
+              {{ file.uploadName }}
+              <mat-icon
+                class="Icon remove"
+                (click)="clearFileBeneficiaryindex(i)"
+                aria-label="Icon Remove"
+              >
+                delete_outline</mat-icon
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+
+      <div class="Form-fieldset last">
+        <h4 class="mat-h2">Comentarios adicionales(Opcional)</h4>
+        <div class="Form-control">
+          <div class="Col">
+            <mat-form-field appearance="outline" class="Form-textarea">
+              <mat-label>Comentario opcional:</mat-label>
+              <textarea
+                ngCustomValidator="isLatinCharacter"
+                inputLength="400"
+                formControlName="comments"
+                matInput
+                placeholder="Comentario opcional."
+              ></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="Navigation-btns">
+        <button type="button" mat-flat-button (click)="presenter.backStep()">
+          <span class="material-icons">
+            keyboard_arrow_left
+          </span>
+          Volver
+        </button>
+        <span class="separated"></span>
+        <button
+          type="button"
+          mat-flat-button
+          color="primary"
+          [disabled]="!form.valid"
+          (click)="register()"
+        >
+          Registrar
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

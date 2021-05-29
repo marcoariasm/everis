@@ -1,0 +1,105 @@
+{
+  "retiro4uitprod/v1/register4uit/request-4uit": {
+    "POST": {
+      "codeResponse": "202",
+      "responses": [
+        {
+          "statusCode": "202",
+          "errorCode": "000000",
+          "headers": {
+            "response": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": ""
+            },
+            "request": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": ""
+            }
+          },
+          "body": {
+            "requestNumber": "40614447-20201201-131951",
+            "registerDate": "2020-12-01T13:19:51.8247815",
+            "email": "******eo@gmail.com",
+            "cellphone": "99****999",
+            "bankAccountNumber": "3244234324***3523"
+          }
+        },
+        {
+          "statusCode": "403",
+          "errorCode": "000000",
+          "headers": {
+            "response": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": ""
+            },
+            "request": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": ""
+            }
+          },
+          "body": {
+            "code": "AFP0011"
+          }
+        },
+        {
+          "statusCode": "409",
+          "errorCode": "000000",
+          "headers": {
+            "response": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": ""
+            },
+            "request": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": ""
+            }
+          },
+          "body": {
+            "code": "AFP0003",
+            "description": "Request withdraw already registered",
+            "meta": {
+              "requestNumber": "a81830d9-2d2a-48a6-ab5a-3d32eda8b34a",
+              "registerDate": "2020-04-07T09:45:12.255"
+            }
+          }
+        },
+        {
+          "statusCode": "412",
+          "errorCode": "000000",
+          "headers": {
+            "response": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": ""
+            },
+            "request": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": ""
+            }
+          },
+          "body": {
+            "code": "AFP001",
+            "description": "Failed to process request"
+          }
+        },
+        {
+          "statusCode": "410",
+          "errorCode": "000000",
+          "headers": {
+            "response": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": ""
+            },
+            "request": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": ""
+            }
+          },
+          "body": {
+            "code": "AFP0004",
+            "description": "Bank Account Number already registered"
+          }
+        }
+      ]
+    }
+  }
+}

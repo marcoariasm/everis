@@ -1,0 +1,382 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+@import 'assets/fonts/_fonts.scss';
+
+
+$custom-typography: mat-typography-config(
+  $font-family: 'inherit'
+  );
+
+@include mat-core($custom-typography);
+
+$mat-prima-primary: (
+  '50': #ffeae1,
+  '100': #ffc9b3,
+  '200': #ffa680,
+  '300': #ff824d,
+  '400': #ff6727,
+  '500': #ff4c01,
+  '600': #ff4501,
+  '700': #ff3c01,
+  '800': #ff3301,
+  '900': #ff2400,
+  'A100': #ffffff,
+  'A200': #fff3f2,
+  'A400': #ff3c01,
+  'A700': #ff2400,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+$mat-prima-accent: (
+  '50': #e0f3f2,
+  '100': #b3e2de,
+  '200': #80cec9,
+  '300': #4dbab3,
+  '400': #26aca2,
+  '500': #009d92,
+  '600': #00958a,
+  '700': #008b7f,
+  '800': #008175,
+  '900': #009d92,
+  'A100': #9efff2,
+  'A200': #6bffeb,
+  'A400': #009d92,
+  'A700': #009d92,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+// The warn palette is optional (defaults to red).
+$affiliates-primary: mat-palette($mat-prima-primary, A400, A200, A700);
+$affiliates-accent: mat-palette($mat-prima-accent, A400, A200, A700);
+$affiliates-warn: mat-palette($mat-red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$affiliates-theme: mat-light-theme((
+  color: (
+    primary: $affiliates-primary,
+    accent: $affiliates-accent,
+    warn: $affiliates-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($affiliates-theme);
+
+$number-of-steps:  4;
+$line-width:       2px;
+$bullet-size:      2em;
+$background-color: black;
+$foreground-color: #555;
+$active-background-color: #555;
+$active-foreground-color: black;
+
+/* You can add global styles to this file, and also import other style files */
+:root {
+  /*--main-bg-color: #edeeef;*/
+  --main-bg-color: #fff;
+}
+
+* {
+  box-sizing: border-box;
+  font-family:'FS Emeric', 'Calibri';
+}
+
+body {
+  margin: 0;
+  font-family:'FS Emeric', 'Calibri';
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  background-color: var(--main-bg-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'Calibri';
+  font-style: normal;
+  font-weight: bold;
+}
+
+.separated {
+  flex: 1;
+}
+
+.Wrapper {
+  padding-top: 60px;
+  width: 100%;
+  height: 100%;
+}
+
+.Form, .Row {
+  &-fieldset {
+    padding-bottom: 8px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+    &.last {
+      border-bottom: 0 none;
+    }
+  }
+
+  &-subtitle {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+
+  &-control {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    &.wrap {
+      flex-flow: wrap;
+    }
+
+    &.mb {
+      margin-bottom: 16px;
+    }
+
+    .Col {
+      flex: 1;
+      padding: 0 8px;
+    }
+  }
+
+  &-input {
+    width: 100%;
+
+    &[readonly] {
+      background-color: rgba(0,0,0,.045);
+    }
+  }
+
+  &-select {
+    width: 100%;
+
+    &[readonly] {
+      background-color: rgba(0,0,0,.045);
+    }
+  }
+
+  &-textarea {
+    width: 100%;
+  }
+}
+
+
+.Sub-Heaher {
+  width: 100%;
+  padding: 32px;
+}
+
+
+.Content {
+  // background-color: white;
+  padding: 32px;
+  min-height: 200px;
+}
+
+.Inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+.Table {
+  width: 100%;
+  margin: 0 0 32px;
+  border-collapse: collapse;
+  border: 1px solid rgba(0,0,0,.2);
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  td, th {
+    padding: 12px 8px;
+    text-align: center;
+  }
+
+  th {
+    background-color: rgba(0,0,0,.2);
+  }
+}
+
+.Navigation-btns {
+  display: flex;
+  flex-direction: row;
+  padding-top: 32px;
+  margin-top: 32px;
+  border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.Title-actions {
+  display: flex;
+  flex-direction: row;
+}
+
+.Footer-actions {
+  display: flex;
+  align-items: center;
+
+  &.end {
+    justify-content: flex-end;
+  }
+
+  &.start {
+    justify-content: flex-start;
+  }
+
+  &.center {
+    justify-content: center;
+  }
+
+  &.mb {
+    margin-bottom: 16px;
+  }
+
+  &.pb {
+    padding-bottom: 16px;
+  }
+}
+
+.Warning {
+  color: #ff6727;
+}
+
+.Comments {
+  padding: 16px;
+  background-color:rgba(0,0,0,.045);
+  border-radius: 4px;
+  margin-bottom: 16px;
+
+  &-item {
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    margin-bottom: 16px;
+  }
+}
+
+.Steps {
+  position: relative;
+  overflow: hidden;
+  counter-reset: wizard;
+  margin: 0 0 32px;
+
+  li {
+    position: relative;
+    float: left;
+    width: 100% / $number-of-steps;
+    text-align: center;
+    color: $active-background-color;
+    list-style: none;
+    margin: 0;
+
+    span {
+      font-size: 0.9em;
+    }
+
+    strong {
+      font-size: 1.1em;
+    }
+  }
+
+  .current ~ li {
+    color: $foreground-color;
+  }
+
+  li:before {
+    counter-increment: wizard;
+    content: '';
+    content: counter(wizard);
+    display: block;
+    color: #ffffff;
+    background-color: #ff6727;
+    border: $line-width solid #ff6727;
+    text-align: center;
+    width: $bullet-size;
+    height: $bullet-size;
+    line-height: $bullet-size;
+    border-radius: $bullet-size;
+    position: relative;
+    left: 50%;
+    margin-bottom: $bullet-size / 2;
+    margin-left: $bullet-size * -0.5;
+    z-index: 1;
+
+    .current ~ & {
+      background-color: $background-color;
+      color: $foreground-color;
+      border-color: $foreground-color;
+    }
+  }
+
+  li + li {
+    &:after{
+      content: "";
+      display: block;
+      width: 100%;
+      background-color: #ff6727;
+      height: $line-width;
+      position: absolute;
+      left: -50%;
+      top: $bullet-size / 2;
+      z-index: 0;
+    }
+  }
+
+  .current ~ li:after {
+      background-color: $black-87-opacity;
+  }
+}
+
+table {
+  width: 100%;
+}

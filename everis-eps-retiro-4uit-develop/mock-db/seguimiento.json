@@ -1,0 +1,122 @@
+{
+    "retiro4uitprod/v1/tracing4uit/tracing4Uit": {
+        "POST": {
+            "codeResponse": "202",
+            "responses": [
+                {
+                    "statusCode": "202",
+                    "errorCode": "000000",
+                    "headers": {
+                        "response": {
+                            "g-recaptcha-response": ""
+                        },
+                        "request": {
+                            "g-recaptcha-response": ""
+                        }
+                    },
+                    "body": {
+                      "afp": "PRIMA",
+                      "requestNumber": "110192",
+                      "documentData": "45645464",
+                      "fullName": "Maria Tello",
+                      "status": "En progreso",
+                      "situation": "Aprobada",
+                      "requestDate": "11-27-2020",
+                      "message": "Solicitud en progreso",
+                      "withdrawDate": "",
+                      "paymentMode": "Transferencia",
+                      "paymentDate": "11-27-2020",
+                      "accountNumber": "02165456021",
+                      "observation": "Emitida",
+                      "bank": "BBVA",
+                      "transferDate": "11-27-2020",
+                      "typeRequest": "",
+                      "paymentAccount": "211-12231-11112"
+                    }
+                },
+                {
+                    "statusCode": "400",
+                    "errorCode": "AFP500",
+                    "headers": {
+                        "response": {
+                          "g-recaptcha-response": "",
+                          "Ocp-Apim-Subscription-Key": ""
+                        },
+                        "request": {
+                          "g-recaptcha-response": "",
+                          "Ocp-Apim-Subscription-Key": ""
+                        }
+                    },
+                    "body": {
+                      "code": "AFP500",
+                      "description": "Invalid parameters"
+                    }
+                },
+                {
+                    "statusCode": "404",
+                    "errorCode": "AFP501",
+                    "headers": {
+                        "response": {
+                            "g-recaptcha-response": ""
+                        },
+                        "request": {
+                            "g-recaptcha-response": ""
+                        }
+                    },
+                    "body": {
+                      "code": "AFP501",
+                      "description": "AFP user not found"
+                    }
+                },
+                {
+                    "statusCode": "412",
+                    "errorCode": "AFP502",
+                    "headers": {
+                        "response": {
+                            "g-recaptcha-response": ""
+                        },
+                        "request": {
+                            "g-recaptcha-response": ""
+                        }
+                    },
+                    "body": {
+                      "code": "AFP502",
+                      "description": "AFP user not found on external systems"
+                    }
+                },
+                {
+                    "statusCode": "500",
+                    "errorCode": "AFP510",
+                    "headers": {
+                        "response": {
+                            "g-recaptcha-response": ""
+                        },
+                        "request": {
+                            "g-recaptcha-response": ""
+                        }
+                    },
+                    "body": {
+                      "code": "AFP510",
+                      "description": "Error received from external service"
+                    }
+                },
+                {
+                    "statusCode": "503",
+                    "errorCode": "AFP511",
+                    "headers": {
+                        "response": {
+                            "g-recaptcha-response": ""
+                        },
+                        "request": {
+                            "g-recaptcha-response": ""
+                        }
+                    },
+                    "body": {
+                      "code": "AFP511",
+                      "description": "Request timeout from external service"
+                    }
+                }
+            ]
+        }
+    }
+}

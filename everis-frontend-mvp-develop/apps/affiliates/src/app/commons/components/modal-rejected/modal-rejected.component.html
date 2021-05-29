@@ -1,0 +1,16 @@
+<div class="message-container">
+  <div class="message-icon">
+    <span class="material-icons">
+      error_outline
+    </span>
+  </div>
+  <div class="message">
+    <p *ngIf="typeError">Ups!, Ha ocurrido un error inesperado.</p>
+    <p *ngIf="!typeError">Ups! , Existe un trámite registrado o en proceso</p>
+  </div>
+</div>
+<div class="mat-dialog-actions" align="center">
+  <div class="actions-container">
+    <button class="action-button" mat-raised-button color="primary" (click)="exit()">Salir</button>
+  </div>
+</div>

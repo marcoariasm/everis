@@ -1,0 +1,143 @@
+<div class="main">
+  <div class="step-3">
+    <div class="nombre-contacto">
+      <div class="icono-check">
+        <img src="../../../assets/approved.svg" alt="">
+      </div>
+      <br>
+      <h1 class="primary-title">Seguimiento</h1>
+      <br />
+      <label class="primary-label">Aquí puedes revisar el <strong>estado de tu solicitud:</strong></label>
+      <br><br>
+    </div>
+    <div class="datos-solicitud" *ngIf="tracingDetail">
+      <table *ngIf="tracingDetail.afp === afpType.integra">
+        <th>Información</th>
+        <th></th>
+        <tr>
+          <td>AFP:</td>
+          <td>{{tracingDetail?.afp}}</td>
+        </tr>
+        <tr>
+          <td>Fecha de registro:</td>
+          <td>{{tracingDetail?.requestDate}}</td>
+        </tr>
+        <tr>
+          <td>Nro. de solicitud:</td>
+          <td>{{ tracingDetail?.requestNumber }}</td>
+        </tr>
+        <tr>
+          <td>Estado:</td>
+          <td>{{ tracingDetail?.status }}</td>
+        </tr>
+        <tr>
+          <td>Número de cuenta:</td>
+          <td>{{ tracingDetail?.accountNumber }}</td>
+        </tr>
+        <tr>
+          <td>Mensaje:</td>
+          <td>{{ tracingDetail?.message }}</td>
+        </tr>
+      </table>
+      <table *ngIf="tracingDetail.afp === afpType.prima">
+        <th>Información</th>
+        <th></th>
+        <tr>
+          <td>AFP:</td>
+          <td>{{tracingDetail?.afp}}</td>
+        </tr>
+        <tr>
+          <td>Tipo de solicitud:</td>
+          <td>{{tracingDetail?.typeRequest}}</td>
+        </tr>
+        <tr>
+          <td>Fecha de registro:</td>
+          <td>{{tracingDetail?.requestDate}}</td>
+        </tr>
+        <tr>
+          <td>Nombre completo:</td>
+          <td>{{ tracingDetail?.fullName }}</td>
+        </tr>
+        <tr>
+          <td>Documento:</td>
+          <td>{{ tracingDetail?.documentData }}</td>
+        </tr>
+        <tr>
+          <td>Situación:</td>
+          <td>{{ tracingDetail?.situation }}</td>
+        </tr>
+        <tr>
+          <td>Fecha de pago:</td>
+          <td>{{ tracingDetail?.paymentDate }}</td>
+        </tr>
+        <tr>
+          <td>Método de pago:</td>
+          <td>{{ tracingDetail?.paymentMode }}</td>
+        </tr>
+        <tr>
+          <td>Número de cuenta:</td>
+          <td>{{ tracingDetail?.accountNumber }}</td>
+        </tr>
+      </table>
+      <table *ngIf="tracingDetail.afp === afpType.profuturo">
+        <th>Información</th>
+        <th></th>
+        <tr>
+          <td>AFP:</td>
+          <td>{{tracingDetail?.afp}}</td>
+        </tr>
+        <tr>
+          <td>Tipo de solicitud:</td>
+          <td>{{tracingDetail?.typeRequest}}</td>
+        </tr>
+        <tr>
+          <td>Número de solicitud AFP:</td>
+          <td>{{tracingDetail?.requestNumber}}</td>
+        </tr>
+        <tr>
+          <td>Estado:</td>
+          <td>{{ tracingDetail?.status }}</td>
+        </tr>
+        <tr>
+          <td>Fecha de próximo pago: </td>
+
+          <td>{{ tracingDetail?.paymentDate }}</td>
+        </tr>
+        <tr>
+          <th>Datos del último pago realizado</th>
+          <th></th>
+        </tr>
+        <tr>
+          <td>Número de pago:</td>
+          <td>{{ tracingDetail?.paymentAccount }}</td>
+        </tr>
+        <tr>
+          <td>Número de cuenta abono:</td>
+          <td>{{ tracingDetail?.accountNumber }}</td>
+        </tr>
+
+        <tr>
+          <td>Fecha de cargo cuenta AFP:</td>
+          <td>{{ tracingDetail?.withdrawDate }}</td>
+        </tr>
+        <tr>
+          <td>Fecha de transferencia a entidad financiera:</td>
+          <td>{{ tracingDetail?.transferDate }}</td>
+        </tr>
+        <tr>
+          <td>Entidad financiera:</td>
+          <td>{{ tracingDetail?.bank }}</td>
+        </tr>
+        <tr>
+          <td>Mensaje:</td>
+          <td>{{ tracingDetail?.message }}</td>
+        </tr>
+        <tr>
+          <td>Observación:</td>
+          <td>{{ tracingDetail?.observation }}</td>
+        </tr>
+      </table>
+      <button (click)="goToHome()" class="btn-alternative" mat-flat-button color="primary">Entendido</button>
+    </div>
+  </div>
+</div>

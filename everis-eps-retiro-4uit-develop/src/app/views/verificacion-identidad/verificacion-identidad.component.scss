@@ -1,0 +1,134 @@
+div {
+  &.main {
+    width: 80%;
+    min-width: 300px;
+    max-width: 900px;
+    margin: 48px auto 40px;
+    text-align: center;
+    .btn-primary {
+      box-sizing: border-box;
+      width: 224px;
+      font-size: 16px;
+      // font-weight: bold;
+      line-height: 1.5;
+      letter-spacing: 0.2px;
+      text-align: center;
+      color: #ffffff;
+      border-radius: 4px;
+      // padding: 10px 50px;
+      padding: 10px 0px;
+      margin-top: 40px;
+      background-color: var(--afp-azul-primario);
+    }
+
+    .linkAfp {
+      width: 100%;
+      margin: 25px 0;
+
+      a {
+        text-decoration: underline;
+        color: #007bff;
+      }
+    }
+  }
+}
+.header-container {
+  height: 275px;
+  background-color: #f0f6ff66;
+  .inner {
+    text-align: center;
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+    min-width: 300px;
+    max-width: 900px;
+    img {
+      margin-top: 70px;
+      height: 80px;
+    }
+    .primary-title {
+      display: block;
+      margin-top: 32px;
+      margin-top: 34px;
+      font-size: 40px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 0.73;
+      letter-spacing: 0.2px;
+      text-align: center;
+      color: var(--afp-azul-primario);
+    }
+  }
+}
+.primary-label {
+  max-width: 425px;
+  font-size: 18px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.39;
+  letter-spacing: 0.2px;
+  text-align: center;
+  color: var(--afp-dark);
+  margin: 0 auto;
+}
+.right {
+  text-align: right;
+}
+.left {
+  text-align: left;
+}
+.block {
+  display: block;
+}
+.bold {
+  font-weight: bold;
+}
+.logo-footer {
+  width: 120px;
+  padding: 22px 60px;
+}
+.footer {
+  background-color: var(--afp-lightblue-sec);
+}
+.logo {
+  width: 120px;
+  // margin: 24px 16px;
+  vertical-align: middle;
+
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    width: 80px;
+    margin: 14px 8px 0;
+  }
+}
+
+.margin-top-70 {
+  margin-top: 70px;
+}
+.rp-form-element {
+  vertical-align: middle;
+  min-width: 285px;
+  margin-bottom: -18px;
+}
+.margin-center {
+  margin: 0 auto;
+}
+.height-70 {
+  height: 70px;
+}
+td label {
+  font-family: Roboto;
+  font-size: 18px;
+  line-height: 1.22;
+  letter-spacing: 0.2px;
+  color: var(--afp-dark);
+}
+.td-data {
+  padding-left: 45px;
+}
+.icon-tooltip {
+  margin-left: 25px;
+  vertical-align: middle;
+  cursor: pointer;
+}

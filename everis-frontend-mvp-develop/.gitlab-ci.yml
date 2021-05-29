@@ -1,0 +1,77 @@
+stages:
+  - build
+  - deploy
+  - clean_cache
+
+build affiliates dev:
+  image: node:10.22.0
+  stage: build
+  script:
+    - npm install
+    - npm run build:affiliates
+  artifacts:
+    expire_in: 10 minutes
+    paths:
+      - ./dist/apps/affiliates/**
+  only:
+    - develop
+
+deploy affiliates dev:
+  stage: deploy
+  image: microsoft/azure-cli
+  dependencies:
+    - build affiliates dev
+  script:
+    - ls -la
+    - az storage blob delete-batch -s "\$web" --connection-string $AZURE_ST_AFFILIATES_CONNECTION_STRING_DEV
+    - az storage blob upload-batch -d "\$web" -s ./dist/apps/affiliates/ --connection-string $AZURE_ST_AFFILIATES_CONNECTION_STRING_DEV
+  only:
+    - develop
+
+purge cdn affiliate dev:
+  stage: clean_cache
+  image: microsoft/azure-cli
+  dependencies:
+    - deploy affiliates dev
+  script:
+    - az login --service-principal -u $AZURE_SP_USER_DEV -p $AZURE_SP_SECRET_DEV -t $AZURE_SP_TENANT_DEV
+    - az cdn endpoint purge -g $RG_CDN_NAME_DEV -n $EP_AFFILIATE_NAME_DEV --profile-name $CDN_PROFILE_NAME_DEV --content-paths '/*'
+  only:
+    - develop
+
+
+build backoffice dev:
+  image: node:10.22.0
+  stage: build
+  script:
+    - npm install
+    - npm run build:backoffice
+  artifacts:
+    expire_in: 10 minutes
+    paths:
+      - ./dist/apps/backoffice/**
+  only:
+    - develop
+
+deploy backoffice dev:
+  stage: deploy
+  image: microsoft/azure-cli
+  dependencies:
+    - build backoffice dev
+  script:
+    - ls -la
+    - az storage blob delete-batch -s "\$web" --connection-string $AZURE_ST_BACKOFFICE_CONNECTION_STRING_DEV
+    - az storage blob upload-batch -d "\$web" -s ./dist/apps/backoffice/ --connection-string $AZURE_ST_BACKOFFICE_CONNECTION_STRING_DEV
+  only:
+    - develop
+
+purge cdn backoffice dev:
+  stage: clean_cache
+  image: microsoft/azure-cli
+  dependencies:
+    - deploy backoffice dev
+  script:
+    - az login --service-principal -u $AZURE_SP_USER_DEV -p $AZURE_SP_SECRET_DEV -t $AZURE_SP_TENANT_DEV
+    - az cdn endpoint purge -g $RG_CDN_NAME_DEV -n $EP_BACKOFFICE_NAME_DEV --profile-name $CDN_PROFILE_NAME_DEV --content-paths '/*'
+  only:
+    - develop

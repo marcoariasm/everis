@@ -1,0 +1,74 @@
+{
+    "prima-register/v1/request": {
+        "POST": {
+            "codeResponse": "202",
+            "responses": [
+                {
+                    "statusCode": "202",
+                    "errorCode": "000000",
+                    "headers": {
+                        "response": {
+                            "x-afp-signature": "",
+                            "Ocp-Apim-Subscription-Key": "",
+                            "x-prima-signature": ""
+                        },
+                        "request": {
+                            "x-afp-signature": "",
+                            "Ocp-Apim-Subscription-Key": "",
+                            "x-prima-signature": ""
+                        }
+                    },
+                    "body": {
+                        "id": 0,
+                        "requestNumber": "d5232da8-02b0-4637-bf00-fb2fbbef7a46",
+                        "registerDate": "2020-04-05T21:59:55.777Z"
+                    }
+                },
+                {
+                    "statusCode": "409",
+                    "errorCode": "PRI0003",
+                    "headers": {
+                        "response": {
+                            "x-afp-signature": "",
+                            "Ocp-Apim-Subscription-Key": "",
+                            "x-prima-signature": ""
+                        },
+                        "request": {
+                            "x-afp-signature": "",
+                            "Ocp-Apim-Subscription-Key": "",
+                            "x-prima-signature": ""
+                        }
+                    },
+                    "body": {
+                        "code": "PRI0003",
+                        "description": "Current request already register",
+                        "meta": {
+                            "requestNumber": "?",
+                            "registerDate": "{?date}"
+                        }
+                    }
+                },
+                {
+                    "statusCode": "412",
+                    "errorCode": "PRI001",
+                    "headers": {
+                        "response": {
+                            "x-afp-signature": "",
+                            "Ocp-Apim-Subscription-Key": "",
+                            "x-prima-signature": ""
+                        },
+                        "request": {
+                            "x-afp-signature": "",
+                            "Ocp-Apim-Subscription-Key": "",
+                            "x-prima-signature": ""
+                        }
+                    },
+                    "body": {
+                        "code": "PRI001",
+                        "description": "Failed to login request"
+                    }
+                }
+            ]
+        }
+    }
+}

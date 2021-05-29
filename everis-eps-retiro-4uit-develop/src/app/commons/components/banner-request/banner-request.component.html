@@ -1,0 +1,25 @@
+<div class="message-container">
+  <div class="message-icon">
+    <mat-icon>announcement</mat-icon>
+  </div>
+  <div *ngIf="info.code === 'REQUEST_SUCCESS'" class="message">
+    <p>Se ha registrado tu solicitud de retiro</p>
+    <p><b>{{info.number}}</b></p>
+    <p>el día {{info.date}} a las {{info.time}} horas. Gracias.</p>
+    <div class="msg-container">
+      <div class="msg">
+        La AFP o la Asociación de AFP no solicitan información personal, como número de tarjeta, clave de tarjeta, CVV u otro, en los mensajes de texto o correos que te envían.
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="info.code === 'REQUEST_ALREADY_REGISTERED'"class="message">
+    <p>Cuentas con una solicitud de retiro</p>
+    <p><b>{{info.number}}</b></p>
+    <p>registrada el {{info.date}} a las {{info.time}} horas.</p>
+    <p>No es posible hacer el registro más de una vez.</p>
+  </div>
+</div>
+<mat-dialog-actions align="center">
+  <button  class="action-button" mat-raised-button color="primary" (click)="exit()">Salir</button>
+</mat-dialog-actions>

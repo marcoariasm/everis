@@ -1,0 +1,67 @@
+{
+    "location/v2/ubigeo/provinces": {
+        "GET": {
+            "codeResponse": "200",
+            "responses": [
+              {
+                "statusCode": "200",
+                "errorCode": "000000",
+                "headers": {
+                  "response": {
+                    "g-recaptcha-response": "",
+                    "Ocp-Apim-Subscription-Key": "",
+                    "x-afp-signature": ""
+                  },
+                  "request": {
+                    "g-recaptcha-response": "",
+                    "Ocp-Apim-Subscription-Key": "",
+                    "x-afp-signature": ""
+                  }
+                },
+                "body": [
+                  {
+                    "code": "150100",
+                    "description": "LIMA"
+                  },
+                  {
+                    "code": "150200",
+                    "description": "BARRANCA"
+                  },
+                  {
+                    "code": "150300",
+                    "description": "CAJATAMBO"
+                  },
+                  {
+                    "code": "150400",
+                    "description": "CANTA"
+                  },
+                  {
+                    "code": "150500",
+                    "description": "CAÃETE"
+                  },
+                  {
+                    "code": "150600",
+                    "description": "HUARAL"
+                  },
+                  {
+                    "code": "150700",
+                    "description": "HUAROCHIRI"
+                  },
+                  {
+                    "code": "150800",
+                    "description": "HUAURA"
+                  },
+                  {
+                    "code": "150900",
+                    "description": "OYON"
+                  },
+                  {
+                    "code": "151000",
+                    "description": "YAUYOS"
+                  }
+                ]
+              }
+            ]
+        }
+    }
+}

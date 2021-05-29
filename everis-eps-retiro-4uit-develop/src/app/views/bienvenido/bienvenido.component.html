@@ -1,0 +1,44 @@
+<div class="bienvenido-container">
+    <div class="img-container">
+        <img class="logo-main undraggable" src="/assets/AAFP.png">
+    </div>
+
+    <h1 class="primary-title">¡Bienvenido!</h1>
+    <br />
+    <label class="primary-label">Tu ahorro (aportes) en la AFP tiene como finalidad ser un <b>soporte para tu futuro.</b></label>
+    <br />
+    <label class="primary-label"><b>Cuídalo</b> y retira solo lo que necesites en esta coyuntura</label>
+    <br />
+    <br />
+    <label class="primary-label">Elige la solicitud que deseas realizar</label>
+    <div class="options">
+        <div class="option-container">
+            <div class="info-retiro">
+                <label class="options-label">Retiro</label>
+            <br />
+            <label class="options-label-big">S/ 2,000 </label><br/>
+            <label class="options-label">(Suspensión perfecta de labores)</label>
+            <br />
+            </div>
+            <button class="btn-primary" mat-flat-button color="primary" onclick="location.href='https://www.consultaretiroafp.pe';">
+                Quiero retirar
+            </button>
+        </div>
+        <div class="option-container">
+            <div class="info-retiro">
+                <label class="options-label">Retiro de</label>
+            <br />
+            <label class="options-label-big">Hasta 4 UIT (S/ 17,600)</label><br/>
+                <label class="options-label">(afiliado sin aportes)</label>
+            <br />
+            </div>
+            <button [routerLink]="['/informacion']" class="btn-primary" mat-flat-button color="primary">Quiero retirar</button>
+            <br />
+            <br />
+            <button [routerLink]="['/seguimiento']" class="btn-alternative" mat-flat-button color="primary">¿Cómo va mi solicitud?</button>
+        </div>
+    </div>
+
+
+</div>
+<app-afp-banner></app-afp-banner>

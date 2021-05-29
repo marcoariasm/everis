@@ -1,0 +1,129 @@
+.cronograma-header-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+
+  .header {
+    margin-top: 16px;
+    margin-bottom: 8px;
+    text-align: center;
+    display: inline-block;
+    width: 50%;
+    min-width: 200px;
+  }
+
+  label {
+    display: block;
+    margin: 0 auto;
+    max-width: 220px;
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 1.16;
+    letter-spacing: 0.2px;
+    text-align: center;
+    color: var(--azul-gris-afp);
+  }
+}
+
+.header-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-left: 25%;
+  margin-right: 25%;
+  font-weight: 500;
+  line-height: 1.16;
+  letter-spacing: 0.2px;
+  height: 40px;
+  color: white;
+  background-color: var(--afp-azul-primario);
+
+  .last-digit{
+    flex-basis: 25%;
+  }
+  .dates {
+    align-items: center;
+    flex-basis: 25%;
+  }
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    margin-left: 5%;
+    margin-right: 5%;
+    font-size: 14px;
+  }
+}
+
+.first-column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 40%;
+  border-left: .4px var(--azul-gris-afp) solid;
+  border-right: .4px var(--azul-gris-afp) solid;
+  label {
+    display: block;
+    margin: 5px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.53;
+    letter-spacing: 0.2px;
+    text-align: center;
+    color: var(--azul-gris-afp);
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+      font-size: 14px;
+    }
+  }
+}
+
+
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-left: 25%;
+  margin-right: 25%;
+  border-bottom: .4px var(--azul-gris-afp) solid;
+  border-top: .4px var(--azul-gris-afp) solid;
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    margin-left: 5%;
+    margin-right: 5%;
+    font-size: 14px;
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  width: 16%;
+  border-left: .4px var(--azul-gris-afp) solid;
+  border-right: .4px var(--azul-gris-afp) solid;
+  label {
+    display: block;
+    margin: 5px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.53;
+    letter-spacing: 0.2px;
+    text-align: center;
+    color: var(--azul-gris-afp);
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+      font-size: 14px;
+    }
+  }
+}
+
+
+.cronograma-title {
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 0.81;
+  letter-spacing: 0.2px;
+  text-align: center;
+  color: var(--afp-dark);
+}
+
+.bold {
+  font-weight: bold;
+}

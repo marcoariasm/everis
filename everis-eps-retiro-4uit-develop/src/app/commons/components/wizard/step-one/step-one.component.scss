@@ -1,0 +1,332 @@
+:host {
+  width: 100%;
+
+  .nombre-residente {
+    font-family: Roboto;
+    font-size: 36px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 0.83;
+    letter-spacing: 0.2px;
+    text-align: center;
+    margin: 40px 0;
+    color: var(--afp-azul-primario);
+  }
+  .monto-disponible-residente {
+    margin: 40px auto;
+    max-width: 900px;
+    height: 104px;
+    border-radius: 8px;
+    box-shadow: 0 1px 20px 0 rgba(79, 107, 143, 0.1);
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    align-items: center;
+    .amount-text {
+      font-family: Roboto;
+      font-size: 16px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.25;
+      letter-spacing: 0.64px;
+      text-align: left;
+      color: var(--afp-dark);
+      padding: 0 20px;
+      margin: 10px 0;
+    }
+    .amount {
+      font-family: Roboto;
+      font-size: 40px;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1;
+      letter-spacing: 1.6px;
+      text-align: center;
+      color: var(--afp-azul-primario);
+    }
+  }
+
+  .retiro-fondo-pension {
+    display: block;
+    width: 100%;
+
+    .title {
+      display: block;
+      text-align: left;
+      width: 100%;
+      font-family: Roboto;
+      font-size: 18px;
+      font-weight: 500;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.33;
+      letter-spacing: 0.72px;
+      text-align: left;
+      color: var(--afp-dark);
+    }
+
+    .block-saldo-monto {
+      display: flex;
+      justify-content: space-between;
+      margin: 24px 0;
+
+      .block-saldo {
+        display: flex;
+        justify-content: space-between;
+        border-radius: 8px;
+        box-shadow: 0 1px 20px 0 rgba(79, 107, 143, 0.1);
+        background-color: #ffffff;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        margin-right: 20px;
+        height: 60px;
+        .title-saldo {
+          font-family: Roboto;
+          font-size: 18px;
+          font-weight: bold;
+          font-stretch: normal;
+          font-style: normal;
+          line-height: 1.33;
+          letter-spacing: 0.72px;
+          text-align: left;
+          color: var(--afp-azul-sec);
+          margin-right: 15px;
+        }
+        .amount-saldo {
+          font-family: Roboto;
+          font-size: 32px;
+          font-weight: 500;
+          font-stretch: normal;
+          font-style: normal;
+          line-height: 1.88;
+          letter-spacing: 0.2px;
+          text-align: left;
+          color: var(--azul-gris-afp);
+        }
+      }
+      .block-monto {
+        display: block;
+        width: 50%;
+        height: 58px;
+        .amount-input {
+          width: 100%
+        }
+        span {
+          display: block;
+          font-size: 12px;
+          font-weight: normal;
+          font-stretch: normal;
+          font-style: normal;
+          line-height: 1.5;
+          letter-spacing: 0.2px;
+          text-align: left;
+          color: var(--afp-dark);
+          margin: 5px 15px;
+        }
+      }
+    }
+  }
+
+  .info-retiro {
+    border-radius: 8px;
+    background-color: var(--afp-lightblue-sec);
+    padding: 30px 37px;
+    margin: 24px 0;
+    display: inline-block;
+    text-align: left;
+    .icono-info {
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 2%;
+    }
+    p {
+      display: inline-block;
+      vertical-align: top;
+      font-family: Roboto;
+      font-size: 14px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.43;
+      letter-spacing: 0.2px;
+      text-align: left;
+      color: var(--afp-dark);
+      width: 94%;
+
+    }
+    ul {
+      li {
+        margin-bottom: 5px;
+      }
+    }
+
+  }
+  .mantener-saldo {
+    margin: 56px 0;
+    text-align: left;
+    .title-saldo {
+      font-family: Roboto;
+      font-size: 17px;
+      font-weight: 500;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.33;
+      letter-spacing: 0.72px;
+      text-align: left;
+      color: var(--afp-dark);
+      position: relative;
+      .icon-tooltip {
+        position: absolute;
+        padding-left: 10px;
+        cursor: pointer;
+      }
+    }
+    .group-radio {
+      margin: 27px 0;
+      .mat-radio-button {
+        padding: 0 10px;
+      }
+    }
+    .input-hidden {
+      .mat-form-field {
+        margin: 0 15px;
+      }
+    }
+  }
+  .input-width {
+   width: 45%;
+  }
+}
+
+/* .row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column{
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+}
+
+.fund-type {
+  width: 45%;
+}
+
+@media screen and (min-width: 800px) {
+  .column {
+    flex: 1
+  }
+}
+
+.rp-form-element {
+  padding: 0 10px;
+
+  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    width: 95%;
+  }
+} */
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column{
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+}
+
+@media screen and (min-width: 800px) {
+  .column {
+    flex: 1
+  }
+  .monto-disponible-residente {
+    flex-direction: column;
+  }
+}
+
+.rp-form-element {
+  padding: 0 10px;
+
+  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    width: 95%;
+
+  }
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  .mat-horizontal-content-container {
+    overflow: hidden;
+    padding: 0 10px 24px 10px;
+}
+  .monto-disponible-residente {
+    flex-direction: column;
+
+    .amount-text {
+      font-size: 12px !important;
+      margin-bottom: 15px;
+    }
+    .amount {
+      font-size: 35px !important;
+    }
+  }
+
+  .block-saldo {
+    flex-direction: column;
+    width: 100% !important;
+    height: auto !important;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    .title-saldo {
+      margin-right: 0 !important;
+    }
+  }
+  .block-saldo-monto {
+    flex-direction: column;
+  }
+
+  .block-monto {
+    width: 100% !important;
+    height: auto !important;
+
+    span {
+      margin: 5px !important;
+    }
+  }
+
+  .info-retiro {
+    padding: 25px !important;
+    margin: 20px 0 !important;
+
+    .icono-info {
+      display: none !important;
+    }
+  }
+
+  .mantener-saldo {
+    margin: 20px 0 !important;
+    .title-saldo {
+      font-size: 15px !important;
+
+    }
+  }
+
+  .group-radio {
+
+      text-align: center;
+
+  }
+
+
+}

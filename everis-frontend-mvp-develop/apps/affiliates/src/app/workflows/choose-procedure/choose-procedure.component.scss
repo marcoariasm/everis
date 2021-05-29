@@ -1,0 +1,147 @@
+.Choose-procedure {
+  height: 100%;
+  width: 100%;
+  background-color: #edeeef;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  font-family: Calibri;
+  font-style: normal;
+  font-weight: normal;
+  color: #696158;
+
+  &-inner {
+    background-color: white;
+    border-radius: 11px;
+    padding: 65px 65px 41px 65px;
+    max-width: 80%;
+    min-width: 55%;
+    margin: 8% auto 10% auto;
+  }
+}
+
+.title {
+  font-family: Calibri;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 24px;
+  color: #ff4f00;
+}
+.sub-title {
+  font-family: Calibri;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ff4f00;
+}
+
+.Form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  div {
+    text-align: center;
+  }
+  .btn {
+    margin: 4% 4% 0% 4%;
+  }
+}
+
+.radio-item {
+  background-color: #f9f9fb;
+  border-radius: 10px;
+  label {
+    justify-content: center;
+  }
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 11px 0 0px 0;
+  .mat-radio-button {
+    border-radius: 10px;
+    margin: 16px;
+  }
+}
+.mat-radio-button {
+  font-size: 18px;
+}
+
+.sec-radio {
+  margin-left: 16px;
+}
+
+mat-radio-label {
+  flex-wrap: nowrap;
+}
+
+label div.mat-radio-outer-circle {
+  border-color: rgba(245, 43, 43, 0.54);
+}
+
+.border-container {
+  // border: 1px solid #FF4F00;
+  // border-radius: 10px;
+  box-sizing: border-box;
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 80px;
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+  .mat-radio-group {
+    display: flex;
+    flex-direction: column;
+    .sec-radio {
+      margin-left: 0px;
+      margin-top: 16px;
+    }
+  }
+  .Choose-procedure {
+    height: 100vh;
+    &-inner {
+      background-color: white;
+      max-width: 100%;
+      height: 100vh;
+      margin: 0;
+    }
+  }
+
+  .title {
+    h1 {
+      font-size: 20px;
+      line-height: 24px;
+      color: #ff4f00;
+    }
+  }
+  .sub-title{
+    h2 {
+      font-size: 16px;
+    }
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .mat-radio-button {
+    font-size: 16px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  // .mat-radio-button {
+  //   width: 100%;
+  // }
+}

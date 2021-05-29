@@ -1,0 +1,97 @@
+<ng-container [formGroup]="form">
+  <div class="nombre-residente">Hola {{firstName | titlecase}},</div>
+  <div class="monto-disponible-residente">
+    <div class="amount-text">TIENES UN MONTO DISPONIBLE DE</div>
+    <div class="amount">{{amountAvailable | currency: 'S/': 'symbol': '.0-0' }}</div>
+  </div>
+  <div class="retiro-fondo-pension">
+    <div class="title">Retiro de fondo de pensión:</div>
+    <div class="block-saldo-monto">
+      <div class="block-saldo">
+        <div class="title-saldo">Saldo disponible para retiro:</div>
+        <div class="amount-saldo">{{ amountAvailable | currency: 'S/': 'symbol': '.0-0'}}</div>
+      </div>
+      <div class="block-monto">
+        <mat-form-field appearance="outline" class="amount-input">
+          <mat-label>Ingresa el monto a retirar</mat-label>
+          <input matInput placeholder="Ingrese el monto a retirar" maxlength="9" formControlName="amountWithdraw"
+            autocomplete="off">
+          <mat-error *ngIf="hasErrors('amountWithdraw') && form.get('amountWithdraw').errors.required">Es requerido
+          </mat-error>
+          <mat-error *ngIf="hasErrors('amountWithdraw') && form.get('amountWithdraw').errors.onlyNumber">Solo números
+          </mat-error>
+          <mat-error *ngIf="hasErrors('amountWithdraw') && form.get('amountWithdraw').errors.amountBalance">Valor mayor
+            al disponible
+          </mat-error>
+          <mat-error *ngIf="hasErrors('amountWithdraw') && form.get('amountWithdraw').errors.min">El monto debe ser mayor a 0
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div class="info-retiro">
+    <span class="icono-info">
+      <img src="../../../assets/info.png" alt="info" />
+    </span>
+    <p>
+      Puedes retirar <strong>como máximo el monto disponible</strong> indicado. El monto disponible podría variar
+      dependiendo del saldo que tengas en tu cuenta individual al momento de realizar el retiro o en caso tengas otra solicitud de retiro en curso.<br /><br />
+      La entrega del monto a retirar se hará en 3 armadas, las dos primeras de hasta 1 UIT cada una y en la tercera se desembolasará el monto restante. La primera, dentro de los 30 días calendario posteriores al registro de tu solicitud y las siguientes, cada 30 días calendario.
+    </p>
+  </div>
+  <div class="mantener-saldo" *ngIf="retentionFlag === 1">
+    <div class="title-saldo">
+      ¿Deseas mantener un saldo en la AFP en tu cuenta de aportes voluntarios de libre disponibilidad?
+      <img (click)="showModalContentLibreDis()" class="icon-tooltip undraggable" src="/assets/icon_tooltip.svg">
+    </div>
+    <div class="group-radio">
+      <mat-radio-group #radioGroup="matRadioGroup" formControlName="radio">
+        <mat-radio-button value="SI"> SI </mat-radio-button>
+        <mat-radio-button value="NO"> NO </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="input-hidden" *ngIf="radioGroup.value === 'SI'">
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="outline">
+            <mat-label>Monto en soles</mat-label>
+            <input matInput placeholder="Monto en soles" maxlength="9" formControlName="amountAPV" autocomplete="off" />
+            <mat-error *ngIf="hasErrors('amountAPV') && form.get('amountAPV').errors.required">Es requerido
+            </mat-error>
+            <mat-error *ngIf="hasErrors('amountAPV') && form.get('amountAPV').errors.onlyNumber">Solo números
+            </mat-error>
+            <mat-error *ngIf="hasErrors('amountAPV') && form.get('amountAPV').errors.amountBalance">Valor mayor al
+              retiro
+            </mat-error>
+            <mat-error *ngIf="hasErrors('amountAPV') && form.get('amountAPV').errors.min">El monto debe ser mayor a 0
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="column">
+          <mat-form-field appearance="outline">
+            <mat-label>Tipo de fondo</mat-label>
+            <mat-select matNativeControl formControlName="fundAPV">
+              <mat-option *ngFor="let option of fundTypeOptions" [value]="option.id">{{ option.name }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="hasErrors('fundAPV') && form.get('fundAPV').errors.required">Es requerido
+            </mat-error>
+            <mat-error *ngIf="hasErrors('fundAPV') && form.get('fundAPV').errors.onlyNumber">Solo números
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="info-retiro">
+          <span class="icono-info">
+            <img src="../../../assets/info.png" alt="info" />
+          </span>
+            Condiciones de la <strong>cuenta de aportes voluntarios de libre disponibilidad</strong>:
+            <ul style="padding-left: 48px;">
+              <li>La cuenta está afecta a la comisión de la administración de fondo y el saldo es embargable.</li>
+              <li>La ganancia obtenida está afecta al impuesto a la renta.</li>
+              <li>La rentabilidad de los distintos tipos de Fondo es variable, su nivel en el futuro puede cambiar en relación con la rentabilidad pasada.</li>
+              <li>La presente operación no configura una operación inusual del cliente, debido a que los fondos son lícitos por provenir de sus aportes obligatorios en la AFP.</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

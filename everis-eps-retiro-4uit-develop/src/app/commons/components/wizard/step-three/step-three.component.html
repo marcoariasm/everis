@@ -1,0 +1,161 @@
+<div class="nombre-contacto">
+  <strong>{{firstName | titlecase}}</strong>, antes de finalizar,<br />
+  <strong>confirma los datos</strong> ingresados en la solicitud
+</div>
+<div class="datos-solicitud">
+  <table *ngIf="!residenceIsPeru">
+    <th>LUGAR DE RESIDENCIA</th>
+    <th></th>
+    <tr>
+      <td>País de residencia:</td>
+      <td>{{ residenceCountry }}</td>
+    </tr>
+    <tr>
+      <td>Ciudad de residencia:</td>
+      <td>{{ formStepTwo.get('ciudadResidencia').value }}</td>
+    </tr>
+    <tr>
+      <td>Dirección de residencia:</td>
+      <td>{{ formStepTwo.get('direccionResidencia').value }}</td>
+    </tr>
+  </table>
+
+  <table *ngIf="residenceIsPeru">
+    <th>DATOS DE LA CUENTA</th>
+    <th></th>
+    <tr>
+      <td>Monto a retirar:</td>
+      <td>{{ amountWithdraw | currency: 'S/':true:'2.0'  }}</td>
+    </tr>
+    <tr *ngIf="radioValue === 'SI' && (amountAvailable > uit)">
+      <td>Mantener en AFP con libre disponibilidad:</td>
+      <td>{{ amountAPV | currency: 'S/':true:'2.0'  }}</td>
+    </tr>
+    <tr *ngIf="radioValue === 'SI' && (amountWithdrawBank > 0)">
+      <td>Monto a transferir al banco:</td>
+      <td>{{ amountWithdrawBank | currency: 'S/':true:'2.0'  }}</td>
+    </tr>
+    <ng-container *ngIf="formSaldoResidoPeru.get('tipoRetiro').value && amountWithdrawBank > 0">
+      <tr>
+        <td>Tipo de retiro</td>
+        <td>{{ withdrawType }}</td>
+      </tr>
+      <tr *ngIf="bankName">
+        <td>Banco:</td>
+        <td>{{ bankName }}</td>
+      </tr>
+      <ng-container *ngIf="formSaldoResidoPeru.get('tipoRetiro').value === 'BANK_DEPOSIT'">
+        <tr>
+          <td>Número de cuenta:</td>
+          <td>{{ formSaldoResidoPeru.get('numeroDeCuenta').value }}</td>
+        </tr>
+      </ng-container>
+    </ng-container>
+  </table>
+
+  <table *ngIf="!residenceIsPeru && amountWithdrawBank > 0">
+    <th>DATOS DEL RETIRO</th>
+    <th></th>
+    <tr>
+      <td>Banco destino:</td>
+      <td>{{ formSaldoNoResidoPeru.get('bancoDestino').value || '-' }}</td>
+    </tr>
+    <tr>
+      <td>Ciudad banco destino:</td>
+      <td>{{ formSaldoNoResidoPeru.get('ciudadBancoDestino').value || '-' }}</td>
+    </tr>
+    <tr>
+      <td>Nombres en banco:</td>
+      <td>{{ formSaldoNoResidoPeru.get('nombreRegistradoBanco').value || '-' }}</td>
+    </tr>
+    <tr>
+      <td>Apellidos en banco:</td>
+      <td>{{ formSaldoNoResidoPeru.get('apellidoRegistradoBanco').value || '-' }}</td>
+    </tr>
+    <tr>
+      <td>Moneda banco destino:</td>
+      <td>{{ currencyDestinyBank || '-' }}</td>
+    </tr>
+    <tr>
+      <td>Tipo de cuenta:</td>
+      <td>{{ presenter.accountTypeName || '-' }}</td>
+    </tr>
+    <tr>
+      <td>Número de cuenta destino:</td>
+      <td>{{ formSaldoNoResidoPeru.get('numeroCuentaBancoDestino').value || '-' }}</td>
+    </tr>
+     <tr>
+      <td>Documento del banco:</td>
+      <td>{{ formSaldoNoResidoPeru.get('documentoVoucher').value || '-' }}</td>
+    </tr>
+    <tr>
+      <td>Número {{ formSaldoNoResidoPeru.get('tipoSwiftBic').value || 'SWIFT / BIC' }}:</td>
+      <td>{{ formSaldoNoResidoPeru.get('numeroSwiftBic').value || '-' }}</td>
+    </tr>
+    <tr>
+      <td>Número {{ formSaldoNoResidoPeru.get('tipoAbaIban').value || 'ABA / IBAN' }}:</td>
+      <td>{{ formSaldoNoResidoPeru.get('numeroAbaIban').value || '-' }}</td>
+    </tr>
+    <tr>
+      <td>Número {{ presenter.clabeTransitName || 'CLABE / Transit number' }}:</td>
+      <td>{{ formSaldoNoResidoPeru.get('numeroClaveTransitNumber').value || '-' }}</td>
+    </tr>
+  </table>
+
+  <table
+    *ngIf="!residenceIsPeru && formSaldoNoResidoPeru.get('tengoBancoIntermediario').value === 'INTERMEDIARY_BANK_ACCOUNT'">
+    <th>DATOS BANCO INTERMEDIARIO</th>
+    <th></th>
+    <tr>
+      <td>Banco intermediario:</td>
+      <td>{{ formSaldoNoResidoPeru.get('bancoIntermediario').value || '-' }}</td>
+    </tr>
+    <tr>
+      <td>País banco intermediario:</td>
+      <td>{{ intermediateBankCountry || '-'}}</td>
+    </tr>
+    <tr>
+      <td>Ciudad banco intermediario:</td>
+      <td>{{ formSaldoNoResidoPeru.get('ciudadBancoIntermediario').value || '-' }}</td>
+    </tr>
+    <tr>
+      <td>Número de cuenta banco intermediario:</td>
+      <td>{{ formSaldoNoResidoPeru.get('cuentaBancoIntermediario').value || '-' }}</td>
+    </tr>
+    <tr>
+      <td>Número {{ formSaldoNoResidoPeru.get('tipoSwiftAba').value || 'SWIFT / ABA' }}:</td>
+      <td>{{ formSaldoNoResidoPeru.get('numeroSwiftAba').value || '-' }}</td>
+    </tr>
+  </table>
+
+  <table>
+    <th>DATOS PERSONALES</th>
+    <th></th>
+    <tr>
+      <td>Correo electrónico:</td>
+      <td>{{ formStepTwo.get('correoElectronico').value || '-' }}</td>
+    </tr>
+    <tr>
+      <td>Número de teléfono:</td>
+      <td>{{ formStepTwo.get('numeroTelefono').value || '-' }}</td>
+    </tr>
+    <ng-container *ngIf="residenceIsPeru">
+      <tr>
+        <td>Departamento:</td>
+        <td>{{ this.presenter.codeDescripcion.departamento }}</td>
+      </tr>
+      <tr>
+        <td>Distrito:</td>
+        <td>{{ this.presenter.codeDescripcion.distrito }}</td>
+      </tr>
+      <tr>
+        <td>Provincia:</td>
+        <td>{{ this.presenter.codeDescripcion.provincia }}</td>
+      </tr>
+      <tr>
+        <td>Dirección:</td>
+        <td>{{ formStepTwo.get('direccion').value }}</td>
+      </tr>
+    </ng-container>
+  </table>
+</div>

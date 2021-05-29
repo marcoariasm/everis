@@ -1,0 +1,152 @@
+<div class="main">
+  <h2 class="tittle">{{lang.views.request.title}} <span class="timer">{{minutes}}:{{seconds}}</span></h2>
+
+  <app-affiliate [affiliate]="affiliate" [text]="lang.commons.affiliate"></app-affiliate>
+
+  <br>
+  <mat-divider></mat-divider>
+
+  <br>
+
+  <h4>{{lang.views.request.subtitle}}</h4>
+  <form class="form" [formGroup]="form">
+    <p class="label-fieldset">Lugar de residencia:</p>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="rp-form-element">
+          <mat-label>{{lang.views.request.controls.departamento.label}}</mat-label>
+          <mat-select formControlName="departamento">
+            <mat-option *ngFor="let item of departamentoArr" value="{{item.code}}">{{item.description}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="column">
+        <mat-form-field appearance="outline" class="rp-form-element">
+          <mat-label>{{lang.views.request.controls.provincia.label}}</mat-label>
+          <mat-select formControlName="provincia">
+            <mat-option *ngFor="let item of provinciaArr" value="{{item.code}}">{{item.description}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="column">
+        <mat-form-field appearance="outline" class="rp-form-element">
+          <mat-label>{{lang.views.request.controls.ubigeo.label}}</mat-label>
+          <mat-select formControlName="ubigeo">
+            <mat-option *ngFor="let item of distritoArr" value="{{item.code}}">{{item.description}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="rp-form-element">
+          <mat-label>{{lang.views.request.controls.address.label}}</mat-label>
+          <textarea
+            [maxlength]="100"
+            [minlength]="5"
+            matInput
+            [placeholder]="lang.views.request.controls.address.placeholder"
+            formControlName="address"
+            autocomplete="off"
+          ></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <p class="label-fieldset">Datos de contacto:</p>
+    <div class="row">
+      <div class="column">
+        <mat-form-field appearance="outline" class="rp-form-element">
+          <mat-label>{{lang.views.request.controls.email.label}}</mat-label>
+          <input matInput [placeholder]="lang.views.request.controls.email.placeholder" formControlName="email" autocomplete="off">
+        </mat-form-field>
+      </div>
+      <div class="column">
+        <mat-form-field appearance="outline" class="rp-form-element">
+          <mat-label>{{lang.views.request.controls.cellphone.label}}</mat-label>
+          <input
+            (focus)="focusPhone()"
+            matInput
+            [placeholder]="lang.views.request.controls.cellphone.placeholder"
+            maxlength="9"
+            formControlName="cellphone"
+            autocomplete="off"
+          >
+        </mat-form-field>
+      </div>
+      <div class="column">
+        <mat-form-field appearance="outline" class="rp-form-element">
+          <mat-label>{{lang.views.request.controls.paymentType.label}}</mat-label>
+          <mat-select formControlName="paymentType">
+            <mat-option value="BANK_DEPOSIT">Tengo cuenta bancaria</mat-option>
+            <mat-option value="WINDOW_PAYMENT">No tengo cuenta bancaria</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div *ngIf="form['controls'].paymentType.value==='BANK_DEPOSIT'">
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="outline" class="rp-form-element">
+            <mat-label>{{lang.views.request.controls.bank.label}}</mat-label>
+            <mat-select
+              formControlName="bank"
+              (selectionChange)="selectionBank($event.value)"
+            >
+              <mat-option *ngFor="let bank of BANKS" [value]="bank.value">{{bank.text}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="column">
+          <mat-form-field appearance="outline" class="rp-form-element">
+            <mat-label>{{lang.views.request.controls.bankAccountNumber.label}}</mat-label>
+            <input
+              (input)="focusAccountBank()"
+              [maxlength]="lenghAccount"
+              matInput
+              [placeholder]="isBN ? lang.views.request.controls.bankAccountNumber.placeholderBN: lang.views.request.controls.bankAccountNumber.placeholder"
+              formControlName="bankAccountNumber"
+              autocomplete="off"
+              (click)="presenter.showModalHelpBankAccount()"
+            >
+            <mat-hint *ngIf="isBN" [innerHTML]="MSG.ERROR_NATION_BANK_DIGIT"></mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="form['controls'].paymentType.value==='WINDOW_PAYMENT' && showUbigeoBanks()">
+      <div class="row">
+        <div class="column">
+          <mat-form-field appearance="outline" class="rp-form-element">
+            <mat-label>{{lang.views.request.controls.bank.label}}</mat-label>
+            <mat-select
+              formControlName="bank"
+              (selectionChange)="selectionBank($event.value)"
+            >
+              <mat-option *ngFor="let bank of BANKS_UBIGEO" [value]="bank.value">{{bank.text}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="column">
+          &nbsp;
+        </div>
+      </div>
+    </div>
+    <div class="additionalInfo">
+      <app-additional-info [info]="lang.commons.additionalInfo"></app-additional-info>
+    </div>
+  </form>
+  <div class="row authorize">
+    <mat-checkbox color="primary" class="rp-form-element" [(ngModel)]="accountStatement">{{lang.views.request.authorizeVirtualShipping}}</mat-checkbox>
+  </div>
+  <div class="button-container">
+    <button mat-button color="primary" (click)="back()">{{lang.commons.buttons.back}}</button>
+    <button
+      class="action-button"
+      [disabled]="!form.valid || isGroupNoneAndProfuturo()"
+      mat-raised-button
+      color="primary"
+      (click)="presenter.registerRequest(form.value, accountStatement)"
+    >{{lang.commons.buttons.register}}</button>
+  </div>
+</div>

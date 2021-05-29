@@ -1,0 +1,180 @@
+{
+  "backoffice-request-query/v1/backoffice-query": {
+    "POST": {
+      "codeResponse": "202",
+      "responses": [
+        {
+          "statusCode": "202",
+          "errorCode": "000000",
+          "headers": {
+            "response": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": "",
+              "x-prima-signature": ""
+            },
+            "request": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": "",
+              "x-prima-signature": ""
+            }
+          },
+          "body": {
+            "id": 1,
+            "commentInternal": null,
+            "requestTypeId": 1,
+            "requestType": "Solicitud SEYCI",
+            "requestNumber": "1a84d1ec-44af-4d56-b1ab-a9c199ff5bed",
+            "statusId": 3,
+            "executiveId": 1,
+            "status": "Registrado",
+            "registerDate": "19 de January del 2020 06:37 PM",
+            "affiliate": {
+                "cuspp": "750118ANCOR4",
+                "fullname": "Huamaní Medina Ana Cecilia",
+                "firstName": "Ana",
+                "secondName": "Cecilia",
+                "fatherLastname": "Huamaní",
+                "motherLastname": "Medina",
+                "documentTypeId": 1,
+                "documentType": "L.E/D.N.I",
+                "documentNumber": "40614447",
+                "email": "*****na@gmail.com",
+                "cellphone": "99****333",
+                "telephone": "36***69",
+                "genre": "F",
+                "maritalStatusId": null,
+                "maritalStatus": null
+            },
+            "petitioner": {
+                "fullname": "De la Cruz Gonzales Pialr ",
+                "firstName": "Pialr",
+                "secondName": "",
+                "fatherLastname": "De la Cruz",
+                "motherLastname": "Gonzales",
+                "documentTypeId": 1,
+                "documentType": "L.E/D.N.I",
+                "documentNumber": "44884488",
+                "birthdate": "",
+                "relationshipTypeId": 11,
+                "relationshipType": "Conyuge",
+                "email": "",
+                "cellphone": "",
+                "telephone": ""
+            },
+            "statuses": [
+                {
+                    "id": 3,
+                    "name": "Aceptado",
+                    "reason": "",
+                    "registerDate": "19 de January del 2020 06:40 PM"
+                },
+                {
+                    "id": 2,
+                    "name": "En Proceso",
+                    "reason": "",
+                    "registerDate": "19 de January del 2020 06:40 PM"
+                },
+                {
+                    "id": 1,
+                    "name": "Registrado",
+                    "reason": "",
+                    "registerDate": "19 de January del 2020 06:40 PM"
+                }
+            ],
+            "beneficiaries": [],
+            "comments": [
+                {
+                    "comment": "Comentario abc",
+                    "file": null,
+                    "functionary": "",
+                    "registerDate": "26 de January del 2020 11:03 AM"
+                },
+                {
+                    "comment": "Comentario abc",
+                    "file": null,
+                    "functionary": "",
+                    "registerDate": "26 de January del 2020 10:45 AM"
+                },
+                {
+                    "comment": "Comentario abc",
+                    "file": null,
+                    "functionary": "",
+                    "registerDate": "26 de January del 2020 10:44 AM"
+                },
+                {
+                    "comment": "Comentario XXX",
+                    "file": "https://stloadfilesdev.blob.core.windows.net/stloadfilesdev/1-a557f29b-edb8-4a9b-9fd1-6ef66982a0e1.png",
+                    "functionary": "",
+                    "registerDate": "25 de January del 2020 03:37 AM"
+                },
+                {
+                    "comment": "Comentario XXX",
+                    "file": "https://stloadfilesdev.blob.core.windows.net/stloadfilesdev/archivo.jpeg",
+                    "functionary": "",
+                    "registerDate": "24 de January del 2020 04:32 PM"
+                },
+                {
+                    "comment": "Comentario XXX",
+                    "file": "https://stloadfilesdev.blob.core.windows.net/stloadfilesdev/archivo.jpeg",
+                    "functionary": "",
+                    "registerDate": "24 de January del 2020 04:29 PM"
+                },
+                {
+                    "comment": "Comentario XXX",
+                    "file": "https://stloadfilesdev.blob.core.windows.net/stloadfilesdev/archivo.jpeg",
+                    "functionary": "",
+                    "registerDate": "24 de January del 2020 04:27 PM"
+                },
+                {
+                    "comment": "Comentario XXX",
+                    "file": null,
+                    "functionary": "",
+                    "registerDate": "24 de January del 2020 12:10 PM"
+                },
+                {
+                    "comment": "Comentario 4",
+                    "file": null,
+                    "functionary": "Ana  Coronado Medina",
+                    "registerDate": "19 de January del 2020 06:40 PM"
+                },
+                {
+                    "comment": "Comentario 3",
+                    "file": null,
+                    "functionary": "",
+                    "registerDate": "19 de January del 2020 06:40 PM"
+                },
+                {
+                    "comment": "Comentario 2",
+                    "file": null,
+                    "functionary": "Ana  Coronado Medina",
+                    "registerDate": "19 de January del 2020 06:40 PM"
+                },
+                {
+                    "comment": "Comentario 1",
+                    "file": null,
+                    "functionary": "",
+                    "registerDate": "19 de January del 2020 06:40 PM"
+                }
+            ],
+            "requirementsRequest": [
+                {
+                    "file": "https://stloadfilesdev.blob.core.windows.net/stloadfilesdev/423432432-88a55191-9bb3-4653-81ea-1ac8cccbc812.jpeg",
+                    "registerDate": "25 de January del 2020 03:17 AM"
+                },
+                {
+                    "file": "https://stloadfilesdev.blob.core.windows.net/stloadfilesdev/423432432-f3e69051-063c-4946-8d41-b48c19cf5012.jpeg",
+                    "registerDate": "25 de January del 2020 03:09 AM"
+                }
+            ],
+            "requirementsBeneficiary": [
+                {
+                    "file": "https://stloadfilesdev.blob.core.windows.net/stloadfilesdev/423432432-d9d3b0d3-f897-4775-9607-458ffc257776.jpeg",
+                    "registerDate": "25 de January del 2020 03:19 AM"
+                }
+            ]
+        }
+        }
+      ]
+    }
+  }
+}

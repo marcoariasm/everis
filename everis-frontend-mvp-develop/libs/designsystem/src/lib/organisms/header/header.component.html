@@ -1,0 +1,19 @@
+<mat-toolbar color="primary" class="mat-elevation-z16">
+  <mat-toolbar-row>
+    <span class="logo">
+    </span>
+    <span class="header-spacer"></span>
+    <span *ngIf="!type" class="message">#EstamosTrabajandoPorTi </span>
+    <div *ngIf="type && fullName" class="actions">
+      <span *ngIf="type" class="user">
+        <span>{{fullName}}</span>
+        <span class="material-icons">
+          account_circle
+        </span>
+      </span>
+      <button (click)="goOut()" matTooltip="Salir del sistema" class="action" mat-icon-button aria-label="Icon Logout">
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

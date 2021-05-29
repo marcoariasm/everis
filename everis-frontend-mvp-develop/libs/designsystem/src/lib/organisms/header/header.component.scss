@@ -1,0 +1,65 @@
+:host {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 3;
+
+  .logo {
+    background: url("/assets/img/logo-prima-white.svg") no-repeat;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 44px;
+  }
+  .message {
+    font-family: Calibri;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16.5862px;
+    line-height: 20px;
+  }
+  .mat-toolbar-row {
+    padding: 0 20%;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .user {
+    font-size: 15px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .material-icons {
+      margin-left: 5px;
+    }
+  }
+
+  .material-icons {
+    font-size: 32px;
+  }
+}
+.header-spacer {
+  flex: 1 1 auto;
+}
+
+
+@media only screen and (max-width: 768px) {
+  :host{
+    .mat-toolbar-row {
+      padding-left: 8px;
+      .message{
+        display: none;
+      }
+    }
+  }
+}

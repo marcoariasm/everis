@@ -1,0 +1,11 @@
+:host {
+  button {
+    background: #00ae99;
+    border-radius: 8.55407px;
+    color: #fff;
+    & > span {
+      background: #139686;
+      color: #fff;
+    }
+  }
+}

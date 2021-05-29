@@ -1,0 +1,203 @@
+{
+    "location/v2/ubigeo/districts": {
+        "GET": {
+            "codeResponse": "200",
+            "responses": [
+              {
+                "statusCode": "200",
+                "errorCode": "000000",
+                "headers": {
+                  "response": {
+                    "x-afp-signature": "",
+                    "g-recaptcha-response": "",
+                    "Ocp-Apim-Subscription-Key": "",
+                    "x-afp-signature": ""
+                  },
+                  "request": {
+                    "g-recaptcha-response": "",
+                    "Ocp-Apim-Subscription-Key": "",
+                    "x-afp-signature": ""
+                  }
+                },
+                "body": [
+                  {
+                    "code": "150101",
+                    "description": "LIMA",
+                    "type": "A"
+                  },
+                  {
+                    "code": "150102",
+                    "description": "ANCON",
+                    "type": "B"
+                  },
+                  {
+                    "code": "150103",
+                    "description": "ATE",
+                    "type": ""
+                  },
+                  {
+                    "code": "150104",
+                    "description": "BARRANCO"
+                  },
+                  {
+                    "code": "150105",
+                    "description": "BREÃA"
+                  },
+                  {
+                    "code": "150106",
+                    "description": "CARABAYLLO"
+                  },
+                  {
+                    "code": "150107",
+                    "description": "CHACLACAYO"
+                  },
+                  {
+                    "code": "150108",
+                    "description": "CHORRILLOS"
+                  },
+                  {
+                    "code": "150109",
+                    "description": "CIENEGUILLA"
+                  },
+                  {
+                    "code": "150110",
+                    "description": "COMAS"
+                  },
+                  {
+                    "code": "150111",
+                    "description": "EL AGUSTINO"
+                  },
+                  {
+                    "code": "150112",
+                    "description": "INDEPENDENCIA"
+                  },
+                  {
+                    "code": "150113",
+                    "description": "JESUS MARIA"
+                  },
+                  {
+                    "code": "150114",
+                    "description": "LA MOLINA"
+                  },
+                  {
+                    "code": "150115",
+                    "description": "LA VICTORIA"
+                  },
+                  {
+                    "code": "150116",
+                    "description": "LINCE"
+                  },
+                  {
+                    "code": "150117",
+                    "description": "LOS OLIVOS"
+                  },
+                  {
+                    "code": "150118",
+                    "description": "LURIGANCHO"
+                  },
+                  {
+                    "code": "150119",
+                    "description": "LURIN"
+                  },
+                  {
+                    "code": "150120",
+                    "description": "MAGDALENA DEL MAR"
+                  },
+                  {
+                    "code": "150121",
+                    "description": "PUEBLO LIBRE"
+                  },
+                  {
+                    "code": "150122",
+                    "description": "MIRAFLORES"
+                  },
+                  {
+                    "code": "150123",
+                    "description": "PACHACAMAC"
+                  },
+                  {
+                    "code": "150124",
+                    "description": "PUCUSANA"
+                  },
+                  {
+                    "code": "150125",
+                    "description": "PUENTE PIEDRA"
+                  },
+                  {
+                    "code": "150126",
+                    "description": "PUNTA HERMOSA"
+                  },
+                  {
+                    "code": "150127",
+                    "description": "PUNTA NEGRA"
+                  },
+                  {
+                    "code": "150128",
+                    "description": "RIMAC"
+                  },
+                  {
+                    "code": "150129",
+                    "description": "SAN BARTOLO"
+                  },
+                  {
+                    "code": "150130",
+                    "description": "SAN BORJA"
+                  },
+                  {
+                    "code": "150131",
+                    "description": "SAN ISIDRO"
+                  },
+                  {
+                    "code": "150132",
+                    "description": "SAN JUAN DE LURIGANCHO"
+                  },
+                  {
+                    "code": "150133",
+                    "description": "SAN JUAN DE MIRAFLORES"
+                  },
+                  {
+                    "code": "150134",
+                    "description": "SAN LUIS"
+                  },
+                  {
+                    "code": "150135",
+                    "description": "SAN MARTIN DE PORRES"
+                  },
+                  {
+                    "code": "150136",
+                    "description": "SAN MIGUEL"
+                  },
+                  {
+                    "code": "150137",
+                    "description": "SANTA ANITA"
+                  },
+                  {
+                    "code": "150138",
+                    "description": "SANTA MARIA DEL MAR"
+                  },
+                  {
+                    "code": "150139",
+                    "description": "SANTA ROSA"
+                  },
+                  {
+                    "code": "150140",
+                    "description": "SANTIAGO DE SURCO"
+                  },
+                  {
+                    "code": "150141",
+                    "description": "SURQUILLO"
+                  },
+                  {
+                    "code": "150142",
+                    "description": "VILLA EL SALVADOR"
+                  },
+                  {
+                    "code": "150143",
+                    "description": "VILLA MARIA DEL TRIUNFO"
+                  }
+                ]
+              }
+            ]
+        }
+    }
+}

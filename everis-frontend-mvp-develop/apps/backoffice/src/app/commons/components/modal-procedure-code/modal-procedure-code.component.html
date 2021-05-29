@@ -1,0 +1,21 @@
+<div class="message-container">
+  <div class="message-icon">
+    <span class="material-icons" *ngIf="data">
+      check_circle_outline
+    </span>
+    <span class="material-icons" *ngIf="!data">
+      error_outline
+    </span>
+  </div>
+  <div class="message" *ngIf="data">
+    <p>Se ha enviado un nuevo código de trámite con éxito</p>
+  </div>
+  <div class="message" *ngIf="!data">
+    <p>Ha ocurrido un error al generar el nuevo código de trámite</p>
+  </div>
+</div>
+<div class="mat-dialog-actions" align="center">
+  <div class="actions-container">
+    <button class="action-button" mat-raised-button color="primary" (click)="exit()">Aceptar</button>
+  </div>
+</div>

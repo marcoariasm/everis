@@ -1,0 +1,32 @@
+<section class="Login">
+  <div class="Login-inner mat-elevation-z16">
+    <div class="header">
+      <h2 class="mat-h4 header-title">Portal Ejecutiva</h2>
+      <h4 class="mat-h4 header-subtitle">Inicio de Sesión</h4>
+      <p>Ingresa tu matrícula y clave para iniciar sesión.</p>
+    </div>
+    <form class="Form" [formGroup]="form" autocomplete="off">
+      <div class="Form-control" id="matricula">
+        <mat-form-field appearance="outline" class="Form-input">
+          <mat-label>Matrícula</mat-label>
+          <input
+            ngCustomValidator="isAlphaNumeric" inputLength="6"
+            matInput
+            formControlName="login" autocomplete="off">
+        </mat-form-field>
+      </div>
+      <div class="Form-control" id="password">
+        <mat-form-field appearance="outline" class="Form-input">
+          <mat-label>Clave</mat-label>
+          <input type="password" matInput formControlName="password" autocomplete="off">
+        </mat-form-field>
+      </div>
+      <div class="Form-control" id="button">
+        <button type="button" mat-flat-button color="primary" [disabled]="!form.valid"
+          (click)="presenter.login(form.value)">
+          Ingresar
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

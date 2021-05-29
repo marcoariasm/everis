@@ -1,0 +1,432 @@
+{
+    "location/v2/ubigeo/currencies": {
+        "GET": {
+            "codeResponse": "200",
+            "responses": [
+              {
+                "statusCode": "200",
+                "errorCode": "000000",
+                "headers": {
+                  "response": {
+                    "x-afp-signature": "",
+                    "g-recaptcha-response": "",
+                    "Ocp-Apim-Subscription-Key": "",
+                    "x-afp-signature": ""
+                  },
+                  "request": {
+                    "g-recaptcha-response": "",
+                    "Ocp-Apim-Subscription-Key": "",
+                    "x-afp-signature": ""
+                  }
+                },
+                "body": [
+                  {
+                    "code": "USD ",
+                    "description": " Dolar estadounidense"
+                  },
+                  {
+                    "code": "EUR ",
+                    "description": " Euro"
+                  },
+                  {
+                    "code": "PEN ",
+                    "description": " Sol"
+                  },
+                  {
+                    "code": "AFN ",
+                    "description": " Afgani afgano"
+                  },
+                  {
+                    "code": "MGA ",
+                    "description": " Ariary malgache"
+                  },
+                  {
+                    "code": "THB ",
+                    "description": " Baht tailandes"
+                  },
+                  {
+                    "code": "PAB ",
+                    "description": " Balboa panameÃ±a"
+                  },
+                  {
+                    "code": "ETB ",
+                    "description": " Birr etiope"
+                  },
+                  {
+                    "code": "VEF ",
+                    "description": " Bolivar Fuerte"
+                  },
+                  {
+                    "code": "BOB ",
+                    "description": " Boliviano"
+                  },
+                  {
+                    "code": "GHS ",
+                    "description": " Cedi ghanes"
+                  },
+                  {
+                    "code": "KES ",
+                    "description": " Chelin keniata"
+                  },
+                  {
+                    "code": "SOS ",
+                    "description": " Chelin somali"
+                  },
+                  {
+                    "code": "TZS ",
+                    "description": " Chelin tanzano"
+                  },
+                  {
+                    "code": "UGX ",
+                    "description": " Chelin ugandes"
+                  },
+                  {
+                    "code": "CRC ",
+                    "description": " Colon costarricense"
+                  },
+                  {
+                    "code": "NIO ",
+                    "description": " Cordoba nicaraguense"
+                  },
+                  {
+                    "code": "DKK ",
+                    "description": " Corona danesa"
+                  },
+                  {
+                    "code": "NOK ",
+                    "description": " Corona noruega"
+                  },
+                  {
+                    "code": "SEK ",
+                    "description": " Corona sueca"
+                  },
+                  {
+                    "code": "GMD ",
+                    "description": " Dalasi gambiano"
+                  },
+                  {
+                    "code": "MKD ",
+                    "description": " Denar macedonio"
+                  },
+                  {
+                    "code": "DZD ",
+                    "description": " Dinar argelino"
+                  },
+                  {
+                    "code": "BHD ",
+                    "description": " Dinar bahreini"
+                  },
+                  {
+                    "code": "IQD ",
+                    "description": " Dinar iraqi"
+                  },
+                  {
+                    "code": "JOD ",
+                    "description": " Dinar jordano"
+                  },
+                  {
+                    "code": "KWD ",
+                    "description": " Dinar kuwaiti"
+                  },
+                  {
+                    "code": "LYD ",
+                    "description": " Dinar libio"
+                  },
+                  {
+                    "code": "RSD ",
+                    "description": " Dinar serbio"
+                  },
+                  {
+                    "code": "TND ",
+                    "description": " Dinar tunecino"
+                  },
+                  {
+                    "code": "AED ",
+                    "description": " Dirham de los Emiratos arabes Unidos"
+                  },
+                  {
+                    "code": "MAD ",
+                    "description": " Dirham marroqui"
+                  },
+                  {
+                    "code": "STD ",
+                    "description": " Dobra de Santo Tome y Principe"
+                  },
+                  {
+                    "code": "AUD ",
+                    "description": " Dolar australiano"
+                  },
+                  {
+                    "code": "BSD ",
+                    "description": " Dolar bahameÃ±o"
+                  },
+                  {
+                    "code": "KYD ",
+                    "description": " Dolar caimano"
+                  },
+                  {
+                    "code": "CAD ",
+                    "description": " Dolar canadiense"
+                  },
+                  {
+                    "code": "BBD ",
+                    "description": " Dolar de Barbados"
+                  },
+                  {
+                    "code": "BZD ",
+                    "description": " Dolar de Belice"
+                  },
+                  {
+                    "code": "BMD ",
+                    "description": " Dolar de Bermuda"
+                  },
+                  {
+                    "code": "BND ",
+                    "description": " Dolar de Brunei"
+                  },
+                  {
+                    "code": "HKD ",
+                    "description": " Dolar de Hong Kong"
+                  },
+                  {
+                    "code": "SBD ",
+                    "description": " Dolar de las Islas Salomon"
+                  },
+                  {
+                    "code": "SGD ",
+                    "description": " Dolar de Singapur"
+                  },
+                  {
+                    "code": "TTD ",
+                    "description": " Dolar de Trinidad y Tobago"
+                  },
+                  {
+                    "code": "XCD ",
+                    "description": " Dolar del Caribe Oriental"
+                  },
+                  {
+                    "code": "FJD ",
+                    "description": " Dolar fijiano"
+                  },
+                  {
+                    "code": "GYD ",
+                    "description": " Dolar guyanes"
+                  },
+                  {
+                    "code": "JMD ",
+                    "description": " Dolar jamaicano"
+                  },
+                  {
+                    "code": "LRD ",
+                    "description": " Dolar liberiano"
+                  },
+                  {
+                    "code": "NAD ",
+                    "description": " Dolar namibio"
+                  },
+                  {
+                    "code": "NZD ",
+                    "description": " Dolar neozelandes"
+                  },
+                  {
+                    "code": "SRD ",
+                    "description": " Dolar surinames"
+                  },
+                  {
+                    "code": "TWD ",
+                    "description": " Dolar taiwanes"
+                  },
+                  {
+                    "code": "ZWL ",
+                    "description": " Dolar zimbabwes"
+                  },
+                  {
+                    "code": "VND ",
+                    "description": " Dong vietnamita"
+                  },
+                  {
+                    "code": "AMD ",
+                    "description": " Dram armenio"
+                  },
+                  {
+                    "code": "SVC ",
+                    "description": " El Salvador Colon"
+                  },
+                  {
+                    "code": "CVE ",
+                    "description": " Escudo caboverdiano"
+                  },
+                  {
+                    "code": "HUF ",
+                    "description": " Forint hungaro"
+                  },
+                  {
+                    "code": "BIF ",
+                    "description": " Franco burundes"
+                  },
+                  {
+                    "code": "KMF ",
+                    "description": " Franco comoriano"
+                  },
+                  {
+                    "code": "CDF ",
+                    "description": " Franco congoleÃ±o"
+                  },
+                  {
+                    "code": "GNF ",
+                    "description": " Franco guineano"
+                  },
+                  {
+                    "code": "RWF ",
+                    "description": " Franco ruandes"
+                  },
+                  {
+                    "code": "CHF ",
+                    "description": " Franco suizo"
+                  },
+                  {
+                    "code": "DJF ",
+                    "description": " Franco yibutiano"
+                  },
+                  {
+                    "code": "HTG ",
+                    "description": " Gourde haitiano"
+                  },
+                  {
+                    "code": "PYG ",
+                    "description": " Guarani paraguayo"
+                  },
+                  {
+                    "code": "AWG ",
+                    "description": " Guilder de Aruba"
+                  },
+                  {
+                    "code": "ANG ",
+                    "description": " Guilder de las Antillas Holandesas"
+                  },
+                  {
+                    "code": "UAH ",
+                    "description": " Hryvnia ucraniana"
+                  },
+                  {
+                    "code": "PGK ",
+                    "description": " Kina de Papua Nueva Guinea"
+                  },
+                  {
+                    "code": "LAK ",
+                    "description": " Kip lao"
+                  },
+                  {
+                    "code": "CZK ",
+                    "description": " Koruna checo"
+                  },
+                  {
+                    "code": "ISK ",
+                    "description": " Krona islandesa"
+                  },
+                  {
+                    "code": "HRK ",
+                    "description": " Kuna croata"
+                  },
+                  {
+                    "code": "MWK ",
+                    "description": " Kwacha malawiano"
+                  },
+                  {
+                    "code": "ZMK ",
+                    "description": " Kwacha zambiano"
+                  },
+                  {
+                    "code": "AOA ",
+                    "description": " Kwanza angoleÃ±o"
+                  },
+                  {
+                    "code": "MMK ",
+                    "description": " Kyat myanmaro"
+                  },
+                  {
+                    "code": "GEL ",
+                    "description": " Lari georgiano"
+                  },
+                  {
+                    "code": "LVL ",
+                    "description": " Lat leton"
+                  },
+                  {
+                    "code": "ALL ",
+                    "description": " Lek albano"
+                  },
+                  {
+                    "code": "HNL ",
+                    "description": " Lempira hondureÃ±a"
+                  },
+                  {
+                    "code": "SLL ",
+                    "description": " Leone de Sierra Leona"
+                  },
+                  {
+                    "code": "MDL ",
+                    "description": " Leu moldavo"
+                  },
+                  {
+                    "code": "RON ",
+                    "description": " Leu rumano"
+                  },
+                  {
+                    "code": "BGN ",
+                    "description": " Lev bulgaro"
+                  },
+                  {
+                    "code": "GIP ",
+                    "description": " Libra de Gibraltar"
+                  },
+                  {
+                    "code": "SHP ",
+                    "description": " Libra de Santa Helena"
+                  },
+                  {
+                    "code": "EGP ",
+                    "description": " Libra egipcia"
+                  },
+                  {
+                    "code": "GBP ",
+                    "description": " Libra esterlina"
+                  },
+                  {
+                    "code": "LBP ",
+                    "description": " Libra libanesa"
+                  },
+                  {
+                    "code": "FKP ",
+                    "description": " Libra malvinense"
+                  },
+                  {
+                    "code": "SYP ",
+                    "description": " Libra siria"
+                  },
+                  {
+                    "code": "SDG ",
+                    "description": " Libra sudanesa"
+                  },
+                  {
+                    "code": "SZL ",
+                    "description": " Lilangeni suazi"
+                  },
+                  {
+                    "code": "LTL ",
+                    "description": " Litas lituano"
+                  },
+                  {
+                    "code": "LSL ",
+                    "description": " Loti lesothense"
+                  },
+                  {
+                    "code": "AZN ",
+                    "description": " Manat azerbaiyano"
+                  }
+                ]
+              }
+            ]
+        }
+    }
+}

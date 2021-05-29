@@ -1,0 +1,18 @@
+<div class="cronograma-container">
+  <div class="inner">
+    <!-- <h1 class="cronograma-title">Cronograma de solicitudes</h1> -->
+    <div class="header-row">
+      <div class="last-digit">
+        <label>Último dígito</label>
+      </div>
+      <div class="dates">
+        <label>Fechas</label>
+      </div>
+    </div>
+    <div class="row" *ngFor="let row of Dates">
+      <div class="column" *ngFor="let value of row; index as i" [class.first-column]="i===0">
+        <label>{{value}}</label>
+      </div>
+    </div>
+  </div>
+</div>

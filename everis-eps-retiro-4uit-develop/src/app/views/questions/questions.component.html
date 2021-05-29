@@ -1,0 +1,63 @@
+<main>
+  <section class="container-header">
+    <div class="img-container">
+      <img class="logo-main undraggable" src="/assets/icon-seguimiento.svg">
+    </div>
+    <p class="title-bg">Verificación de identidad</p>
+    <p class="subtitle-bg">Por tu seguridad, para confirmar tu identidad, por favor, responde las <br>
+      siguientes preguntas con <b>los datos del DNI que tenías al {{ getCurrentDate() }} </b></p>
+  </section>
+
+  <section class="container-body">
+    <form [formGroup]="form">
+      <div class="form">
+        <div class="row">
+          <div class="column">
+            <mat-form-field appearance="outline" class="rp-form-element" (click)="dp0.open()">
+              <mat-label>¿Cuál es la fecha de emisión de tu DNI?</mat-label>
+              <input matInput [matDatepicker]="dp0" readonly formControlName="emissionDate" />
+              <mat-datepicker #dp0 disabled="false"></mat-datepicker>
+              <mat-datepicker-toggle matSuffix [for]="dp0"></mat-datepicker-toggle>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <mat-form-field appearance="outline" class="rp-form-element" (click)="dp1.open()">
+              <mat-label>¿Cuál es la fecha de caducidad de tu DNI?</mat-label>
+              <input matInput [matDatepicker]="dp1" readonly formControlName="expiryDate" />
+              <mat-datepicker #dp1 disabled="false"></mat-datepicker>
+              <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+              <mat-hint><b>Si tu DNI no tiene fecha de vigencia, deja en blanco este dato.</b></mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <mat-form-field appearance="outline" class="rp-form-element">
+              <mat-label>¿Cuál es tu grupo de votación?</mat-label>
+              <input matInput placeholder="Ejem: 047033" formControlName="votingGroup" maxlength="6">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="btn-container">
+        Si has renovado tu DNI últimamente y tienes problemas para atender estas preguntas,
+        prueba con los datos de la fecha de emisión y caducidad de tu documento anterior;
+        en caso persista el problema, contacta con tu AFP.<br>
+        &nbsp;
+        <br>
+        <button
+          class="action-button"
+          [disabled]="!form.valid"
+          mat-raised-button
+          color="primary"
+          (click)="validateQuestions(form.value); form.reset()">
+          Continuar
+        </button>
+        </div>
+    </form>
+
+  </section>
+</main>
+

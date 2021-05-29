@@ -1,0 +1,89 @@
+.Validation {
+  min-height: 100%;
+  width: 100%;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  box-sizing: border-box;
+  background-color: #edeeef;
+  font-family: Calibri;
+  font-style: normal;
+  font-weight: normal;
+  color: #696158;
+
+  &-inner {
+    background-color: white;
+    border-radius: 4px;
+    padding: 32px;
+    width: 840px;
+    margin: 0 auto;
+  }
+
+  .fullName {
+    position: relative;
+
+    .icon {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      z-index: 2;
+      color: #009d92;
+      font-size: 30px;
+    }
+  }
+}
+
+.message-valid {
+  &-title {
+    color: #ff3c01;
+  }
+  & > p {
+    margin-bottom: 25px;
+  }
+}
+
+.small {
+  margin-left: 5px;
+  font-size: 0.7em;
+}
+
+.message-query {
+  font-family: Calibri;
+  color: #656565;
+  text-align: end;
+
+  & > p {
+    & > span {
+      color: #00ae99;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .Validation {
+    width: 100%;
+    padding-top: 0;
+    padding-bottom: 0;
+    &-inner {
+      width: 100%;
+      background-color: white;
+      padding: 16px;
+      margin: 0 auto;
+    }
+  }
+
+  .Form-control {
+    display: flex;
+    flex-direction: column;
+    .Col {
+      width: 100%;
+    }
+    .Form-input {
+      width: 100%;
+    }
+    #beneficiary {
+      white-space: pre-line;
+    }
+  }
+}

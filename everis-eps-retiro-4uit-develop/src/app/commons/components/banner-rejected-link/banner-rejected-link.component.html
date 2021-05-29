@@ -1,0 +1,11 @@
+<div class="message-container">
+  <div class="message-icon">
+    <mat-icon>error_outline</mat-icon>
+  </div>
+  <div class="message">
+    <p>{{info.content}} <a target="_blank" href="https://www2.sbs.gob.pe/afiliados/paginas/Consulta.aspx">Consulta de afiliados en la SBS </a></p>
+  </div>
+</div>
+<mat-dialog-actions align="center">
+  <button class="action-button" mat-raised-button color="primary" (click)="exit()">Salir</button>
+</mat-dialog-actions>

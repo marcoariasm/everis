@@ -1,0 +1,93 @@
+@import 'src/sass/_mixins.scss';
+.container-header {
+  // background-color: var(--afp-ligh);
+  padding: 30px 0;
+  text-align: center;
+
+  .title-bg {
+    margin-bottom: 50px;
+    font-family: Roboto;
+    font-size: 40px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 0.73;
+    letter-spacing: 0.2px;
+    text-align: center;
+    color: #007bff;
+    @include for-phone-only {
+      font-size: 35px;
+      line-height: 1;
+    }
+  }
+
+  .subtitle-bg {
+  font-family: Roboto;
+  font-size: 24px;
+  line-height: 1.25;
+  letter-spacing: 0.2px;
+  text-align: justify;
+    @include for-phone-only {
+      font-size: 18px;
+      padding: 0 10px 0 10px;
+    }
+  }
+}
+.form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+.container-body {
+  padding: 0 30px 30px;
+}
+.img-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.logo-footer {
+  width: 120px;
+  padding: 22px 60px;
+}
+.footer {
+  background-color: var(--afp-lightblue-sec);
+}
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn-container {
+  text-align: center;
+  max-width: 800px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column{
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  width: 320px;
+}
+
+@media screen and (min-width: 800px) {
+  .column {
+    flex: 1
+  }
+}
+
+.rp-form-element {
+  padding: 0 10px;
+  width: 100%;
+
+  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    width: 95%;
+  }
+}

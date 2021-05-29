@@ -1,0 +1,199 @@
+.Register {
+  min-height: 100%;
+  width: 100%;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  box-sizing: border-box;
+  background-color: #edeeef;
+  font-family: Calibri;
+  font-style: normal;
+  font-weight: normal;
+  color: #696158;
+  &-inner {
+    background-color: white;
+    border-radius: 4px;
+    padding: 32px;
+    width: 1024px;
+    margin: 0 auto;
+  }
+
+  .fullName {
+    position: relative;
+
+    .icon {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      z-index: 2;
+      color: #009d92;
+      font-size: 30px;
+    }
+  }
+}
+
+.Beneficiary {
+  padding: 16px 8px 0;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.readonly {
+  background-color: rgba(0, 0, 0, 0.025);
+  border-radius: 20px;
+  padding-top: 12px;
+}
+.contactToggle {
+  margin-left: 15px;
+  vertical-align: middle;
+}
+
+.beneficiaryGroup {
+  border-radius: 20px;
+  padding-top: 12px;
+  border-width: 1px;
+}
+
+.title {
+  color: #ff3c01;
+}
+.mat-divider {
+  border-color: transparent;
+  margin: 10px;
+}
+
+.detail-request {
+  & > p {
+    font-size: 18px;
+  }
+}
+.detail-afiliado {
+  & > h4 {
+    font-size: 20px;
+    color: #ff3c01;
+  }
+  & > p {
+    font-size: 18px;
+  }
+}
+
+.attach-file {
+  font-family: FS Emeric;
+
+  & > h3 {
+    color: #00ae99;
+  }
+}
+
+.attach-file-message {
+  & > h4 {
+    font-family: FS Emeric;
+    color: #00ae99;
+    font-size: 16px;
+    & > span {
+      width: 11px;
+      height: 11px;
+      text-align: center;
+      position: absolute;
+      margin-top: 7px;
+      margin-left: 5px;
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 9px;
+      color: #ffffff;
+      background: url('/assets/img/info.svg') no-repeat;
+    }
+  }
+}
+
+.attach-file-drap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f9f9fb;
+  border: 1.71081px dashed #d7d9d9;
+  border-radius: 8.55407px;
+  font-family: Calibri;
+  color: #696158;
+  padding: 4%;
+
+  & > h2 {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+  }
+  & > p {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+  }
+}
+
+.small {
+  margin-left: 5px;
+  font-size: 0.7em;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: #00ae99;
+}
+
+.list-files {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f9f9fb;
+  border: 1.71081px dashed #d7d9d9;
+  border-radius: 8.55407px;
+  font-family: Calibri;
+  color: #696158;
+  padding: 4%;
+  margin-top: 1%;
+  & > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9em;
+  }
+}
+.Icon {
+  &.remove {
+    margin-left: 5px;
+    cursor: pointer;
+  }
+}
+
+.custom-frame {
+  & .mat-checkbox-background,
+  .mat-checkbox-frame {
+    border-radius: 70% !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .Register {
+    width: 100%;
+    padding-top: 0;
+    padding-bottom: 0;
+    &-inner {
+      width: 100%;
+    }
+    .Form-fieldset {
+      display: flex;
+      flex-direction: column;
+    }
+    .Form-control {
+      display: flex;
+      flex-direction: column;
+    }
+    .Col {
+      width: 100%;
+    }
+  }
+}

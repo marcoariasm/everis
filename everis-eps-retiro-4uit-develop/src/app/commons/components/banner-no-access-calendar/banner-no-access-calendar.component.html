@@ -1,0 +1,31 @@
+<div class="message-container">
+  <div class="message-icon">
+    <mat-icon>announcement</mat-icon>
+  </div>
+  <div class="message" *ngIf="data.flag === '1'">
+     <span>Sí accedes al retiro. Considera que el monto disponible es menor a S/ 50.</span>
+    <br><br>
+    <span>{{data.message}}</span>
+    <br>
+  </div>
+  <div class="message" *ngIf="data.flag === '2'">
+     <span>Sí accedes al retiro.</span>
+    <br><br>
+    <span>{{data.message}}</span>
+    <br>
+  </div>
+  <div class="message" *ngIf="data.flag === '3' || data.flag === '4'">
+     <span>{{data.message}}</span>
+    <br>
+  </div>
+
+  <div class="message" *ngIf="data.flag === '5'">
+     <span>No accedes al retiro por el siguiente motivo: {{data.reason}}</span>
+    <br>
+  </div>
+</div>
+
+<mat-dialog-actions class="btn-container">
+  <button class="btn action-button" mat-raised-button color="primary" disabled>Registrar Solicitud</button>
+  <button class="btn" mat-button (click)="back()">Volver</button>
+</mat-dialog-actions>

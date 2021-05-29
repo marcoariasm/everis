@@ -1,0 +1,55 @@
+.List-procedures {
+  width: 100%;
+  background-color: #fff;
+
+  &-inner {
+    background-color: white;
+    border-radius: 4px;
+    padding: 0;
+    max-width: 1024px;
+    min-width: 300px;
+    margin: 0 auto 48px;
+  }
+}
+
+.Sub-header {
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin: 32px auto;
+  padding: 24px 16px;
+  max-width: 1024px;
+  min-width: 300px;
+}
+
+.List-table {
+  display: block;
+  position: relative;
+  margin-bottom: 32px;
+  width: 100%;
+  min-height: 300px;
+
+  .layer {
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    min-height: 300px;
+    height: 100%;
+  }
+
+  .holder {
+    min-height: 300px;
+  }
+}
+
+.mat-table .mat-header-cell {
+  text-align: center;
+}
+td.mat-cell:last-of-type {
+  text-align: center;
+}

@@ -1,0 +1,128 @@
+{
+    "location/v2/ubigeo/departments": {
+        "GET": {
+            "codeResponse": "200",
+            "responses": [
+              {
+                "statusCode": "200",
+                "errorCode": "000000",
+                "headers": {
+                  "response": {
+                    "x-afp-signature": "",
+                    "g-recaptcha-response": "",
+                    "Ocp-Apim-Subscription-Key": "",
+                    "x-afp-signature": ""
+                  },
+                  "request": {
+                    "g-recaptcha-response": "",
+                    "Ocp-Apim-Subscription-Key": "",
+                    "x-afp-signature": ""
+                  }
+                },
+                "body": [
+                  {
+                    "code": "010000",
+                    "description": "AMAZONAS"
+                  },
+                  {
+                    "code": "020000",
+                    "description": "ANCASH"
+                  },
+                  {
+                    "code": "030000",
+                    "description": "APURIMAC"
+                  },
+                  {
+                    "code": "040000",
+                    "description": "AREQUIPA"
+                  },
+                  {
+                    "code": "050000",
+                    "description": "AYACUCHO"
+                  },
+                  {
+                    "code": "060000",
+                    "description": "CAJAMARCA"
+                  },
+                  {
+                    "code": "070000",
+                    "description": "CALLAO"
+                  },
+                  {
+                    "code": "080000",
+                    "description": "CUSCO"
+                  },
+                  {
+                    "code": "090000",
+                    "description": "HUANCAVELICA"
+                  },
+                  {
+                    "code": "100000",
+                    "description": "HUANUCO"
+                  },
+                  {
+                    "code": "110000",
+                    "description": "ICA"
+                  },
+                  {
+                    "code": "120000",
+                    "description": "JUNIN"
+                  },
+                  {
+                    "code": "130000",
+                    "description": "LA LIBERTAD"
+                  },
+                  {
+                    "code": "140000",
+                    "description": "LAMBAYEQUE"
+                  },
+                  {
+                    "code": "150000",
+                    "description": "LIMA"
+                  },
+                  {
+                    "code": "160000",
+                    "description": "LORETO"
+                  },
+                  {
+                    "code": "170000",
+                    "description": "MADRE DE DIOS"
+                  },
+                  {
+                    "code": "180000",
+                    "description": "MOQUEGUA"
+                  },
+                  {
+                    "code": "190000",
+                    "description": "PASCO"
+                  },
+                  {
+                    "code": "200000",
+                    "description": "PIURA"
+                  },
+                  {
+                    "code": "210000",
+                    "description": "PUNO"
+                  },
+                  {
+                    "code": "220000",
+                    "description": "SAN MARTIN"
+                  },
+                  {
+                    "code": "230000",
+                    "description": "TACNA"
+                  },
+                  {
+                    "code": "240000",
+                    "description": "TUMBES"
+                  },
+                  {
+                    "code": "250000",
+                    "description": "UCAYALI"
+                  }
+                ]
+              }
+            ]
+        }
+    }
+}

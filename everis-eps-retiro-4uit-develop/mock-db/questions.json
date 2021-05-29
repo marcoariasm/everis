@@ -1,0 +1,130 @@
+{
+    "identity/v1/questions": {
+        "GET": {
+            "codeResponse": "200",
+            "responses": [
+                {
+                    "statusCode": "200",
+                    "errorCode": "000000",
+                    "headers": {
+                        "response": {
+                            "x-afp-signature": "",
+                            "Ocp-Apim-Subscription-Key": ""
+                        },
+                        "request": {
+                            "x-afp-signature": "",
+                            "Ocp-Apim-Subscription-Key": ""
+                        }
+                    },
+                    "body": {
+                        "operationId": "202005120000064",
+                        "reject": "0",
+                        "unanswered": "1",
+                        "disapproved": "0",
+                        "questions": [
+                            {
+                                "id": "37",
+                                "description": "¿CON CUÁNTAS ENTIDADES TIENE O HA TENIDO TARJETA DE CRÉDITO (ENTRE OCTUBRE-2019 Y DICIEMBRE-2019)?",
+                                "category": "01",
+                                "option": [
+                                    {
+                                        "id": "0",
+                                        "description": "1"
+                                    },
+                                    {
+                                        "id": "1",
+                                        "description": "2"
+                                    },
+                                    {
+                                        "id": "2",
+                                        "description": "3"
+                                    },
+                                    {
+                                        "id": "3",
+                                        "description": "4"
+                                    }, {
+                                        "id": "4",
+                                        "description": "N/A"
+                                    }
+                                ]
+                            }, {
+                                "id": "53",
+                                "description": "¿CUÁL ES SU AÑO DE NACIMIENTO?",
+                                "category": "06",
+                                "option": [
+                                    {
+                                        "id": "0",
+                                        "description": "1965"
+                                    },
+                                    {
+                                        "id": "1",
+                                        "description": "1994"
+                                    },
+                                    {
+                                        "id": "2",
+                                        "description": "1995"
+                                    },
+                                    {
+                                        "id": "3",
+                                        "description": "1977"
+                                    }, {
+                                        "id": "4",
+                                        "description": "N/A"
+                                    }
+                                ]
+                            }, {
+                                "id": "23",
+                                "description": "¿CUÁNTOS AÑOS TIENE?",
+                                "category": "06",
+                                "option": [
+                                    {
+                                        "id": "0",
+                                        "description": "25"
+                                    },
+                                    {
+                                        "id": "1",
+                                        "description": "24"
+                                    },
+                                    {
+                                        "id": "2",
+                                        "description": "23"
+                                    },
+                                    {
+                                        "id": "3",
+                                        "description": "26"
+                                    }, {
+                                        "id": "4",
+                                        "description": "N/A"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "POST": {
+          "codeResponse": "200",
+          "responses": [
+              {
+                "statusCode": "200",
+                "errorCode": "000000",
+                "headers": {
+                    "response": {
+                        "x-afp-signature": "",
+                        "Ocp-Apim-Subscription-Key": ""
+                    },
+                    "request": {
+                        "x-afp-signature": "",
+                        "Ocp-Apim-Subscription-Key": ""
+                    }
+                },
+                "body": {
+                    "flag": "APROBADA",
+                    "amountAvailable": "4800.00"
+                }
+              }
+          ]
+      }
+    }
+}

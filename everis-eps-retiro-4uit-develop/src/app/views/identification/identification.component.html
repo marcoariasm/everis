@@ -1,0 +1,44 @@
+<div class="main">
+  <!--{{countRetry}}-->
+  <h2 class="tittle">{{lang.views.identification.title}} <span class="timer">{{minutes}}:{{seconds}}</span></h2>
+
+  <app-affiliate [affiliate]="affiliate" [text]="lang.commons.affiliate"></app-affiliate>
+  <br>
+  <ng-container *ngIf="hasIdentification">
+    <mat-divider></mat-divider>
+    <br>
+    <h4>{{lang.views.identification.subtitle}}</h4>
+    <form class="form">
+      <div class="content-questions">
+        <div class="row questions" *ngFor="let question of questions; let i = index">
+          <p class="description">{{i + 1}}.- {{question.description}}</p>
+          <div class="radio" *ngFor="let option of question.option; let j = index">
+            <input
+              (input)="selectQuestion($event.target.value, i, option.description)"
+              type="radio"
+              name="radio{{i}}"
+              id="radio{{i}}{{j}}"
+              class="radio__input"
+              value="{{option.id}}"
+            >
+            <label for="radio{{i}}{{j}}" class="radio__label">{{option.description}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-container">
+        <button mat-button color="primary" (click)="back()">{{lang.commons.buttons.cancel}}</button>
+        <button
+          class="action-button"
+          [disabled]="!ready"
+          mat-raised-button
+          color="primary"
+          (click)="presenter.continueRequest(answers, affiliate)"
+        >
+          {{lang.commons.buttons.validate}}
+        </button>
+      </div>
+
+    </form>
+  </ng-container>
+</div>

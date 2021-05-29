@@ -1,0 +1,31 @@
+<div class="message-container">
+  <div class="message">
+    <h2 class="title">Hemos recibido tu solicitud!</h2>
+    <p>Validaremos tus documentos y nos pondremos en contacto contigo para dar inicio a tu trámite. Recuerda el Código para
+      hacerle seguimiento.</p>
+  </div>
+</div>
+
+<div class="information">
+  <div class="image">
+  </div>
+  <div class="description">
+    <p>Email:</p>
+    <p>Teléfono móvil:</p>
+    <p>Télefono fijo:</p>
+    <p>Código del Trámite  </p>
+  </div>
+  <div class="detail">
+    <p> {{info.email}} </p>
+    <p>{{info.movil}} </p>
+    <p> {{info.telefono}} </p>
+    <p>{{info.requestNumber}} </p>
+  </div>
+</div>
+
+
+<div class="mat-dialog-actions" align="center">
+  <div class="actions-container">
+    <button class="action-button" mat-flat-button color="primary" (click)="exit()">Finalizar</button>
+  </div>
+</div>

@@ -1,0 +1,223 @@
+{
+  "affiliate-request-register/v1/query": {
+    "POST": {
+      "codeResponse": "202",
+      "responses": [
+        {
+          "statusCode": "202",
+          "errorCode": "000000",
+          "headers": {
+            "response": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": "",
+              "x-prima-signature": ""
+            },
+            "request": {
+              "g-recaptcha-response": "",
+              "Ocp-Apim-Subscription-Key": "",
+              "x-prima-signature": ""
+            }
+          },
+          "body": {
+            "id": 1,
+            "requestTypeId": 1,
+            "requestType": "Gasto de Sepelio",
+            "requestNumber": "1a84d1ec-44af-4d56-b1ab-a9c199ff5bed",
+            "statusId": 3,
+            "status": "Aceptado",
+            "registerDate": "19/08/2020",
+            "affiliate": {
+              "cuspp": "750118ANCOR4",
+              "fullname": "Huamaní Medina Ana Cecilia",
+              "firstName": "Ana",
+              "secondName": "Cecilia",
+              "fatherLastname": "Huamaní",
+              "motherLastname": "Medina",
+              "documentTypeId": 1,
+              "documentType": "L.E/D.N.I",
+              "documentNumber": "40614447",
+              "email": "*****na@gmail.com",
+              "cellphone": "99****333",
+              "telephone": "36***69",
+              "genre": "F",
+              "maritalStatusId": null,
+              "maritalStatus": null
+            },
+            "petitioner": {
+              "fullname": "De la Cruz Gonzales Pialr ",
+              "firstName": "Pialr",
+              "secondName": "",
+              "fatherLastname": "De la Cruz",
+              "motherLastname": "Gonzales",
+              "documentTypeId": 1,
+              "documentType": "L.E/D.N.I",
+              "documentNumber": "44884488",
+              "birthdate": "",
+              "relationshipTypeId": 11,
+              "relationshipType": "Conyuge",
+              "email": "",
+              "cellphone": "",
+              "telephone": ""
+            },
+            "statuses": [
+              {
+                "id": 3,
+                "name": "Aceptado",
+                "reason": "",
+                "registerDate": "19/08/2020"
+              },
+              {
+                "id": 2,
+                "name": "En Proceso",
+                "reason": "",
+                "registerDate": "19/08/2020"
+              },
+              {
+                "id": 1,
+                "name": "Registrado",
+                "reason": "",
+                "registerDate": "19/08/2020"
+              }
+            ],
+            "beneficiaries": [],
+            "comments": [
+              {
+                "comment": "Probando mensaje",
+                "file": null,
+                "functionary": "Ana  Coronado Medina",
+                "registerDate": "29/08/2020"
+              },
+              {
+                "comment": "hola ",
+                "file": null,
+                "functionary": "Gerardo Rafael Bracho Camacho",
+                "registerDate": "29/08/2020"
+              },
+              {
+                "comment": "En los días de solsticio, la duración del día y la altitud del Sol al mediodía son máximas (en el solsticio de verano) y mínimas (en el solsticio de invierno) comparadas con cualquier otro día del año. En la mayoría de las culturas antiguas se celebraban festivales conmemorativos de los solsticios.",
+                "file": null,
+                "functionary": "Gerardo Rafael Bracho Camacho",
+                "registerDate": "29/08/2020"
+              },
+              {
+                "comment": "abc",
+                "file": null,
+                "functionary": "Joam  Peramas Ceras",
+                "registerDate": "29/08/2020"
+              },
+              {
+                "comment": "Comentario abc",
+                "file": null,
+                "functionary": "",
+                "registerDate": "26/08/2020"
+              },
+              {
+                "comment": "Comentario abc",
+                "file": null,
+                "functionary": "",
+                "registerDate": "26/08/2020"
+              },
+              {
+                "comment": "Comentario abc",
+                "file": null,
+                "functionary": "",
+                "registerDate": "26/08/2020"
+              },
+              {
+                "comment": "Comentario XXX",
+                "file": null,
+                "functionary": "",
+                "registerDate": "25/08/2020"
+              },
+              {
+                "comment": "Comentario XXX",
+                "file": null,
+                "functionary": "",
+                "registerDate": "24/08/2020"
+              },
+              {
+                "comment": "Comentario XXX",
+                "file": null,
+                "functionary": "",
+                "registerDate": "24/08/2020"
+              },
+              {
+                "comment": "Comentario XXX",
+                "file": null,
+                "functionary": "",
+                "registerDate": "24/08/2020"
+              },
+              {
+                "comment": "Comentario XXX",
+                "file": null,
+                "functionary": "",
+                "registerDate": "24/08/2020"
+              },
+              {
+                "comment": "Comentario 4",
+                "file": null,
+                "functionary": "Ana  Coronado Medina",
+                "registerDate": "19/08/2020"
+              },
+              {
+                "comment": "Comentario 3",
+                "file": null,
+                "functionary": "",
+                "registerDate": "19/08/2020"
+              },
+              {
+                "comment": "Comentario 2",
+                "file": null,
+                "functionary": "Ana  Coronado Medina",
+                "registerDate": "19/08/2020"
+              },
+              {
+                "comment": "Comentario 1",
+                "file": null,
+                "functionary": "",
+                "registerDate": "19/08/2020"
+              }
+            ],
+            "requirementsRequest": [
+              {
+                "file": "423432432-88a55191-9bb3-4653-81ea-1ac8cccbc812.jpeg",
+                "registerDate": "25/08/2020"
+              },
+              {
+                "file": "423432432-f3e69051-063c-4946-8d41-b48c19cf5012.jpeg",
+                "registerDate": "25/08/2020"
+              }
+            ],
+            "requirementsBeneficiary": [
+              {
+                "file": "423432432-d9d3b0d3-f897-4775-9607-458ffc257776.jpeg",
+                "registerDate": "25/08/2020"
+              }
+            ],
+            "signature": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJwcmltYSIsImlhdCI6MTU5OTAyNDQ0NCwic3ViIjoicHJpbWEiLCJpc3MiOiJwcmltYSIsInBheWxvYWQiOiJQYXJhbWV0ZXIoaWQ9MSwgbmFtZT1udWxsKTQwNjE0NDQ3MTMvMDkvMTk4MCIsImV4cCI6MTU5OTAyNDg0NH0.SzWtrXB7QWmpnv_yeze8JZopcmGcObjiZs9MQEkhpEw"
+          }
+        },
+        {
+          "statusCode": "404",
+          "errorCode": "PRI0007",
+          "headers": {
+            "response": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": "",
+              "x-prima-signature": ""
+            },
+            "request": {
+              "x-afp-signature": "",
+              "Ocp-Apim-Subscription-Key": "",
+              "x-prima-signature": ""
+            }
+          },
+          "body": {
+            "code": "PRI0007",
+            "description": "Request not found"
+          }
+        }
+      ]
+    }
+  }
+}

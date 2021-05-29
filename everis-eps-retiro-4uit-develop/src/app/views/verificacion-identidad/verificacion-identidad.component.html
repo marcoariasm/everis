@@ -1,0 +1,37 @@
+<div class="header-container">
+  <div class="inner">
+    <img src="/assets/icon_verificacion.svg">
+    <h1 class="primary-title"> Verificación de identidad </h1>
+  </div>
+</div>
+<div class="main">
+  <label class="primary-label block">
+    Por tu seguridad, para validar tu identidad, por favor ingresa la clave con la que ingresas a la <b>zona privada en la página web de tu AFP.</b>
+  </label>
+  <table class="margin-center" [formGroup]="form">
+    <tr class="height-70"></tr>
+    <tr>
+      <td class="right"><label>Fondo de Pensión:</label></td>
+      <td class="left td-data" [ngSwitch]="userAFP">
+        <img *ngSwitchCase="'HABITAT'" class="logo undraggable" src="/assets/Habitat.png">
+        <img *ngSwitchCase="'INTEGRA'" class="logo undraggable" src="/assets/Integra.png">
+        <img *ngSwitchCase="'PRIMA'" class="logo undraggable" src="/assets/Prima.png">
+        <img *ngSwitchCase="'PROFUTURO'" class="logo undraggable" src="/assets/Profuturo.png">
+      </td>
+    </tr>
+    <tr class="height-70"></tr>
+    <tr>
+      <td class="right"><label>Clave AFP:</label></td>
+      <td class="left td-data">
+        <mat-form-field appearance="outline" color="primary" class="rp-form-element">
+          <input matInput type="password" maxlength="20" placeholder="***************" autocomplete="off" formControlName="passwordAFP">
+        </mat-form-field>
+        <img (click)="showModalContentAfp()" class="icon-tooltip undraggable" src="/assets/icon_tooltip.svg">
+      </td>
+    </tr>
+  </table>
+  <button [disabled]="form.invalid" (click)="checkPassword()" class="btn-primary" mat-flat-button color="primary">Validar</button>
+
+  <div *ngIf="userAFP==='PRIMA'" class="linkAfp">Si eres cliente de <span class="bold">Prima AFP</span> y no recuerdas tu clave web es necesario que actualices tus datos haciendo clic <a href="https://primazonasegura.prima.com.pe/PrimaWeb/zona-informativa/actualizacion-datos/" target="_blank">aquí</a>.</div>
+  <div *ngIf="userAFP==='PROFUTURO'" class="linkAfp">Si eres cliente de <span class="bold">Profuturo AFP</span> y no recuerdas tu clave web, puedes generarla o modificarla <a href="https://claveweb.profuturo.com.pe/#/" target="_blank">aquí</a>.</div>
+</div>

@@ -1,0 +1,36 @@
+div {
+  &.main {
+    width: 80%;
+    min-width: 300px;
+    max-width: 768px;
+    margin: 0 auto 40px;
+    text-align: center;
+  }
+}
+
+.img-container{
+  margin: 50px 0px;
+
+  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    margin-top: 30px;
+  }
+}
+
+.logo {
+  width: 177px;
+}
+
+.logos-container{
+  margin-top:16px;
+}
+
+.logo-footer {
+  width: 120px;
+  margin: 24px 16px 0;
+  vertical-align: top;
+
+  @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    width: 80px;
+    margin: 14px 8px 0;
+  }
+}

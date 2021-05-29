@@ -1,0 +1,368 @@
+{
+    "location/v2/ubigeo/countries": {
+        "GET": {
+            "codeResponse": "200",
+            "responses": [
+              {
+                "statusCode": "200",
+                "errorCode": "000000",
+                "headers": {
+                  "response": {
+                    "x-afp-signature": "",
+                    "g-recaptcha-response": "",
+                    "Ocp-Apim-Subscription-Key": "",
+                    "x-afp-signature": ""
+                  },
+                  "request": {
+                    "g-recaptcha-response": "",
+                    "Ocp-Apim-Subscription-Key": "",
+                    "x-afp-signature": ""
+                  }
+                },
+                "body": [
+                  {
+                    "code": "AF ",
+                    "description": " Afganistan"
+                  },
+                  {
+                    "code": "AL ",
+                    "description": " Albania"
+                  },
+                  {
+                    "code": "DE ",
+                    "description": " Alemania"
+                  },
+                  {
+                    "code": "AD ",
+                    "description": " Andorra"
+                  },
+                  {
+                    "code": "AO ",
+                    "description": " Angola"
+                  },
+                  {
+                    "code": "AI ",
+                    "description": " Anguilla"
+                  },
+                  {
+                    "code": "AG ",
+                    "description": " Antigua y Barbuda"
+                  },
+                  {
+                    "code": "AN ",
+                    "description": " Antillas Holandesas"
+                  },
+                  {
+                    "code": "SA ",
+                    "description": " Arabia Saudi"
+                  },
+                  {
+                    "code": "DZ ",
+                    "description": " Argelia"
+                  },
+                  {
+                    "code": "AR ",
+                    "description": " Argentina"
+                  },
+                  {
+                    "code": "AM ",
+                    "description": " Armenia"
+                  },
+                  {
+                    "code": "AW ",
+                    "description": " Aruba"
+                  },
+                  {
+                    "code": "MK ",
+                    "description": " ARY Macedonia"
+                  },
+                  {
+                    "code": "AU ",
+                    "description": " Australia"
+                  },
+                  {
+                    "code": "AT ",
+                    "description": " Austria"
+                  },
+                  {
+                    "code": "AZ ",
+                    "description": " Azerbaiyan"
+                  },
+                  {
+                    "code": "BS ",
+                    "description": " Bahamas"
+                  },
+                  {
+                    "code": "BH ",
+                    "description": " Bahrein"
+                  },
+                  {
+                    "code": "BD ",
+                    "description": " Bangladesh"
+                  },
+                  {
+                    "code": "BB ",
+                    "description": " Barbados"
+                  },
+                  {
+                    "code": "BE ",
+                    "description": " Belgica"
+                  },
+                  {
+                    "code": "BZ ",
+                    "description": " Belice"
+                  },
+                  {
+                    "code": "BJ ",
+                    "description": " Benin"
+                  },
+                  {
+                    "code": "BM ",
+                    "description": " Bermudas"
+                  },
+                  {
+                    "code": "BT ",
+                    "description": " Bhutan"
+                  },
+                  {
+                    "code": "BY ",
+                    "description": " Bielorrusia"
+                  },
+                  {
+                    "code": "BO ",
+                    "description": " Bolivia"
+                  },
+                  {
+                    "code": "BA ",
+                    "description": " Bosnia y Herzegovina"
+                  },
+                  {
+                    "code": "BW ",
+                    "description": " Botsuana"
+                  },
+                  {
+                    "code": "BR ",
+                    "description": " Brasil"
+                  },
+                  {
+                    "code": "BN ",
+                    "description": " Brunei"
+                  },
+                  {
+                    "code": "BG ",
+                    "description": " Bulgaria"
+                  },
+                  {
+                    "code": "BF ",
+                    "description": " Burkina Faso"
+                  },
+                  {
+                    "code": "BI ",
+                    "description": " Burundi"
+                  },
+                  {
+                    "code": "CV ",
+                    "description": " Cabo Verde"
+                  },
+                  {
+                    "code": "KH ",
+                    "description": " Camboya"
+                  },
+                  {
+                    "code": "CM ",
+                    "description": " Camerun"
+                  },
+                  {
+                    "code": "CA ",
+                    "description": " Canada"
+                  },
+                  {
+                    "code": "TD ",
+                    "description": " Chad"
+                  },
+                  {
+                    "code": "CL ",
+                    "description": " Chile"
+                  },
+                  {
+                    "code": "CN ",
+                    "description": " China"
+                  },
+                  {
+                    "code": "CY ",
+                    "description": " Chipre"
+                  },
+                  {
+                    "code": "VA ",
+                    "description": " Ciudad del Vaticano"
+                  },
+                  {
+                    "code": "CO ",
+                    "description": " Colombia"
+                  },
+                  {
+                    "code": "KM ",
+                    "description": " Comoras"
+                  },
+                  {
+                    "code": "CG ",
+                    "description": " Congo"
+                  },
+                  {
+                    "code": "KP ",
+                    "description": " Corea del Norte"
+                  },
+                  {
+                    "code": "KR ",
+                    "description": " Corea del Sur"
+                  },
+                  {
+                    "code": "CI ",
+                    "description": " Costa de Marfil"
+                  },
+                  {
+                    "code": "CR ",
+                    "description": " Costa Rica"
+                  },
+                  {
+                    "code": "HR ",
+                    "description": " Croacia"
+                  },
+                  {
+                    "code": "CU ",
+                    "description": " Cuba"
+                  },
+                  {
+                    "code": "DK ",
+                    "description": " Dinamarca"
+                  },
+                  {
+                    "code": "DM ",
+                    "description": " Dominica"
+                  },
+                  {
+                    "code": "EC ",
+                    "description": " Ecuador"
+                  },
+                  {
+                    "code": "EG ",
+                    "description": " Egipto"
+                  },
+                  {
+                    "code": "SV ",
+                    "description": " El Salvador"
+                  },
+                  {
+                    "code": "AE ",
+                    "description": " Emiratos arabes Unidos"
+                  },
+                  {
+                    "code": "ER ",
+                    "description": " Eritrea"
+                  },
+                  {
+                    "code": "SK ",
+                    "description": " Eslovaquia"
+                  },
+                  {
+                    "code": "SI ",
+                    "description": " Eslovenia"
+                  },
+                  {
+                    "code": "ES ",
+                    "description": " EspaÃ±a"
+                  },
+                  {
+                    "code": "US ",
+                    "description": " Estados Unidos"
+                  },
+                  {
+                    "code": "EE ",
+                    "description": " Estonia"
+                  },
+                  {
+                    "code": "ET ",
+                    "description": " Etiopia"
+                  },
+                  {
+                    "code": "PH ",
+                    "description": " Filipinas"
+                  },
+                  {
+                    "code": "FI ",
+                    "description": " Finlandia"
+                  },
+                  {
+                    "code": "FJ ",
+                    "description": " Fiyi"
+                  },
+                  {
+                    "code": "FR ",
+                    "description": " Francia"
+                  },
+                  {
+                    "code": "GA ",
+                    "description": " Gabon"
+                  },
+                  {
+                    "code": "GM ",
+                    "description": " Gambia"
+                  },
+                  {
+                    "code": "GE ",
+                    "description": " Georgia"
+                  },
+                  {
+                    "code": "GH ",
+                    "description": " Ghana"
+                  },
+                  {
+                    "code": "GI ",
+                    "description": " Gibraltar"
+                  },
+                  {
+                    "code": "GD ",
+                    "description": " Granada"
+                  },
+                  {
+                    "code": "GR ",
+                    "description": " Grecia"
+                  },
+                  {
+                    "code": "GL ",
+                    "description": " Groenlandia"
+                  },
+                  {
+                    "code": "GP ",
+                    "description": " Guadalupe"
+                  },
+                  {
+                    "code": "GU ",
+                    "description": " Guam"
+                  },
+                  {
+                    "code": "GT ",
+                    "description": " Guatemala"
+                  },
+                  {
+                    "code": "GF ",
+                    "description": " Guayana Francesa"
+                  },
+                  {
+                    "code": "GG ",
+                    "description": " Guernesey"
+                  },
+                  {
+                    "code": "GN ",
+                    "description": " Guinea"
+                  },
+                  {
+                    "code": "GQ ",
+                    "description": " Guinea Ecuatorial"
+                  }
+                ]
+              }
+            ]
+        }
+    }
+}

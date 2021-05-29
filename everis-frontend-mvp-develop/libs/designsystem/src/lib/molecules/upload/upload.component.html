@@ -1,0 +1,21 @@
+<ng-container>
+  <button *ngIf="loadRequest"
+    (click)="addFiles()"
+    type="button"
+    mat-flat-button
+  >
+    <span   class="material-icons">
+      {{icon}}
+    </span>
+    {{text}}
+  </button>
+  <input
+    type="file"
+    #file
+    style="display: none"
+    (change)="onFilesAdded()"
+    [attr.multiple]="multiple"
+  />
+
+  <mat-spinner [diameter]="24" *ngIf="!loadRequest" class="material-icons spiner" ></mat-spinner>
+<ng-container>

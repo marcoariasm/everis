@@ -1,0 +1,204 @@
+<section class="Validation">
+  <div class="Validation-inner mat-elevation-z16">
+    <form class="Form" [formGroup]="form">
+      <h2 *ngIf="!isQuery" class="mat-h1 title">
+        ¿Eres el afiliado del trámite a realizar?
+      </h2>
+      <div *ngIf="!isQuery">
+        <mat-radio-group
+          aria-label="Seleccione una opción"
+          formControlName="isAffiliate"
+        >
+          <div class="Form-control">
+            <div class="Col">
+              <mat-radio-button value="1">Si, soy afiliado</mat-radio-button
+              ><br />
+              <br />
+              <mat-radio-button value="0"
+                ><span id="beneficiary">
+                  No, soy su beneficiario, representante o apoderado
+                </span></mat-radio-button
+              >
+            </div>
+          </div>
+        </mat-radio-group>
+      </div>
+      <br />
+      <div class="message-valid">
+        <h3 class="message-valid-title">Datos del afiliado</h3>
+        <p>
+          Ingresa los siguientes datos para
+          <span *ngIf="!isQuery">iniciar un nuevo trámite. </span>
+          <span *ngIf="isQuery">consultar un trámite. </span>
+          Si eres un beneficiario, representante o apoderado, ingresa los datos
+          del afiliado
+        </p>
+      </div>
+      <div class="Form-control">
+        <div class="Col">
+          <mat-form-field
+            appearance="outline"
+            class="Form-input"
+            color="accent"
+          >
+            <mat-label>Tipo de documento:</mat-label>
+            <mat-select formControlName="documentType">
+              <mat-option
+                *ngFor="let type of documentTypeOptions"
+                value="{{ type.value }}"
+                >{{ type.abbr }}
+                <span class="small">({{ type.name }})</span></mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="Col">
+          <mat-form-field
+            appearance="outline"
+            class="Form-input"
+            color="accent"
+          >
+            <mat-label>Nro de documento:</mat-label>
+            <input
+              matInput
+              placeholder=""
+              [maxlength]="maxLengthtDocument"
+              [ngCustomValidator]="alphaNumeric"
+              [inputLength]="maxLengthtDocument"
+              formControlName="documentNumber"
+              autocomplete="off"
+            />
+          </mat-form-field>
+        </div>
+        <div class="Col">
+          <mat-form-field
+            appearance="outline"
+            class="Form-input"
+            (click)="picker.open()"
+          >
+            <mat-label>Fecha de nacimiento:</mat-label>
+            <input
+              matInput
+              readonly
+              [matDatepicker]="picker"
+              formControlName="birthdate"
+              [min]="minDate"
+              [max]="maxDate"
+            />
+            <mat-datepicker
+              #picker
+              disabled="false"
+              startView="multi-year"
+              [startAt]="maxDate"
+            ></mat-datepicker>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+          </mat-form-field>
+        </div>
+      </div>
+      <div *ngIf="isQuery">
+        <div class="Form-control">
+          <div class="Col">
+            <mat-form-field appearance="outline" class="Form-input">
+              <mat-label>Ingresar Código de Trámite</mat-label>
+              <input
+                matInput
+                ngCustomValidator="isAlphaNumericWithDash"
+                inputLength="36"
+                formControlName="code"
+                autocomplete="off"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="Form-control mb">
+        <div class="Col">
+          <re-captcha
+            class="captcha"
+            formControlName="recaptcha"
+            siteKey="6Lc2WNUUAAAAANcuhh2dSXpqjX31TmVYZaZotvQh"
+          >
+          </re-captcha>
+        </div>
+        <div class="Col"></div>
+      </div>
+      <div class="Form-control">
+        <div class="Col">
+          <button
+            *ngIf="!isQuery"
+            mat-flat-button
+            color="accent"
+            #tooltip="matTooltip"
+            matTooltip="Buscar persona"
+            [disabled]="!form.valid"
+            (click)="presenter.verify(form.value)"
+          >
+            Buscar <mat-icon>search</mat-icon>
+          </button>
+          <button
+            *ngIf="isQuery"
+            mat-flat-button
+            color="accent"
+            #tooltip="matTooltip"
+            matTooltip="Buscar persona"
+            [disabled]="!form.valid"
+            (click)="presenter.requestProcces(form.value)"
+          >
+            Buscar <mat-icon>search</mat-icon>
+          </button>
+        </div>
+      </div>
+      <br />
+      <div class="Form-control">
+        <div class="Col fullName">
+          <mat-form-field appearance="outline" class="Form-input">
+            <mat-label>Apellidos y nombres</mat-label>
+            <input
+              readonly
+              matInput
+              formControlName="fullName"
+              autocomplete="off"
+            />
+          </mat-form-field>
+          <span
+            *ngIf="form.controls.fullName.value"
+            class="material-icons icon"
+          >
+            check_circle
+          </span>
+        </div>
+      </div>
+      <div *ngIf="isQuery" class="message-query">
+        <p>
+          Si olvidaste el código de tu trámite?
+          <span>servicios@prima.com.pe</span>
+        </p>
+      </div>
+
+      <div class="Navigation-btns">
+        <button type="button" mat-flat-button (click)="presenter.backStep()">
+          <span class="material-icons">
+            keyboard_arrow_left
+          </span>
+          Volver
+        </button>
+        <span class="separated"></span>
+        <button
+          type="button"
+          mat-flat-button
+          color="primary"
+          [disabled]="!form.controls.fullName.value"
+          (click)="presenter.nextStep(form.value)"
+        >
+          Continuar
+          <span class="material-icons">
+            keyboard_arrow_right
+          </span>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

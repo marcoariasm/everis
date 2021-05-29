@@ -1,0 +1,42 @@
+<div class="message-container">
+  <div class="message">
+    <form class="Form" [formGroup]="form">
+      <div class="Col">
+        <mat-form-field>
+          <mat-label>
+            Matricula
+          </mat-label>
+          <mat-select formControlName="matricula">
+            <mat-option *ngFor="let item of listUser" [value]="item.id">
+              {{ item.login }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+</div>
+<div *ngIf="errorAssigned" class="mat-dialog-actions" align="center">
+  <p class="message-error">Ups ha ocurrido un error!</p>
+</div>
+<div class="mat-dialog-actions" align="center">
+  <div class="actions-container">
+    <button
+      class="action-button"
+      mat-raised-button
+      color="primary"
+      (click)="reassigned()"
+      [disabled]="!form.valid"
+    >
+      Reasginar
+    </button>
+    <button
+      class="action-button"
+      mat-raised-button
+      color="accent"
+      (click)="exit()"
+    >
+      Cancelar
+    </button>
+  </div>
+</div>

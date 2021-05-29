@@ -1,0 +1,124 @@
+<div class="Filters">
+  <div class="filter-title">
+    <div>
+      <h3 class="Title accent mat-3">
+        <span class="material-icons">tune</span> Filtrar por
+      </h3>
+    </div>
+    <div>
+      <ng-content select=[buttonGenerate]>
+      </ng-content>
+    </div>
+  </div>
+
+  <form class="Form" [formGroup]="form">
+    <div class="Form-control mb0">
+      <div class="Col p0">
+        <h4 class="Title secondary plr mat-4">Documento de identidad</h4>
+        <div class="Form-control">
+          <div class="Col">
+            <mat-form-field appearance="outline" class="Form-input">
+              <mat-label>Tipo de documento:</mat-label>
+              <mat-select formControlName="documentType" formControlName="documentType">
+                <mat-option *ngFor="let item of documentsType" [value] ="item.value">{{item.abbr}} <span class="small">({{item.name}})</span></mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="Col">
+            <mat-form-field appearance="outline" class="Form-input">
+              <mat-label>Nro de documento:</mat-label>
+              <input
+                matInput
+                placeholder=""
+                [maxlength]="maxLengthtDocument"
+                [ngCustomValidator]="alphaNumeric" [inputLength]="maxLengthtDocument"
+                formControlName="documentNumber"
+                autocomplete="off"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+        <h4 class="Title secondary plr mat-4">CUSPP</h4>
+        <div class="Form-control">
+          <div class="Col">
+            <mat-form-field appearance="outline" class="Form-input">
+              <mat-label>Buscar por CUSPP</mat-label>
+              <input
+                matInput
+                formControlName="cuspp"
+                autocomplete="off"
+                [ngCustomValidator]="alphaNumeric" inputLength="15"
+              >
+            </mat-form-field>
+          </div>
+          <div class="Col">
+          </div>
+        </div>
+      </div>
+      <div class="Col p0">
+        <h4 class="Title secondary plr mat-4">Trámite</h4>
+        <div class="Form-control">
+          <div class="Col">
+            <mat-form-field appearance="outline" class="Form-input">
+              <mat-label>Selecciona el trámite que quieres solicitar:</mat-label>
+              <mat-select  formControlName="procedureType">
+                <mat-option *ngFor="let item of procedures" [value]="item.value">{{
+                  item.name
+                }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="Col">
+            <mat-form-field appearance="outline" class="Form-input">
+              <mat-label>Estado de trámite:</mat-label>
+              <mat-select formControlName="status">
+                <mat-option *ngFor="let item of procedureType" [value]="item.value">{{item.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <h4 class="Title secondary plr mat-4">Ejecutivo(a)</h4>
+        <div class="Form-control">
+          <div class="Col">
+            <mat-form-field appearance="outline" class="Form-input">
+              <mat-label>Escriba la matrícula a consultar</mat-label>
+              <input
+                matInput
+                placeholder=""
+                formControlName="executive"
+                autocomplete="off"
+                [ngCustomValidator]="alphaNumeric" inputLength="6"
+              >
+            </mat-form-field>
+          </div>
+          <div class="Col">
+            <mat-form-field appearance="outline" class="Form-input" (click)="picker.open()">
+              <mat-label>Fecha de Registro:</mat-label>
+              <input matInput readonly [matDatepicker]="picker" formControlName="registerDate">
+              <mat-datepicker #picker disabled="false"></mat-datepicker>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="Navigation-btns none right plr">
+      <button
+        type="button"
+        mat-flat-button
+        (click)="clear()"
+      >
+        Limpiar filtros
+      </button>
+      <button
+        type="button"
+        mat-flat-button
+        color="primary"
+        [disabled]="loader"
+        (click)="apply(form.value)"
+      >
+        Aplicar cambios
+      </button>
+    </div>
+  </form>
+</div>

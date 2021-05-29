@@ -1,0 +1,297 @@
+:root {
+  --afp-azul-sec: #aac6f3;
+  --azul-gris-2-afp: #6b7c93;
+  --azul-gris-4-afp: #e3e7ed;
+  --afp-ligh: rgba(246, 250, 255, 0.76);
+  --azul-grisclaro-afp: rgba(227, 231, 237, 0.5);
+  --afp-dark: #343a40;
+  --afp-azul-primario: #007bff;
+  --azul-gris-afp: #4f6b8f;
+  --azul-gris-3-afp: #bcc2cd;
+  --afp-lightblue-sec: #f0f6ff;
+}
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import "~@angular/material/theming";
+// Plus imports for other components in your app.
+
+// custom colors
+@import "./sass/colors";
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+$md-afp: (
+  50: #e0f3fc,
+  100: #b3e2f7,
+  200: #80cef2,
+  300: #4dbaec,
+  400: #26ace8,
+  500: #009de4,
+  600: #0095e1,
+  700: #008bdd,
+  800: #0081d9,
+  900: #006fd1,
+  A100: #f9fcff,
+  A200: #c6e1ff,
+  A400: #93c6ff,
+  A700: #7ab9ff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+// $test-primary: mat-palette($mat-indigo);
+$test-primary: mat-palette($md-afp);
+$test-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$test-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$test-theme: mat-light-theme($test-primary, $test-accent, $test-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($test-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+* {
+  box-sizing: content-box;
+}
+
+div {
+  &.main {
+    width: 80%;
+    min-width: 300px;
+    max-width: 900px;
+    margin: 50px auto 40px;
+    text-align: center;
+  }
+}
+
+.undraggable {
+  user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+.action-button {
+  background-color: $color-primary;
+  color: $color-white;
+  display: block;
+  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08) !important;
+}
+.mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: $color-primary;
+  stroke-width: 6% !important;
+}
+@media only screen and (max-width: 768px) {
+  .cdk-overlay-pane {
+    min-width: 80vw !important;
+    top: 123px !important;
+    right: 4% !important;
+    bottom: 248px !important;
+  }
+  .mat-datepicker-content .mat-calendar {
+    width: 265px !important;
+  }
+  .mat-calendar-controls {
+    margin: 0 !important;
+  }
+}
+
+.logo-footer {
+  width: 120px;
+  padding: 22px 60px;
+}
+.footer {
+  background-color: var(--afp-lightblue-sec);
+}
+
+.mat-radio-container {
+  .mat-radio-outer-circle {
+      border-color: #007bff !important;
+    }
+    .mat-radio-inner-circle {
+      background-color: #007bff !important;
+    }
+}
+
+.input-hidden {
+  display: flex;
+  justify-content: space-between;
+}
+.example-full-width {
+  width: 50%;
+}
+
+.form-control-feedback {
+  color: red;
+  font-size: 11px;
+  text-align: left;
+  margin: 5px 15px;
+  display: block;
+}
+.mat-button[disabled] {
+  opacity: 0.4;
+}
+.mat-radio-label-content {
+  padding-right: 8px !important;
+}
+
+// .mat-checkbox-background {
+//   background-color: #007bff !important;
+// }
+
+.step-1 {
+  .mat-form-field-ripple {
+    opacity: 0 !important;
+  }
+  .mat-form-field-underline {
+    height: 0 !important;
+  }
+}
+
+.step-2 {
+  .mat-form-field-appearance-legacy .mat-form-field-underline {
+    height: 0 !important;
+  }
+  .mat-form-field-ripple {
+    opacity: 0 !important;
+  }
+  .mat-form-field-underline {
+    height: 0 !important;
+  }
+}
+
+
+mat-label {
+  background-color: white;
+  margin: 0 0 0 10px;
+}
+
+.mat-form-field-type-mat-native-select .mat-form-field-infix::after {
+  top: 40% !important;
+  right: 15px !important;
+}
+
+.input-width {
+  .mat-form-field-label {
+    line-height: 40px !important;
+    left: 10px !important;
+  }
+  .mat-form-field-label {
+    top: 29px !important;
+  }
+}
+
+.mat-horizontal-stepper-header{
+  pointer-events: none !important;
+}
+
+.mat-step-header:hover {
+  background-color: transparent !important;
+}
+
+.mat-step-header .mat-step-icon {
+ z-index: 1 !important;
+ background-color: #6b7c93 !important;
+}
+
+.mat-step-header .mat-step-icon-state-edit {
+  background-color: #009de4 !important;
+}
+
+.mat-step-icon {
+  width: 50px !important;
+  height: 50px !important;
+  font-size: 32px !important;
+  z-index: 1 !important;
+}
+
+.mat-stepper-label-position-bottom .mat-stepper-horizontal-line {
+  top:50px !important;
+  border-top-width: 5px !important;
+  background-color: #6b7c93 !important;
+}
+
+.ng-star-inserted::after {
+  top: 50px !important;
+  border-top-width: 5px !important;
+  background-color: #6b7c93 !important;
+}
+
+.mat-horizontal-stepper-header::before {
+  top: 50px !important;
+  border-top-width: 5px !important;
+  background-color: #6b7c93 !important;
+}
+
+.mat-stepper-label-position-bottom .mat-horizontal-stepper-header .mat-step-label {
+  padding: 16px 0 0 0;
+  width: 100%;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.07;
+  letter-spacing: 0.2px;
+  text-align: center;
+  color: var(--charcoal-grey);
+}
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  .buttons-next-prev {
+    button {
+      margin: 10px 0 !important;
+    }
+  }
+  .mat-checkbox-inner-container {
+    margin: 4px auto !important;
+    margin-right: 5px !important;
+  }
+  .mat-checkbox-layout {
+    white-space: normal !important;
+    align-items: normal !important;
+  }
+  .mat-step-label {
+    font-size: 11px !important;
+  }
+}
+
+

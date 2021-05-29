@@ -1,0 +1,29 @@
+
+
+.logo-footer {
+  width: 120px;
+  padding: 22px 60px;
+}
+
+.footer {
+  background-color: var(--afp-lightblue-sec);
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.bg-gradient {
+  height: 40px;
+  background-image: linear-gradient(
+    to right,
+    #c0dcf0,
+    #b7d9ef,
+    #9dd0eb,
+    #76c1e5,
+    #64adde,
+    #5698d5,
+    #4376bd,
+    #345b95,
+    #345b95
+  );
+}

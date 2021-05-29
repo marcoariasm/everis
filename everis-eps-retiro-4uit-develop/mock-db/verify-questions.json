@@ -1,0 +1,37 @@
+{
+  "v1/verify-identity/questions": {
+      "GET": {
+          "codeResponse": "200",
+          "responses": [
+              {
+                "statusCode": "200",
+                "errorCode": "000000",
+                "headers": {
+                    "response": {
+                        "x-afp-signature": "",
+                        "Ocp-Apim-Subscription-Key": ""
+                    },
+                    "request": {
+                        "x-afp-signature": "",
+                        "Ocp-Apim-Subscription-Key": ""
+                    }
+                },
+                "body": [
+                  {
+                      "code": "q1",
+                      "description": "¿Cuál es la fecha de Emisión del DNI?"
+                  },
+                  {
+                      "code": "q2",
+                      "description": "¿Cuál es la fecha de Caducidad del DNI?"
+                  },
+                  {
+                      "code": "q3",
+                      "description": "¿Cuál es su Grupo de Votación?"
+                  }
+                ]
+              }
+          ]
+      }
+  }
+}

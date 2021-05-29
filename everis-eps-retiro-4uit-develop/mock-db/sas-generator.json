@@ -1,0 +1,41 @@
+{
+  "retiro4uitprod/v1/register4uit/upload-token": {
+      "POST": {
+          "codeResponse": "200",
+          "responses": [
+              {
+                  "statusCode": "200",
+                  "errorCode": "000000",
+                  "headers": {
+                      "response": {
+                        "x-afp-signature": ""
+                      },
+                      "request": {
+                        "x-afp-signature": ""
+                      }
+                  },
+                  "body": "http://localhost:3000/persona-extranjera/bc17645b-8952-48a7-8406-21bb13fe490f.jpg?"
+              }
+          ]
+      },
+      "OPTIONS": {
+        "codeResponse": "200",
+        "responses": [
+            {
+                "statusCode": "200",
+                "errorCode": "000000",
+                "headers": {
+                    "response": {
+                      "x-afp-signature": ""
+                    },
+                    "request": {
+                      "x-afp-signature": ""
+
+                    }
+                },
+                "body": "http://localhost:3000/persona-extranjera/bc17645b-8952-48a7-8406-21bb13fe490f.jpg?"
+            }
+        ]
+      }
+  }
+}

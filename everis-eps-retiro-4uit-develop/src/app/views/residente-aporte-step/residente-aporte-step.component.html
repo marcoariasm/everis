@@ -1,0 +1,30 @@
+<div class="timer">
+  <div class="base">
+    {{minutes}}:{{seconds}}
+  </div>
+
+</div>
+<div class="main">
+  <form (ngSubmit)="registrarSolicitud($event)" autocomplete="off" [formGroup]="presenter.registerForm">
+    <mat-horizontal-stepper labelPosition="bottom" #stepper>
+      <mat-step label="Decide" completed="false">
+        <app-step-one></app-step-one>
+      </mat-step>
+      <mat-step label="Registra tus datos" completed="false">
+        <app-step-two></app-step-two>
+      </mat-step>
+      <mat-step label="Resumen" completed="false">
+        <app-step-three></app-step-three>
+      </mat-step>
+    </mat-horizontal-stepper>
+
+    <div class="buttons-next-prev">
+      <button class="back" mat-button type="button" (click)="goBack(stepper)">
+        Atrás
+      </button>
+      <button class="next" mat-button type="button" (click)="goForward(stepper)" [disabled]="disabledForm || disableFormByUbigeoOrAFP">
+        {{nameBtnNext}}
+      </button>
+    </div>
+  </form>
+</div>

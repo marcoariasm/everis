@@ -1,0 +1,88 @@
+<div class="seguimiento-container">
+  <div class="img-container">
+    <img class="logo undraggable" src="/assets/AAFP.png"/>
+  </div>
+  <br>
+  <h1 class="primary-title">Seguimiento</h1>
+  <br/>
+  <label class="primary-label">Por favor ingrese su <strong>número de documento de identidad</strong> para consultar el
+    estado de su solicitud.</label>
+
+  <br><br><br>
+  <form class="form-container" [formGroup]="form">
+    <mat-form-field appearance="outline" class="rp-form-element">
+      <mat-label>{{ lang.views.query.controls.documentType.label }}</mat-label>
+      <mat-select formControlName="documentType">
+        <mat-option value="DNI">DNI</mat-option>
+        <mat-option value="CE">CARNÉ DE EXTRANJERÍA</mat-option>
+        <mat-option value="CMP">CARNÉ MILITAR Y POLICIAL</mat-option>
+        <mat-option value="LAT">LIBRETA ADOLESCENTES TRAB</mat-option>
+        <mat-option value="PAS">PASAPORTE</mat-option>
+        <mat-option value="OTR">OTROS</mat-option>
+        <mat-option value="INX">INEXIS/AFILIA</mat-option>
+        <mat-option value="PTP">PERMISO TEMPORAL DE PERMANENCIA</mat-option>
+        <mat-option value="CRE">CARNÉ DE IDENTIDAD DE RELACIONES EXTERIORES</mat-option>
+        <mat-option value="CIE">CÉDULA DE IDENTIDAD DE EXTRNAJERO</mat-option>
+        <mat-option value="CSR">CARNÉ DE SOLICITANTE DE REFUGIO</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <br/>
+
+    <mat-form-field
+      appearance="outline"
+      class="rp-form-element"
+      [ngClass]="{
+        'medium-size': form['controls'].documentType.value === 'DNI'
+      }">
+      <mat-label>{{
+        lang.views.query.controls.documentNumber.label
+        }}</mat-label>
+      <input
+        matInput
+        [maxlength]="maxLengthtDocument"
+        [placeholder]="lang.views.query.controls.documentNumber.placeholder"
+        formControlName="documentNumber"
+        autocomplete="off"
+      />
+    </mat-form-field>
+
+    <mat-form-field
+      *ngIf="form['controls'].documentType.value === 'DNI'"
+      appearance="outline"
+      class="rp-form-element small-size">
+      <mat-label>{{ lang.views.query.controls.digit.label }}</mat-label>
+      <input
+        matInput
+        [maxlength]="maxLengthtVerificationCode"
+        [placeholder]="lang.views.query.controls.digit.placeholder"
+        formControlName="digit"
+        autocomplete="off"/>
+      <span class="icon-verificator" (click)="presenter.showModalContentInfo()">
+        <img src="/assets/tooltip.png"/>
+      </span>
+    </mat-form-field>
+
+    <br/>
+    <re-captcha
+      class="captcha"
+      formControlName="recaptcha"
+      [siteKey]="captchaKey"
+    >
+    </re-captcha>
+
+    <br/>
+    <div class="btn-container">
+      <button
+        class="action-button"
+        mat-raised-button
+        [disabled]="form.invalid"
+        color="primary"
+        (click)="presenter.consultaSeguimiento(form.value); form.reset({documentType:'DNI'})">
+        {{ lang.commons.buttons.query }}
+      </button>
+    </div>
+  </form>
+
+  <app-afp-banner></app-afp-banner>
+</div>

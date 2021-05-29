@@ -1,0 +1,16 @@
+<div class="message-container">
+  <div class="message-icon">
+    <span class="material-icons">
+      error_outline
+    </span>
+  </div>
+  <div class="message">
+    <p>¿Su sessión esta por expirar, para renovar presione aceptar?.</p>
+  </div>
+</div>
+<div class="mat-dialog-actions" align="center">
+  <div class="actions-container">
+    <button class="action-button" mat-raised-button color="primary" (click)="refreshToken()">Aceptar</button>
+    <button class="action-button" mat-raised-button color="primary" (click)="exit()">Salir</button>
+  </div>
+</div>

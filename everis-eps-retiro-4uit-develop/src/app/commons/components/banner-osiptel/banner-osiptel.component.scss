@@ -1,0 +1,57 @@
+.message-container{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.message-icon{
+  margin-right: 24px;
+  color: #18a0c2;
+  > .mat-icon {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+  }
+
+  &.error {
+    color: #f44336
+  }
+}
+.message{
+  font-size: 14px;
+  color: #222;
+  line-height: 1.3;
+
+  .title {
+    text-align: left;
+    font-weight: bold;
+    margin: 0 0 10px;
+  }
+}
+
+.buttons-next-update {
+  display: flex;
+  justify-content: center;
+  button {
+    width: 120px;
+    height: 34px;
+    border-radius: 4px;
+    border: solid 2px var(--afp-azul-primario);
+    background-color: rgba(0, 123, 255, 0);
+    line-height: 1.5px;
+    font-family: Roboto;
+    font-size: 16px;
+    &:last-child {
+      margin-right: 0;
+    }
+    &.back {
+      color: var(--afp-azul-primario);
+      margin-right: 4px;
+    }
+    &.next {
+      margin-left: 4px;
+      color: white;
+      background-color: var(--afp-azul-primario);
+      border: none;
+    }
+  }
+}
