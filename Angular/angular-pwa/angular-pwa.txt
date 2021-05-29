@@ -1,0 +1,89 @@
+ramas:
+
+git clone https://github.com/angular-university/angular-pwa-course.git
+
+
+[ ** 0-start ** ]
+
+
+npm i --verbose
+npm run server
+
+(en otra terminal)
+npm run start
+
+ng add @angular/cli@9.0.2
+npm install --save @angular/service-worker
+
+el archivo proxy.json 
+    hace que las llamadas a  "/api"  apunten a  un   server  levantado localmente
+    que está en la carpeta  "server"
+
+en  angular.json
+    29  en configurations:      "serviceWorker": true,
+                                "ngswConfigPath": "src/ngsw-config.json",   // angular service worker
+
+el archivo    src/ngsw-config.json   es un archivo del  build,  no del tiempo de ejecución
+{
+    "index":  "/index.html",
+    "assetGroups": [{              //  assets o archivos que serán cacheados
+        "name": "app",
+        "instalMode": "prefetch",
+        "resources": {
+            "files": [              // archivos llamados sin usar el internet
+                "/favicon.ico",
+                "/index.html"
+            ],
+            "versionedFiles": [
+                "/*.bundle.css",
+                "/*.bundle.js",
+                "/*.chun.js"
+            ]
+        }
+    },
+    {
+        "name": "assets",
+        "installMode": "lazy",
+        ...
+    }
+    }]
+}
+
+en el archivo    app.module.ts:
+importar    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+
+construir el build en modo producción (solo prueba)
+    ng build --prod
+
+en dist  ya se creo nuestro build para producción
+
+instalar http-server globalmente
+en la terminal PS y con rol de administrador:
+    npm install -g http-serve
+
+    levantar el servidor  (solo prueba)
+    http-server -c-1 -P http://localhost:9000 .
+
+
+para correr el proyecto y verlo funcionando como PWA:
+1. terminal 1:  levantar el servidor http:       npm run server
+2. terminal 2:  levantar el proyecto angular     
+        npm run start:prod
+3. llamar al app en :    localhost:8081
+    F12   se puede ver el service worker funcionando:   ngsw-worker.js
+4. Todo significa que el service worker ha interceptado los llamados REST
+   y ha bajado al cache del navegador los archivos necesarios para cargar
+   la página de manera más rápida y también cuando no haya conexión
+5. Si detenemos el servidor REST entonces no cargará el contenido de la
+   página web además que la carga será más lenta.
+   ** OJO **  Pero aún así ha descargado algunas imagenes y assets
+
+
+[ 5 ] Manejo de versiones
+
+Si sacamos otra versión de la aplicación web, habrá una versión antigua almacenada
+en caché (v1) pero también habrá otra versión nueva (v2) en los servidores, al llamar a la página
+
+Al llamar a la página, se cargaría el contenido de la caché local entonces se mostraría v1
+
+[ 8 ] 

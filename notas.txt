@@ -7,3 +7,6 @@ git remote add origin https://github.com/marcoariasm/everis.git
 
 DELETE BRANCH
 git branch -D <rama>
+
+
+
